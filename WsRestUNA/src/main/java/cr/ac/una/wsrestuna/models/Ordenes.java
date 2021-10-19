@@ -74,12 +74,27 @@ public class Ordenes implements Serializable
         this.ordId = ordId;
     }
 
-    public Ordenes(Long ordId , Long facTotal , Date facFecha , Long facVersion )
+    public Ordenes(Long ordId , Long facTotal , Date facFecha , Long facVersion)
     {
         this.ordId = ordId;
         this.facTotal = facTotal;
         this.facFecha = facFecha;
         this.facVersion = facVersion;
+    }
+
+    public Ordenes(OrdenesDto ordenDto)
+    {
+        this.ordId = ordenDto.getId();
+        actualizarOrdenes(ordenDto);
+    }
+
+    public void actualizarOrdenes(OrdenesDto ordenDto)
+    {
+        this.facTotal = ordenDto.getFacTotal();
+        this.facFecha = ordenDto.getFecha();
+        this.facTotal = ordenDto.getDesc();
+        this.empId = new Empleados(ordenDto.getEmp());
+        this.mesaId = new Mesa(ordenDto.getMesa());
     }
 
     public Long getOrdId()

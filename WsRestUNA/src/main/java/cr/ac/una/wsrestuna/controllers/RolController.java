@@ -5,11 +5,24 @@
  */
 package cr.ac.una.wsrestuna.controllers;
 
+import cr.ac.una.wsrestuna.utils.*;
+import javax.ws.rs.*;
+import javax.ws.rs.core.*;
+
 /**
  *
  * @author jp015
  */
+
+@Secure
+@Path("/RolController")
 public class RolController
 {
-    
+        @Path("/ping")
+    public Response ping()
+    {
+        return Response
+                  .ok("ping")
+                  .build();
+    }
 }

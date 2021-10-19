@@ -5,11 +5,24 @@
  */
 package cr.ac.una.wsrestuna.controllers;
 
+import cr.ac.una.wsrestuna.utils.*;
+import javax.ws.rs.*;
+import javax.ws.rs.core.*;
+
 /**
  *
  * @author jp015
  */
+
+@Secure
+@Path("/MesaController")
 public class MesaController
 {
-    
+        @Path("/ping")
+    public Response ping()
+    {
+        return Response
+                  .ok("ping")
+                  .build();
+    }
 }

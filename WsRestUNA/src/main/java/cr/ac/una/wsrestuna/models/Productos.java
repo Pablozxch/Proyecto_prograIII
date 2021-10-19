@@ -18,22 +18,22 @@ import javax.validation.constraints.*;
 @Entity
 @Table(name = "TBL_PRODUCTOS" , catalog = "" , schema = "RESTUNA")
 @NamedQueries(
-{
-    @NamedQuery(name = "Productos.findAll" , query = "SELECT p FROM Productos p") ,
-    @NamedQuery(name = "Productos.findByProId" , query = "SELECT p FROM Productos p WHERE p.proId = :proId") ,
-    @NamedQuery(name = "Productos.findByProNombre" , query = "SELECT p FROM Productos p WHERE p.proNombre = :proNombre") ,
-    @NamedQuery(name = "Productos.findByProDetalle" , query = "SELECT p FROM Productos p WHERE p.proDetalle = :proDetalle") ,
-    @NamedQuery(name = "Productos.findByProCosto" , query = "SELECT p FROM Productos p WHERE p.proCosto = :proCosto") ,
-    @NamedQuery(name = "Productos.findByProCantidad" , query = "SELECT p FROM Productos p WHERE p.proCantidad = :proCantidad") ,
-    @NamedQuery(name = "Productos.findByProVersion" , query = "SELECT p FROM Productos p WHERE p.proVersion = :proVersion")
-})
+          {
+              @NamedQuery(name = "Productos.findAll" , query = "SELECT p FROM Productos p") ,
+              @NamedQuery(name = "Productos.findByProId" , query = "SELECT p FROM Productos p WHERE p.proId = :proId") ,
+              @NamedQuery(name = "Productos.findByProNombre" , query = "SELECT p FROM Productos p WHERE p.proNombre = :proNombre") ,
+              @NamedQuery(name = "Productos.findByProDetalle" , query = "SELECT p FROM Productos p WHERE p.proDetalle = :proDetalle") ,
+              @NamedQuery(name = "Productos.findByProCosto" , query = "SELECT p FROM Productos p WHERE p.proCosto = :proCosto") ,
+              @NamedQuery(name = "Productos.findByProCantidad" , query = "SELECT p FROM Productos p WHERE p.proCantidad = :proCantidad") ,
+              @NamedQuery(name = "Productos.findByProVersion" , query = "SELECT p FROM Productos p WHERE p.proVersion = :proVersion")
+          })
 public class Productos implements Serializable
 {
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
-     @SequenceGenerator(name = "TBL_PRODUCTOS_PRO_ID_GENERATOR" , sequenceName = "RESTUNA.TBL_PRODUCTOS_SEQ01" , allocationSize = 1)
+    @SequenceGenerator(name = "TBL_PRODUCTOS_PRO_ID_GENERATOR" , sequenceName = "RESTUNA.TBL_PRODUCTOS_SEQ01" , allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "TBL_PRODUCTOS_PRO_ID_GENERATOR")
     @Basic(optional = false)
     @NotNull
@@ -84,7 +84,7 @@ public class Productos implements Serializable
         this.proId = proId;
     }
 
-    public Productos(Long proId , String proNombre , String proDetalle , byte[] proFoto , Long proCosto , Long proCantidad )
+    public Productos(Long proId , String proNombre , String proDetalle , byte[] proFoto , Long proCosto , Long proCantidad)
     {
         this.proId = proId;
         this.proNombre = proNombre;
@@ -92,6 +92,21 @@ public class Productos implements Serializable
         this.proFoto = proFoto;
         this.proCosto = proCosto;
         this.proCantidad = proCantidad;
+    }
+
+    public Productos(ProductosDto proDto)
+    {
+        this.proId = proDto.getId();
+        actualizarProducto(proDto);
+    }
+
+    public void actualizarProducto(ProductosDto proDto)
+    {
+        this.proNombre = proDto.getNombre();
+        this.proDetalle = proDto.getDetalle();
+        this.proFoto=proDto.getFoto();
+        this.proCosto=proDto.getCosto();
+        this.proCantidad=proDto.getCantidad();
     }
 
     public Long getProId()
@@ -223,5 +238,5 @@ public class Productos implements Serializable
     {
         return "cr.ac.una.wsrestuna.models.Productos[ proId=" + proId + " ]";
     }
-    
+
 }

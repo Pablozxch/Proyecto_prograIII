@@ -17,20 +17,21 @@ import javax.validation.constraints.*;
 @Entity
 @Table(name = "TBL_CODIGOSDESC" , catalog = "" , schema = "RESTUNA")
 @NamedQueries(
-{
-    @NamedQuery(name = "Codigosdesc.findAll" , query = "SELECT c FROM Codigosdesc c") ,
-    @NamedQuery(name = "Codigosdesc.findByCodId" , query = "SELECT c FROM Codigosdesc c WHERE c.codId = :codId") ,
-    @NamedQuery(name = "Codigosdesc.findByCodNombre" , query = "SELECT c FROM Codigosdesc c WHERE c.codNombre = :codNombre") ,
-    @NamedQuery(name = "Codigosdesc.findByCodCant" , query = "SELECT c FROM Codigosdesc c WHERE c.codCant = :codCant") ,
-    @NamedQuery(name = "Codigosdesc.findByCodVersion" , query = "SELECT c FROM Codigosdesc c WHERE c.codVersion = :codVersion")
-})
+          {
+              @NamedQuery(name = "Codigosdesc.findAll" , query = "SELECT c FROM Codigosdesc c") ,
+              @NamedQuery(name = "Codigosdesc.findByCodId" , query = "SELECT c FROM Codigosdesc c WHERE c.codId = :codId") ,
+              @NamedQuery(name = "Codigosdesc.findByCodNombre" , query = "SELECT c FROM Codigosdesc c WHERE c.codNombre = :codNombre") ,
+              @NamedQuery(name = "Codigosdesc.findByCodCant" , query = "SELECT c FROM Codigosdesc c WHERE c.codCant = :codCant") ,
+              @NamedQuery(name = "Codigosdesc.findByCodVersion" , query = "SELECT c FROM Codigosdesc c WHERE c.codVersion = :codVersion") ,
+              @NamedQuery(name = "Codigosdesc.findByCodUrl" , query = "SELECT c FROM Codigosdesc c WHERE c.codUrl = :codUrl")
+          })
 public class Codigosdesc implements Serializable
 {
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
-     @SequenceGenerator(name = "TBL_CODIGOSDESC_COD_ID_GENERATOR" , sequenceName = "RESTUNA.TBL_CODIGOSDESC_SEQ01" , allocationSize = 1)
+    @SequenceGenerator(name = "TBL_CODIGOSDESC_COD_ID_GENERATOR" , sequenceName = "RESTUNA.TBL_CODIGOSDESC_SEQ01" , allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "TBL_CODIGOSDESC_COD_ID_GENERATOR")
     @Basic(optional = false)
     @NotNull
@@ -50,6 +51,11 @@ public class Codigosdesc implements Serializable
     @Version
     @Column(name = "COD_VERSION")
     private Long codVersion;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1 , max = 50)
+    @Column(name = "COD_URL")
+    private String codUrl;
     @JoinColumn(name = "RES_ID" , referencedColumnName = "RES_ID")
     @ManyToOne(fetch = FetchType.LAZY)
     private Restaurantes resId;
@@ -63,11 +69,20 @@ public class Codigosdesc implements Serializable
         this.codId = codId;
     }
 
-    public Codigosdesc(Long codId , String codNombre , Long codCant)
+    public Codigosdesc(Long codId , String codNombre , Long codCant , String codUrl)
     {
         this.codId = codId;
         this.codNombre = codNombre;
         this.codCant = codCant;
+        this.codUrl = codUrl;
+    }
+    public Codigosdesc(CodigosdescDto codDto)
+    {
+        this.codId=codDto.getId();
+        this.codNombre=codDto.getNombre();
+        this.codCant=codDto.getCantidad();
+        this.codUrl=codDto.getUrl();
+        this.resId=new Restaurantes(codDto.getResid());
     }
 
     public Long getCodId()
@@ -110,6 +125,16 @@ public class Codigosdesc implements Serializable
         this.codVersion = codVersion;
     }
 
+    public String getCodUrl()
+    {
+        return codUrl;
+    }
+
+    public void setCodUrl(String codUrl)
+    {
+        this.codUrl = codUrl;
+    }
+
     public Restaurantes getResId()
     {
         return resId;
@@ -149,5 +174,5 @@ public class Codigosdesc implements Serializable
     {
         return "cr.ac.una.wsrestuna.models.Codigosdesc[ codId=" + codId + " ]";
     }
-    
+
 }
