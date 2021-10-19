@@ -3,6 +3,27 @@
   <!-- Define Persistence Unit -->
   <persistence-unit name="WsRestUNA" transaction-type="JTA">
     <jta-data-source>jdbc/RestUNA</jta-data-source>
+    <class>cr.ac.una.wsrestuna.models.Ordenes</class>
+    <class>cr.ac.una.wsrestuna.models.Productos</class>
+    <class>cr.ac.una.wsrestuna.models.Categorias</class>
+    <class>cr.ac.una.wsrestuna.models.Mesas</class>
+    <class>cr.ac.una.wsrestuna.models.ResRol</class>
+    <class>cr.ac.una.wsrestuna.models.Productosxorden</class>
+    <class>cr.ac.una.wsrestuna.models.Salones</class>
+    <class>cr.ac.una.wsrestuna.models.Restaurantes</class>
+    <class>cr.ac.una.wsrestuna.models.Empleados</class>
+    <class>cr.ac.una.wsrestuna.models.Rol</class>
+    <class>cr.ac.una.wsrestuna.models.TblSalones</class>
+    <class>cr.ac.una.wsrestuna.models.TblProductosxorden</class>
+    <class>cr.ac.una.wsrestuna.models.TblRestaurantes</class>
+    <class>cr.ac.una.wsrestuna.models.TblResRol</class>
+    <class>cr.ac.una.wsrestuna.models.TblEmpleados</class>
+    <class>cr.ac.una.wsrestuna.models.TblMesas</class>
+    <class>cr.ac.una.wsrestuna.models.TblProductos</class>
+    <class>cr.ac.una.wsrestuna.models.TblOrdenes</class>
+    <class>cr.ac.una.wsrestuna.models.TblCategorias</class>
+    <class>cr.ac.una.wsrestuna.models.Codigosdesc</class>
+    <class>cr.ac.una.wsrestuna.models.Mesa</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="eclipselink.logging.level.sql" value="FINE"/>

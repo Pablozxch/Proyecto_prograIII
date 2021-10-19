@@ -30,6 +30,7 @@ public class SecurityFilter implements ContainerRequestFilter
 {
 
     private static final String AUTHORIZATION_SERVICE_PATH = "getUsuario";//TODO
+    private static final String RENEWAL_SERVICE_PATH = "renovarToken";
     private final JwTokenHelper jwTokenHelper = JwTokenHelper.getInstance();
     private static final String AUTHENTICATION_SCHEME = "Bearer ";
 
@@ -71,6 +72,14 @@ public class SecurityFilter implements ContainerRequestFilter
             try
             {
                 Claims claims = jwTokenHelper.claimKey(token);
+                if(method.getName().equals(RENEWAL_SERVICE_PATH))
+                {
+                    if(!(boolean) claims.getOrDefault("rnw" , false))
+                    {
+                        abortWithUnauthorized(request , "Invalid authorization");;
+                    }
+                    return;
+                }
                 final SecurityContext currentSecurityContext = request.getSecurityContext();
                 request.setSecurityContext(new SecurityContext()
                 {

@@ -4,7 +4,8 @@ package cr.ac.una.wsrestuna.utils;
  *
  * @author ccarranza
  */
-public enum CodigoRespuesta {
+public enum CodigoRespuesta
+{
     CORRECTO(200),
     ERROR_ACCESO(403),
     ERROR_PERMISOS(401),
@@ -19,11 +20,13 @@ public enum CodigoRespuesta {
         this.setValue(value);
     }
 
-    public Integer getValue() {
+    public Integer getValue()
+    {
         return value;
     }
 
-    public void setValue(Integer value) {
+    public void setValue(Integer value)
+    {
         this.value = value;
     }
 }
