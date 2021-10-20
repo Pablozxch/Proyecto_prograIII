@@ -82,7 +82,7 @@ public class FlowController
                 {
                     try
                     {
-                        loader = new FXMLLoader(App.class.getResource("view/" + name + ".fxml") , this.idioma);
+                        loader = new FXMLLoader(App.class.getResource("views/" + name + ".fxml") , this.idioma);
                         loader.load();
                         loaders.put(name , loader);
                     }
@@ -180,7 +180,7 @@ public class FlowController
         stage.show();
     }
 
-    public void goLogInWindowModal(Boolean resizable)
+    public void goLogInWindowModal(Boolean resizable)//Aqui se le puede mandar tambien el nombre de la vista para abrir en modal
     {
         goViewInWindowModal("LogIng2" , this.controller.getStage() , resizable);
     }
@@ -191,8 +191,8 @@ public class FlowController
         Controller controller = loader.getController();
         controller.initialize();
         Stage stage = new Stage();
-        stage.getIcons().add(new Image(App.class.getResourceAsStream("/cr/ac/una/unaplanilla/resources/Usuario-48.png")));
-        stage.setTitle("UNA PLANILLA");
+        stage.getIcons().add(new Image(App.class.getResourceAsStream("/cr/ac/una/proyectorestaurante/resources/Usuario-48.png")));
+        stage.setTitle("Restaurante");
         stage.setResizable(resizable);
         stage.setOnHidden((WindowEvent event) ->
         {

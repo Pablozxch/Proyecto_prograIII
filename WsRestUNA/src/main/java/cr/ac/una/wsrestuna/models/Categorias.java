@@ -77,7 +77,16 @@ public class Categorias implements Serializable
         this.catNombre = catNombre;
         this.catDescripcion = catDescripcion;
     }
-
+    public Categorias(CategoriasDto catDto)
+    {
+        this.catId=catDto.getId();
+        actualizarCategorias(catDto);
+    }
+    public void actualizarCategorias(CategoriasDto catDto)
+    {
+        this.catNombre=catDto.getNombre();
+        this.catDescripcion=catDto.getDetalle();
+    }
     public Long getCatId()
     {
         return catId;

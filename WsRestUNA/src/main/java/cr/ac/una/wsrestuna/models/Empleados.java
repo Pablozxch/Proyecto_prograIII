@@ -18,22 +18,22 @@ import javax.validation.constraints.*;
 @Entity
 @Table(name = "TBL_EMPLEADOS" , catalog = "" , schema = "RESTUNA")
 @NamedQueries(
-{
-    @NamedQuery(name = "Empleados.findAll" , query = "SELECT e FROM Empleados e") ,
-    @NamedQuery(name = "Empleados.findByEmpId" , query = "SELECT e FROM Empleados e WHERE e.empId = :empId") ,
-    @NamedQuery(name = "Empleados.findByEmpNombre" , query = "SELECT e FROM Empleados e WHERE e.empNombre = :empNombre") ,
-    @NamedQuery(name = "Empleados.findByEmpUsuario" , query = "SELECT e FROM Empleados e WHERE e.empUsuario = :empUsuario") ,
-    @NamedQuery(name = "Empleados.findByEmpContra" , query = "SELECT e FROM Empleados e WHERE e.empContra = :empContra") ,
-    @NamedQuery(name = "Empleados.findByEmpApelllido" , query = "SELECT e FROM Empleados e WHERE e.empApelllido = :empApelllido") ,
-    @NamedQuery(name = "Empleados.findByEmpVersion" , query = "SELECT e FROM Empleados e WHERE e.empVersion = :empVersion")
-})
+          {
+              @NamedQuery(name = "Empleados.findAll" , query = "SELECT e FROM Empleados e") ,
+              @NamedQuery(name = "Empleados.findByEmpId" , query = "SELECT e FROM Empleados e WHERE e.empId = :empId") ,
+              @NamedQuery(name = "Empleados.findByEmpNombre" , query = "SELECT e FROM Empleados e WHERE e.empNombre = :empNombre") ,
+              @NamedQuery(name = "Empleados.findByEmpUsuario" , query = "SELECT e FROM Empleados e WHERE e.empUsuario = :empUsuario") ,
+              @NamedQuery(name = "Empleados.findByEmpContra" , query = "SELECT e FROM Empleados e WHERE e.empContra = :empContra") ,
+              @NamedQuery(name = "Empleados.findByEmpApelllido" , query = "SELECT e FROM Empleados e WHERE e.empApelllido = :empApelllido") ,
+              @NamedQuery(name = "Empleados.findByEmpVersion" , query = "SELECT e FROM Empleados e WHERE e.empVersion = :empVersion")
+          })
 public class Empleados implements Serializable
 {
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
-     @SequenceGenerator(name = "TBL_EMPLEADOS_EMP_ID_GENERATOR" , sequenceName = "RESTUNA.TBL_EMPLEADOS_SEQ01" , allocationSize = 1)
+    @SequenceGenerator(name = "TBL_EMPLEADOS_EMP_ID_GENERATOR" , sequenceName = "RESTUNA.TBL_EMPLEADOS_SEQ01" , allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "TBL_EMPLEADOS_EMP_ID_GENERATOR")
     @Basic(optional = false)
     @NotNull
@@ -95,6 +95,22 @@ public class Empleados implements Serializable
         this.empContra = empContra;
         this.empFoto = empFoto;
         this.empApelllido = empApelllido;
+    }
+
+    public Empleados(EmpleadosDto empDto)
+    {
+        this.empId = empDto.getId();
+        actualizarEmpleados(empDto);
+    }
+
+    public void actualizarEmpleados(EmpleadosDto empDto)
+    {
+        this.empNombre = empDto.getNombre();
+        this.empUsuario = empDto.getUsuario();
+        this.empContra = empDto.getContra();
+        this.empFoto = empDto.getFoto();
+        this.empApelllido = empDto.getApellido();
+        this.rolId=new Rol(empDto.getRol());
     }
 
     public Long getEmpId()
@@ -226,5 +242,5 @@ public class Empleados implements Serializable
     {
         return "cr.ac.una.wsrestuna.models.Empleados[ empId=" + empId + " ]";
     }
-    
+
 }
