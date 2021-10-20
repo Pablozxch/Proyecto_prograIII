@@ -9,35 +9,26 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
+
+import javafx.scene.control.TextArea;
 /**
  * FXML Controller class
  *
  * @author Christopher
  */
-public class RegistroProductoController extends Controller implements Initializable {
+public class CrearCategoríaController extends Controller implements Initializable {
 
 
     @FXML
-    private JFXTextField txtNombre;
+    private JFXTextField txtCategoria;
     @FXML
-    private JFXTextField txtDetalle;
+    private TextArea txtDescripcion;
     @FXML
-    private JFXTextField txtCosto;
+    private JFXButton btnVolver;
     @FXML
-    private ImageView imvImagen;
-    @FXML
-    private Button btnCargarImagen;
-    @FXML
-    private JFXTextField txtCantidad;
-    @FXML
-    private JFXButton btnContinuar;
-    @FXML
-    private JFXButton btnCerrar;
+    private JFXButton btnAceptar;
     /**
      * Initializes the controller class.
      */
@@ -45,14 +36,10 @@ public class RegistroProductoController extends Controller implements Initializa
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-    
-    @FXML
-    private void click(ActionEvent event) {
-    }
 
     @Override
     public void initialize() {
-        
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
 }

@@ -12,47 +12,40 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
+
 /**
  * FXML Controller class
  *
  * @author Christopher
  */
-public class RegistroProductoController extends Controller implements Initializable {
-
+public class CodigosDescuentosController extends Controller implements Initializable {
 
     @FXML
     private JFXTextField txtNombre;
     @FXML
-    private JFXTextField txtDetalle;
-    @FXML
-    private JFXTextField txtCosto;
-    @FXML
-    private ImageView imvImagen;
-    @FXML
-    private Button btnCargarImagen;
+    private JFXTextField txtPorcentaje;
     @FXML
     private JFXTextField txtCantidad;
     @FXML
-    private JFXButton btnContinuar;
+    private JFXButton btnVolver;
     @FXML
-    private JFXButton btnCerrar;
+    private JFXButton btnAceptar;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
     @FXML
     private void click(ActionEvent event) {
     }
 
     @Override
     public void initialize() {
-        
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

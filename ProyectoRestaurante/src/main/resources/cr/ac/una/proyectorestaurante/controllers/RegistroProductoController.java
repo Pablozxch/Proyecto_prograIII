@@ -13,7 +13,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 /**
  * FXML Controller class
@@ -34,7 +33,7 @@ public class RegistroProductoController extends Controller implements Initializa
     @FXML
     private Button btnCargarImagen;
     @FXML
-    private TextField txtCantidad;
+    private JFXTextField txtCantidad;
     @FXML
     private JFXButton btnContinuar;
     @FXML
