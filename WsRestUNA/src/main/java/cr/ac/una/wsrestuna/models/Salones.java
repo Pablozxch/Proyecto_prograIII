@@ -61,7 +61,7 @@ public class Salones implements Serializable
     @ManyToOne(optional = false , fetch = FetchType.LAZY)
     private Restaurantes resId;
     @OneToMany(cascade = CascadeType.ALL , mappedBy = "salId" , fetch = FetchType.LAZY)
-    private List<Mesa> mesaList;
+    private List<Mesas> mesaList;
 
     public Salones()
     {
@@ -153,12 +153,12 @@ public class Salones implements Serializable
         this.resId = resId;
     }
 
-    public List<Mesa> getMesaList()
+    public List<Mesas> getMesaList()
     {
         return mesaList;
     }
 
-    public void setMesaList(List<Mesa> mesaList)
+    public void setMesaList(List<Mesas> mesaList)
     {
         this.mesaList = mesaList;
     }

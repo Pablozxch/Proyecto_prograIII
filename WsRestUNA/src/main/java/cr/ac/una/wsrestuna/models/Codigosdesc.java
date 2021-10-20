@@ -23,7 +23,8 @@ import javax.validation.constraints.*;
               @NamedQuery(name = "Codigosdesc.findByCodNombre" , query = "SELECT c FROM Codigosdesc c WHERE c.codNombre = :codNombre") ,
               @NamedQuery(name = "Codigosdesc.findByCodCant" , query = "SELECT c FROM Codigosdesc c WHERE c.codCant = :codCant") ,
               @NamedQuery(name = "Codigosdesc.findByCodVersion" , query = "SELECT c FROM Codigosdesc c WHERE c.codVersion = :codVersion") ,
-              @NamedQuery(name = "Codigosdesc.findByCodUrl" , query = "SELECT c FROM Codigosdesc c WHERE c.codUrl = :codUrl")
+              @NamedQuery(name = "Codigosdesc.findByCodUrl" , query = "SELECT c FROM Codigosdesc c WHERE c.codUrl = :codUrl") ,
+              @NamedQuery(name = "Codigosdesc.findByCodCantdesc" , query = "SELECT c FROM Codigosdesc c WHERE c.codCantdesc = :codCantdesc")
           })
 public class Codigosdesc implements Serializable
 {
@@ -48,7 +49,6 @@ public class Codigosdesc implements Serializable
     private Long codCant;
     @Basic(optional = false)
     @NotNull
-    @Version
     @Column(name = "COD_VERSION")
     private Long codVersion;
     @Basic(optional = false)
@@ -56,6 +56,10 @@ public class Codigosdesc implements Serializable
     @Size(min = 1 , max = 50)
     @Column(name = "COD_URL")
     private String codUrl;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "COD_CANTDESC")
+    private Long codCantdesc;
     @JoinColumn(name = "RES_ID" , referencedColumnName = "RES_ID")
     @ManyToOne(fetch = FetchType.LAZY)
     private Restaurantes resId;
@@ -69,20 +73,26 @@ public class Codigosdesc implements Serializable
         this.codId = codId;
     }
 
-    public Codigosdesc(Long codId , String codNombre , Long codCant , String codUrl)
+    public Codigosdesc(Long codId , String codNombre , Long codCant , String codUrl , Long codCantdesc)
     {
         this.codId = codId;
         this.codNombre = codNombre;
         this.codCant = codCant;
         this.codUrl = codUrl;
+        this.codCantdesc = codCantdesc;
     }
     public Codigosdesc(CodigosdescDto codDto)
     {
         this.codId=codDto.getId();
-        this.codNombre=codDto.getNombre();
-        this.codCant=codDto.getCantidad();
-        this.codUrl=codDto.getUrl();
-        this.resId=new Restaurantes(codDto.getResid());
+        actualizarCodigos(codDto);
+    }
+    public void actualizarCodigos(CodigosdescDto codDto)
+    {
+        this.codNombre = codDto.getNombre();
+        this.codCant = codDto.getCantidad();
+        this.codUrl = codDto.getUrl();
+        this.codCantdesc=codDto.getCantidaddesc();
+        this.resId = new Restaurantes(codDto.getResid());
     }
 
     public Long getCodId()
@@ -133,6 +143,16 @@ public class Codigosdesc implements Serializable
     public void setCodUrl(String codUrl)
     {
         this.codUrl = codUrl;
+    }
+
+    public Long getCodCantdesc()
+    {
+        return codCantdesc;
+    }
+
+    public void setCodCantdesc(Long codCantdesc)
+    {
+        this.codCantdesc = codCantdesc;
     }
 
     public Restaurantes getResId()

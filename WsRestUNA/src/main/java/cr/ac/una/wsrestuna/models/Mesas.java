@@ -27,7 +27,7 @@ import javax.validation.constraints.*;
               @NamedQuery(name = "Mesa.findByMesaPosy" , query = "SELECT m FROM Mesa m WHERE m.mesaPosy = :mesaPosy") ,
               @NamedQuery(name = "Mesa.findByMesaVersion" , query = "SELECT m FROM Mesa m WHERE m.mesaVersion = :mesaVersion")
           })
-public class Mesa implements Serializable
+public class Mesas implements Serializable
 {
 
     private static final long serialVersionUID = 1L;
@@ -68,16 +68,16 @@ public class Mesa implements Serializable
     @ManyToOne(optional = false , fetch = FetchType.LAZY)
     private Salones salId;
 
-    public Mesa()
+    public Mesas()
     {
     }
 
-    public Mesa(Long mesaId)
+    public Mesas(Long mesaId)
     {
         this.mesaId = mesaId;
     }
 
-    public Mesa(Long mesaId , String mesaNombre , String mesaEstado , Long mesaPosx , Long mesaPosy)
+    public Mesas(Long mesaId , String mesaNombre , String mesaEstado , Long mesaPosx , Long mesaPosy)
     {
         this.mesaId = mesaId;
         this.mesaNombre = mesaNombre;
@@ -86,13 +86,13 @@ public class Mesa implements Serializable
         this.mesaPosy = mesaPosy;
     }
 
-    public Mesa(MesaDto mesaDto)
+    public Mesas(MesasDto mesaDto)
     {
         this.mesaId = mesaDto.getId();
         actualizarMesa(mesaDto);
     }
 
-    public void actualizarMesa(MesaDto mesaDto)
+    public void actualizarMesa(MesasDto mesaDto)
     {
         this.mesaNombre = mesaDto.getNombre();
         this.mesaEstado = mesaDto.getEstado();
@@ -192,11 +192,11 @@ public class Mesa implements Serializable
     public boolean equals(Object object)
     {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if(!(object instanceof Mesa))
+        if(!(object instanceof Mesas))
         {
             return false;
         }
-        Mesa other = (Mesa) object;
+        Mesas other = (Mesas) object;
         if((this.mesaId == null && other.mesaId != null) || (this.mesaId != null && !this.mesaId.equals(other.mesaId)))
         {
             return false;

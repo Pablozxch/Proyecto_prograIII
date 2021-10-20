@@ -19,7 +19,7 @@ public class OrdenesDto
     private Date fecha;
     private Long desc;
     private EmpleadosDto emp;
-    private MesaDto mesa;
+    private MesasDto mesa;
     private Boolean modificado;
 
     public OrdenesDto()
@@ -34,7 +34,7 @@ public class OrdenesDto
         this.fecha = orden.getFacFecha();
         this.desc = orden.getFacDesc();
         this.emp = new EmpleadosDto(orden.getEmpId());
-        this.mesa = new MesaDto(orden.getMesaId());
+        this.mesa = new MesasDto(orden.getMesaId());
     }
 
     public Long getId()
@@ -87,12 +87,12 @@ public class OrdenesDto
         this.emp = emp;
     }
 
-    public MesaDto getMesa()
+    public MesasDto getMesa()
     {
         return mesa;
     }
 
-    public void setMesa(MesaDto mesa)
+    public void setMesa(MesasDto mesa)
     {
         this.mesa = mesa;
     }

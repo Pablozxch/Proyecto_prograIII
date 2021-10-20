@@ -9,7 +9,7 @@ package cr.ac.una.wsrestuna.models;
  *
  * @author jp015
  */
-public class MesaDto
+public class MesasDto
 {
 
     private Long id;
@@ -20,12 +20,12 @@ public class MesaDto
     private SalonesDto salon;
     private Boolean modificado;
 
-    public MesaDto()
+    public MesasDto()
     {
         this.modificado = false;
     }
 
-    public MesaDto(Mesa mes)
+    public MesasDto(Mesas mes)
     {
         this();
         this.id=mes.getMesaId();

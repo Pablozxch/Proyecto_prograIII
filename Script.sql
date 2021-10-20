@@ -6,6 +6,112 @@ Database: Oracle 18c
 */
 
 
+-- Drop relationships section -------------------------------------------------
+
+ALTER TABLE tbl_codigosdesc DROP CONSTRAINT rel_res_cod
+;
+ALTER TABLE tbl_productosxOrden DROP CONSTRAINT rel_pro_ord
+;
+ALTER TABLE tbl_productosxOrden DROP CONSTRAINT rel_ord_pro
+;
+ALTER TABLE tbl_productos DROP CONSTRAINT Relationship33
+;
+ALTER TABLE tbl_mesas DROP CONSTRAINT rel_sal_mes
+;
+ALTER TABLE tbl_salones DROP CONSTRAINT rel_res_sal
+;
+ALTER TABLE tbl_empleados DROP CONSTRAINT rel_rol_emp
+;
+ALTER TABLE tbl_empleados DROP CONSTRAINT rel_res_emp
+;
+ALTER TABLE tbl_ordenes DROP CONSTRAINT rel_emp_ord
+;
+ALTER TABLE tbl_ordenes DROP CONSTRAINT rel_mes_ord
+;
+ALTER TABLE tbl_categoriasxProductos DROP CONSTRAINT rel_pro_cat
+;
+ALTER TABLE tbl_categoriasxProductos DROP CONSTRAINT rel_cat_pro
+;
+
+
+
+
+-- Drop keys for tables section -------------------------------------------------
+
+ALTER TABLE tbl_codigosdesc DROP CONSTRAINT PK_tbl_codigosdesc
+;
+ALTER TABLE tbl_productosxOrden DROP CONSTRAINT PK_tbl_productosxOrden
+;
+ALTER TABLE tbl_ordenes DROP CONSTRAINT PK_tbl_ordenes
+;
+ALTER TABLE tbl_mesas DROP CONSTRAINT PK_tbl_mesas
+;
+ALTER TABLE tbl_salones DROP CONSTRAINT PK_tbl_salones
+;
+ALTER TABLE tbl_res_rol DROP CONSTRAINT PK_tbl_res_rol
+;
+ALTER TABLE tbl_categorias DROP CONSTRAINT PK_tbl_categorias
+;
+ALTER TABLE tbl_restaurantes DROP CONSTRAINT PK_tbl_restaurantes
+;
+ALTER TABLE tbl_empleados DROP CONSTRAINT PK_tbl_empleados
+;
+ALTER TABLE tbl_productos DROP CONSTRAINT PK_tbl_productos
+;
+
+
+-- Drop indexes section -------------------------------------------------
+
+DROP INDEX IX_Relationship39
+;
+
+
+-- Drop tables section ---------------------------------------------------
+
+DROP TABLE tbl_codigosdesc
+;
+DROP TABLE tbl_productosxOrden
+;
+DROP TABLE tbl_ordenes
+;
+DROP TABLE tbl_mesas
+;
+DROP TABLE tbl_salones
+;
+DROP TABLE tbl_res_rol
+;
+DROP TABLE tbl_categoriasxProductos
+;
+DROP TABLE tbl_categorias
+;
+DROP TABLE tbl_restaurantes
+;
+DROP TABLE tbl_empleados
+;
+DROP TABLE tbl_productos
+;
+
+-- Drop sequences section --------------------------------------------------- 
+
+DROP SEQUENCE tbl_ordenes_seq01
+;
+DROP SEQUENCE tbl_roles_seq01
+;
+DROP SEQUENCE tbl_empleados_seq01
+;
+DROP SEQUENCE tbl_mesas_seq01
+;
+DROP SEQUENCE tbl_codigosdesc_seq01
+;
+DROP SEQUENCE tbl_proxorden_seq01
+;
+DROP SEQUENCE tbl_salones_seq01
+;
+DROP SEQUENCE tbl_restaurantes_seq01
+;
+DROP SEQUENCE tbl_categorias_seq01
+;
+
 -- Create sequences section -------------------------------------------------
 
 CREATE SEQUENCE tbl_categorias_seq01
@@ -247,6 +353,8 @@ CREATE TABLE tbl_codigosdesc(
   cod_nombre Varchar2(30 ) NOT NULL,
   cod_cant Number NOT NULL,
   cod_version Number DEFAULT 1 NOT NULL,
+  cod_url Varchar2(50 ) NOT NULL,
+  cod_cantdesc number NOT NULL,
   res_id Number
 )
 ;
@@ -260,8 +368,6 @@ CREATE INDEX IX_Relationship39 ON tbl_codigosdesc (res_id)
 
 ALTER TABLE tbl_codigosdesc ADD CONSTRAINT PK_tbl_codigosdesc PRIMARY KEY (cod_id)
 ;
-
-
 -- Trigger for sequence tbl_productos_seq01 for column pro_id in table tbl_productos ---------
 CREATE OR REPLACE TRIGGER tbl_productos_tgr01 BEFORE INSERT
 ON tbl_productos FOR EACH ROW
@@ -420,6 +526,7 @@ BEGIN
   RAISE_APPLICATION_ERROR(-20010,'Cannot update column cod_id in table tbl_codigosdesc as it uses sequence.');
 END;
 /
+
 
 
 -- Create foreign keys (relationships) section ------------------------------------------------- 
