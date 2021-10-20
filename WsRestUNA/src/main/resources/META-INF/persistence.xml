@@ -23,7 +23,6 @@
     <class>cr.ac.una.wsrestuna.models.TblOrdenes</class>
     <class>cr.ac.una.wsrestuna.models.TblCategorias</class>
     <class>cr.ac.una.wsrestuna.models.Codigosdesc</class>
-    <class>cr.ac.una.wsrestuna.models.Mesa</class>
     <class>cr.ac.una.wsrestuna.models.TblCodigosdesc</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>

@@ -15,6 +15,7 @@ public class CodigosdescDto
     private Long id;
     private String nombre;
     private Long cantidad;
+    private Long cantidaddesc;
     private Boolean modificado;
     private String url;
     private RestaurantesDto resid;
@@ -31,6 +32,7 @@ public class CodigosdescDto
         this.nombre = cod.getCodNombre();
         this.cantidad = cod.getCodCant();
         this.url = cod.getCodUrl();
+        this.cantidaddesc=cod.getCodCantdesc();
         this.resid = new RestaurantesDto(cod.getResId());
     }
 
@@ -93,6 +95,15 @@ public class CodigosdescDto
     {
         this.resid = resid;
     }
+    public Long getCantidaddesc()
+    {
+        return cantidaddesc;
+    }
+
+    public void setCantidaddesc(Long cantidaddesc)
+    {
+        this.cantidaddesc = cantidaddesc;
+    }
 
     @Override
     public String toString()
@@ -101,7 +112,9 @@ public class CodigosdescDto
         sb.append("CodigosdescDto{id=").append(id);
         sb.append(", nombre=").append(nombre);
         sb.append(", cantidad=").append(cantidad);
+        sb.append(", cantidaddesc=").append(cantidaddesc);
         sb.append(", url=").append(url);
+        sb.append(", resid=").append(resid);
         sb.append('}');
         return sb.toString();
     }

@@ -63,7 +63,7 @@ public class Ordenes implements Serializable
     private Empleados empId;
     @JoinColumn(name = "MESA_ID" , referencedColumnName = "MESA_ID")
     @ManyToOne(optional = false , fetch = FetchType.LAZY)
-    private Mesa mesaId;
+    private Mesas mesaId;
 
     public Ordenes()
     {
@@ -94,7 +94,7 @@ public class Ordenes implements Serializable
         this.facFecha = ordenDto.getFecha();
         this.facTotal = ordenDto.getDesc();
         this.empId = new Empleados(ordenDto.getEmp());
-        this.mesaId = new Mesa(ordenDto.getMesa());
+        this.mesaId = new Mesas(ordenDto.getMesa());
     }
 
     public Long getOrdId()
@@ -167,12 +167,12 @@ public class Ordenes implements Serializable
         this.empId = empId;
     }
 
-    public Mesa getMesaId()
+    public Mesas getMesaId()
     {
         return mesaId;
     }
 
-    public void setMesaId(Mesa mesaId)
+    public void setMesaId(Mesas mesaId)
     {
         this.mesaId = mesaId;
     }
