@@ -1,7 +1,7 @@
 /*
  * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * To change this templeadolate file, choose Tools | Templeadolates
+ * and open the templeadolate in the editor.
  */
 package cr.ac.una.wsrestuna.models;
 
@@ -11,7 +11,7 @@ import java.util.*;
  *
  * @author jp015
  */
-public class EmpleadosDto
+public class EmpleadoDto
 {
 
     private Long id;
@@ -23,19 +23,19 @@ public class EmpleadosDto
     private RolDto rol;
     private Boolean modificado;
     
-    public EmpleadosDto()
+    public EmpleadoDto()
     {
         this.modificado=false;
     }
-    public EmpleadosDto(Empleados emp)
+    public EmpleadoDto(Empleado empleado)
     {
         this();
-        this.id=emp.getEmpId();
-        this.nombre=emp.getEmpNombre();
-        this.apellido=emp.getEmpApelllido();
-        this.usuario=emp.getEmpUsuario();
-        this.contra=emp.getEmpContra();
-        this.rol = new RolDto(emp.getRolId());
+        this.id=empleado.getEmpId();
+        this.nombre=empleado.getEmpNombre();
+        this.apellido=empleado.getEmpApelllido();
+        this.usuario=empleado.getEmpUsuario();
+        this.contra=empleado.getEmpContra();
+        this.rol = new RolDto(empleado.getRolId());
     }
 
     public String getApellido()

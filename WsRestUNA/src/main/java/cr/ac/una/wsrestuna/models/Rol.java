@@ -16,22 +16,22 @@ import javax.validation.constraints.*;
  * @author jp015
  */
 @Entity
-@Table(name = "TBL_RES_ROL" , catalog = "" , schema = "RESTUNA")
+@Table(name = "TBL_ROL" , catalog = "" , schema = "RESTUNA")
 @NamedQueries(
-{
-    @NamedQuery(name = "Rol.findAll" , query = "SELECT r FROM Rol r") ,
-    @NamedQuery(name = "Rol.findByRolId" , query = "SELECT r FROM Rol r WHERE r.rolId = :rolId") ,
-    @NamedQuery(name = "Rol.findByRolNombre" , query = "SELECT r FROM Rol r WHERE r.rolNombre = :rolNombre") ,
-    @NamedQuery(name = "Rol.findByRolVersion" , query = "SELECT r FROM Rol r WHERE r.rolVersion = :rolVersion")
-})
+          {
+              @NamedQuery(name = "Rol.findAll" , query = "SELECT r FROM Rol r") ,
+              @NamedQuery(name = "Rol.findByRolId" , query = "SELECT r FROM Rol r WHERE r.rolId = :rolId") ,
+              @NamedQuery(name = "Rol.findByRolNombre" , query = "SELECT r FROM Rol r WHERE r.rolNombre = :rolNombre") ,
+              @NamedQuery(name = "Rol.findByRolVersion" , query = "SELECT r FROM Rol r WHERE r.rolVersion = :rolVersion")
+          })
 public class Rol implements Serializable
 {
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
-     @SequenceGenerator(name = "TBL_RES_ROL_ROL_ID_GENERATOR" , sequenceName = "RESTUNA.TBL_RES_ROL_SEQ01" , allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "TBL_RES_ROL_ROL_ID_GENERATOR")
+    @SequenceGenerator(name = "TBL_ROL_ROL_ID_GENERATOR" , sequenceName = "RESTUNA.TBL_ROL_SEQ01" , allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "TBL_ROL_ROL_ID_GENERATOR")
     @Basic(optional = false)
     @NotNull
     @Column(name = "ROL_ID")
@@ -47,7 +47,7 @@ public class Rol implements Serializable
     @Column(name = "ROL_VERSION")
     private Long rolVersion;
     @OneToMany(cascade = CascadeType.ALL , mappedBy = "rolId" , fetch = FetchType.LAZY)
-    private List<Empleados> empleadosList;
+    private List<Empleado> empleadoList;
 
     public Rol()
     {
@@ -58,19 +58,10 @@ public class Rol implements Serializable
         this.rolId = rolId;
     }
 
-    public Rol(Long rolId , String rolNombre )
+    public Rol(Long rolId , String rolNombre)
     {
         this.rolId = rolId;
         this.rolNombre = rolNombre;
-    }
-    public Rol(RolDto rolDto)
-    {
-        this.rolId=rolDto.getId();
-        actualizarRol(rolDto);
-    }
-    public void actualizarRol(RolDto rolDto)
-    {
-        this.rolNombre=rolDto.getNombre();
     }
 
     public Long getRolId()
@@ -103,14 +94,14 @@ public class Rol implements Serializable
         this.rolVersion = rolVersion;
     }
 
-    public List<Empleados> getEmpleadosList()
+    public List<Empleado> getEmpleadoList()
     {
-        return empleadosList;
+        return empleadoList;
     }
 
-    public void setEmpleadosList(List<Empleados> empleadosList)
+    public void setEmpleadoList(List<Empleado> empleadoList)
     {
-        this.empleadosList = empleadosList;
+        this.empleadoList = empleadoList;
     }
 
     @Override
@@ -142,5 +133,5 @@ public class Rol implements Serializable
     {
         return "cr.ac.una.wsrestuna.models.Rol[ rolId=" + rolId + " ]";
     }
-    
+
 }

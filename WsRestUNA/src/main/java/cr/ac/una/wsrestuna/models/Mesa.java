@@ -16,7 +16,7 @@ import javax.validation.constraints.*;
  * @author jp015
  */
 @Entity
-@Table(name = "TBL_MESAS" , catalog = "" , schema = "RESTUNA")
+@Table(name = "TBL_MESA" , catalog = "" , schema = "RESTUNA")
 @NamedQueries(
           {
               @NamedQuery(name = "Mesa.findAll" , query = "SELECT m FROM Mesa m") ,
@@ -27,14 +27,14 @@ import javax.validation.constraints.*;
               @NamedQuery(name = "Mesa.findByMesaPosy" , query = "SELECT m FROM Mesa m WHERE m.mesaPosy = :mesaPosy") ,
               @NamedQuery(name = "Mesa.findByMesaVersion" , query = "SELECT m FROM Mesa m WHERE m.mesaVersion = :mesaVersion")
           })
-public class Mesas implements Serializable
+public class Mesa implements Serializable
 {
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
-    @SequenceGenerator(name = "TBL_MESAS_MESA_ID_GENERATOR" , sequenceName = "RESTUNA.TBL_MESAS_SEQ01" , allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "TBL_MESAS_MESA_ID_GENERATOR")
+    @SequenceGenerator(name = "TBL_MESA_MESA_ID_GENERATOR" , sequenceName = "RESTUNA.TBL_MESA_SEQ01" , allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "TBL_MESA_MESA_ID_GENERATOR")
     @Basic(optional = false)
     @NotNull
     @Column(name = "MESA_ID")
@@ -62,42 +62,28 @@ public class Mesas implements Serializable
     @Version
     @Column(name = "MESA_VERSION")
     private Long mesaVersion;
-    @OneToMany(cascade = CascadeType.ALL , mappedBy = "mesaId" , fetch = FetchType.LAZY)
-    private List<Ordenes> ordenesList;
     @JoinColumn(name = "SAL_ID" , referencedColumnName = "SAL_ID")
     @ManyToOne(optional = false , fetch = FetchType.LAZY)
-    private Salones salId;
+    private Salon salId;
+    @OneToMany(cascade = CascadeType.ALL , mappedBy = "mesaId" , fetch = FetchType.LAZY)
+    private List<Orden> ordenList;
 
-    public Mesas()
+    public Mesa()
     {
     }
 
-    public Mesas(Long mesaId)
+    public Mesa(Long mesaId)
     {
         this.mesaId = mesaId;
     }
 
-    public Mesas(Long mesaId , String mesaNombre , String mesaEstado , Long mesaPosx , Long mesaPosy)
+    public Mesa(Long mesaId , String mesaNombre , String mesaEstado , Long mesaPosx , Long mesaPosy )
     {
         this.mesaId = mesaId;
         this.mesaNombre = mesaNombre;
         this.mesaEstado = mesaEstado;
         this.mesaPosx = mesaPosx;
         this.mesaPosy = mesaPosy;
-    }
-
-    public Mesas(MesasDto mesaDto)
-    {
-        this.mesaId = mesaDto.getId();
-        actualizarMesa(mesaDto);
-    }
-
-    public void actualizarMesa(MesasDto mesaDto)
-    {
-        this.mesaNombre = mesaDto.getNombre();
-        this.mesaEstado = mesaDto.getEstado();
-        this.mesaPosx = mesaDto.getPosx();
-        this.mesaPosy = mesaDto.getPosy();
     }
 
     public Long getMesaId()
@@ -160,24 +146,24 @@ public class Mesas implements Serializable
         this.mesaVersion = mesaVersion;
     }
 
-    public List<Ordenes> getOrdenesList()
-    {
-        return ordenesList;
-    }
-
-    public void setOrdenesList(List<Ordenes> ordenesList)
-    {
-        this.ordenesList = ordenesList;
-    }
-
-    public Salones getSalId()
+    public Salon getSalId()
     {
         return salId;
     }
 
-    public void setSalId(Salones salId)
+    public void setSalId(Salon salId)
     {
         this.salId = salId;
+    }
+
+    public List<Orden> getOrdenList()
+    {
+        return ordenList;
+    }
+
+    public void setOrdenList(List<Orden> ordenList)
+    {
+        this.ordenList = ordenList;
     }
 
     @Override
@@ -192,11 +178,11 @@ public class Mesas implements Serializable
     public boolean equals(Object object)
     {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if(!(object instanceof Mesas))
+        if(!(object instanceof Mesa))
         {
             return false;
         }
-        Mesas other = (Mesas) object;
+        Mesa other = (Mesa) object;
         if((this.mesaId == null && other.mesaId != null) || (this.mesaId != null && !this.mesaId.equals(other.mesaId)))
         {
             return false;

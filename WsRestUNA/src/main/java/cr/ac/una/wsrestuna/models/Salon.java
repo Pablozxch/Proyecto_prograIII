@@ -16,23 +16,23 @@ import javax.validation.constraints.*;
  * @author jp015
  */
 @Entity
-@Table(name = "TBL_SALONES" , catalog = "" , schema = "RESTUNA")
+@Table(name = "TBL_SALON" , catalog = "" , schema = "RESTUNA")
 @NamedQueries(
           {
-              @NamedQuery(name = "Salones.findAll" , query = "SELECT s FROM Salones s") ,
-              @NamedQuery(name = "Salones.findBySalId" , query = "SELECT s FROM Salones s WHERE s.salId = :salId") ,
-              @NamedQuery(name = "Salones.findBySalNombre" , query = "SELECT s FROM Salones s WHERE s.salNombre = :salNombre") ,
-              @NamedQuery(name = "Salones.findBySalBarraomesa" , query = "SELECT s FROM Salones s WHERE s.salBarraomesa = :salBarraomesa") ,
-              @NamedQuery(name = "Salones.findBySalVersion" , query = "SELECT s FROM Salones s WHERE s.salVersion = :salVersion")
+              @NamedQuery(name = "Salon.findAll" , query = "SELECT s FROM Salon s") ,
+              @NamedQuery(name = "Salon.findBySalId" , query = "SELECT s FROM Salon s WHERE s.salId = :salId") ,
+              @NamedQuery(name = "Salon.findBySalNombre" , query = "SELECT s FROM Salon s WHERE s.salNombre = :salNombre") ,
+              @NamedQuery(name = "Salon.findBySalBarraomesa" , query = "SELECT s FROM Salon s WHERE s.salBarraomesa = :salBarraomesa") ,
+              @NamedQuery(name = "Salon.findBySalVersion" , query = "SELECT s FROM Salon s WHERE s.salVersion = :salVersion")
           })
-public class Salones implements Serializable
+public class Salon implements Serializable
 {
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
-    @SequenceGenerator(name = "TBL_SALONES_SAL_ID_GENERATOR" , sequenceName = "RESTUNA.TBL_SALONES_SEQ01" , allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "TBL_SALONES_SAL_ID_GENERATOR")
+    @SequenceGenerator(name = "TBL_SALON_SAL_ID_GENERATOR" , sequenceName = "RESTUNA.TBL_SALON_SEQ01" , allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "TBL_SALON_SAL_ID_GENERATOR")
     @Basic(optional = false)
     @NotNull
     @Column(name = "SAL_ID")
@@ -59,38 +59,25 @@ public class Salones implements Serializable
     private Long salVersion;
     @JoinColumn(name = "RES_ID" , referencedColumnName = "RES_ID")
     @ManyToOne(optional = false , fetch = FetchType.LAZY)
-    private Restaurantes resId;
+    private Restaurante resId;
     @OneToMany(cascade = CascadeType.ALL , mappedBy = "salId" , fetch = FetchType.LAZY)
-    private List<Mesas> mesaList;
+    private List<Mesa> mesaList;
 
-    public Salones()
+    public Salon()
     {
     }
 
-    public Salones(Long salId)
+    public Salon(Long salId)
     {
         this.salId = salId;
     }
 
-    public Salones(Long salId , String salNombre , byte[] salImagen , String salBarraomesa)
+    public Salon(Long salId , String salNombre , byte[] salImagen , String salBarraomesa)
     {
         this.salId = salId;
         this.salNombre = salNombre;
         this.salImagen = salImagen;
         this.salBarraomesa = salBarraomesa;
-    }
-
-    public Salones(SalonesDto salDto)
-    {
-        this.salId = salDto.getId();
-        actualizarSalones(salDto);
-    }
-
-    public void actualizarSalones(SalonesDto salDto)
-    {
-        this.salNombre = salDto.getNombre();
-        this.salImagen = salDto.getFoto();
-        this.salBarraomesa = salDto.getBarraMesa();
     }
 
     public Long getSalId()
@@ -143,22 +130,22 @@ public class Salones implements Serializable
         this.salVersion = salVersion;
     }
 
-    public Restaurantes getResId()
+    public Restaurante getResId()
     {
         return resId;
     }
 
-    public void setResId(Restaurantes resId)
+    public void setResId(Restaurante resId)
     {
         this.resId = resId;
     }
 
-    public List<Mesas> getMesaList()
+    public List<Mesa> getMesaList()
     {
         return mesaList;
     }
 
-    public void setMesaList(List<Mesas> mesaList)
+    public void setMesaList(List<Mesa> mesaList)
     {
         this.mesaList = mesaList;
     }
@@ -175,11 +162,11 @@ public class Salones implements Serializable
     public boolean equals(Object object)
     {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if(!(object instanceof Salones))
+        if(!(object instanceof Salon))
         {
             return false;
         }
-        Salones other = (Salones) object;
+        Salon other = (Salon) object;
         if((this.salId == null && other.salId != null) || (this.salId != null && !this.salId.equals(other.salId)))
         {
             return false;
@@ -190,7 +177,7 @@ public class Salones implements Serializable
     @Override
     public String toString()
     {
-        return "cr.ac.una.wsrestuna.models.Salones[ salId=" + salId + " ]";
+        return "cr.ac.una.wsrestuna.models.Salon[ salId=" + salId + " ]";
     }
 
 }
