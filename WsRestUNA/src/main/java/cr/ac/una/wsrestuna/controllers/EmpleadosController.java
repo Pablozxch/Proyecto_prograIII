@@ -13,7 +13,7 @@ import javax.ws.rs.core.*;
  *
  * @author jp015
  */
-@Secure
+
 @Path("/EmpleadosController")
 public class EmpleadosController
 {

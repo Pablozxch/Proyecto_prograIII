@@ -5,7 +5,12 @@
  */
 package cr.ac.una.wsrestuna.controllers;
 
+import cr.ac.una.wsrestuna.models.*;
+import cr.ac.una.wsrestuna.services.*;
 import cr.ac.una.wsrestuna.utils.*;
+import java.util.*;
+import java.util.logging.*;
+import javax.ejb.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 
@@ -13,15 +18,46 @@ import javax.ws.rs.core.*;
  *
  * @author jp015
  */
-@Secure
 @Path("/RestauranteController")
 public class RestauranteController
 {
-        @Path("/ping")
+
+    @EJB
+    RestauranteService restauranteService;
+
+    @GET
+    @Path("/ping")
     public Response ping()
     {
         return Response
                   .ok("ping")
                   .build();
     }
+
+    @GET
+    @Path("/restaurante")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getRestaurantes()
+    {
+        try
+        {
+
+            Respuesta res = restauranteService.getRestaurantes();
+            if(!res.getEstado())
+            {
+                return Response.status(res.getCodigoRespuesta().getValue()).entity(res.getMensaje()).build();//TODO
+            }
+
+            return Response.ok(new GenericEntity<List<RestauranteDto>>((List<RestauranteDto>) res.getResultado("Restaurantes"))
+            {
+            }).build();
+        }
+        catch(Exception ex)
+        {
+            Logger.getLogger(RestauranteController.class.getName()).log(Level.SEVERE , null , ex);
+            return Response.status(CodigoRespuesta.ERROR_INTERNO.getValue()).entity("Error al obtener el empleado ").build();//TODO
+        }
+    }
+
 }

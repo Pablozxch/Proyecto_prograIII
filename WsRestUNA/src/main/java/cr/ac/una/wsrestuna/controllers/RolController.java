@@ -14,7 +14,7 @@ import javax.ws.rs.core.*;
  * @author jp015
  */
 
-@Secure
+
 @Path("/RolController")
 public class RolController
 {

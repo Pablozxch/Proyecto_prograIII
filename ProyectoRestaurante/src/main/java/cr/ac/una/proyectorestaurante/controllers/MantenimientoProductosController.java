@@ -12,9 +12,9 @@ import javafx.fxml.Initializable;
 /**
  * FXML Controller class
  *
- * @author Christopher
+ * @author Christophers
  */
-public class MantenimientoProductosController implements Initializable {
+public class MantenimientoProductosController extends Controller implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -23,5 +23,11 @@ public class MantenimientoProductosController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @Override
+    public void initialize()
+    {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

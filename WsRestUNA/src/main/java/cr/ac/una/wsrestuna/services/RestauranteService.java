@@ -52,7 +52,7 @@ public class RestauranteService
         }
     }
 
-    public Respuesta getRestaurantes(String proNombre , String proCosto)
+    public Respuesta getRestaurantes()
     {
         try
         {
