@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" stylesheets="@../styles/StylesCss.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.proyectorestaurante.controllers.PrincipalController">
+   <left>
+      <VBox alignment="TOP_CENTER" prefHeight="620.0" prefWidth="240.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER" prefHeight="487.0" prefWidth="216.0" spacing="20.0">
+               <children>
+                  <JFXButton fx:id="btnSalones" text="Salones" />
+                  <JFXButton fx:id="btnProductos" text="Productos" />
+                  <JFXButton fx:id="btnOrdenes" text="Órdenes" />
+                  <JFXButton fx:id="btnFacturar" text="Facturar" />
+                  <JFXButton fx:id="btnEmpleados" prefHeight="54.0" prefWidth="167.0" text="Empleados" />
+               </children>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="278.0" prefWidth="210.0" spacing="20.0">
+               <children>
+                  <JFXButton fx:id="btnCerrarSesion" prefHeight="54.0" prefWidth="192.0" text="Cerrar Sesión" />
+                  <JFXButton fx:id="btnSalir" prefHeight="54.0" prefWidth="179.0" text="Salir" />
+               </children>
+               <padding>
+                  <Insets bottom="5.0" />
+               </padding>
+            </VBox>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <VBox prefHeight="620.0" prefWidth="953.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="620.0" prefWidth="960.0" />
+         </children></VBox>
+   </center>
+   <top>
+      <AnchorPane prefHeight="80.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" layoutX="500.0" layoutY="-20.0" prefHeight="80.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label styleClass="titulo" text=" Sistema de Restaurantes " />
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </top>
+</BorderPane>

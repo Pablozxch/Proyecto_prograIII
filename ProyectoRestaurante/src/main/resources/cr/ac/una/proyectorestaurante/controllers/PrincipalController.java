@@ -8,25 +8,30 @@ package cr.ac.una.proyectorestaurante.controllers;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-
-import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
  *
  * @author Christopher
  */
-public class MainController extends Controller implements Initializable {
+public class PrincipalController extends Controller implements Initializable {
 
     @FXML
-    private AnchorPane root;
+    private JFXButton btnSalones;
     @FXML
-    private JFXButton btnRegistrar;
+    private JFXButton btnProductos;
     @FXML
-    private JFXButton btnEntrar;
+    private JFXButton btnOrdenes;
+    @FXML
+    private JFXButton btnFacturar;
+    @FXML
+    private JFXButton btnEmpleados;
+    @FXML
+    private JFXButton btnCerrarSesion;
+    @FXML
+    private JFXButton btnSalir;
 
     /**
      * Initializes the controller class.
@@ -34,10 +39,6 @@ public class MainController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }
-
-    @FXML
-    private void click(ActionEvent event) {
     }
 
     @Override

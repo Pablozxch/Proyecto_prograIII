@@ -11,8 +11,8 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="150.0" VBox.vgrow="ALWAYS">
                <children>
-                  <JFXButton fx:id="btnReg" onAction="#click" text="Registrarse" />
-                  <JFXButton fx:id="btnEn" onAction="#click" text="Entrar" />
+                  <JFXButton fx:id="btnRegistrar" onAction="#click" text="Registrar Usuario" />
+                  <JFXButton fx:id="btnEntrar" text="Entrar" />
                </children>
             </HBox>
          </children>
