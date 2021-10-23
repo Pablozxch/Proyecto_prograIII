@@ -25,7 +25,10 @@ import javax.validation.constraints.*;
               @NamedQuery(name = "Empleado.findByEmpUsuario" , query = "SELECT e FROM Empleado e WHERE e.empUsuario = :empUsuario") ,
               @NamedQuery(name = "Empleado.findByEmpContra" , query = "SELECT e FROM Empleado e WHERE e.empContra = :empContra") ,
               @NamedQuery(name = "Empleado.findByEmpApelllido" , query = "SELECT e FROM Empleado e WHERE e.empApelllido = :empApelllido") ,
-              @NamedQuery(name = "Empleado.findByEmpVersion" , query = "SELECT e FROM Empleado e WHERE e.empVersion = :empVersion")
+              @NamedQuery(name = "Empleado.findByEmpVersion" , query = "SELECT e FROM Empleado e WHERE e.empVersion = :empVersion") ,
+              @NamedQuery(name = "Empleado.findByUsuClave" , query = "SELECT e FROM Empleado e WHERE e.empUsuario = :empUsuario and e.empContra = :empContra" , hints = @QueryHint(name = "eclipselink.refresh" , value = "true")) ,
+              @NamedQuery(name = "Empleado.findByNombreApellido" , query = "SELECT e FROM Empleado e WHERE UPPER(e.empNombre) like :empNombre and UPPER(e.empApelllido) like :empApelllido" , hints = @QueryHint(name = "eclipselink.refresh" , value = "true")),
+
           })
 public class Empleado implements Serializable
 {
@@ -96,6 +99,7 @@ public class Empleado implements Serializable
         this.empFoto = empFoto;
         this.empApelllido = empApelllido;
     }
+
     public Empleado(EmpleadoDto empleadoDto)
     {
         this.empId = empleadoDto.getId();
@@ -111,6 +115,7 @@ public class Empleado implements Serializable
         this.empApelllido = empleadoDto.getApellido();
         this.rolId = new Rol(empleadoDto.getRol());
     }
+
     public Long getEmpId()
     {
         return empId;

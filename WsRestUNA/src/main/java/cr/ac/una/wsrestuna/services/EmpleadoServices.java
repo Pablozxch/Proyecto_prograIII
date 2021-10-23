@@ -55,27 +55,31 @@ public class EmpleadoServices
         }
     }
 
-    public Respuesta getEmpleado(String cedula , String nombre , String pApellido)
+    public Respuesta getEmpleados(String empNombre , String empApelllido)
     {
         try
         {
-            Query qryEmpleado = em.createNamedQuery("Empleado.findByCedulaNombrePapellido" , Empleado.class);
-            qryEmpleado.setParameter("empCedula" , cedula);
-            qryEmpleado.setParameter("empNombre" , nombre);
-            qryEmpleado.setParameter("empPapellido" , pApellido);
-            List<Empleado> empleados = (List<Empleado>) qryEmpleado.getResultList();
+            Query qryEmpleados = em.createNamedQuery("Empleado.findByNombreApellido" , Empleado.class);
+            qryEmpleados.setParameter("empNombre" , empNombre);
+            qryEmpleados.setParameter("empApelllido" , empApelllido);
+            List<Empleado> empleados = (List<Empleado>) qryEmpleados.getResultList();
             List<EmpleadoDto> empleadosDto = new ArrayList<>();
-            return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "" , "Empleado" , empleadosDto);
+            empleados.forEach(empleado ->
+            {
+                empleadosDto.add(new EmpleadoDto(empleado));
+            });
+
+            return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "" , "Empleados" , empleadosDto);
 
         }
         catch(NoResultException ex)
         {
-            return new Respuesta(false , CodigoRespuesta.ERROR_NOENCONTRADO , "No existen empleados con los criterios ingresados." , "getEmpleado NoResultException");
+            return new Respuesta(false , CodigoRespuesta.ERROR_NOENCONTRADO , "No existen empleados con los criterios ingresados." , "getEmpleados NoResultException");
         }
         catch(Exception ex)
         {
             LOG.log(Level.SEVERE , "Ocurrio un error al consultar el empleado." , ex);
-            return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al consultar el empleado." , "getEmpleado " + ex.getMessage());
+            return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al consultar el empleado." , "getEmpleados " + ex.getMessage());
         }
     }
 

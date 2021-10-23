@@ -23,7 +23,9 @@ import javax.validation.constraints.*;
               @NamedQuery(name = "Categoria.findByCatId" , query = "SELECT c FROM Categoria c WHERE c.catId = :catId") ,
               @NamedQuery(name = "Categoria.findByCatNombre" , query = "SELECT c FROM Categoria c WHERE c.catNombre = :catNombre") ,
               @NamedQuery(name = "Categoria.findByCatDetalle" , query = "SELECT c FROM Categoria c WHERE c.catDetalle = :catDetalle") ,
-              @NamedQuery(name = "Categoria.findByCatVersion" , query = "SELECT c FROM Categoria c WHERE c.catVersion = :catVersion")
+              @NamedQuery(name = "Categoria.findByCatVersion" , query = "SELECT c FROM Categoria c WHERE c.catVersion = :catVersion"),
+              @NamedQuery(name = "Categoria.findByNombreDetalle" , query = "SELECT e FROM Categoria e WHERE UPPER(e.catNombre) like :catNombre and UPPER(e.catDetalle) like :catDetalle" , hints = @QueryHint(name = "eclipselink.refresh" , value = "true")),
+
           })
 public class Categoria implements Serializable
 {
