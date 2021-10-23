@@ -99,3 +99,8 @@ and open the template in the editor.
 {
     -fx-alignment: CENTER;
 }
+
+.combo-box{
+    -fx-text-fill: white;
+    -fx-background-color: #D6E0F0;
+}

@@ -6,6 +6,7 @@
 package cr.ac.una.proyectorestaurante.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -37,7 +38,9 @@ public class RegistroProductoController extends Controller implements Initializa
     @FXML
     private JFXButton btnContinuar;
     @FXML
-    private JFXButton btnCerrar;
+    private JFXComboBox<String> cmbFavorito;
+    @FXML
+    private JFXButton btnVolver;
     /**
      * Initializes the controller class.
      */
@@ -52,7 +55,7 @@ public class RegistroProductoController extends Controller implements Initializa
 
     @Override
     public void initialize() {
-        
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
