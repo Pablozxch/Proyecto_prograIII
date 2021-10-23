@@ -1,120 +1,10 @@
 /*
 Created: 10/10/2021
-Modified: 22/10/2021
+Modified: 23/10/2021
 Model: Oracle 18c
 Database: Oracle 18c
 */
 
-
--- Drop relationships section -------------------------------------------------
-
-ALTER TABLE tbl_orden DROP CONSTRAINT rel_cod_orden
-;
-ALTER TABLE tbl_codigodesc DROP CONSTRAINT rel_res_cod
-;
-ALTER TABLE tbl_productosxOrden DROP CONSTRAINT rel_pro_ord
-;
-ALTER TABLE tbl_productosxOrden DROP CONSTRAINT rel_ord_pro
-;
-ALTER TABLE tbl_producto DROP CONSTRAINT rel_res_pro
-;
-ALTER TABLE tbl_mesa DROP CONSTRAINT rel_sal_mes
-;
-ALTER TABLE tbl_salon DROP CONSTRAINT rel_res_sal
-;
-ALTER TABLE tbl_empleado DROP CONSTRAINT rel_rol_emp
-;
-ALTER TABLE tbl_empleado DROP CONSTRAINT rel_res_emp
-;
-ALTER TABLE tbl_orden DROP CONSTRAINT rel_emp_ord
-;
-ALTER TABLE tbl_orden DROP CONSTRAINT rel_mes_ord
-;
-ALTER TABLE tbl_categoriaxProducto DROP CONSTRAINT rel_pro_cat
-;
-ALTER TABLE tbl_categoriaxProducto DROP CONSTRAINT rel_cat_pro
-;
-
-
-
-
--- Drop keys for tables section -------------------------------------------------
-
-ALTER TABLE tbl_codigodesc DROP CONSTRAINT PK_tbl_codigodesc
-;
-ALTER TABLE tbl_productosxOrden DROP CONSTRAINT PK_tbl_productosxOrden
-;
-ALTER TABLE tbl_orden DROP CONSTRAINT PK_tbl_orden
-;
-ALTER TABLE tbl_mesa DROP CONSTRAINT PK_tbl_mesa
-;
-ALTER TABLE tbl_salon DROP CONSTRAINT PK_tbl_salon
-;
-ALTER TABLE tbl_rol DROP CONSTRAINT PK_tbl_rol
-;
-ALTER TABLE tbl_categoria DROP CONSTRAINT PK_tbl_categoria
-;
-ALTER TABLE tbl_restaurante DROP CONSTRAINT PK_tbl_restaurante
-;
-ALTER TABLE tbl_empleado DROP CONSTRAINT PK_tbl_empleado
-;
-ALTER TABLE tbl_producto DROP CONSTRAINT PK_tbl_producto
-;
-
-
--- Drop indexes section -------------------------------------------------
-
-DROP INDEX IX_Relationship39
-;
-DROP INDEX IX_Relationship2
-;
-
-
--- Drop tables section ---------------------------------------------------
-
-DROP TABLE tbl_codigodesc
-;
-DROP TABLE tbl_productosxOrden
-;
-DROP TABLE tbl_orden
-;
-DROP TABLE tbl_mesa
-;
-DROP TABLE tbl_salon
-;
-DROP TABLE tbl_rol
-;
-DROP TABLE tbl_categoriaxProducto
-;
-DROP TABLE tbl_categoria
-;
-DROP TABLE tbl_restaurante
-;
-DROP TABLE tbl_empleado
-;
-DROP TABLE tbl_producto
-;
-
--- Drop sequences section --------------------------------------------------- 
-
-DROP SEQUENCE tbl_orden_seq01
-;
-DROP SEQUENCE tbl_rol_seq01
-;
-DROP SEQUENCE tbl_empleado_seq01
-;
-DROP SEQUENCE tbl_mesa_seq01
-;
-DROP SEQUENCE tbl_codigodesc_seq01
-;
-DROP SEQUENCE tbl_proxorden_seq01
-;
-DROP SEQUENCE tbl_salon_seq01
-;
-DROP SEQUENCE tbl_restaurante_seq01
-;
-DROP SEQUENCE tbl_categoria_seq01
-;
 
 -- Create sequences section -------------------------------------------------
 
@@ -438,11 +328,6 @@ CREATE TABLE tbl_orden(
 )
 ;
 
--- Create indexes for table tbl_orden
-
-CREATE INDEX IX_Relationship2 ON tbl_orden (cod_id)
-;
-
 -- Add keys for table tbl_orden
 
 ALTER TABLE tbl_orden ADD CONSTRAINT PK_tbl_orden PRIMARY KEY (ord_id)
@@ -509,11 +394,6 @@ CREATE TABLE tbl_codigodesc(
 )
 ;
 
--- Create indexes for table tbl_codigodesc
-
-CREATE INDEX IX_Relationship39 ON tbl_codigodesc (res_id)
-;
-
 -- Add keys for table tbl_codigodesc
 
 ALTER TABLE tbl_codigodesc ADD CONSTRAINT PK_tbl_codigodesc PRIMARY KEY (cod_id)
@@ -535,7 +415,6 @@ COMMENT ON COLUMN tbl_codigodesc.res_id IS 'ID del restaurante'
 ;
 COMMENT ON COLUMN tbl_codigodesc.cod_version IS 'Version del codigo de descuento'
 ;
-
 
 -- Trigger for sequence tbl_producto_seq01 for column pro_id in table tbl_producto ---------
 CREATE OR REPLACE TRIGGER tbl_producto_tgr01 BEFORE INSERT
@@ -698,6 +577,7 @@ BEGIN
   RAISE_APPLICATION_ERROR(-20010,'Cannot update column cod_id in table tbl_codigodesc as it uses sequence.');
 END;
 /
+
 
 -- Create foreign keys (relationships) section ------------------------------------------------- 
 

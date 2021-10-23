@@ -50,7 +50,7 @@ ALTER TABLE tbl_mesa DROP CONSTRAINT PK_tbl_mesa
 ;
 ALTER TABLE tbl_salon DROP CONSTRAINT PK_tbl_salon
 ;
-ALTER TABLE tbl_res_rol DROP CONSTRAINT PK_tbl_res_rol
+ALTER TABLE tbl_rol DROP CONSTRAINT PK_tbl_rol
 ;
 ALTER TABLE tbl_categoria DROP CONSTRAINT PK_tbl_categoria
 ;
@@ -82,7 +82,7 @@ DROP TABLE tbl_mesa
 ;
 DROP TABLE tbl_salon
 ;
-DROP TABLE tbl_res_rol
+DROP TABLE tbl_rol
 ;
 DROP TABLE tbl_categoriaxProducto
 ;
@@ -347,27 +347,27 @@ CREATE TABLE tbl_categoriaxProducto(
 )
 ;
 
--- Table tbl_res_rol
+-- Table tbl_rol
 
-CREATE TABLE tbl_res_rol(
+CREATE TABLE tbl_rol(
   rol_id Number NOT NULL,
   rol_nombre Varchar2(30 ) NOT NULL,
   rol_version Number DEFAULT 1 NOT NULL
 )
 ;
 
--- Add keys for table tbl_res_rol
+-- Add keys for table tbl_rol
 
-ALTER TABLE tbl_res_rol ADD CONSTRAINT PK_tbl_res_rol PRIMARY KEY (rol_id)
+ALTER TABLE tbl_rol ADD CONSTRAINT PK_tbl_rol PRIMARY KEY (rol_id)
 ;
 
 -- Table and Columns comments section
 
-COMMENT ON COLUMN tbl_res_rol.rol_id IS 'ID del rol'
+COMMENT ON COLUMN tbl_rol.rol_id IS 'ID del rol'
 ;
-COMMENT ON COLUMN tbl_res_rol.rol_nombre IS 'Nombre del rol'
+COMMENT ON COLUMN tbl_rol.rol_nombre IS 'Nombre del rol'
 ;
-COMMENT ON COLUMN tbl_res_rol.rol_version IS 'Version del rol'
+COMMENT ON COLUMN tbl_rol.rol_version IS 'Version del rol'
 ;
 
 -- Table tbl_salon
@@ -536,6 +536,7 @@ COMMENT ON COLUMN tbl_codigodesc.res_id IS 'ID del restaurante'
 COMMENT ON COLUMN tbl_codigodesc.cod_version IS 'Version del codigo de descuento'
 ;
 
+
 -- Trigger for sequence tbl_producto_seq01 for column pro_id in table tbl_producto ---------
 CREATE OR REPLACE TRIGGER tbl_producto_tgr01 BEFORE INSERT
 ON tbl_producto FOR EACH ROW
@@ -602,9 +603,9 @@ BEGIN
 END;
 /
 
--- Trigger for sequence tbl_rol_seq01 for column rol_id in table tbl_res_rol ---------
+-- Trigger for sequence tbl_rol_seq01 for column rol_id in table tbl_rol ---------
 CREATE OR REPLACE TRIGGER tbl_rol_tgr01 BEFORE INSERT
-ON tbl_res_rol FOR EACH ROW
+ON tbl_rol FOR EACH ROW
 BEGIN
   IF :new.rol_id IS NULL OR :new.rol_id <=1 THEN
   :new.rol_id := tbl_rol_seq01.nextval;
@@ -612,7 +613,7 @@ BEGIN
 END;
 /
 CREATE OR REPLACE TRIGGER tbl_rol_tgr02 AFTER UPDATE OF rol_id
-ON tbl_res_rol FOR EACH ROW
+ON tbl_rol FOR EACH ROW
 BEGIN
   RAISE_APPLICATION_ERROR(-20010,'Cannot update column rol_id in table tbl_res_rol as it uses sequence.');
 END;
@@ -698,7 +699,6 @@ BEGIN
 END;
 /
 
-
 -- Create foreign keys (relationships) section ------------------------------------------------- 
 
 ALTER TABLE tbl_categoriaxProducto ADD CONSTRAINT rel_cat_pro FOREIGN KEY (cat_id) REFERENCES tbl_categoria (cat_id)
@@ -726,7 +726,7 @@ ALTER TABLE tbl_empleado ADD CONSTRAINT rel_res_emp FOREIGN KEY (res_id) REFEREN
 
 
 
-ALTER TABLE tbl_empleado ADD CONSTRAINT rel_rol_emp FOREIGN KEY (rol_id) REFERENCES tbl_res_rol (rol_id)
+ALTER TABLE tbl_empleado ADD CONSTRAINT rel_rol_emp FOREIGN KEY (rol_id) REFERENCES tbl_rol (rol_id)
 ;
 
 
