@@ -7,6 +7,7 @@ package cr.ac.una.proyectorestaurante.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -26,7 +27,7 @@ public class RegistroProductoController extends Controller implements Initializa
     @FXML
     private JFXTextField txtNombre;
     @FXML
-    private JFXTextField txtDetalle;
+    private JFXTextArea txtDetalle;
     @FXML
     private JFXTextField txtCosto;
     @FXML

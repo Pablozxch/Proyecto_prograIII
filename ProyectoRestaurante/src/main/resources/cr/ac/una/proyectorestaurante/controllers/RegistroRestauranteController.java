@@ -6,6 +6,7 @@
 package cr.ac.una.proyectorestaurante.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -28,8 +29,6 @@ public class RegistroRestauranteController extends Controller implements Initial
     @FXML
     private JFXTextField txtDetalle;
     @FXML
-    private TextArea txtDireccion;
-    @FXML
     private ImageView imvImagen;
     @FXML
     private JFXButton btnCargarImagen;
@@ -39,6 +38,8 @@ public class RegistroRestauranteController extends Controller implements Initial
     private JFXButton btnContinuar;
     @FXML
     private JFXButton btnCerrar;
+    @FXML
+    private JFXTextArea txtDreccion;
     /**
      * Initializes the controller class.
      */

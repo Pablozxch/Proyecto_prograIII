@@ -101,6 +101,9 @@ and open the template in the editor.
 }
 
 .combo-box{
-    -fx-text-fill: white;
+    -fx-background-color: #D6E0F0;
+}
+
+.text-area{
     -fx-background-color: #D6E0F0;
 }
