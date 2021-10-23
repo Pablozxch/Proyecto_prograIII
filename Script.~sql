@@ -22,9 +22,9 @@ ALTER TABLE tbl_mesa DROP CONSTRAINT rel_sal_mes
 ;
 ALTER TABLE tbl_salon DROP CONSTRAINT rel_res_sal
 ;
-ALTER TABLE tbl_empleados DROP CONSTRAINT rel_rol_emp
+ALTER TABLE tbl_empleado DROP CONSTRAINT rel_rol_emp
 ;
-ALTER TABLE tbl_empleados DROP CONSTRAINT rel_res_emp
+ALTER TABLE tbl_empleado DROP CONSTRAINT rel_res_emp
 ;
 ALTER TABLE tbl_orden DROP CONSTRAINT rel_emp_ord
 ;
@@ -50,13 +50,13 @@ ALTER TABLE tbl_mesa DROP CONSTRAINT PK_tbl_mesa
 ;
 ALTER TABLE tbl_salon DROP CONSTRAINT PK_tbl_salon
 ;
-ALTER TABLE tbl_res_rol DROP CONSTRAINT PK_tbl_res_rol
+ALTER TABLE tbl_rol DROP CONSTRAINT PK_tbl_rol
 ;
 ALTER TABLE tbl_categoria DROP CONSTRAINT PK_tbl_categoria
 ;
 ALTER TABLE tbl_restaurante DROP CONSTRAINT PK_tbl_restaurante
 ;
-ALTER TABLE tbl_empleados DROP CONSTRAINT PK_tbl_empleados
+ALTER TABLE tbl_empleado DROP CONSTRAINT PK_tbl_empleado
 ;
 ALTER TABLE tbl_producto DROP CONSTRAINT PK_tbl_producto
 ;
@@ -82,7 +82,7 @@ DROP TABLE tbl_mesa
 ;
 DROP TABLE tbl_salon
 ;
-DROP TABLE tbl_res_rol
+DROP TABLE tbl_rol
 ;
 DROP TABLE tbl_categoriaxProducto
 ;
@@ -90,7 +90,7 @@ DROP TABLE tbl_categoria
 ;
 DROP TABLE tbl_restaurante
 ;
-DROP TABLE tbl_empleados
+DROP TABLE tbl_empleado
 ;
 DROP TABLE tbl_producto
 ;
@@ -231,9 +231,9 @@ COMMENT ON COLUMN tbl_producto.res_id IS 'ID del restaurante'
 COMMENT ON COLUMN tbl_producto.pro_version IS 'Version del producto'
 ;
 
--- Table tbl_empleados
+-- Table tbl_empleado
 
-CREATE TABLE tbl_empleados(
+CREATE TABLE tbl_empleado(
   emp_id Number NOT NULL,
   emp_nombre Varchar2(50 ) NOT NULL,
   emp_usuario Varchar2(50 ) NOT NULL,
@@ -246,30 +246,30 @@ CREATE TABLE tbl_empleados(
 )
 ;
 
--- Add keys for table tbl_empleados
+-- Add keys for table tbl_empleado
 
-ALTER TABLE tbl_empleados ADD CONSTRAINT PK_tbl_empleados PRIMARY KEY (emp_id)
+ALTER TABLE tbl_empleado ADD CONSTRAINT PK_tbl_empleado PRIMARY KEY (emp_id)
 ;
 
 -- Table and Columns comments section
 
-COMMENT ON COLUMN tbl_empleados.emp_id IS 'ID del empleado'
+COMMENT ON COLUMN tbl_empleado.emp_id IS 'ID del empleado'
 ;
-COMMENT ON COLUMN tbl_empleados.emp_nombre IS 'Nombre del empleado'
+COMMENT ON COLUMN tbl_empleado.emp_nombre IS 'Nombre del empleado'
 ;
-COMMENT ON COLUMN tbl_empleados.emp_usuario IS 'Usuario del empleado'
+COMMENT ON COLUMN tbl_empleado.emp_usuario IS 'Usuario del empleado'
 ;
-COMMENT ON COLUMN tbl_empleados.emp_contra IS 'Cotraseña del empleado'
+COMMENT ON COLUMN tbl_empleado.emp_contra IS 'Cotraseña del empleado'
 ;
-COMMENT ON COLUMN tbl_empleados.emp_foto IS 'Foto del empleado'
+COMMENT ON COLUMN tbl_empleado.emp_foto IS 'Foto del empleado'
 ;
-COMMENT ON COLUMN tbl_empleados.emp_apelllido IS 'Apellido del empleado'
+COMMENT ON COLUMN tbl_empleado.emp_apelllido IS 'Apellido del empleado'
 ;
-COMMENT ON COLUMN tbl_empleados.rol_id IS 'ID del rol'
+COMMENT ON COLUMN tbl_empleado.rol_id IS 'ID del rol'
 ;
-COMMENT ON COLUMN tbl_empleados.res_id IS 'ID del restaurante'
+COMMENT ON COLUMN tbl_empleado.res_id IS 'ID del restaurante'
 ;
-COMMENT ON COLUMN tbl_empleados.emp__version IS 'Version del empleado'
+COMMENT ON COLUMN tbl_empleado.emp__version IS 'Version del empleado'
 ;
 
 -- Table tbl_restaurante
@@ -347,27 +347,27 @@ CREATE TABLE tbl_categoriaxProducto(
 )
 ;
 
--- Table tbl_res_rol
+-- Table tbl_rol
 
-CREATE TABLE tbl_res_rol(
+CREATE TABLE tbl_rol(
   rol_id Number NOT NULL,
   rol_nombre Varchar2(30 ) NOT NULL,
   rol_version Number DEFAULT 1 NOT NULL
 )
 ;
 
--- Add keys for table tbl_res_rol
+-- Add keys for table tbl_rol
 
-ALTER TABLE tbl_res_rol ADD CONSTRAINT PK_tbl_res_rol PRIMARY KEY (rol_id)
+ALTER TABLE tbl_rol ADD CONSTRAINT PK_tbl_rol PRIMARY KEY (rol_id)
 ;
 
 -- Table and Columns comments section
 
-COMMENT ON COLUMN tbl_res_rol.rol_id IS 'ID del rol'
+COMMENT ON COLUMN tbl_rol.rol_id IS 'ID del rol'
 ;
-COMMENT ON COLUMN tbl_res_rol.rol_nombre IS 'Nombre del rol'
+COMMENT ON COLUMN tbl_rol.rol_nombre IS 'Nombre del rol'
 ;
-COMMENT ON COLUMN tbl_res_rol.rol_version IS 'Version del rol'
+COMMENT ON COLUMN tbl_rol.rol_version IS 'Version del rol'
 ;
 
 -- Table tbl_salon
@@ -536,6 +536,7 @@ COMMENT ON COLUMN tbl_codigodesc.res_id IS 'ID del restaurante'
 COMMENT ON COLUMN tbl_codigodesc.cod_version IS 'Version del codigo de descuento'
 ;
 
+
 -- Trigger for sequence tbl_producto_seq01 for column pro_id in table tbl_producto ---------
 CREATE OR REPLACE TRIGGER tbl_producto_tgr01 BEFORE INSERT
 ON tbl_producto FOR EACH ROW
@@ -552,9 +553,9 @@ BEGIN
 END;
 /
 
--- Trigger for sequence tbl_empleado_seq01 for column emp_id in table tbl_empleados ---------
+-- Trigger for sequence tbl_empleado_seq01 for column emp_id in table tbl_empleado ---------
 CREATE OR REPLACE TRIGGER tbl_empleado_tgr01 BEFORE INSERT
-ON tbl_empleados FOR EACH ROW
+ON tbl_empleado FOR EACH ROW
 BEGIN
   IF :new.emp_id IS NULL OR :new.emp_id <=1 THEN
   :new.emp_id := tbl_empleado_seq01.nextval;
@@ -563,7 +564,7 @@ END;
 ;
 /
 CREATE OR REPLACE TRIGGER tbl_empleado_tgr02 AFTER UPDATE OF emp_id
-ON tbl_empleados FOR EACH ROW
+ON tbl_empleado FOR EACH ROW
 BEGIN
   RAISE_APPLICATION_ERROR(-20010,'Cannot update column emp_id in table tbl_empleados as it uses sequence.');
 END;
@@ -602,9 +603,9 @@ BEGIN
 END;
 /
 
--- Trigger for sequence tbl_rol_seq01 for column rol_id in table tbl_res_rol ---------
+-- Trigger for sequence tbl_rol_seq01 for column rol_id in table tbl_rol ---------
 CREATE OR REPLACE TRIGGER tbl_rol_tgr01 BEFORE INSERT
-ON tbl_res_rol FOR EACH ROW
+ON tbl_rol FOR EACH ROW
 BEGIN
   IF :new.rol_id IS NULL OR :new.rol_id <=1 THEN
   :new.rol_id := tbl_rol_seq01.nextval;
@@ -612,7 +613,7 @@ BEGIN
 END;
 /
 CREATE OR REPLACE TRIGGER tbl_rol_tgr02 AFTER UPDATE OF rol_id
-ON tbl_res_rol FOR EACH ROW
+ON tbl_rol FOR EACH ROW
 BEGIN
   RAISE_APPLICATION_ERROR(-20010,'Cannot update column rol_id in table tbl_res_rol as it uses sequence.');
 END;
@@ -698,7 +699,6 @@ BEGIN
 END;
 /
 
-
 -- Create foreign keys (relationships) section ------------------------------------------------- 
 
 ALTER TABLE tbl_categoriaxProducto ADD CONSTRAINT rel_cat_pro FOREIGN KEY (cat_id) REFERENCES tbl_categoria (cat_id)
@@ -716,17 +716,17 @@ ALTER TABLE tbl_orden ADD CONSTRAINT rel_mes_ord FOREIGN KEY (mesa_id) REFERENCE
 
 
 
-ALTER TABLE tbl_orden ADD CONSTRAINT rel_emp_ord FOREIGN KEY (emp_id) REFERENCES tbl_empleados (emp_id)
+ALTER TABLE tbl_orden ADD CONSTRAINT rel_emp_ord FOREIGN KEY (emp_id) REFERENCES tbl_empleado (emp_id)
 ;
 
 
 
-ALTER TABLE tbl_empleados ADD CONSTRAINT rel_res_emp FOREIGN KEY (res_id) REFERENCES tbl_restaurante (res_id)
+ALTER TABLE tbl_empleado ADD CONSTRAINT rel_res_emp FOREIGN KEY (res_id) REFERENCES tbl_restaurante (res_id)
 ;
 
 
 
-ALTER TABLE tbl_empleados ADD CONSTRAINT rel_rol_emp FOREIGN KEY (rol_id) REFERENCES tbl_res_rol (rol_id)
+ALTER TABLE tbl_empleado ADD CONSTRAINT rel_rol_emp FOREIGN KEY (rol_id) REFERENCES tbl_rol (rol_id)
 ;
 
 

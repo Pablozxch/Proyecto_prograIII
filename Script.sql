@@ -1,120 +1,10 @@
 /*
 Created: 10/10/2021
-Modified: 22/10/2021
+Modified: 23/10/2021
 Model: Oracle 18c
 Database: Oracle 18c
 */
 
-
--- Drop relationships section -------------------------------------------------
-
-ALTER TABLE tbl_orden DROP CONSTRAINT rel_cod_orden
-;
-ALTER TABLE tbl_codigodesc DROP CONSTRAINT rel_res_cod
-;
-ALTER TABLE tbl_productosxOrden DROP CONSTRAINT rel_pro_ord
-;
-ALTER TABLE tbl_productosxOrden DROP CONSTRAINT rel_ord_pro
-;
-ALTER TABLE tbl_producto DROP CONSTRAINT rel_res_pro
-;
-ALTER TABLE tbl_mesa DROP CONSTRAINT rel_sal_mes
-;
-ALTER TABLE tbl_salon DROP CONSTRAINT rel_res_sal
-;
-ALTER TABLE tbl_empleado DROP CONSTRAINT rel_rol_emp
-;
-ALTER TABLE tbl_empleado DROP CONSTRAINT rel_res_emp
-;
-ALTER TABLE tbl_orden DROP CONSTRAINT rel_emp_ord
-;
-ALTER TABLE tbl_orden DROP CONSTRAINT rel_mes_ord
-;
-ALTER TABLE tbl_categoriaxProducto DROP CONSTRAINT rel_pro_cat
-;
-ALTER TABLE tbl_categoriaxProducto DROP CONSTRAINT rel_cat_pro
-;
-
-
-
-
--- Drop keys for tables section -------------------------------------------------
-
-ALTER TABLE tbl_codigodesc DROP CONSTRAINT PK_tbl_codigodesc
-;
-ALTER TABLE tbl_productosxOrden DROP CONSTRAINT PK_tbl_productosxOrden
-;
-ALTER TABLE tbl_orden DROP CONSTRAINT PK_tbl_orden
-;
-ALTER TABLE tbl_mesa DROP CONSTRAINT PK_tbl_mesa
-;
-ALTER TABLE tbl_salon DROP CONSTRAINT PK_tbl_salon
-;
-ALTER TABLE tbl_res_rol DROP CONSTRAINT PK_tbl_res_rol
-;
-ALTER TABLE tbl_categoria DROP CONSTRAINT PK_tbl_categoria
-;
-ALTER TABLE tbl_restaurante DROP CONSTRAINT PK_tbl_restaurante
-;
-ALTER TABLE tbl_empleado DROP CONSTRAINT PK_tbl_empleado
-;
-ALTER TABLE tbl_producto DROP CONSTRAINT PK_tbl_producto
-;
-
-
--- Drop indexes section -------------------------------------------------
-
-DROP INDEX IX_Relationship39
-;
-DROP INDEX IX_Relationship2
-;
-
-
--- Drop tables section ---------------------------------------------------
-
-DROP TABLE tbl_codigodesc
-;
-DROP TABLE tbl_productosxOrden
-;
-DROP TABLE tbl_orden
-;
-DROP TABLE tbl_mesa
-;
-DROP TABLE tbl_salon
-;
-DROP TABLE tbl_res_rol
-;
-DROP TABLE tbl_categoriaxProducto
-;
-DROP TABLE tbl_categoria
-;
-DROP TABLE tbl_restaurante
-;
-DROP TABLE tbl_empleado
-;
-DROP TABLE tbl_producto
-;
-
--- Drop sequences section --------------------------------------------------- 
-
-DROP SEQUENCE tbl_orden_seq01
-;
-DROP SEQUENCE tbl_rol_seq01
-;
-DROP SEQUENCE tbl_empleado_seq01
-;
-DROP SEQUENCE tbl_mesa_seq01
-;
-DROP SEQUENCE tbl_codigodesc_seq01
-;
-DROP SEQUENCE tbl_proxorden_seq01
-;
-DROP SEQUENCE tbl_salon_seq01
-;
-DROP SEQUENCE tbl_restaurante_seq01
-;
-DROP SEQUENCE tbl_categoria_seq01
-;
 
 -- Create sequences section -------------------------------------------------
 
@@ -347,27 +237,27 @@ CREATE TABLE tbl_categoriaxProducto(
 )
 ;
 
--- Table tbl_res_rol
+-- Table tbl_rol
 
-CREATE TABLE tbl_res_rol(
+CREATE TABLE tbl_rol(
   rol_id Number NOT NULL,
   rol_nombre Varchar2(30 ) NOT NULL,
   rol_version Number DEFAULT 1 NOT NULL
 )
 ;
 
--- Add keys for table tbl_res_rol
+-- Add keys for table tbl_rol
 
-ALTER TABLE tbl_res_rol ADD CONSTRAINT PK_tbl_res_rol PRIMARY KEY (rol_id)
+ALTER TABLE tbl_rol ADD CONSTRAINT PK_tbl_rol PRIMARY KEY (rol_id)
 ;
 
 -- Table and Columns comments section
 
-COMMENT ON COLUMN tbl_res_rol.rol_id IS 'ID del rol'
+COMMENT ON COLUMN tbl_rol.rol_id IS 'ID del rol'
 ;
-COMMENT ON COLUMN tbl_res_rol.rol_nombre IS 'Nombre del rol'
+COMMENT ON COLUMN tbl_rol.rol_nombre IS 'Nombre del rol'
 ;
-COMMENT ON COLUMN tbl_res_rol.rol_version IS 'Version del rol'
+COMMENT ON COLUMN tbl_rol.rol_version IS 'Version del rol'
 ;
 
 -- Table tbl_salon
@@ -438,11 +328,6 @@ CREATE TABLE tbl_orden(
 )
 ;
 
--- Create indexes for table tbl_orden
-
-CREATE INDEX IX_Relationship2 ON tbl_orden (cod_id)
-;
-
 -- Add keys for table tbl_orden
 
 ALTER TABLE tbl_orden ADD CONSTRAINT PK_tbl_orden PRIMARY KEY (ord_id)
@@ -507,11 +392,6 @@ CREATE TABLE tbl_codigodesc(
   res_id Number,
   cod_version Number DEFAULT 1 NOT NULL
 )
-;
-
--- Create indexes for table tbl_codigodesc
-
-CREATE INDEX IX_Relationship39 ON tbl_codigodesc (res_id)
 ;
 
 -- Add keys for table tbl_codigodesc
@@ -602,9 +482,9 @@ BEGIN
 END;
 /
 
--- Trigger for sequence tbl_rol_seq01 for column rol_id in table tbl_res_rol ---------
+-- Trigger for sequence tbl_rol_seq01 for column rol_id in table tbl_rol ---------
 CREATE OR REPLACE TRIGGER tbl_rol_tgr01 BEFORE INSERT
-ON tbl_res_rol FOR EACH ROW
+ON tbl_rol FOR EACH ROW
 BEGIN
   IF :new.rol_id IS NULL OR :new.rol_id <=1 THEN
   :new.rol_id := tbl_rol_seq01.nextval;
@@ -612,7 +492,7 @@ BEGIN
 END;
 /
 CREATE OR REPLACE TRIGGER tbl_rol_tgr02 AFTER UPDATE OF rol_id
-ON tbl_res_rol FOR EACH ROW
+ON tbl_rol FOR EACH ROW
 BEGIN
   RAISE_APPLICATION_ERROR(-20010,'Cannot update column rol_id in table tbl_res_rol as it uses sequence.');
 END;
@@ -726,7 +606,7 @@ ALTER TABLE tbl_empleado ADD CONSTRAINT rel_res_emp FOREIGN KEY (res_id) REFEREN
 
 
 
-ALTER TABLE tbl_empleado ADD CONSTRAINT rel_rol_emp FOREIGN KEY (rol_id) REFERENCES tbl_res_rol (rol_id)
+ALTER TABLE tbl_empleado ADD CONSTRAINT rel_rol_emp FOREIGN KEY (rol_id) REFERENCES tbl_rol (rol_id)
 ;
 
 

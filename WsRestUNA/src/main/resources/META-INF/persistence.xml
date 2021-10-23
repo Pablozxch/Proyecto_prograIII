@@ -1,43 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.2" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
-  <!-- Define Persistence Unit -->
-  <persistence-unit name="WsRestUNA" transaction-type="JTA">
-    <jta-data-source>jdbc/RestUNA</jta-data-source>
-    <class>cr.ac.una.wsrestuna.models.Ordenes</class>
-    <class>cr.ac.una.wsrestuna.models.Productos</class>
-    <class>cr.ac.una.wsrestuna.models.Categorias</class>
-    <class>cr.ac.una.wsrestuna.models.Mesas</class>
-    <class>cr.ac.una.wsrestuna.models.ResRol</class>
-    <class>cr.ac.una.wsrestuna.models.Productosxorden</class>
-    <class>cr.ac.una.wsrestuna.models.Salones</class>
-    <class>cr.ac.una.wsrestuna.models.Restaurantes</class>
-    <class>cr.ac.una.wsrestuna.models.Empleados</class>
-    <class>cr.ac.una.wsrestuna.models.Rol</class>
-    <class>cr.ac.una.wsrestuna.models.TblSalones</class>
-    <class>cr.ac.una.wsrestuna.models.TblProductosxorden</class>
-    <class>cr.ac.una.wsrestuna.models.TblRestaurantes</class>
-    <class>cr.ac.una.wsrestuna.models.TblResRol</class>
-    <class>cr.ac.una.wsrestuna.models.TblEmpleados</class>
-    <class>cr.ac.una.wsrestuna.models.TblMesas</class>
-    <class>cr.ac.una.wsrestuna.models.TblProductos</class>
-    <class>cr.ac.una.wsrestuna.models.TblOrdenes</class>
-    <class>cr.ac.una.wsrestuna.models.TblCategorias</class>
-    <class>cr.ac.una.wsrestuna.models.Codigosdesc</class>
-    <class>cr.ac.una.wsrestuna.models.TblCodigosdesc</class>
-    <class>cr.ac.una.wsrestuna.models.Orden</class>
-    <class>cr.ac.una.wsrestuna.models.Categoria</class>
-    <class>cr.ac.una.wsrestuna.models.Codigodesc</class>
-    <class>cr.ac.una.wsrestuna.models.Salon</class>
-    <class>cr.ac.una.wsrestuna.models.Producto</class>
-    <class>cr.ac.una.wsrestuna.models.Restaurante</class>
-    <class>cr.ac.una.wsrestuna.models.Mesa</class>
-    <class>cr.ac.una.wsrestuna.models.Empleado</class>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <properties>
-      <property name="eclipselink.logging.level.sql" value="FINE"/>
-      <property name="eclipselink.logging.parameters" value="true"/>
-      <property name="eclipselink.logging.logger" value="JavaLogger"/>
-      <property name="eclipselink.logging.level" value="FINE"/>
-    </properties>
-  </persistence-unit>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+    <persistence-unit name="WsRestUNA" transaction-type="JTA">
+        <jta-data-source>jdbc/RestUNA</jta-data-source>
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        <properties>
+            <property name="eclipselink.logging.level.sql" value="FINE"/>
+            <property name="eclipselink.logging.parameters" value="true"/>
+            <property name="eclipselink.logging.logger" value="JavaLogger"/>
+            <property name="eclipselink.logging.level" value="FINE"/>
+        </properties>
+    </persistence-unit>
 </persistence>

@@ -29,7 +29,7 @@ import javax.validation.constraints.*;
               @NamedQuery(name = "Producto.findByProAccesoRapido" , query = "SELECT p FROM Producto p WHERE p.proAccesoRapido = :proAccesoRapido") ,
               @NamedQuery(name = "Producto.findByProCantidadv" , query = "SELECT p FROM Producto p WHERE p.proCantidadv = :proCantidadv") ,
               @NamedQuery(name = "Producto.findByProVersion" , query = "SELECT p FROM Producto p WHERE p.proVersion = :proVersion"),
-              @NamedQuery(name = "Producto.findByNombreCosto" , query = "SELECT e FROM Producto e WHERE UPPER(e.proNombre) like :proNombre and UPPER(e.proCosto) like :proCosto" , hints = @QueryHint(name = "eclipselink.refresh" , value = "true")),
+              @NamedQuery(name = "Producto.findByNombreCosto" , query = "SELECT p FROM Producto p WHERE UPPER(p.proNombre) like :proNombre and UPPER(p.proCosto) like :proCosto" , hints = @QueryHint(name = "eclipselink.refresh" , value = "true")),
 
           })
 public class Producto implements Serializable
