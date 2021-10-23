@@ -58,14 +58,14 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Label fx:id="Lbl_NombreD" alignment="CENTER" prefHeight="100.0" prefWidth="336.0" text="Nombre_Restaurante">
+                              <Label fx:id="lblNombreRes" alignment="CENTER" prefHeight="100.0" prefWidth="336.0" text="Nombre_Restaurante">
                                  <font>
                                     <Font name="Cambria Bold" size="25.0" />
                                  </font>
                               </Label>
                            </children>
                         </HBox>
-                        <ImageView fx:id="img_Foto" fitHeight="177.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imgRes" fitHeight="177.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../../../../../../../TareaTournament/TorneoPabloKevin/Torneo/src/main/resources/cr/ac/una/torneo/resources/cherry.png" />
                            </image>

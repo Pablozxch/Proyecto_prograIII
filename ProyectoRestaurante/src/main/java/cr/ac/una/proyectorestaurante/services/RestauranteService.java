@@ -25,7 +25,6 @@ public class RestauranteService
     {
         try
         {
-            //TODO
             Request request = new Request("RestauranteController/restaurante");
             request.get();
             if(request.isError())
