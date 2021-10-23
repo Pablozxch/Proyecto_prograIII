@@ -30,8 +30,30 @@ public class RestauranteController
     public Response ping()
     {
         return Response
-                  .ok("ping")
+                  .ok("ping Restaurante")
                   .build();
+    }
+
+    @GET
+    @Path("/restaurante/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getRestaurante(@PathParam("id") Long id)
+    {
+        try
+        {
+            Respuesta res = restauranteService.getRestaurante(id);
+            if(!res.getEstado())
+            {
+                return Response.status(res.getCodigoRespuesta().getValue()).entity(res.getMensaje()).build();
+            }
+            return Response.ok((RestauranteDto) res.getResultado("Restaurante")).build();//TODO
+        }
+        catch(Exception ex)
+        {
+            Logger.getLogger(RestauranteController.class.getName()).log(Level.SEVERE , null , ex);
+            return Response.status(CodigoRespuesta.ERROR_INTERNO.getValue()).entity("Error al obtener el restaurante ").build();//TODO
+        }
     }
 
     @GET
@@ -42,7 +64,6 @@ public class RestauranteController
     {
         try
         {
-
             Respuesta res = restauranteService.getRestaurantes();
             if(!res.getEstado())
             {
@@ -56,8 +77,49 @@ public class RestauranteController
         catch(Exception ex)
         {
             Logger.getLogger(RestauranteController.class.getName()).log(Level.SEVERE , null , ex);
-            return Response.status(CodigoRespuesta.ERROR_INTERNO.getValue()).entity("Error al obtener el empleado ").build();//TODO
+            return Response.status(CodigoRespuesta.ERROR_INTERNO.getValue()).entity("Error al obtener el procuto ").build();//TODO
         }
     }
 
+    @POST
+    @Path("/restaurante")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response guardarRestaurante(RestauranteDto productoDto)
+    {
+        try
+        {
+            Respuesta res = restauranteService.guardarRestaurante(productoDto);
+            if(!res.getEstado())
+            {
+                return Response.status(res.getCodigoRespuesta().getValue()).entity(res.getMensaje()).build();
+            }
+            return Response.ok((RestauranteDto) res.getResultado("Restaurante")).build();//TODO
+        }
+        catch(Exception ex)
+        {
+            Logger.getLogger(RestauranteController.class.getName()).log(Level.SEVERE , null , ex);
+            return Response.status(CodigoRespuesta.ERROR_INTERNO.getValue()).entity("Error al obtener el restaurante ").build();//TODO
+        }
+    }
+
+    @DELETE
+    @Path("/restaurante/{id}")
+    public Response eliminarRestaurante(@PathParam("id") Long id)
+    {
+        try
+        {
+            Respuesta res = restauranteService.eliminarRestaurante(id);
+            if(!res.getEstado())
+            {
+                return Response.status(res.getCodigoRespuesta().getValue()).entity(res.getMensaje()).build();
+            }
+            return Response.ok().build();
+        }
+        catch(Exception ex)
+        {
+            Logger.getLogger(RestauranteController.class.getName()).log(Level.SEVERE , null , ex);
+            return Response.status(CodigoRespuesta.ERROR_INTERNO.getValue()).entity("Error al obtener el restaurante ").build();//TODO
+        }
+    }
 }

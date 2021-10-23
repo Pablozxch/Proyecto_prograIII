@@ -28,12 +28,12 @@ public class CategoriaService
     @PersistenceContext(unitName = "WsRestUNA")
     private EntityManager em;
 
-    public Respuesta getCategoria(Long proId)// Un unico producto por id
+    public Respuesta getCategoria(Long catId)// Un unico producto por id
     {
         try
         {
             Query qryCategoria = em.createNamedQuery("Categoria.findByCatId" , Categoria.class);
-            qryCategoria.setParameter("proId" , proId);
+            qryCategoria.setParameter("catId" , catId);
 
             return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "" , "Categoria" , new CategoriaDto((Categoria) qryCategoria.getSingleResult()));
 

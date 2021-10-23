@@ -5,7 +5,8 @@
  */
 package cr.ac.una.wsrestuna.controllers;
 
-import cr.ac.una.wsrestuna.utils.*;
+import cr.ac.una.wsrestuna.services.*;
+import javax.ejb.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 
@@ -13,15 +14,21 @@ import javax.ws.rs.core.*;
  *
  * @author jp015
  */
-
-@Path("/ProductoOrdenController")
-public class ProductoOrdenController
+@Path("/CodigodescController")
+public class CodigodescController
 {
-        @Path("/ping")
+
+    @EJB
+    CodigodescServices codigodescServices;
+
+    @GET
+    @Path("/ping")
     public Response ping()
     {
         return Response
-                  .ok("ping")
+                  .ok("ping Producto")
                   .build();
     }
+    
+
 }
