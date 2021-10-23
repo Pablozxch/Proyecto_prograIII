@@ -9,10 +9,10 @@ package cr.ac.una.proyectorestaurante;
  *
  * @author jp015
  */
-public class Main
+public class Principal
 {
     public static void main(String[] args)
     {
-        App.launch(args);
+        App.main(args);
     }
 }

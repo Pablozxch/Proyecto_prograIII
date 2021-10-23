@@ -97,7 +97,7 @@
                         <option>--add-opens</option>
                         <option>java.base/java.lang.reflect=com.jfoenix</option>
                     </options>
-                    <mainClass>cr.ac.una.proyectorestaurante.Main</mainClass>
+                    <mainClass>cr.ac.una.proyectorestaurante.Principal</mainClass>
                 </configuration>
                 <executions>
                     <execution>
@@ -177,7 +177,7 @@
                             <transformers>
                                 <transformer implementation=
                                                      "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>cr.ac.una.proyectorestaurante.Main</mainClass>
+                                    <mainClass>cr.ac.una.proyectorestaurante.Principal</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
