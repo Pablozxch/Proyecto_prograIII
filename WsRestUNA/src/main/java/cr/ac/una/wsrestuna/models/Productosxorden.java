@@ -66,6 +66,19 @@ public class Productosxorden implements Serializable
         this.pxoCantidad = pxoCantidad;
     }
 
+    public Productosxorden(ProductosxordenDto productoxordenDto)
+    {
+        this.pxoId = productoxordenDto.getId();
+        actualizarProductos(productoxordenDto);
+    }
+
+    public void actualizarProductos(ProductosxordenDto productoxordenDto)
+    {
+        this.pxoCantidad = productoxordenDto.getCantidad();
+        this.ordId = new Orden(productoxordenDto.getIdO());
+        this.proId = new Producto(productoxordenDto.getIdP());
+    }
+
     public Long getPxoId()
     {
         return pxoId;

@@ -64,6 +64,17 @@ public class Rol implements Serializable
         this.rolNombre = rolNombre;
     }
 
+    public Rol(RolDto rolDto)
+    {
+        this.rolId = rolDto.getId();
+        actualizarRol(rolDto);
+    }
+
+    public void actualizarRol(RolDto rolDto)
+    {
+        this.rolNombre = rolDto.getNombre();
+    }
+
     public Long getRolId()
     {
         return rolId;

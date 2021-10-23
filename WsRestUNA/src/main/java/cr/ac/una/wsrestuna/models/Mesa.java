@@ -77,13 +77,27 @@ public class Mesa implements Serializable
         this.mesaId = mesaId;
     }
 
-    public Mesa(Long mesaId , String mesaNombre , String mesaEstado , Long mesaPosx , Long mesaPosy )
+    public Mesa(Long mesaId , String mesaNombre , String mesaEstado , Long mesaPosx , Long mesaPosy)
     {
         this.mesaId = mesaId;
         this.mesaNombre = mesaNombre;
         this.mesaEstado = mesaEstado;
         this.mesaPosx = mesaPosx;
         this.mesaPosy = mesaPosy;
+    }
+
+    public Mesa(MesaDto mesaDto)
+    {
+        this.mesaId = mesaDto.getId();
+        actualizarMesa(mesaDto);
+    }
+
+    public void actualizarMesa(MesaDto mesaDto)
+    {
+        this.mesaNombre = mesaDto.getNombre();
+        this.mesaEstado = mesaDto.getEstado();
+        this.mesaPosx = mesaDto.getPosx();
+        this.mesaPosy = mesaDto.getPosy();
     }
 
     public Long getMesaId()

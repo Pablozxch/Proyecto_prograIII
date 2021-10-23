@@ -32,11 +32,11 @@ public class EmpleadoServices
     {
         try
         {
-            Query qryEmpleado = em.createNamedQuery("Empleado.findByUsuClave" , Empleados.class);
+            Query qryEmpleado = em.createNamedQuery("Empleado.findByUsuClave" , Empleado.class);
             qryEmpleado.setParameter("empUsuario" , empUsuario);
             qryEmpleado.setParameter("empContra" , empContra);
 
-            return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "" , "Empleado" , new EmpleadoDto((Empleados) qryEmpleado.getSingleResult()));
+            return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "" , "Empleado" , new EmpleadoDto((Empleado) qryEmpleado.getSingleResult()));
 
         }
         catch(NoResultException ex)
@@ -55,27 +55,27 @@ public class EmpleadoServices
         }
     }
 
-    public Respuesta getEmpleados(String cedula , String nombre , String pApellido)
+    public Respuesta getEmpleado(String cedula , String nombre , String pApellido)
     {
         try
         {
-            Query qryEmpleado = em.createNamedQuery("Empleado.findByCedulaNombrePapellido" , Empleados.class);
+            Query qryEmpleado = em.createNamedQuery("Empleado.findByCedulaNombrePapellido" , Empleado.class);
             qryEmpleado.setParameter("empCedula" , cedula);
             qryEmpleado.setParameter("empNombre" , nombre);
             qryEmpleado.setParameter("empPapellido" , pApellido);
-            List<Empleados> empleados = (List<Empleados>) qryEmpleado.getResultList();
+            List<Empleado> empleados = (List<Empleado>) qryEmpleado.getResultList();
             List<EmpleadoDto> empleadosDto = new ArrayList<>();
-            return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "" , "Empleados" , empleadosDto);
+            return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "" , "Empleado" , empleadosDto);
 
         }
         catch(NoResultException ex)
         {
-            return new Respuesta(false , CodigoRespuesta.ERROR_NOENCONTRADO , "No existen empleados con los criterios ingresados." , "getEmpleados NoResultException");
+            return new Respuesta(false , CodigoRespuesta.ERROR_NOENCONTRADO , "No existen empleados con los criterios ingresados." , "getEmpleado NoResultException");
         }
         catch(Exception ex)
         {
             LOG.log(Level.SEVERE , "Ocurrio un error al consultar el empleado." , ex);
-            return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al consultar el empleado." , "getEmpleados " + ex.getMessage());
+            return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al consultar el empleado." , "getEmpleado " + ex.getMessage());
         }
     }
 
@@ -83,10 +83,10 @@ public class EmpleadoServices
     {
         try
         {
-            Query qryEmpleado = em.createNamedQuery("Empleados.findByEmpId" , Empleados.class);
+            Query qryEmpleado = em.createNamedQuery("Empleado.findByEmpId" , Empleado.class);
             qryEmpleado.setParameter("empId" , empId);
 
-            return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "" , "Empleado" , new EmpleadoDto((Empleados) qryEmpleado.getSingleResult()));
+            return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "" , "Empleado" , new EmpleadoDto((Empleado) qryEmpleado.getSingleResult()));
 
         }
         catch(NoResultException ex)
@@ -109,20 +109,20 @@ public class EmpleadoServices
     {
         try
         {
-            Empleados empleado;
+            Empleado empleado;
             if(empleadoDto.getId() != null && empleadoDto.getId() > 0)
             {
-                empleado = em.find(Empleados.class , empleadoDto.getId());
+                empleado = em.find(Empleado.class , empleadoDto.getId());
                 if(empleado == null)
                 {
                     return new Respuesta(false , CodigoRespuesta.ERROR_NOENCONTRADO , "No se encrontró el empleado a modificar." , "guardarEmpleado NoResultException");
                 }
-                empleado.actualizarEmpleados(empleadoDto);
+                empleado.actualizarEmpleado(empleadoDto);
                 empleado = em.merge(empleado);
             }
             else
             {
-                empleado = new Empleados(empleadoDto);
+                empleado = new Empleado(empleadoDto);
                 em.persist(empleado);
             }
             em.flush();
@@ -139,10 +139,10 @@ public class EmpleadoServices
     {
         try
         {
-            Empleados empleado;
+            Empleado empleado;
             if(id != null && id > 0)
             {
-                empleado = em.find(Empleados.class , id);
+                empleado = em.find(Empleado.class , id);
                 if(empleado == null)
                 {
                     return new Respuesta(false , CodigoRespuesta.ERROR_NOENCONTRADO , "No se encrontró el empleado a eliminar." , "eliminarEmpleado NoResultException");

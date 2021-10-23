@@ -18,13 +18,13 @@ import javax.validation.constraints.*;
 @Entity
 @Table(name = "TBL_CATEGORIA" , catalog = "" , schema = "RESTUNA")
 @NamedQueries(
-{
-    @NamedQuery(name = "Categoria.findAll" , query = "SELECT c FROM Categoria c") ,
-    @NamedQuery(name = "Categoria.findByCatId" , query = "SELECT c FROM Categoria c WHERE c.catId = :catId") ,
-    @NamedQuery(name = "Categoria.findByCatNombre" , query = "SELECT c FROM Categoria c WHERE c.catNombre = :catNombre") ,
-    @NamedQuery(name = "Categoria.findByCatDetalle" , query = "SELECT c FROM Categoria c WHERE c.catDetalle = :catDetalle") ,
-    @NamedQuery(name = "Categoria.findByCatVersion" , query = "SELECT c FROM Categoria c WHERE c.catVersion = :catVersion")
-})
+          {
+              @NamedQuery(name = "Categoria.findAll" , query = "SELECT c FROM Categoria c") ,
+              @NamedQuery(name = "Categoria.findByCatId" , query = "SELECT c FROM Categoria c WHERE c.catId = :catId") ,
+              @NamedQuery(name = "Categoria.findByCatNombre" , query = "SELECT c FROM Categoria c WHERE c.catNombre = :catNombre") ,
+              @NamedQuery(name = "Categoria.findByCatDetalle" , query = "SELECT c FROM Categoria c WHERE c.catDetalle = :catDetalle") ,
+              @NamedQuery(name = "Categoria.findByCatVersion" , query = "SELECT c FROM Categoria c WHERE c.catVersion = :catVersion")
+          })
 public class Categoria implements Serializable
 {
 
@@ -76,6 +76,18 @@ public class Categoria implements Serializable
         this.catId = catId;
         this.catNombre = catNombre;
         this.catDetalle = catDetalle;
+    }
+
+    public Categoria(CategoriaDto categoriaDto)
+    {
+        this.catId = categoriaDto.getId();
+        actualizarCategoria(categoriaDto);
+    }
+
+    public void actualizarCategoria(CategoriaDto categoriaDto)
+    {
+        this.catNombre = categoriaDto.getNombre();
+        this.catDetalle = categoriaDto.getDetalle();
     }
 
     public Long getCatId()
@@ -157,5 +169,5 @@ public class Categoria implements Serializable
     {
         return "cr.ac.una.wsrestuna.models.Categoria[ catId=" + catId + " ]";
     }
-    
+
 }

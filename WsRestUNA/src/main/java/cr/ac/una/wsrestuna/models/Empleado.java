@@ -96,7 +96,21 @@ public class Empleado implements Serializable
         this.empFoto = empFoto;
         this.empApelllido = empApelllido;
     }
+    public Empleado(EmpleadoDto empleadoDto)
+    {
+        this.empId = empleadoDto.getId();
+        actualizarEmpleado(empleadoDto);
+    }
 
+    public void actualizarEmpleado(EmpleadoDto empleadoDto)
+    {
+        this.empNombre = empleadoDto.getNombre();
+        this.empUsuario = empleadoDto.getUsuario();
+        this.empContra = empleadoDto.getContra();
+        this.empFoto = empleadoDto.getFoto();
+        this.empApelllido = empleadoDto.getApellido();
+        this.rolId = new Rol(empleadoDto.getRol());
+    }
     public Long getEmpId()
     {
         return empId;

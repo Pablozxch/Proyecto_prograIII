@@ -86,6 +86,21 @@ public class Codigodesc implements Serializable
         this.codCant = codCant;
     }
 
+    public Codigodesc(CodigodescDto codigoDto)
+    {
+        this.codId = codigoDto.getId();
+        actualizarCodigos(codigoDto);
+    }
+
+    public void actualizarCodigos(CodigodescDto codigoDto)
+    {
+        this.codNombre = codigoDto.getNombre();
+        this.codCant = codigoDto.getCantidad();
+        this.codUrl = codigoDto.getUrl();
+        this.codDesc = codigoDto.getCantidaddesc();
+        this.resId = new Restaurante(codigoDto.getResid());
+    }
+
     public Long getCodId()
     {
         return codId;

@@ -80,6 +80,19 @@ public class Salon implements Serializable
         this.salBarraomesa = salBarraomesa;
     }
 
+    public Salon(SalonDto salonDto)
+    {
+        this.salId = salonDto.getId();
+        actualizarSalon(salonDto);
+    }
+
+    public void actualizarSalon(SalonDto salonDto)
+    {
+        this.salNombre = salonDto.getNombre();
+        this.salImagen = salonDto.getFoto();
+        this.salBarraomesa = salonDto.getBarraMesa();
+    }
+
     public Long getSalId()
     {
         return salId;

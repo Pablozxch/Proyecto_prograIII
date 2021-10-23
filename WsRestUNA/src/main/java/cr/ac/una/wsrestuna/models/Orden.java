@@ -18,14 +18,14 @@ import javax.validation.constraints.*;
 @Entity
 @Table(name = "TBL_ORDEN" , catalog = "" , schema = "RESTUNA")
 @NamedQueries(
-{
-    @NamedQuery(name = "Orden.findAll" , query = "SELECT o FROM Orden o") ,
-    @NamedQuery(name = "Orden.findByOrdId" , query = "SELECT o FROM Orden o WHERE o.ordId = :ordId") ,
-    @NamedQuery(name = "Orden.findByFacTotal" , query = "SELECT o FROM Orden o WHERE o.facTotal = :facTotal") ,
-    @NamedQuery(name = "Orden.findByFacFecha" , query = "SELECT o FROM Orden o WHERE o.facFecha = :facFecha") ,
-    @NamedQuery(name = "Orden.findByFacDesc" , query = "SELECT o FROM Orden o WHERE o.facDesc = :facDesc") ,
-    @NamedQuery(name = "Orden.findByFacVersion" , query = "SELECT o FROM Orden o WHERE o.facVersion = :facVersion")
-})
+          {
+              @NamedQuery(name = "Orden.findAll" , query = "SELECT o FROM Orden o") ,
+              @NamedQuery(name = "Orden.findByOrdId" , query = "SELECT o FROM Orden o WHERE o.ordId = :ordId") ,
+              @NamedQuery(name = "Orden.findByFacTotal" , query = "SELECT o FROM Orden o WHERE o.facTotal = :facTotal") ,
+              @NamedQuery(name = "Orden.findByFacFecha" , query = "SELECT o FROM Orden o WHERE o.facFecha = :facFecha") ,
+              @NamedQuery(name = "Orden.findByFacDesc" , query = "SELECT o FROM Orden o WHERE o.facDesc = :facDesc") ,
+              @NamedQuery(name = "Orden.findByFacVersion" , query = "SELECT o FROM Orden o WHERE o.facVersion = :facVersion")
+          })
 public class Orden implements Serializable
 {
 
@@ -84,7 +84,22 @@ public class Orden implements Serializable
         this.facFecha = facFecha;
         this.facDesc = facDesc;
     }
-    
+
+    public Orden(OrdenDto ordenDto)
+    {
+        this.ordId = ordenDto.getId();
+        actualizarOrden(ordenDto);
+    }
+
+    public void actualizarOrden(OrdenDto ordenDto)
+    {
+        this.facTotal = ordenDto.getFacTotal();
+        this.facFecha = ordenDto.getFecha();
+        this.facTotal = ordenDto.getDesc();
+        this.empId = new Empleado(ordenDto.getEmp());
+        this.mesaId = new Mesa(ordenDto.getMesa());
+    }
+
     public Long getOrdId()
     {
         return ordId;
@@ -204,5 +219,5 @@ public class Orden implements Serializable
     {
         return "cr.ac.una.wsrestuna.models.Orden[ ordId=" + ordId + " ]";
     }
-    
+
 }
