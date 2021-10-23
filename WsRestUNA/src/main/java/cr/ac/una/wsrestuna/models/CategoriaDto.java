@@ -11,29 +11,29 @@ import java.util.*;
  *
  * @author jp015
  */
-public class CategoriasDto
+public class CategoriaDto
 {
 
     private Long id;
     private String nombre;
     private String detalle;
     private Boolean modificado;
-    private List<ProductosDto> productos;
-    private List<ProductosDto> productosEliminados;
+    private List<ProductoDto> productos;
+    private List<ProductoDto> productosEliminados;
 
-    public CategoriasDto()
+    public CategoriaDto()
     {
         this.modificado = false;
         productos = new ArrayList<>();
         productosEliminados = new ArrayList<>();
     }
 
-    public CategoriasDto(Categorias cat)
+    public CategoriaDto(Categoria categorias)
     {
         this();
-        this.id = cat.getCatId();
-        this.nombre = cat.getCatNombre();
-        this.detalle = cat.getCatDescripcion();
+        this.id = categorias.getCatId();
+        this.nombre = categorias.getCatNombre();
+        this.detalle = categorias.getCatDetalle();
 
     }
 
@@ -77,22 +77,22 @@ public class CategoriasDto
         this.modificado = modificado;
     }
 
-    public List<ProductosDto> getProductos()
+    public List<ProductoDto> getProductos()
     {
         return productos;
     }
 
-    public void setProductos(List<ProductosDto> productos)
+    public void setProductos(List<ProductoDto> productos)
     {
         this.productos = productos;
     }
 
-    public List<ProductosDto> getProductosEliminados()
+    public List<ProductoDto> getProductosEliminados()
     {
         return productosEliminados;
     }
 
-    public void setProductosEliminados(List<ProductosDto> productosEliminados)
+    public void setProductosEliminados(List<ProductoDto> productosEliminados)
     {
         this.productosEliminados = productosEliminados;
     }

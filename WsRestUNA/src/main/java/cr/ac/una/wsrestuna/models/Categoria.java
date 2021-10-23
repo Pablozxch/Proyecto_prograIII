@@ -16,23 +16,23 @@ import javax.validation.constraints.*;
  * @author jp015
  */
 @Entity
-@Table(name = "TBL_CATEGORIAS" , catalog = "" , schema = "RESTUNA")
+@Table(name = "TBL_CATEGORIA" , catalog = "" , schema = "RESTUNA")
 @NamedQueries(
-          {
-              @NamedQuery(name = "Categorias.findAll" , query = "SELECT c FROM Categorias c") ,
-              @NamedQuery(name = "Categorias.findByCatId" , query = "SELECT c FROM Categorias c WHERE c.catId = :catId") ,
-              @NamedQuery(name = "Categorias.findByCatNombre" , query = "SELECT c FROM Categorias c WHERE c.catNombre = :catNombre") ,
-              @NamedQuery(name = "Categorias.findByCatDescripcion" , query = "SELECT c FROM Categorias c WHERE c.catDescripcion = :catDescripcion") ,
-              @NamedQuery(name = "Categorias.findByCatVersion" , query = "SELECT c FROM Categorias c WHERE c.catVersion = :catVersion")
-          })
-public class Categorias implements Serializable
+{
+    @NamedQuery(name = "Categoria.findAll" , query = "SELECT c FROM Categoria c") ,
+    @NamedQuery(name = "Categoria.findByCatId" , query = "SELECT c FROM Categoria c WHERE c.catId = :catId") ,
+    @NamedQuery(name = "Categoria.findByCatNombre" , query = "SELECT c FROM Categoria c WHERE c.catNombre = :catNombre") ,
+    @NamedQuery(name = "Categoria.findByCatDetalle" , query = "SELECT c FROM Categoria c WHERE c.catDetalle = :catDetalle") ,
+    @NamedQuery(name = "Categoria.findByCatVersion" , query = "SELECT c FROM Categoria c WHERE c.catVersion = :catVersion")
+})
+public class Categoria implements Serializable
 {
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
-    @SequenceGenerator(name = "Entity_CAT_ID_GENERATOR" , sequenceName = "RESTUNA.Entity_SEQ01" , allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "Entity_CAT_ID_GENERATOR")
+    @SequenceGenerator(name = "TBL_CATEGORIA_CAT_ID_GENERATOR" , sequenceName = "RESTUNA.TBL_CATEGORIA_SEQ01" , allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "TBL_CATEGORIA_CAT_ID_GENERATOR")
     @Basic(optional = false)
     @NotNull
     @Column(name = "CAT_ID")
@@ -45,14 +45,14 @@ public class Categorias implements Serializable
     @Basic(optional = false)
     @NotNull
     @Size(min = 1 , max = 50)
-    @Column(name = "CAT_DESCRIPCION")
-    private String catDescripcion;
+    @Column(name = "CAT_DETALLE")
+    private String catDetalle;
     @Basic(optional = false)
     @NotNull
     @Version
     @Column(name = "CAT_VERSION")
     private Long catVersion;
-    @JoinTable(name = "TBL_CATEGORIASXPRODUCTOS" , joinColumns =
+    @JoinTable(name = "TBL_CATEGORIAXPRODUCTO" , joinColumns =
     {
         @JoinColumn(name = "CAT_ID" , referencedColumnName = "CAT_ID")
     } , inverseJoinColumns =
@@ -60,33 +60,24 @@ public class Categorias implements Serializable
         @JoinColumn(name = "PROD_ID" , referencedColumnName = "PRO_ID")
     })
     @ManyToMany(fetch = FetchType.LAZY)
-    private List<Productos> productosList;
+    private List<Producto> productoList;
 
-    public Categorias()
+    public Categoria()
     {
     }
 
-    public Categorias(Long catId)
+    public Categoria(Long catId)
     {
         this.catId = catId;
     }
 
-    public Categorias(Long catId , String catNombre , String catDescripcion)
+    public Categoria(Long catId , String catNombre , String catDetalle)
     {
         this.catId = catId;
         this.catNombre = catNombre;
-        this.catDescripcion = catDescripcion;
+        this.catDetalle = catDetalle;
     }
-    public Categorias(CategoriasDto catDto)
-    {
-        this.catId=catDto.getId();
-        actualizarCategorias(catDto);
-    }
-    public void actualizarCategorias(CategoriasDto catDto)
-    {
-        this.catNombre=catDto.getNombre();
-        this.catDescripcion=catDto.getDetalle();
-    }
+
     public Long getCatId()
     {
         return catId;
@@ -107,14 +98,14 @@ public class Categorias implements Serializable
         this.catNombre = catNombre;
     }
 
-    public String getCatDescripcion()
+    public String getCatDetalle()
     {
-        return catDescripcion;
+        return catDetalle;
     }
 
-    public void setCatDescripcion(String catDescripcion)
+    public void setCatDetalle(String catDetalle)
     {
-        this.catDescripcion = catDescripcion;
+        this.catDetalle = catDetalle;
     }
 
     public Long getCatVersion()
@@ -127,14 +118,14 @@ public class Categorias implements Serializable
         this.catVersion = catVersion;
     }
 
-    public List<Productos> getProductosList()
+    public List<Producto> getProductoList()
     {
-        return productosList;
+        return productoList;
     }
 
-    public void setProductosList(List<Productos> productosList)
+    public void setProductoList(List<Producto> productoList)
     {
-        this.productosList = productosList;
+        this.productoList = productoList;
     }
 
     @Override
@@ -149,11 +140,11 @@ public class Categorias implements Serializable
     public boolean equals(Object object)
     {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if(!(object instanceof Categorias))
+        if(!(object instanceof Categoria))
         {
             return false;
         }
-        Categorias other = (Categorias) object;
+        Categoria other = (Categoria) object;
         if((this.catId == null && other.catId != null) || (this.catId != null && !this.catId.equals(other.catId)))
         {
             return false;
@@ -164,7 +155,7 @@ public class Categorias implements Serializable
     @Override
     public String toString()
     {
-        return "cr.ac.una.wsrestuna.models.Categorias[ catId=" + catId + " ]";
+        return "cr.ac.una.wsrestuna.models.Categoria[ catId=" + catId + " ]";
     }
-
+    
 }

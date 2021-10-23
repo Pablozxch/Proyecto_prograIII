@@ -16,25 +16,27 @@ import javax.validation.constraints.*;
  * @author jp015
  */
 @Entity
-@Table(name = "TBL_RESTAURANTES" , catalog = "" , schema = "RESTUNA")
+@Table(name = "TBL_RESTAURANTE" , catalog = "" , schema = "RESTUNA")
 @NamedQueries(
           {
-              @NamedQuery(name = "Restaurantes.findAll" , query = "SELECT r FROM Restaurantes r") ,
-              @NamedQuery(name = "Restaurantes.findByResId" , query = "SELECT r FROM Restaurantes r WHERE r.resId = :resId") ,
-              @NamedQuery(name = "Restaurantes.findByResNombre" , query = "SELECT r FROM Restaurantes r WHERE r.resNombre = :resNombre") ,
-              @NamedQuery(name = "Restaurantes.findByResDetalle" , query = "SELECT r FROM Restaurantes r WHERE r.resDetalle = :resDetalle") ,
-              @NamedQuery(name = "Restaurantes.findByResDireccion" , query = "SELECT r FROM Restaurantes r WHERE r.resDireccion = :resDireccion") ,
-              @NamedQuery(name = "Restaurantes.findByResCorreo" , query = "SELECT r FROM Restaurantes r WHERE r.resCorreo = :resCorreo") ,
-              @NamedQuery(name = "Restaurantes.findByResVersion" , query = "SELECT r FROM Restaurantes r WHERE r.resVersion = :resVersion") ,
-              @NamedQuery(name = "Restaurantes.findByResVen" , query = "SELECT r FROM Restaurantes r WHERE r.resVen = :resVen") ,
-              @NamedQuery(name = "Restaurantes.findByResServ" , query = "SELECT r FROM Restaurantes r WHERE r.resServ = :resServ")
+              @NamedQuery(name = "Restaurante.findAll" , query = "SELECT r FROM Restaurante r") ,
+              @NamedQuery(name = "Restaurante.findByResId" , query = "SELECT r FROM Restaurante r WHERE r.resId = :resId") ,
+              @NamedQuery(name = "Restaurante.findByResNombre" , query = "SELECT r FROM Restaurante r WHERE r.resNombre = :resNombre") ,
+              @NamedQuery(name = "Restaurante.findByResDetalle" , query = "SELECT r FROM Restaurante r WHERE r.resDetalle = :resDetalle") ,
+              @NamedQuery(name = "Restaurante.findByResDireccion" , query = "SELECT r FROM Restaurante r WHERE r.resDireccion = :resDireccion") ,
+              @NamedQuery(name = "Restaurante.findByResCorreo" , query = "SELECT r FROM Restaurante r WHERE r.resCorreo = :resCorreo") ,
+              @NamedQuery(name = "Restaurante.findByResImpv" , query = "SELECT r FROM Restaurante r WHERE r.resImpv = :resImpv") ,
+              @NamedQuery(name = "Restaurante.findByResServ" , query = "SELECT r FROM Restaurante r WHERE r.resServ = :resServ") ,
+              @NamedQuery(name = "Restaurante.findByResVersion" , query = "SELECT r FROM Restaurante r WHERE r.resVersion = :resVersion")
           })
-public class Restaurantes implements Serializable
+public class Restaurante implements Serializable
 {
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
+    @SequenceGenerator(name = "TBL_RESTAURANTE_RES_ID_GENERATOR" , sequenceName = "RESTUNA.TBL_RESTAURANTE_SEQ01" , allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "TBL_RESTAURANTE_RES_ID_GENERATOR")
     @Basic(optional = false)
     @NotNull
     @Column(name = "RES_ID")
@@ -66,29 +68,36 @@ public class Restaurantes implements Serializable
     private byte[] resFoto;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "RES_VERSION")
-    private Long resVersion;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "RES_VEN")
-    private Long resVen;
+    @Column(name = "RES_IMPV")
+    private Long resImpv;
     @Basic(optional = false)
     @NotNull
     @Column(name = "RES_SERV")
     private Long resServ;
+    @Basic(optional = false)
+    @NotNull
+    @Version
+    @Column(name = "RES_VERSION")
+    private Long resVersion;
     @OneToMany(mappedBy = "resId" , fetch = FetchType.LAZY)
-    private List<Codigosdesc> codigosdescList;
+    private List<Codigodesc> codigodescList;
+    @OneToMany(cascade = CascadeType.ALL , mappedBy = "resId" , fetch = FetchType.LAZY)
+    private List<Salon> salonList;
+    @OneToMany(cascade = CascadeType.ALL , mappedBy = "resId" , fetch = FetchType.LAZY)
+    private List<Producto> productoList;
+    @OneToMany(cascade = CascadeType.ALL , mappedBy = "resId" , fetch = FetchType.LAZY)
+    private List<Empleado> empleadoList;
 
-    public Restaurantes()
+    public Restaurante()
     {
     }
 
-    public Restaurantes(Long resId)
+    public Restaurante(Long resId)
     {
         this.resId = resId;
     }
 
-    public Restaurantes(Long resId , String resNombre , String resDetalle , String resDireccion , String resCorreo , byte[] resFoto , Long resVen , Long resServ)
+    public Restaurante(Long resId , String resNombre , String resDetalle , String resDireccion , String resCorreo , byte[] resFoto , Long resImpv , Long resServ)
     {
         this.resId = resId;
         this.resNombre = resNombre;
@@ -96,24 +105,24 @@ public class Restaurantes implements Serializable
         this.resDireccion = resDireccion;
         this.resCorreo = resCorreo;
         this.resFoto = resFoto;
-        this.resVen = resVen;
+        this.resImpv = resImpv;
         this.resServ = resServ;
     }
 
-    public Restaurantes(RestaurantesDto resDto)
+    public Restaurante(RestauranteDto resDto)
     {
         this.resId = resDto.getId();
-        actualizarRestaurantes(resDto);
+        actualizarRestaurante(resDto);
     }
 
-    public void actualizarRestaurantes(RestaurantesDto resDto)
+    public void actualizarRestaurante(RestauranteDto resDto)
     {
         this.resNombre = resDto.getNombre();
         this.resDetalle = resDto.getDetalle();
         this.resDireccion = resDto.getDireccion();
         this.resCorreo = resDto.getCorreo();
         this.resFoto = resDto.getFoto();
-        this.resVen = resDto.getImpVen();
+        this.resImpv = resDto.getImpVen();
         this.resServ = resDto.getImpServ();
     }
 
@@ -177,24 +186,14 @@ public class Restaurantes implements Serializable
         this.resFoto = resFoto;
     }
 
-    public Long getResVersion()
+    public Long getResImpv()
     {
-        return resVersion;
+        return resImpv;
     }
 
-    public void setResVersion(Long resVersion)
+    public void setResImpv(Long resImpv)
     {
-        this.resVersion = resVersion;
-    }
-
-    public Long getResVen()
-    {
-        return resVen;
-    }
-
-    public void setResVen(Long resVen)
-    {
-        this.resVen = resVen;
+        this.resImpv = resImpv;
     }
 
     public Long getResServ()
@@ -207,14 +206,54 @@ public class Restaurantes implements Serializable
         this.resServ = resServ;
     }
 
-    public List<Codigosdesc> getCodigosdescList()
+    public Long getResVersion()
     {
-        return codigosdescList;
+        return resVersion;
     }
 
-    public void setCodigosdescList(List<Codigosdesc> codigosdescList)
+    public void setResVersion(Long resVersion)
     {
-        this.codigosdescList = codigosdescList;
+        this.resVersion = resVersion;
+    }
+
+    public List<Codigodesc> getCodigodescList()
+    {
+        return codigodescList;
+    }
+
+    public void setCodigodescList(List<Codigodesc> codigodescList)
+    {
+        this.codigodescList = codigodescList;
+    }
+
+    public List<Salon> getSalonList()
+    {
+        return salonList;
+    }
+
+    public void setSalonList(List<Salon> salonList)
+    {
+        this.salonList = salonList;
+    }
+
+    public List<Producto> getProductoList()
+    {
+        return productoList;
+    }
+
+    public void setProductoList(List<Producto> productoList)
+    {
+        this.productoList = productoList;
+    }
+
+    public List<Empleado> getEmpleadoList()
+    {
+        return empleadoList;
+    }
+
+    public void setEmpleadoList(List<Empleado> empleadoList)
+    {
+        this.empleadoList = empleadoList;
     }
 
     @Override
@@ -229,11 +268,11 @@ public class Restaurantes implements Serializable
     public boolean equals(Object object)
     {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if(!(object instanceof Restaurantes))
+        if(!(object instanceof Restaurante))
         {
             return false;
         }
-        Restaurantes other = (Restaurantes) object;
+        Restaurante other = (Restaurante) object;
         if((this.resId == null && other.resId != null) || (this.resId != null && !this.resId.equals(other.resId)))
         {
             return false;
@@ -244,7 +283,7 @@ public class Restaurantes implements Serializable
     @Override
     public String toString()
     {
-        return "cr.ac.una.wsrestuna.models.Restaurantes[ resId=" + resId + " ]";
+        return "cr.ac.una.wsrestuna.models.Restaurante[ resId=" + resId + " ]";
     }
 
 }

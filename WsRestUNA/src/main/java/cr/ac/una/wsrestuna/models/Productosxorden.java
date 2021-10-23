@@ -46,10 +46,10 @@ public class Productosxorden implements Serializable
     private Long pxoVersion;
     @JoinColumn(name = "ORD_ID" , referencedColumnName = "ORD_ID")
     @ManyToOne(optional = false , fetch = FetchType.LAZY)
-    private Ordenes ordId;
+    private Orden ordId;
     @JoinColumn(name = "PRO_ID" , referencedColumnName = "PRO_ID")
     @ManyToOne(optional = false , fetch = FetchType.LAZY)
-    private Productos proId;
+    private Producto proId;
 
     public Productosxorden()
     {
@@ -60,22 +60,12 @@ public class Productosxorden implements Serializable
         this.pxoId = pxoId;
     }
 
-    public Productosxorden(Long pxoId , Long pxoCantidad )
+    public Productosxorden(Long pxoId , Long pxoCantidad)
     {
         this.pxoId = pxoId;
         this.pxoCantidad = pxoCantidad;
     }
-    public Productosxorden(ProductosxordenDto proDto)
-    {
-        this.pxoId=proDto.getId();
-        actualizarProductos(proDto);
-    }
-    public void actualizarProductos(ProductosxordenDto proDto)
-    {
-        this.pxoCantidad = proDto.getCantidad();
-        this.ordId=new Ordenes(proDto.getIdO());
-        this.proId= new Productos(proDto.getIdP());
-    }
+
     public Long getPxoId()
     {
         return pxoId;
@@ -106,22 +96,22 @@ public class Productosxorden implements Serializable
         this.pxoVersion = pxoVersion;
     }
 
-    public Ordenes getOrdId()
+    public Orden getOrdId()
     {
         return ordId;
     }
 
-    public void setOrdId(Ordenes ordId)
+    public void setOrdId(Orden ordId)
     {
         this.ordId = ordId;
     }
 
-    public Productos getProId()
+    public Producto getProId()
     {
         return proId;
     }
 
-    public void setProId(Productos proId)
+    public void setProId(Producto proId)
     {
         this.proId = proId;
     }

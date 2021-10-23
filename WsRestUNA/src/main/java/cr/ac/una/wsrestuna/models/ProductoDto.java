@@ -9,7 +9,7 @@ package cr.ac.una.wsrestuna.models;
  *
  * @author jp015
  */
-public class ProductosDto
+public class ProductoDto
 {
 
     private Long id;
@@ -18,23 +18,27 @@ public class ProductosDto
     private byte[] foto;
     private Long costo;
     private Long cantidad;
+    private String accesoRapido;
+    private Long cantidadV;
     private Boolean modificado;
 
-    public ProductosDto()
+    public ProductoDto()
     {
         this.modificado = false;
 
     }
 
-    public ProductosDto(Productos pro)
+    public ProductoDto(Producto producto)
     {
         this();
-        this.id = pro.getProId();
-        this.nombre = pro.getProNombre();
-        this.detalle = pro.getProDetalle();
-        this.foto = pro.getProFoto();
-        this.costo = pro.getProCosto();
-        this.cantidad = pro.getProCantidad();
+        this.id = producto.getProId();
+        this.nombre = producto.getProNombre();
+        this.detalle = producto.getProDetalle();
+        this.foto = producto.getProFoto();
+        this.costo = producto.getProCosto();
+        this.cantidad = producto.getProCantidad();
+        this.accesoRapido = producto.getProAccesoRapido();
+        this.cantidadV = producto.getProCantidadv();
     }
 
     public Long getId()
@@ -107,17 +111,38 @@ public class ProductosDto
         this.modificado = modificado;
     }
 
+    public Long getCantidadV()
+    {
+        return cantidadV;
+    }
+
+    public void setCantidadV(Long cantidadV)
+    {
+        this.cantidadV = cantidadV;
+    }
+
+    public String getAccesoRapido()
+    {
+        return accesoRapido;
+    }
+
+    public void setAccesoRapido(String accesoRapido)
+    {
+        this.accesoRapido = accesoRapido;
+    }
+
     @Override
     public String toString()
     {
         StringBuilder sb = new StringBuilder();
-        sb.append("ProductosDto{id=").append(id);
+        sb.append("ProductoDto{id=").append(id);
         sb.append(", nombre=").append(nombre);
         sb.append(", detalle=").append(detalle);
         sb.append(", foto=").append(foto);
         sb.append(", costo=").append(costo);
         sb.append(", cantidad=").append(cantidad);
-        sb.append(", modificado=").append(modificado);
+        sb.append(", accesoRapido=").append(accesoRapido);
+        sb.append(", cantidadV=").append(cantidadV);
         sb.append('}');
         return sb.toString();
     }

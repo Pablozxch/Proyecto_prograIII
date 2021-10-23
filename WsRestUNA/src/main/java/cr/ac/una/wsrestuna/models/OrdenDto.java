@@ -11,30 +11,30 @@ import java.util.*;
  *
  * @author jp015
  */
-public class OrdenesDto
+public class OrdenDto
 {
 
     private Long id;
     private Long facTotal;
     private Date fecha;
     private Long desc;
-    private EmpleadosDto emp;
-    private MesasDto mesa;
+    private EmpleadoDto emp;
+    private MesaDto mesa;
     private Boolean modificado;
 
-    public OrdenesDto()
+    public OrdenDto()
     {
         this.modificado = false;
     }
 
-    public OrdenesDto(Ordenes orden)
+    public OrdenDto(Orden orden)
     {
         this.id = orden.getOrdId();
         this.facTotal = orden.getFacTotal();
         this.fecha = orden.getFacFecha();
         this.desc = orden.getFacDesc();
-        this.emp = new EmpleadosDto(orden.getEmpId());
-        this.mesa = new MesasDto(orden.getMesaId());
+        this.emp = new EmpleadoDto(orden.getEmpId());
+        this.mesa = new MesaDto(orden.getMesaId());
     }
 
     public Long getId()
@@ -77,22 +77,22 @@ public class OrdenesDto
         this.desc = desc;
     }
 
-    public EmpleadosDto getEmp()
+    public EmpleadoDto getEmp()
     {
         return emp;
     }
 
-    public void setEmp(EmpleadosDto emp)
+    public void setEmp(EmpleadoDto emp)
     {
         this.emp = emp;
     }
 
-    public MesasDto getMesa()
+    public MesaDto getMesa()
     {
         return mesa;
     }
 
-    public void setMesa(MesasDto mesa)
+    public void setMesa(MesaDto mesa)
     {
         this.mesa = mesa;
     }

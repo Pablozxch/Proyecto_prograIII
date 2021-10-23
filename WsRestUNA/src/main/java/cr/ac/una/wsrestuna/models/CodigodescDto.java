@@ -9,7 +9,7 @@ package cr.ac.una.wsrestuna.models;
  *
  * @author jp015
  */
-public class CodigosdescDto
+public class CodigodescDto
 {
 
     private Long id;
@@ -18,22 +18,22 @@ public class CodigosdescDto
     private Long cantidaddesc;
     private Boolean modificado;
     private String url;
-    private RestaurantesDto resid;
+    private RestauranteDto resid;
 
-    public CodigosdescDto()
+    public CodigodescDto()
     {
         this.modificado = false;
     }
 
-    public CodigosdescDto(Codigosdesc cod)
+    public CodigodescDto(Codigodesc codigodesc)
     {
         this();
-        this.id = cod.getCodId();
-        this.nombre = cod.getCodNombre();
-        this.cantidad = cod.getCodCant();
-        this.url = cod.getCodUrl();
-        this.cantidaddesc=cod.getCodCantdesc();
-        this.resid = new RestaurantesDto(cod.getResId());
+        this.id = codigodesc.getCodId();
+        this.nombre = codigodesc.getCodNombre();
+        this.cantidad = codigodesc.getCodCant();
+        this.url = codigodesc.getCodUrl();
+        this.cantidaddesc=codigodesc.getCodDesc();
+        this.resid = new RestauranteDto(codigodesc.getResId());
     }
 
     public Long getId()
@@ -86,12 +86,12 @@ public class CodigosdescDto
         this.url = url;
     }
 
-    public RestaurantesDto getResid()
+    public RestauranteDto getResid()
     {
         return resid;
     }
 
-    public void setResid(RestaurantesDto resid)
+    public void setResid(RestauranteDto resid)
     {
         this.resid = resid;
     }

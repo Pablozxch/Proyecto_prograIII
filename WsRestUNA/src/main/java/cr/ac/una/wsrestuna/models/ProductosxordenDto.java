@@ -14,8 +14,8 @@ public class ProductosxordenDto
 
     private Long id;
     private Long cantidad;
-    private OrdenesDto idO;
-    private ProductosDto idP;
+    private OrdenDto idO;
+    private ProductoDto idP;
     private Boolean modificado;
 
     public ProductosxordenDto()
@@ -23,12 +23,12 @@ public class ProductosxordenDto
         this.modificado = false;
     }
 
-    public ProductosxordenDto(Productosxorden pro)
+    public ProductosxordenDto(Productosxorden productoxorden)
     {
-        this.id = pro.getPxoId();
-        this.cantidad = pro.getPxoCantidad();
-        this.idO = new OrdenesDto(pro.getOrdId());
-        this.idP = new ProductosDto(pro.getProId());
+        this.id = productoxorden.getPxoId();
+        this.cantidad = productoxorden.getPxoCantidad();
+        this.idO = new OrdenDto(productoxorden.getOrdId());
+        this.idP = new ProductoDto(productoxorden.getProId());
     }
 
     public Long getId()
@@ -51,22 +51,22 @@ public class ProductosxordenDto
         this.cantidad = cantidad;
     }
 
-    public OrdenesDto getIdO()
+    public OrdenDto getIdO()
     {
         return idO;
     }
 
-    public void setIdO(OrdenesDto idO)
+    public void setIdO(OrdenDto idO)
     {
         this.idO = idO;
     }
 
-    public ProductosDto getIdP()
+    public ProductoDto getIdP()
     {
         return idP;
     }
 
-    public void setIdP(ProductosDto idP)
+    public void setIdP(ProductoDto idP)
     {
         this.idP = idP;
     }

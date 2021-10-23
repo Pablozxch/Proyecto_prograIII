@@ -9,7 +9,7 @@ package cr.ac.una.wsrestuna.models;
  *
  * @author jp015
  */
-class SalonesDto
+class SalonDto
 {
 
     private Long id;
@@ -18,18 +18,18 @@ class SalonesDto
     private Boolean modificado;
     private String barraMesa;
 
-    public SalonesDto()
+    public SalonDto()
     {
         this.modificado = false;
     }
 
-    public SalonesDto(Salones sal)
+    public SalonDto(Salon salon)
     {
         this();
-        this.id = sal.getSalId();
-        this.nombre = sal.getSalNombre();
-        this.foto = sal.getSalImagen();
-        this.barraMesa = sal.getSalBarraomesa();
+        this.id = salon.getSalId();
+        this.nombre = salon.getSalNombre();
+        this.foto = salon.getSalImagen();
+        this.barraMesa = salon.getSalBarraomesa();
     }
 
     public Long getId()

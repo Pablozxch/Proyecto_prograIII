@@ -24,6 +24,14 @@
     <class>cr.ac.una.wsrestuna.models.TblCategorias</class>
     <class>cr.ac.una.wsrestuna.models.Codigosdesc</class>
     <class>cr.ac.una.wsrestuna.models.TblCodigosdesc</class>
+    <class>cr.ac.una.wsrestuna.models.Orden</class>
+    <class>cr.ac.una.wsrestuna.models.Categoria</class>
+    <class>cr.ac.una.wsrestuna.models.Codigodesc</class>
+    <class>cr.ac.una.wsrestuna.models.Salon</class>
+    <class>cr.ac.una.wsrestuna.models.Producto</class>
+    <class>cr.ac.una.wsrestuna.models.Restaurante</class>
+    <class>cr.ac.una.wsrestuna.models.Mesa</class>
+    <class>cr.ac.una.wsrestuna.models.Empleado</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="eclipselink.logging.level.sql" value="FINE"/>

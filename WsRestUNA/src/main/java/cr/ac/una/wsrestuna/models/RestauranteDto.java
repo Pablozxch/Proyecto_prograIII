@@ -11,7 +11,7 @@ import java.util.*;
  *
  * @author jp015
  */
-public class RestaurantesDto
+public class RestauranteDto
 {
 
     private Long id;
@@ -23,27 +23,27 @@ public class RestaurantesDto
     private Long impVen;
     private Long impServ;
     private Boolean modificado;
-    private List<CodigosdescDto> codigos;//DUDA
-    private List<CodigosdescDto> codigosEliminados;
+    private List<CodigodescDto> codigos;//DUDA
+    private List<CodigodescDto> codigosEliminados;
 
-    public RestaurantesDto()
+    public RestauranteDto()
     {
         this.modificado = false;
         codigos = new ArrayList<>();
         codigosEliminados = new ArrayList<>();
     }
 
-    public RestaurantesDto(Restaurantes res)
+    public RestauranteDto(Restaurante restaurante)
     {
         this();
-        this.id = res.getResId();
-        this.nombre = res.getResNombre();
-        this.detalle = res.getResDetalle();
-        this.direccion = res.getResDireccion();
-        this.correo = res.getResCorreo();
-        this.foto = res.getResFoto();
-        this.impVen = res.getResVen();
-        this.impServ = res.getResServ();
+        this.id = restaurante.getResId();
+        this.nombre = restaurante.getResNombre();
+        this.detalle = restaurante.getResDetalle();
+        this.direccion = restaurante.getResDireccion();
+        this.correo = restaurante.getResCorreo();
+        this.foto = restaurante.getResFoto();
+        this.impVen = restaurante.getResImpv();
+        this.impServ = restaurante.getResServ();
     }
 
     public Long getId()
@@ -136,22 +136,22 @@ public class RestaurantesDto
         this.modificado = modificado;
     }
 
-    public List<CodigosdescDto> getCodigos()
+    public List<CodigodescDto> getCodigos()
     {
         return codigos;
     }
 
-    public void setCodigos(List<CodigosdescDto> codigos)
+    public void setCodigos(List<CodigodescDto> codigos)
     {
         this.codigos = codigos;
     }
 
-    public List<CodigosdescDto> getCodigosEliminados()
+    public List<CodigodescDto> getCodigosEliminados()
     {
         return codigosEliminados;
     }
 
-    public void setCodigosEliminados(List<CodigosdescDto> codigosEliminados)
+    public void setCodigosEliminados(List<CodigodescDto> codigosEliminados)
     {
         this.codigosEliminados = codigosEliminados;
     }

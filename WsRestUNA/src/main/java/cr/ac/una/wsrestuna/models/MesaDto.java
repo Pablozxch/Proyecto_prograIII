@@ -9,7 +9,7 @@ package cr.ac.una.wsrestuna.models;
  *
  * @author jp015
  */
-public class MesasDto
+public class MesaDto
 {
 
     private Long id;
@@ -17,23 +17,23 @@ public class MesasDto
     private String estado;
     private Long posx;
     private Long posy;
-    private SalonesDto salon;
+    private SalonDto salon;
     private Boolean modificado;
 
-    public MesasDto()
+    public MesaDto()
     {
         this.modificado = false;
     }
 
-    public MesasDto(Mesas mes)
+    public MesaDto(Mesa mesa)
     {
         this();
-        this.id=mes.getMesaId();
-        this.nombre=mes.getMesaNombre();
-        this.estado=mes.getMesaEstado();
-        this.posx=mes.getMesaPosx();
-        this.posy=mes.getMesaPosy();
-        this.salon=new SalonesDto(mes.getSalId());
+        this.id=mesa.getMesaId();
+        this.nombre=mesa.getMesaNombre();
+        this.estado=mesa.getMesaEstado();
+        this.posx=mesa.getMesaPosx();
+        this.posy=mesa.getMesaPosy();
+        this.salon=new SalonDto(mesa.getSalId());
     }
 
     public Long getId()
@@ -86,12 +86,12 @@ public class MesasDto
         this.posy = posy;
     }
 
-    public SalonesDto getSalon()
+    public SalonDto getSalon()
     {
         return salon;
     }
 
-    public void setSalon(SalonesDto salon)
+    public void setSalon(SalonDto salon)
     {
         this.salon = salon;
     }

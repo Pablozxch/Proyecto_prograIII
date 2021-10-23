@@ -16,24 +16,24 @@ import javax.validation.constraints.*;
  * @author jp015
  */
 @Entity
-@Table(name = "TBL_ORDENES" , catalog = "" , schema = "RESTUNA")
+@Table(name = "TBL_ORDEN" , catalog = "" , schema = "RESTUNA")
 @NamedQueries(
-          {
-              @NamedQuery(name = "Ordenes.findAll" , query = "SELECT o FROM Ordenes o") ,
-              @NamedQuery(name = "Ordenes.findByOrdId" , query = "SELECT o FROM Ordenes o WHERE o.ordId = :ordId") ,
-              @NamedQuery(name = "Ordenes.findByFacTotal" , query = "SELECT o FROM Ordenes o WHERE o.facTotal = :facTotal") ,
-              @NamedQuery(name = "Ordenes.findByFacFecha" , query = "SELECT o FROM Ordenes o WHERE o.facFecha = :facFecha") ,
-              @NamedQuery(name = "Ordenes.findByFacVersion" , query = "SELECT o FROM Ordenes o WHERE o.facVersion = :facVersion") ,
-              @NamedQuery(name = "Ordenes.findByFacDesc" , query = "SELECT o FROM Ordenes o WHERE o.facDesc = :facDesc")
-          })
-public class Ordenes implements Serializable
+{
+    @NamedQuery(name = "Orden.findAll" , query = "SELECT o FROM Orden o") ,
+    @NamedQuery(name = "Orden.findByOrdId" , query = "SELECT o FROM Orden o WHERE o.ordId = :ordId") ,
+    @NamedQuery(name = "Orden.findByFacTotal" , query = "SELECT o FROM Orden o WHERE o.facTotal = :facTotal") ,
+    @NamedQuery(name = "Orden.findByFacFecha" , query = "SELECT o FROM Orden o WHERE o.facFecha = :facFecha") ,
+    @NamedQuery(name = "Orden.findByFacDesc" , query = "SELECT o FROM Orden o WHERE o.facDesc = :facDesc") ,
+    @NamedQuery(name = "Orden.findByFacVersion" , query = "SELECT o FROM Orden o WHERE o.facVersion = :facVersion")
+})
+public class Orden implements Serializable
 {
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
-    @SequenceGenerator(name = "TBL_ORDENES_ORD_ID_GENERATOR" , sequenceName = "RESTUNA.TBL_ORDENES_SEQ01" , allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "TBL_ORDENES_ORD_ID_GENERATOR")
+    @SequenceGenerator(name = "TBL_ORDEN_ORD_ID_GENERATOR" , sequenceName = "RESTUNA.TBL_ORDEN_SEQ01" , allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "TBL_ORDEN_ORD_ID_GENERATOR")
     @Basic(optional = false)
     @NotNull
     @Column(name = "ORD_ID")
@@ -49,54 +49,42 @@ public class Ordenes implements Serializable
     private Date facFecha;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "FAC_DESC")
+    private Long facDesc;
+    @Basic(optional = false)
+    @NotNull
     @Version
     @Column(name = "FAC_VERSION")
     private Long facVersion;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "FAC_DESC")
-    private Long facDesc;
     @OneToMany(cascade = CascadeType.ALL , mappedBy = "ordId" , fetch = FetchType.LAZY)
     private List<Productosxorden> productosxordenList;
+    @JoinColumn(name = "COD_ID" , referencedColumnName = "COD_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Codigodesc codId;
     @JoinColumn(name = "EMP_ID" , referencedColumnName = "EMP_ID")
     @ManyToOne(optional = false , fetch = FetchType.LAZY)
-    private Empleados empId;
+    private Empleado empId;
     @JoinColumn(name = "MESA_ID" , referencedColumnName = "MESA_ID")
     @ManyToOne(optional = false , fetch = FetchType.LAZY)
-    private Mesas mesaId;
+    private Mesa mesaId;
 
-    public Ordenes()
+    public Orden()
     {
     }
 
-    public Ordenes(Long ordId)
+    public Orden(Long ordId)
     {
         this.ordId = ordId;
     }
 
-    public Ordenes(Long ordId , Long facTotal , Date facFecha , Long facVersion)
+    public Orden(Long ordId , Long facTotal , Date facFecha , Long facDesc)
     {
         this.ordId = ordId;
         this.facTotal = facTotal;
         this.facFecha = facFecha;
-        this.facVersion = facVersion;
+        this.facDesc = facDesc;
     }
-
-    public Ordenes(OrdenesDto ordenDto)
-    {
-        this.ordId = ordenDto.getId();
-        actualizarOrdenes(ordenDto);
-    }
-
-    public void actualizarOrdenes(OrdenesDto ordenDto)
-    {
-        this.facTotal = ordenDto.getFacTotal();
-        this.facFecha = ordenDto.getFecha();
-        this.facTotal = ordenDto.getDesc();
-        this.empId = new Empleados(ordenDto.getEmp());
-        this.mesaId = new Mesas(ordenDto.getMesa());
-    }
-
+    
     public Long getOrdId()
     {
         return ordId;
@@ -127,16 +115,6 @@ public class Ordenes implements Serializable
         this.facFecha = facFecha;
     }
 
-    public Long getFacVersion()
-    {
-        return facVersion;
-    }
-
-    public void setFacVersion(Long facVersion)
-    {
-        this.facVersion = facVersion;
-    }
-
     public Long getFacDesc()
     {
         return facDesc;
@@ -145,6 +123,16 @@ public class Ordenes implements Serializable
     public void setFacDesc(Long facDesc)
     {
         this.facDesc = facDesc;
+    }
+
+    public Long getFacVersion()
+    {
+        return facVersion;
+    }
+
+    public void setFacVersion(Long facVersion)
+    {
+        this.facVersion = facVersion;
     }
 
     public List<Productosxorden> getProductosxordenList()
@@ -157,22 +145,32 @@ public class Ordenes implements Serializable
         this.productosxordenList = productosxordenList;
     }
 
-    public Empleados getEmpId()
+    public Codigodesc getCodId()
+    {
+        return codId;
+    }
+
+    public void setCodId(Codigodesc codId)
+    {
+        this.codId = codId;
+    }
+
+    public Empleado getEmpId()
     {
         return empId;
     }
 
-    public void setEmpId(Empleados empId)
+    public void setEmpId(Empleado empId)
     {
         this.empId = empId;
     }
 
-    public Mesas getMesaId()
+    public Mesa getMesaId()
     {
         return mesaId;
     }
 
-    public void setMesaId(Mesas mesaId)
+    public void setMesaId(Mesa mesaId)
     {
         this.mesaId = mesaId;
     }
@@ -189,11 +187,11 @@ public class Ordenes implements Serializable
     public boolean equals(Object object)
     {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if(!(object instanceof Ordenes))
+        if(!(object instanceof Orden))
         {
             return false;
         }
-        Ordenes other = (Ordenes) object;
+        Orden other = (Orden) object;
         if((this.ordId == null && other.ordId != null) || (this.ordId != null && !this.ordId.equals(other.ordId)))
         {
             return false;
@@ -204,7 +202,7 @@ public class Ordenes implements Serializable
     @Override
     public String toString()
     {
-        return "cr.ac.una.wsrestuna.models.Ordenes[ ordId=" + ordId + " ]";
+        return "cr.ac.una.wsrestuna.models.Orden[ ordId=" + ordId + " ]";
     }
-
+    
 }

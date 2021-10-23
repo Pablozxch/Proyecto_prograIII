@@ -16,25 +16,25 @@ import javax.validation.constraints.*;
  * @author jp015
  */
 @Entity
-@Table(name = "TBL_EMPLEADOS" , catalog = "" , schema = "RESTUNA")
+@Table(name = "TBL_EMPLEADO" , catalog = "" , schema = "RESTUNA")
 @NamedQueries(
           {
-              @NamedQuery(name = "Empleados.findAll" , query = "SELECT e FROM Empleados e") ,
-              @NamedQuery(name = "Empleados.findByEmpId" , query = "SELECT e FROM Empleados e WHERE e.empId = :empId") ,
-              @NamedQuery(name = "Empleados.findByEmpNombre" , query = "SELECT e FROM Empleados e WHERE e.empNombre = :empNombre") ,
-              @NamedQuery(name = "Empleados.findByEmpUsuario" , query = "SELECT e FROM Empleados e WHERE e.empUsuario = :empUsuario") ,
-              @NamedQuery(name = "Empleados.findByEmpContra" , query = "SELECT e FROM Empleados e WHERE e.empContra = :empContra") ,
-              @NamedQuery(name = "Empleados.findByEmpApelllido" , query = "SELECT e FROM Empleados e WHERE e.empApelllido = :empApelllido") ,
-              @NamedQuery(name = "Empleados.findByEmpVersion" , query = "SELECT e FROM Empleados e WHERE e.empVersion = :empVersion")
+              @NamedQuery(name = "Empleado.findAll" , query = "SELECT e FROM Empleado e") ,
+              @NamedQuery(name = "Empleado.findByEmpId" , query = "SELECT e FROM Empleado e WHERE e.empId = :empId") ,
+              @NamedQuery(name = "Empleado.findByEmpNombre" , query = "SELECT e FROM Empleado e WHERE e.empNombre = :empNombre") ,
+              @NamedQuery(name = "Empleado.findByEmpUsuario" , query = "SELECT e FROM Empleado e WHERE e.empUsuario = :empUsuario") ,
+              @NamedQuery(name = "Empleado.findByEmpContra" , query = "SELECT e FROM Empleado e WHERE e.empContra = :empContra") ,
+              @NamedQuery(name = "Empleado.findByEmpApelllido" , query = "SELECT e FROM Empleado e WHERE e.empApelllido = :empApelllido") ,
+              @NamedQuery(name = "Empleado.findByEmpVersion" , query = "SELECT e FROM Empleado e WHERE e.empVersion = :empVersion")
           })
-public class Empleados implements Serializable
+public class Empleado implements Serializable
 {
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
-    @SequenceGenerator(name = "TBL_EMPLEADOS_EMP_ID_GENERATOR" , sequenceName = "RESTUNA.TBL_EMPLEADOS_SEQ01" , allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "TBL_EMPLEADOS_EMP_ID_GENERATOR")
+    @SequenceGenerator(name = "TBL_EMPLEADO_EMP_ID_GENERATOR" , sequenceName = "RESTUNA.TBL_EMPLEADO_SEQ01" , allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "TBL_EMPLEADO_EMP_ID_GENERATOR")
     @Basic(optional = false)
     @NotNull
     @Column(name = "EMP_ID")
@@ -69,25 +69,25 @@ public class Empleados implements Serializable
     @Version
     @Column(name = "EMP__VERSION")
     private Long empVersion;
-    @OneToMany(cascade = CascadeType.ALL , mappedBy = "empId" , fetch = FetchType.LAZY)
-    private List<Ordenes> ordenesList;
     @JoinColumn(name = "ROL_ID" , referencedColumnName = "ROL_ID")
     @ManyToOne(optional = false , fetch = FetchType.LAZY)
     private Rol rolId;
     @JoinColumn(name = "RES_ID" , referencedColumnName = "RES_ID")
     @ManyToOne(optional = false , fetch = FetchType.LAZY)
-    private Restaurantes resId;
+    private Restaurante resId;
+    @OneToMany(cascade = CascadeType.ALL , mappedBy = "empId" , fetch = FetchType.LAZY)
+    private List<Orden> ordenList;
 
-    public Empleados()
+    public Empleado()
     {
     }
 
-    public Empleados(Long empId)
+    public Empleado(Long empId)
     {
         this.empId = empId;
     }
 
-    public Empleados(Long empId , String empNombre , String empUsuario , String empContra , byte[] empFoto , String empApelllido)
+    public Empleado(Long empId , String empNombre , String empUsuario , String empContra , byte[] empFoto , String empApelllido)
     {
         this.empId = empId;
         this.empNombre = empNombre;
@@ -95,22 +95,6 @@ public class Empleados implements Serializable
         this.empContra = empContra;
         this.empFoto = empFoto;
         this.empApelllido = empApelllido;
-    }
-
-    public Empleados(EmpleadosDto empDto)
-    {
-        this.empId = empDto.getId();
-        actualizarEmpleados(empDto);
-    }
-
-    public void actualizarEmpleados(EmpleadosDto empDto)
-    {
-        this.empNombre = empDto.getNombre();
-        this.empUsuario = empDto.getUsuario();
-        this.empContra = empDto.getContra();
-        this.empFoto = empDto.getFoto();
-        this.empApelllido = empDto.getApellido();
-        this.rolId=new Rol(empDto.getRol());
     }
 
     public Long getEmpId()
@@ -183,16 +167,6 @@ public class Empleados implements Serializable
         this.empVersion = empVersion;
     }
 
-    public List<Ordenes> getOrdenesList()
-    {
-        return ordenesList;
-    }
-
-    public void setOrdenesList(List<Ordenes> ordenesList)
-    {
-        this.ordenesList = ordenesList;
-    }
-
     public Rol getRolId()
     {
         return rolId;
@@ -203,14 +177,24 @@ public class Empleados implements Serializable
         this.rolId = rolId;
     }
 
-    public Restaurantes getResId()
+    public Restaurante getResId()
     {
         return resId;
     }
 
-    public void setResId(Restaurantes resId)
+    public void setResId(Restaurante resId)
     {
         this.resId = resId;
+    }
+
+    public List<Orden> getOrdenList()
+    {
+        return ordenList;
+    }
+
+    public void setOrdenList(List<Orden> ordenList)
+    {
+        this.ordenList = ordenList;
     }
 
     @Override
@@ -225,11 +209,11 @@ public class Empleados implements Serializable
     public boolean equals(Object object)
     {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if(!(object instanceof Empleados))
+        if(!(object instanceof Empleado))
         {
             return false;
         }
-        Empleados other = (Empleados) object;
+        Empleado other = (Empleado) object;
         if((this.empId == null && other.empId != null) || (this.empId != null && !this.empId.equals(other.empId)))
         {
             return false;
@@ -240,7 +224,7 @@ public class Empleados implements Serializable
     @Override
     public String toString()
     {
-        return "cr.ac.una.wsrestuna.models.Empleados[ empId=" + empId + " ]";
+        return "cr.ac.una.wsrestuna.models.Empleado[ empId=" + empId + " ]";
     }
 
 }
