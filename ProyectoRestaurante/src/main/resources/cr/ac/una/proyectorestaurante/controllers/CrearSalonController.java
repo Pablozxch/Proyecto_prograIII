@@ -38,7 +38,7 @@ public class CrearSalonController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }
+    }    
 
     @FXML
     private void click(ActionEvent event) {
@@ -48,5 +48,5 @@ public class CrearSalonController extends Controller implements Initializable {
     public void initialize() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
 }
