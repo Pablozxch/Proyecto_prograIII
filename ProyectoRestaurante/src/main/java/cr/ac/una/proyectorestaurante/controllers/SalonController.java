@@ -5,45 +5,43 @@
  */
 package cr.ac.una.proyectorestaurante.controllers;
 
-import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ScrollPane;
 
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 /**
  * FXML Controller class
  *
  * @author Christopher
  */
-public class SalonesController extends Controller implements Initializable {
+public class SalonController extends Controller implements Initializable {
+
 
     @FXML
-    private JFXButton btnCrear;
+    private Label lblNombreSalon;
     @FXML
-    private JFXButton btnEditar;
-    @FXML
-    private JFXButton btnEliminar;
-    @FXML
-    private ScrollPane scroll;
-
+    private ImageView imgSalon;
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-
+    
     @FXML
-    private void click(ActionEvent event) {
+    private void click(MouseEvent event) {
     }
 
     @Override
     public void initialize() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

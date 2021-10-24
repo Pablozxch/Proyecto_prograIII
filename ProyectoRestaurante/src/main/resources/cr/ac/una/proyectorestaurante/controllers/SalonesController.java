@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ScrollPane;
 
 /**
  * FXML Controller class
@@ -25,6 +26,8 @@ public class SalonesController extends Controller implements Initializable {
     private JFXButton btnEditar;
     @FXML
     private JFXButton btnEliminar;
+    @FXML
+    private ScrollPane scroll;
 
     /**
      * Initializes the controller class.

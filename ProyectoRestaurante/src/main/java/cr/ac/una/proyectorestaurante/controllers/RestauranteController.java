@@ -23,13 +23,15 @@ import javafx.scene.input.*;
 public class RestauranteController extends Controller implements Initializable
 {
 
-    @FXML
     private Label lblNombreRes;
-    @FXML
     private ImageView imgRest;
 
     private RestauranteDto restauranteDto;
     private MyListenerRes myListener;
+    @FXML
+    private Label lblNombreSalon;
+    @FXML
+    private ImageView imgSalon;
 
     /**
      * Initializes the controller class.
