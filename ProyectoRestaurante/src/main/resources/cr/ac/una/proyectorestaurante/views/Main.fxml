@@ -128,7 +128,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <ScrollPane fx:id="scroll" prefHeight="570.0" prefWidth="785.0" styleClass="transparent" stylesheets="@../../../../../../../../../../TareaTournament/TorneoPabloKevin/Torneo/src/main/resources/cr/ac/una/torneo/view/Style.css">
+                        <ScrollPane fx:id="scroll" prefHeight="570.0" prefWidth="785.0">
                            <content>
                               <GridPane fx:id="grid" prefHeight="0.0" prefWidth="0.0">
                                  <rowConstraints>

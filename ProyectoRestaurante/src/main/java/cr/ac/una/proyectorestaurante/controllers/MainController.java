@@ -46,26 +46,25 @@ public class MainController extends Controller implements Initializable
     private ScrollPane scroll;
     @FXML
     private GridPane grid;
-
-    /**
-     * Initializes the controller class.
-     */
-    private Image image;
-    private MyListenerRes myListenerRess;
-    RestauranteService restauranteService = new RestauranteService();
-    RestauranteDto restauranteDto = new RestauranteDto();
-    private static List<RestauranteDto> restaurantes = new ArrayList<>();
     @FXML
     private Label lblNombreRes;
     @FXML
     private ImageView imgRes;
+    /**
+     * Initializes the controller class.
+     */
+
+    private MyListenerRes myListenerRess;
+    RestauranteService restauranteService = new RestauranteService();
+    RestauranteDto restauranteDto = new RestauranteDto();
+    private static List<RestauranteDto> restaurantes = new ArrayList<>();
 
     @Override
     public void initialize(URL url , ResourceBundle rb)
     {
         Respuesta respuesta = restauranteService.getRestaurantes();
         restaurantes = (List<RestauranteDto>) respuesta.getResultado("Restaurantes");
-      
+
         if(restaurantes.size() > 0)
         {
             setResSelect(restaurantes.get(0));
@@ -79,12 +78,6 @@ public class MainController extends Controller implements Initializable
                 }
             };
         }
-        creacionEspacios();
-
-    }
-
-    public void creacionEspacios()
-    {
         int column = 0;
         int row = 1;
         String name1;
@@ -100,14 +93,14 @@ public class MainController extends Controller implements Initializable
                 if(i + 1 < restaurantes.size())
                 {
                     name2 = restaurantes.get(i + 1).getNombre();
-                    if(name1 == name2)
+                    if(name1 == null ? name2 == null : name1.equals(name2))
                     {
                         break;
                     }
                 }
 
-                RestauranteController itemDeporte = fxmlLoader.getController();
-                itemDeporte.setData(restaurantes.get(i) , myListenerRess);
+                RestauranteController itemrest = fxmlLoader.getController();
+                itemrest.setData(restaurantes.get(i) , myListenerRess);
                 if(column == 3)
                 {
                     column = 0;
@@ -131,10 +124,17 @@ public class MainController extends Controller implements Initializable
         {
             e.printStackTrace();
         }
+
+    }
+
+    public void creacionEspacios()
+    {
+
     }
 
     public void setResSelect(RestauranteDto res)
     {
+        System.out.println("Nasd");
         lblNombreRes.setText(res.getNombre());
         Image img2 = new Image(new ByteArrayInputStream(res.getFoto()));//crea un objeto imagen, transforma el byte[] a un buffered imagen
         imgRes.setImage(img2);

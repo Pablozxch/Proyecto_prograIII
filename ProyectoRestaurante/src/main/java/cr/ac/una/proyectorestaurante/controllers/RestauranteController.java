@@ -9,6 +9,7 @@ import cr.ac.una.proyectorestaurante.models.*;
 import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
@@ -26,6 +27,7 @@ public class RestauranteController extends Controller implements Initializable
     private Label lblNombreRes;
     @FXML
     private ImageView imgRest;
+
     private RestauranteDto restauranteDto;
     private MyListenerRes myListener;
 
@@ -42,13 +44,14 @@ public class RestauranteController extends Controller implements Initializable
     {
         this.restauranteDto = restauranteDto;
         this.myListener = myListener;
+        System.out.println("El nombre es " + restauranteDto.getNombre());
         lblNombreRes.setText(restauranteDto.getNombre());
         Image img2 = new Image(new ByteArrayInputStream(restauranteDto.getFoto()));//crea un objeto imagen, transforma el byte[] a un buffered imagen
         imgRest.setImage(img2);
     }
 
     @FXML
-    private void click(MouseEvent event)
+    private void click(MouseEvent mouseEvent)
     {
         myListener.onClickListener(restauranteDto);
     }
