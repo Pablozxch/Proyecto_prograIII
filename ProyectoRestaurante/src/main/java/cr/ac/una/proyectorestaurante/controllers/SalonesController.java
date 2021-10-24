@@ -6,6 +6,7 @@
 package cr.ac.una.proyectorestaurante.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import cr.ac.una.proyectorestaurante.utils.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -17,7 +18,8 @@ import javafx.fxml.Initializable;
  *
  * @author Christopher
  */
-public class SalonesController extends Controller implements Initializable {
+public class SalonesController extends Controller implements Initializable
+{
 
     @FXML
     private JFXButton btnCrear;
@@ -30,17 +32,21 @@ public class SalonesController extends Controller implements Initializable {
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url , ResourceBundle rb)
+    {
         // TODO
-    }    
+//        FlowController.getInstance().goViewInStage("IdicacionesGenerales", getStage());
+    }
 
     @FXML
-    private void click(ActionEvent event) {
+    private void click(ActionEvent event)
+    {
     }
 
     @Override
-    public void initialize() {
+    public void initialize()
+    {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

@@ -22,7 +22,7 @@ import javax.persistence.*;
 public class CategoriaService
 {
 
-    private static final Logger LOG = Logger.getLogger(EmpleadoServices.class.getName());
+    private static final Logger LOG = Logger.getLogger(EmpleadoService.class.getName());
 
     //TODO
     @PersistenceContext(unitName = "WsRestUNA")

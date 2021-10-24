@@ -19,10 +19,10 @@ import javax.ejb.*;
  */
 @LocalBean
 @Stateless
-public class EmpleadoServices
+public class EmpleadoService
 {
 
-    private static final Logger LOG = Logger.getLogger(EmpleadoServices.class.getName());
+    private static final Logger LOG = Logger.getLogger(EmpleadoService.class.getName());
 
     //TODO
     @PersistenceContext(unitName = "WsRestUNA")

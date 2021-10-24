@@ -6,8 +6,10 @@
 package cr.ac.una.proyectorestaurante.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import cr.ac.una.proyectorestaurante.utils.*;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
@@ -16,7 +18,8 @@ import javafx.fxml.Initializable;
  *
  * @author Christopher
  */
-public class PrincipalController extends Controller implements Initializable {
+public class PrincipalController extends Controller implements Initializable
+{
 
     @FXML
     private JFXButton btnSalones;
@@ -37,13 +40,24 @@ public class PrincipalController extends Controller implements Initializable {
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url , ResourceBundle rb)
+    {
         // TODO
     }
 
     @Override
-    public void initialize() {
+    public void initialize()
+    {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @FXML
+    private void click(ActionEvent event)
+    {
+        if(event.getSource()==btnSalones)
+        {
+            FlowController.getInstance().goView("Salones");
+        }
     }
 
 }

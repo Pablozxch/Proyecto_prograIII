@@ -19,10 +19,10 @@ import javax.ejb.*;
  */
 @LocalBean
 @Stateless
-public class ProductoService
+public class ProductoServic
 {
 
-    private static final Logger LOG = Logger.getLogger(ProductoService.class.getName());
+    private static final Logger LOG = Logger.getLogger(ProductoServic.class.getName());
 
     @PersistenceContext(unitName = "WsRestUNA")
     private EntityManager em;

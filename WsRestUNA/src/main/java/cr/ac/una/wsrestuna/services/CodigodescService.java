@@ -19,10 +19,10 @@ import javax.persistence.*;
  */
 @LocalBean
 @Stateless
-public class CodigodescServices
+public class CodigodescService
 {
 
-    private static final Logger LOG = Logger.getLogger(EmpleadoServices.class.getName());
+    private static final Logger LOG = Logger.getLogger(EmpleadoService.class.getName());
 
     //TODO
     @PersistenceContext(unitName = "WsRestUNA")

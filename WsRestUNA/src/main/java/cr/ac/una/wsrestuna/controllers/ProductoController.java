@@ -23,7 +23,7 @@ public class ProductoController
 {
 
     @EJB
-    ProductoService productoService;
+    ProductoServic productoService;
 
     @GET
     @Path("/ping")

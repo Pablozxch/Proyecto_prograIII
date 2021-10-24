@@ -19,7 +19,7 @@ public class CodigodescController
 {
 
     @EJB
-    CodigodescServices codigodescServices;
+    CodigodescService codigodescServices;
 
     @GET
     @Path("/ping")

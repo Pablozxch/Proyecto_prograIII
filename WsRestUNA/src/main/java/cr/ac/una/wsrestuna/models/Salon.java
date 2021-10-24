@@ -91,6 +91,7 @@ public class Salon implements Serializable
         this.salNombre = salonDto.getNombre();
         this.salImagen = salonDto.getFoto();
         this.salBarraomesa = salonDto.getBarraMesa();
+        this.resId = new Restaurante(salonDto.getResid());
     }
 
     public Long getSalId()

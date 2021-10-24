@@ -165,7 +165,6 @@ public class RestauranteDto
         sb.append(", detalle=").append(detalle);
         sb.append(", direccion=").append(direccion);
         sb.append(", correo=").append(correo);
-        sb.append(", foto=").append(foto);
         sb.append(", impVen=").append(impVen);
         sb.append(", impServ=").append(impServ);
         sb.append('}');

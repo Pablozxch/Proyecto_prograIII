@@ -18,6 +18,7 @@ class SalonDto
     private SimpleStringProperty nombre;
     private SimpleObjectProperty<byte[]> foto;
     private Boolean modificado;
+    private SimpleObjectProperty<RestauranteDto> res;
     private SimpleStringProperty barraMesa;
 
     public SalonDto()
@@ -27,6 +28,7 @@ class SalonDto
         this.nombre = new SimpleStringProperty();
         this.foto = new SimpleObjectProperty();
         this.barraMesa = new SimpleStringProperty();
+        this.res = new SimpleObjectProperty();
     }
 
     public Long getId()
@@ -86,13 +88,24 @@ class SalonDto
         this.barraMesa.set(barraMesa);
     }
 
+    public RestauranteDto getRes()
+    {
+        return res.get();
+    }
+
+    public void setRes(RestauranteDto res)
+    {
+        this.res.set(res);
+    }
+
     @Override
     public String toString()
     {
         StringBuilder sb = new StringBuilder();
-        sb.append("SalonesDto{id=").append(id);
+        sb.append("SalonDto{id=").append(id);
         sb.append(", nombre=").append(nombre);
         sb.append(", foto=").append(foto);
+        sb.append(", res=").append(res);
         sb.append(", barraMesa=").append(barraMesa);
         sb.append('}');
         return sb.toString();

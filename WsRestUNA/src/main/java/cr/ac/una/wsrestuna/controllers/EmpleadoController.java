@@ -23,7 +23,7 @@ public class EmpleadoController
 {
 
     @EJB
-    EmpleadoServices empleadoServices;
+    EmpleadoService empleadoServices;
 
     @GET
     @Path("/ping")
