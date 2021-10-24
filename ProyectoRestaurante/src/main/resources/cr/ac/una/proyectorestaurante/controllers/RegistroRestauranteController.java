@@ -27,7 +27,7 @@ public class RegistroRestauranteController extends Controller implements Initial
     @FXML
     private JFXTextField txtNombre;
     @FXML
-    private JFXTextField txtDetalle;
+    private JFXTextArea txtDetalle;
     @FXML
     private ImageView imvImagen;
     @FXML
@@ -54,7 +54,7 @@ public class RegistroRestauranteController extends Controller implements Initial
 
     @Override
     public void initialize() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
