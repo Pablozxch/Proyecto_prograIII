@@ -44,4 +44,48 @@ public class RestauranteService
             return new Respuesta(false , "Error obteniendo restaurantes." , "getRestaurantes " + ex.getMessage());
         }
     }
+
+    public Respuesta guardarRestaurante(RestauranteDto restaurante)
+    {
+        try
+        {
+            Request request = new Request("RestauranteController/restaurante");
+            request.post(restaurante);
+            if(request.isError())
+            {
+                return new Respuesta(false , request.getError() , "");
+
+            }
+            RestauranteDto restauranteDto = (RestauranteDto) request.readEntity(RestauranteDto.class);//
+            return new Respuesta(true , "" , "" , "Restaurante" , restauranteDto);
+        }
+        catch(Exception ex)
+        {
+            Logger.getLogger(RestauranteService.class.getName()).log(Level.SEVERE , "Error guardando el restaurante." , ex);
+            return new Respuesta(false , "Error guardando el restaurante." , "guardarRestaurante " + ex.getMessage());
+        }
+    }
+
+    public Respuesta eliminarRestaurante(Long id)
+    {
+        try
+        {
+            Map<String , Object> parametros = new HashMap<>();
+            parametros.put("id" , id);
+            Request request = new Request("RestauranteController/restaurante" , "/{id}" , parametros);
+            request.delete();
+            if(request.isError())
+            {
+                return new Respuesta(false , request.getError() , "");
+
+            }
+
+            return new Respuesta(true , "" , "");
+        }
+        catch(Exception ex)
+        {
+            Logger.getLogger(RestauranteService.class.getName()).log(Level.SEVERE , "Error eliminando el restaurante." , ex);
+            return new Respuesta(false , "Error eliminando el restaurante." , "eliminarRestaurante " + ex.getMessage());
+        }
+    }
 }

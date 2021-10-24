@@ -24,14 +24,14 @@
                   <HBox alignment="CENTER" prefHeight="243.0" prefWidth="566.0" spacing="30.0">
                      <children>
                         <ImageView fx:id="imvImagen" fitHeight="193.0" fitWidth="256.0" pickOnBounds="true" preserveRatio="true" />
-                        <JFXButton fx:id="btnCargarImagen" text="Cargar  Imagen" />
+                        <JFXButton fx:id="btnCargarImagen" onAction="#click" text="Cargar  Imagen" />
                      </children>
                   </HBox>
                   <JFXTextField fx:id="txtCorreo" alignment="CENTER" focusColor="WHITE" labelFloat="true" promptText="Correo Electrónico" />
                   <HBox alignment="CENTER" prefHeight="168.0" prefWidth="514.0" spacing="100.0">
                      <children>
-                        <JFXButton fx:id="btnContinuar" text="Continuar" />
-                        <JFXButton fx:id="btnCerrar" text="Cerrar" />
+                        <JFXButton fx:id="btnContinuar" onAction="#click" text="Continuar" />
+                        <JFXButton fx:id="btnCerrar" onAction="#click" text="Cerrar" />
                      </children>
                   </HBox>
                </children>

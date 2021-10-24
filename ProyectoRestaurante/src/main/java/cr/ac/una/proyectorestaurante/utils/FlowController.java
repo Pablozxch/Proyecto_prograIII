@@ -191,7 +191,7 @@ public class FlowController
         Controller controller = loader.getController();
         controller.initialize();
         Stage stage = new Stage();
-        stage.getIcons().add(new Image(App.class.getResourceAsStream("/cr/ac/una/proyectorestaurante/resources/Usuario-48.png")));
+        //stage.getIcons().add(new Image(App.class.getResourceAsStream("/cr/ac/una/proyectorestaurante/resources/Usuario-48.png")));
         stage.setTitle("Restaurante");
         stage.setResizable(resizable);
         stage.setOnHidden((WindowEvent event) ->

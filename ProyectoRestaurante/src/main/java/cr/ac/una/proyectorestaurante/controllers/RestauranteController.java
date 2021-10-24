@@ -49,17 +49,17 @@ public class RestauranteController extends Controller implements Initializable
         Image img2 = new Image(new ByteArrayInputStream(restauranteDto.getFoto()));//crea un objeto imagen, transforma el byte[] a un buffered imagen
         imgRest.setImage(img2);
     }
-
-    @FXML
-    private void click(MouseEvent mouseEvent)
-    {
-        myListener.onClickListener(restauranteDto);
-    }
-
     @Override
     public void initialize()
     {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @FXML
+    private void click(MouseEvent event)
+    {
+          System.out.println("Hello World! (controllerButton)");
+        myListener.onClickListener(restauranteDto);
     }
 
 }
