@@ -5,8 +5,13 @@
  */
 package cr.ac.una.proyectorestaurante.controllers;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 /**
@@ -14,7 +19,18 @@ import javafx.fxml.Initializable;
  *
  * @author Christopher
  */
-public class CrearSalonController implements Initializable {
+public class CrearSalonController extends Controller implements Initializable {
+
+    @FXML
+    private JFXTextField txtNombre;
+    @FXML
+    private JFXComboBox<String> cmbBarraoMesa;
+    @FXML
+    private JFXButton btnCargar;
+    @FXML
+    private JFXButton btnVolver;
+    @FXML
+    private JFXButton btnAceptar;
 
     /**
      * Initializes the controller class.
@@ -23,5 +39,14 @@ public class CrearSalonController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void click(ActionEvent event) {
+    }
+
+    @Override
+    public void initialize() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

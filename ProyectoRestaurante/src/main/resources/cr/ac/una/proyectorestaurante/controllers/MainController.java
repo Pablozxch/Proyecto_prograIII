@@ -11,8 +11,13 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 
 /**
  * FXML Controller class
@@ -24,9 +29,25 @@ public class MainController extends Controller implements Initializable {
     @FXML
     private AnchorPane root;
     @FXML
-    private JFXButton btnRegistrar;
+    private JFXButton btnBuscar;
     @FXML
-    private JFXButton btnEntrar;
+    private Label lblNombreRes;
+    @FXML
+    private ImageView imgRes;
+    @FXML
+    private JFXButton btnEditar;
+    @FXML
+    private JFXButton btnContinuar;
+    @FXML
+    private JFXButton btnEliminar;
+    @FXML
+    private JFXButton btnAgregarRestaurante;
+    @FXML
+    private ScrollPane scroll;
+    @FXML
+    private GridPane grid;
+    @FXML
+    private TextField txtBuscar;
 
     /**
      * Initializes the controller class.
