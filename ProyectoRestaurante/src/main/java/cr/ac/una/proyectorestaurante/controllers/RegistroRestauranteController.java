@@ -18,7 +18,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.stage.*;
 
@@ -87,7 +87,63 @@ public class RegistroRestauranteController extends Controller implements Initial
         }
         if(event.getSource() == btnContinuar)
         {
+            String nombre, detalle, correo, direccion;
+            if(!txtNombre.getText().isBlank())
+            {
+                nombre = txtNombre.getText();
+                if(!txtCorreo.getText().isBlank())
+                {
+                    if(txtCorreo.getText().contains("@"))
+                    {
+                        correo = txtCorreo.getText();
+                        if(!txtDetalle.getText().isBlank())
+                        {
+                            if(txtDetalle.getText().length() <= 50)
+                            {
+                                detalle = txtDetalle.getText();
+                                if(!txtDreccion.getText().isBlank())
+                                {
+                                    if(txtDreccion.getText().length() <= 50)
+                                    {
+                                        direccion = txtDreccion.getText();
 
+                                    }
+                                    else
+                                    {
+                                        new Mensaje().show(Alert.AlertType.WARNING , "Error en los Datos ingresador" , "Direccion No Valido, excede caracteres");
+                                    }
+                                }
+                                else
+                                {
+                                    new Mensaje().show(Alert.AlertType.WARNING , "Error en los Datos ingresador" , "Direccion No Ingresdo");
+                                }
+                            }
+                            else
+                            {
+                                new Mensaje().show(Alert.AlertType.WARNING , "Error en los Datos ingresador" , "Detalle No Valido, excede caracteres");
+                            }
+                        }
+                        else
+                        {
+                            new Mensaje().show(Alert.AlertType.WARNING , "Error en los Datos ingresador" , "Detalle No Ingresdo");
+                        }
+                    }
+                    else
+                    {
+                        new Mensaje().show(Alert.AlertType.WARNING , "Error en los Datos ingresador" , "Correo No Valido");
+                    }
+
+                }
+                else
+                {
+                    new Mensaje().show(Alert.AlertType.WARNING , "Error en los Datos ingresador" , "Correo No Digitado");
+                }
+
+            }
+            else
+            {
+                new Mensaje().show(Alert.AlertType.WARNING , "Error en los Datos ingresador" , "Nombre No Nigitado");
+            }
         }
     }
 

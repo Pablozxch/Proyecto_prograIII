@@ -140,6 +140,7 @@ public class MainController extends Controller implements Initializable
         lblNombreRes.setText(res.getNombre());
         Image img2 = new Image(new ByteArrayInputStream(res.getFoto()));//crea un objeto imagen, transforma el byte[] a un buffered imagen
         imgRes.setImage(img2);
+        AppContext.getInstance().set("Restaurante" , res);
         idRes = res.getId();
     }
 
@@ -164,9 +165,9 @@ public class MainController extends Controller implements Initializable
         }
         if(event.getSource() == btnEliminar)
         {
-            System.out.println("El restaurante a eliminar es " + idRes);
-            restauranteService.eliminarRestaurante(idRes);
-            
+            RestauranteDto res = (RestauranteDto) AppContext.getInstance().get("Restaurante");
+            restauranteService.eliminarRestaurante(res.getId());
+
         }
     }
 
