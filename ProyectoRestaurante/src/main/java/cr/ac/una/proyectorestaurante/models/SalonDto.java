@@ -11,15 +11,16 @@ import javafx.beans.property.*;
  *
  * @author jp015
  */
-class SalonDto
+public class SalonDto
 {
 
     private SimpleStringProperty id;
     private SimpleStringProperty nombre;
-    private SimpleObjectProperty<byte[]> foto;
-    private Boolean modificado;
-    private SimpleObjectProperty<RestauranteDto> res;
+    private ObjectProperty<byte[]> foto;
     private SimpleStringProperty barraMesa;
+    private ObjectProperty<RestauranteDto> resid;
+
+    private Boolean modificado;
 
     public SalonDto()
     {
@@ -28,7 +29,7 @@ class SalonDto
         this.nombre = new SimpleStringProperty();
         this.foto = new SimpleObjectProperty();
         this.barraMesa = new SimpleStringProperty();
-        this.res = new SimpleObjectProperty();
+        this.resid = new SimpleObjectProperty();
     }
 
     public Long getId()
@@ -88,27 +89,22 @@ class SalonDto
         this.barraMesa.set(barraMesa);
     }
 
-    public RestauranteDto getRes()
+     public RestauranteDto getResid()
     {
-        return res.get();
+        return resid.get();
     }
 
-    public void setRes(RestauranteDto res)
+    public void setResid(RestauranteDto resid)
     {
-        this.res.set(res);
+        this.resid.set(resid);
     }
 
     @Override
     public String toString()
     {
-        StringBuilder sb = new StringBuilder();
-        sb.append("SalonDto{id=").append(id);
-        sb.append(", nombre=").append(nombre);
-        sb.append(", foto=").append(foto);
-        sb.append(", res=").append(res);
-        sb.append(", barraMesa=").append(barraMesa);
-        sb.append('}');
-        return sb.toString();
+        return "SalonDto{" + "id=" + id + ", nombre=" + nombre + ", foto=" + foto + ", modificado=" + modificado + ", resid=" + resid.toString() + ", barraMesa=" + barraMesa + '}';
     }
+
+
 
 }

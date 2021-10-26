@@ -5,8 +5,7 @@
  */
 package cr.ac.una.wsrestuna.services;
 
-import cr.ac.una.wsrestuna.models.SalonDto;
-import cr.ac.una.wsrestuna.models.Salon;
+import cr.ac.una.wsrestuna.models.*;
 import cr.ac.una.wsrestuna.utils.*;
 import java.util.*;
 import java.util.logging.*;
@@ -34,7 +33,6 @@ public class SalonService
             Query qrySalon = em.createNamedQuery("Salon.findBySalId" , Salon.class);
             qrySalon.setParameter("salId" , salId);
             SalonDto salDto = new SalonDto((Salon) qrySalon.getSingleResult());
-            System.out.println(" asdasd" + salDto.toString());
             return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "" , "Salon" , salDto);
 
         }
@@ -64,9 +62,7 @@ public class SalonService
             List<SalonDto> salonesDto = new ArrayList<>();
             salones.forEach(salon ->
             {
-                SalonDto saldto = new SalonDto(salon);
-                System.out.println("Los valores de los salones son"+saldto.toString());
-                salonesDto.add(saldto);
+                salonesDto.add(new SalonDto(salon));
             });
 
             return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "" , "Salones" , salonesDto);

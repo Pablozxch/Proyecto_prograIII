@@ -23,15 +23,13 @@ import javafx.scene.input.*;
 public class RestauranteController extends Controller implements Initializable
 {
 
+    @FXML
     private Label lblNombreRes;
+    @FXML
     private ImageView imgRest;
 
     private RestauranteDto restauranteDto;
     private MyListenerRes myListener;
-    @FXML
-    private Label lblNombreSalon;
-    @FXML
-    private ImageView imgSalon;
 
     /**
      * Initializes the controller class.
@@ -51,6 +49,7 @@ public class RestauranteController extends Controller implements Initializable
         Image img2 = new Image(new ByteArrayInputStream(restauranteDto.getFoto()));//crea un objeto imagen, transforma el byte[] a un buffered imagen
         imgRest.setImage(img2);
     }
+
     @Override
     public void initialize()
     {
@@ -60,7 +59,6 @@ public class RestauranteController extends Controller implements Initializable
     @FXML
     private void click(MouseEvent event)
     {
-          System.out.println("Hello World! (controllerButton)");
         myListener.onClickListener(restauranteDto);
     }
 

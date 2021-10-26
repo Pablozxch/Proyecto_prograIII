@@ -21,10 +21,10 @@ import javax.ws.rs.core.*;
 @Path("/SalonController")
 public class SalonController
 {
-
+    
     @EJB
     SalonService salonService;
-
+    
     @GET
     @Path("/ping")
     public Response ping()
@@ -33,7 +33,7 @@ public class SalonController
                   .ok("ping Salon")
                   .build();
     }
-
+    
     @GET
     @Path("/salon/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -47,6 +47,7 @@ public class SalonController
             {
                 return Response.status(res.getCodigoRespuesta().getValue()).entity(res.getMensaje()).build();
             }
+            SalonDto sal=(SalonDto) res.getResultado("Salon");
             return Response.ok((SalonDto) res.getResultado("Salon")).build();//TODO
         }
         catch(Exception ex)
@@ -55,13 +56,14 @@ public class SalonController
             return Response.status(CodigoRespuesta.ERROR_INTERNO.getValue()).entity("Error al obtener el salon ").build();//TODO
         }
     }
-
+    
     @GET
     @Path("/salon")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getSalones()
     {
+        System.out.println("Buenos dias");
         try
         {
             Respuesta res = salonService.getSalones();
@@ -69,7 +71,12 @@ public class SalonController
             {
                 return Response.status(res.getCodigoRespuesta().getValue()).entity(res.getMensaje()).build();//TODO
             }
-
+            
+            List<SalonDto> s = (List<SalonDto>) res.getResultado("Salones");
+            s.forEach(t ->
+            {
+                System.out.println("El valor es " + t.toString());
+            });
             return Response.ok(new GenericEntity<List<SalonDto>>((List<SalonDto>) res.getResultado("Salones"))
             {
             }).build();

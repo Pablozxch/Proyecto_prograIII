@@ -57,7 +57,7 @@ public class Salon implements Serializable
     @Version
     @Column(name = "SAL_VERSION")
     private Long salVersion;
-    @JoinColumn(name = "RES_ID" , referencedColumnName = "RES_ID")
+    @JoinColumn(name = "RES_ID" , referencedColumnName = "RES_ID", nullable = false)
     @ManyToOne(optional = false , fetch = FetchType.LAZY)
     private Restaurante resId;
     @OneToMany(cascade = CascadeType.ALL , mappedBy = "salId" , fetch = FetchType.LAZY)
