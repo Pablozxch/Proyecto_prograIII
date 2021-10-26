@@ -55,7 +55,7 @@ public class MainController extends Controller implements Initializable
      * Initializes the controller class.
      */
 
-    private MyListenerRes myListenerRess;
+    private MyListenerItem myListenerRess;
     RestauranteService restauranteService = new RestauranteService();
     RestauranteDto restauranteDto = new RestauranteDto();
     private static List<RestauranteDto> restaurantes = new ArrayList<>();
@@ -70,7 +70,7 @@ public class MainController extends Controller implements Initializable
         if(restaurantes.size() > 0)
         {
             setResSelect(restaurantes.get(0));
-            myListenerRess = new MyListenerRes()
+            myListenerRess = new MyListenerItem()
             {
                 @Override
                 public void onClickListener(RestauranteDto res)
@@ -101,7 +101,7 @@ public class MainController extends Controller implements Initializable
                     }
                 }
 
-                RestauranteController itemrest = fxmlLoader.getController();
+                ItemController itemrest = fxmlLoader.getController();
                 itemrest.setData(restaurantes.get(i) , myListenerRess);
                 if(column == 3)
                 {

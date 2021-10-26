@@ -56,6 +56,7 @@ and open the template in the editor.
     -fx-text-fill: white;
     -fx-font-weight: bold; 
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 2, 0.0, 1, 2);
+    -fx-background-radius: 30;
 }
 .table-view{
     -fx-background-color: D6E0F0;
@@ -115,4 +116,18 @@ and open the template in the editor.
 
 .text-area{
     -fx-background-color: #D6E0F0;
+}
+.scrollpane
+{
+    -fx-background-color: rgba(0,0,0,0);
+    -fx-background-radius: 50;
+}
+.item
+{
+    -fx-background-color: #4D4A68;
+    -fx-background-radius: 30;
+}
+.barra-derecha
+{
+    -fx-background-color: #4F6784;
 }

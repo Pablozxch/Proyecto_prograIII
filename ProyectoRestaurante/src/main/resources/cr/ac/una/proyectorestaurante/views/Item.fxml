@@ -7,20 +7,20 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" onMouseClicked="#click" prefHeight="215.0" prefWidth="225.0" styleClass="AnchorPane" stylesheets="@../styles/StyleDecoCSS.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.proyectorestaurante.controllers.SalonController">
+<AnchorPane id="AnchorPane" onMouseClicked="#click" prefHeight="215.0" prefWidth="225.0" styleClass="AnchorPane" stylesheets="@../styles/StyleDecoCSS.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.proyectorestaurante.controllers.ItemController">
    <children>
       <VBox alignment="CENTER" prefHeight="215.0" prefWidth="225.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="52.0" prefWidth="225.0">
                <children>
-                  <Label fx:id="lblNombreSalon" alignment="CENTER" contentDisplay="CENTER" prefHeight="103.0" prefWidth="225.0" text="Nombre del Salón" textAlignment="CENTER">
+                  <Label fx:id="lblNombreItem" alignment="CENTER" contentDisplay="CENTER" prefHeight="56.0" prefWidth="225.0" text="Nombre del Item" textAlignment="CENTER">
                      <font>
                         <Font size="19.0" />
                      </font>
                   </Label>
                </children>
             </HBox>
-            <ImageView fx:id="imgSalon" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgItem" fitHeight="125.0" fitWidth="179.0" pickOnBounds="true" />
          </children>
       </VBox>
    </children>

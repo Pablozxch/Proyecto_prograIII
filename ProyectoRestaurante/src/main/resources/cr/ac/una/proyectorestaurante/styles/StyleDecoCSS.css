@@ -10,6 +10,11 @@ and open the template in the editor.
 
 .AnchorPane{
     -fx-background-color: #F1F3F8;
+
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1), 10.0 , 0.0 , 0.0 ,10.0);
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 30;
+
 }
 .label
 {

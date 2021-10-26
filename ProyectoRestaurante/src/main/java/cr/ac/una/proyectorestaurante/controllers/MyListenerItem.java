@@ -11,7 +11,7 @@ import cr.ac.una.proyectorestaurante.models.*;
  *
  * @author jp015
  */
-public interface MyListenerRes
+public interface MyListenerItem
 {
-     public void onClickListener(RestauranteDto restauranteDto);
+     public void onClickListener(Object item);
 }

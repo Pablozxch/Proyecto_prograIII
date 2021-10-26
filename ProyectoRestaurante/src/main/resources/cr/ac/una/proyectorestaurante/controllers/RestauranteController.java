@@ -21,7 +21,7 @@ import javafx.scene.input.MouseEvent;
  *
  * @author Christopher
  */
-public class RestauranteController extends Controller implements Initializable {
+public class ItemController extends Controller implements Initializable {
 
 
     @FXML

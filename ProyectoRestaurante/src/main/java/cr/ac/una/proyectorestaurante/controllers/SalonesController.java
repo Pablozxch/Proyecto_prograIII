@@ -29,26 +29,30 @@ public class SalonesController extends Controller implements Initializable
 {
 
     @FXML
-    private JFXButton btnCrear;
-    @FXML
-    private JFXButton btnEditar;
-    @FXML
-    private JFXButton btnEliminar;
+    private JFXButton btnAgregarSalon;
     @FXML
     private ScrollPane scroll;
     @FXML
     private GridPane grid;
     @FXML
+    private TextField txtBuscar;
+    @FXML
+    private JFXButton btnBuscar;
+    @FXML
+    private Label lblNombreSalon;
+    @FXML
+    private JFXButton btnEditar;
+    @FXML
     private JFXButton btnContinuar;
     @FXML
-    private Label lblNombreSal;
+    private JFXButton btnEliminar;
     @FXML
     private ImageView imgSal;
     /**
      * Initializes the controller class.
      */
 
-    private MyListenerSal myListenerSal;
+    private MyListenerItem myListener;
     SalonService salonService = new SalonService();
     SalonDto salonDto = new SalonDto();
     private static List<SalonDto> salones = new ArrayList<>();
@@ -61,7 +65,7 @@ public class SalonesController extends Controller implements Initializable
 
     public void setSalSelect(SalonDto sal)
     {
-        lblNombreSal.setText(sal.getNombre());
+        lblNombreSalon.setText(sal.getNombre());
         Image img2 = new Image(new ByteArrayInputStream(sal.getFoto()));//crea un objeto imagen, transforma el byte[] a un buffered imagen
         imgSal.setImage(img2);
         AppContext.getInstance().set("Salon" , sal);
@@ -74,12 +78,12 @@ public class SalonesController extends Controller implements Initializable
         if(salones.size() > 0)
         {
             setSalSelect(salones.get(0));
-            myListenerSal = new MyListenerSal()
+            myListener = new MyListenerItem()
             {
                 @Override
-                public void onClickListener(SalonDto sal)
+                public void onClickListener(Object sal)
                 {
-                    setSalSelect(sal);
+                    setSalSelect((SalonDto) sal);
                     //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                 }
             };
@@ -93,7 +97,7 @@ public class SalonesController extends Controller implements Initializable
             for(int i = 0; i < salones.size(); i++)
             {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/cr/ac/una/proyectorestaurante/views/Salon.fxml"));
+                fxmlLoader.setLocation(getClass().getResource("/cr/ac/una/proyectorestaurante/views/Item.fxml"));
                 AnchorPane anchorPane = fxmlLoader.load();
                 name1 = salones.get(i).getNombre();
                 if(i + 1 < salones.size())
@@ -105,8 +109,8 @@ public class SalonesController extends Controller implements Initializable
                     }
                 }
 
-                SalonController itemrest = fxmlLoader.getController();
-                itemrest.setData(salones.get(i) , myListenerSal);
+                ItemController itemcontroller = fxmlLoader.getController();
+                itemcontroller.setData(salones.get(i) , myListener);
                 if(column == 3)
                 {
                     column = 0;
