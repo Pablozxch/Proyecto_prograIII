@@ -139,7 +139,7 @@ public class SalonesController extends Controller implements Initializable
     @FXML
     private void click(ActionEvent event)
     {
-        if(event.getSource() == btnCrear)
+        if(event.getSource() == btnAgregarSalon)
         {
 
         }

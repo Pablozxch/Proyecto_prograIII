@@ -17,6 +17,7 @@ import javafx.fxml.*;
 import javafx.geometry.*;
 
 import javafx.scene.control.*;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.image.*;
 import javafx.scene.layout.*;
 import javafx.stage.*;
@@ -31,8 +32,6 @@ public class MainController extends Controller implements Initializable
 
     @FXML
     private AnchorPane root;
-    @FXML
-    private TextField TextF_DeporteBuscar;
     @FXML
     private JFXButton btnBuscar;
     @FXML
@@ -51,6 +50,8 @@ public class MainController extends Controller implements Initializable
     private Label lblNombreRes;
     @FXML
     private ImageView imgRes;
+    @FXML
+    private TextField txtBuscar;
     /**
      * Initializes the controller class.
      */
@@ -59,10 +60,14 @@ public class MainController extends Controller implements Initializable
     RestauranteService restauranteService = new RestauranteService();
     RestauranteDto restauranteDto = new RestauranteDto();
     private static List<RestauranteDto> restaurantes = new ArrayList<>();
-    private Long idRes;
 
     @Override
     public void initialize(URL url , ResourceBundle rb)
+    {
+        loadItems();
+    }
+
+    public void loadItems()
     {
         Respuesta respuesta = restauranteService.getRestaurantes();
         restaurantes = (List<RestauranteDto>) respuesta.getResultado("Restaurantes");
@@ -73,9 +78,9 @@ public class MainController extends Controller implements Initializable
             myListenerRess = new MyListenerItem()
             {
                 @Override
-                public void onClickListener(RestauranteDto res)
+                public void onClickListener(Object res)
                 {
-                    setResSelect(res);
+                    setResSelect((RestauranteDto) res);
                     //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                 }
             };
@@ -89,7 +94,7 @@ public class MainController extends Controller implements Initializable
             for(int i = 0; i < restaurantes.size(); i++)
             {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/cr/ac/una/proyectorestaurante/views/Restaurante.fxml"));
+                fxmlLoader.setLocation(getClass().getResource("/cr/ac/una/proyectorestaurante/views/Item.fxml"));
                 AnchorPane anchorPane = fxmlLoader.load();
                 name1 = restaurantes.get(i).getNombre();
                 if(i + 1 < restaurantes.size())
@@ -126,12 +131,6 @@ public class MainController extends Controller implements Initializable
         {
             e.printStackTrace();
         }
-
-    }
-
-    public void creacionEspacios()
-    {
-
     }
 
     public void setResSelect(RestauranteDto res)
@@ -141,7 +140,6 @@ public class MainController extends Controller implements Initializable
         Image img2 = new Image(new ByteArrayInputStream(res.getFoto()));//crea un objeto imagen, transforma el byte[] a un buffered imagen
         imgRes.setImage(img2);
         AppContext.getInstance().set("Restaurante" , res);
-        idRes = res.getId();
     }
 
     @FXML
@@ -158,6 +156,9 @@ public class MainController extends Controller implements Initializable
         if(event.getSource() == btnContinuar)
         {
 
+            FlowController.getInstance().goViewInStage("Principal" , (Stage) btnContinuar.getScene().getWindow());
+            Stage s = (Stage) btnContinuar.getScene().getWindow();
+            s.close();
         }
         if(event.getSource() == btnEditar)
         {

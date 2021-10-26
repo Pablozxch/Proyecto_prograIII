@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import javafx.scene.image.*;
 
 /**
  * JavaFX App
@@ -21,7 +22,7 @@ public class App extends Application
     public void start(Stage stage) throws IOException
     {
         FlowController.getInstance().InitializeFlow(stage , null);
-//        stage.getIcons().add(new Image("/cr/ac/una/tareaprogra3/resources/Icono.jpg"));
+        stage.getIcons().add(new Image(App.class.getResourceAsStream("/cr/ac/una/proyectorestaurante/resources/icon.png")));
         stage.setTitle("Restaurante");
         FlowController.getInstance().goMain();
     }

@@ -9,6 +9,10 @@ and open the template in the editor.
 */
 .fondo
 {
+    -fx-background-color: #4F6784;
+}
+.fondo2
+{
     -fx-background-color: #364F6B;
 }
 .button
