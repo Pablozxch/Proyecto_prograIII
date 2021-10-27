@@ -5,6 +5,7 @@
  */
 package cr.ac.una.proyectorestaurante.utils;
 
+import animatefx.animation.*;
 import cr.ac.una.proyectorestaurante.App;
 import cr.ac.una.proyectorestaurante.controllers.Controller;
 import java.io.IOException;
@@ -21,6 +22,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.util.*;
 
 public class FlowController
 {
@@ -102,6 +104,8 @@ public class FlowController
         try
         {
             this.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("/cr/ac/una/proyectorestaurante/views/Main.fxml") , this.idioma)));
+            mainStage.setMinHeight(830);
+            mainStage.setMinWidth(1345);
             this.mainStage.show();
         }
         catch(IOException ex)
@@ -137,6 +141,36 @@ public class FlowController
             case "Center":
                 ((VBox) ((BorderPane) stage.getScene().getRoot()).getCenter()).getChildren().clear();
                 ((VBox) ((BorderPane) stage.getScene().getRoot()).getCenter()).getChildren().add(loader.getRoot());
+                int num = (int) (Math.random() * 9 + 1);
+                switch(num)
+                {
+                    case 1:
+                        new BounceInUp((VBox) ((BorderPane) stage.getScene().getRoot()).getCenter()).setCycleCount(1).play();
+                        break;
+                    case 2:
+                        new BounceInDown((VBox) ((BorderPane) stage.getScene().getRoot()).getCenter()).setCycleCount(1).play();
+                        break;
+                    case 3:
+                        new BounceInLeft((VBox) ((BorderPane) stage.getScene().getRoot()).getCenter()).setCycleCount(1).play();
+                        break;
+                    case 4:
+                        new BounceInRight((VBox) ((BorderPane) stage.getScene().getRoot()).getCenter()).setCycleCount(1).play();
+                        break;
+                    case 5:
+                        new SlideInUp((VBox) ((BorderPane) stage.getScene().getRoot()).getCenter()).setCycleCount(1).play();
+                        break;
+                    case 6:
+                        new SlideInDown((VBox) ((BorderPane) stage.getScene().getRoot()).getCenter()).setCycleCount(1).play();
+                        break;
+                    case 7:
+                        new SlideInLeft((VBox) ((BorderPane) stage.getScene().getRoot()).getCenter()).setCycleCount(1).play();
+                        break;
+                    case 8:
+                        new SlideInRight((VBox) ((BorderPane) stage.getScene().getRoot()).getCenter()).setCycleCount(1).play();
+                        break;
+
+                }
+
                 break;
             case "Top":
                 break;
@@ -165,7 +199,7 @@ public class FlowController
         Controller controller = loader.getController();
         controller.initialize();
         Stage stage = new Stage();
-        //stage.getIcons().add(new Image(App.class.getResourceAsStream("/cr/ac/una/unaplanilla/resources/Usuario-48.png")));
+        stage.getIcons().add(new Image(App.class.getResourceAsStream("/cr/ac/una/proyectorestaurante/resources/icon.png")));
         stage.setTitle("Restaurante");
         stage.setOnHidden((WindowEvent event) ->
         {
@@ -191,7 +225,7 @@ public class FlowController
         Controller controller = loader.getController();
         controller.initialize();
         Stage stage = new Stage();
-        //stage.getIcons().add(new Image(App.class.getResourceAsStream("/cr/ac/una/proyectorestaurante/resources/Usuario-48.png")));
+        stage.getIcons().add(new Image(App.class.getResourceAsStream("/cr/ac/una/proyectorestaurante/resources/icon.png")));
         stage.setTitle("Restaurante");
         stage.setResizable(resizable);
         stage.setOnHidden((WindowEvent event) ->
