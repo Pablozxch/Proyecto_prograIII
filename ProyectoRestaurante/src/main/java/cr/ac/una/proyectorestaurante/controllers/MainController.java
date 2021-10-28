@@ -12,6 +12,7 @@ import cr.ac.una.proyectorestaurante.utils.*;
 import java.io.*;
 import java.net.URL;
 import java.util.*;
+import java.util.stream.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.geometry.*;
@@ -59,18 +60,35 @@ public class MainController extends Controller implements Initializable
     private MyListenerItem myListenerRess;
     RestauranteService restauranteService = new RestauranteService();
     RestauranteDto restauranteDto = new RestauranteDto();
-    private static List<RestauranteDto> restaurantes = new ArrayList<>();
+    private List<RestauranteDto> restaurantes = new ArrayList<>();
+    @FXML
+    private BorderPane root2;
 
     @Override
     public void initialize(URL url , ResourceBundle rb)
     {
-        loadItems();
+        loadItems("aux");
     }
 
-    public void loadItems()
+    public void loadItems(String name)
     {
-        Respuesta respuesta = restauranteService.getRestaurantes();
-        restaurantes = (List<RestauranteDto>) respuesta.getResultado("Restaurantes");
+        if(!"aux".equals(name))
+        {
+            Respuesta respuesta = restauranteService.getRestaurantes();
+            List<RestauranteDto> aux = (List<RestauranteDto>) respuesta.getResultado("Restaurantes");
+            restaurantes = aux.stream().filter(t -> t.getNombre().toUpperCase().contains(name.toUpperCase())).collect(Collectors.toList());
+
+            restaurantes.forEach(t ->
+            {
+                System.out.println("Metodo buscar");
+                t.toString();
+            });
+        }
+        else
+        {
+            Respuesta respuesta = restauranteService.getRestaurantes();
+            restaurantes = (List<RestauranteDto>) respuesta.getResultado("Restaurantes");
+        }
 
         if(restaurantes.size() > 0)
         {
@@ -135,7 +153,6 @@ public class MainController extends Controller implements Initializable
 
     public void setResSelect(RestauranteDto res)
     {
-        System.out.println("Nasd");
         lblNombreRes.setText(res.getNombre());
         Image img2 = new Image(new ByteArrayInputStream(res.getFoto()));//crea un objeto imagen, transforma el byte[] a un buffered imagen
         imgRes.setImage(img2);
@@ -151,7 +168,15 @@ public class MainController extends Controller implements Initializable
         }
         if(event.getSource() == btnBuscar)
         {
-
+            if(!txtBuscar.getText().isBlank() || !txtBuscar.getText().isEmpty())
+            {
+                grid.getChildren().clear();
+                loadItems(txtBuscar.getText());
+            }
+            else
+            {
+                loadItems("aux");
+            }
         }
         if(event.getSource() == btnContinuar)
         {
@@ -166,6 +191,7 @@ public class MainController extends Controller implements Initializable
         }
         if(event.getSource() == btnEliminar)
         {
+
             RestauranteDto res = (RestauranteDto) AppContext.getInstance().get("Restaurante");
             restauranteService.eliminarRestaurante(res.getId());
 

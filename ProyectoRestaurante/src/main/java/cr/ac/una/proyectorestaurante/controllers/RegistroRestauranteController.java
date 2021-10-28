@@ -50,13 +50,33 @@ public class RegistroRestauranteController extends Controller implements Initial
      * Initializes the controller class.
      */
     File x;
-    RestauranteDto empleadoClienteDto = new RestauranteDto();
+    RestauranteDto restauranteDto = new RestauranteDto();
     RestauranteService service = new RestauranteService();
 
     @Override
     public void initialize(URL url , ResourceBundle rb)
     {
         // TODO
+
+    }
+
+    public void load()
+    {
+        restauranteDto = (RestauranteDto) AppContext.getInstance().get("Restaurante");
+        if(restauranteDto != null)
+        {
+            bindRestaurante();
+        }
+    }
+
+    public void bindRestaurante()
+    {
+        txtNombre.setText(restauranteDto.getNombre());
+        txtDetalle.setText(restauranteDto.getDetalle());
+        Image img2 = new Image(new ByteArrayInputStream(restauranteDto.getFoto()));//crea un objeto imagen, transforma el byte[] a un buffered imagen
+        imvImagen.setImage(img2);
+        txtCorreo.setText(restauranteDto.getCorreo());
+        txtDreccion.setText(restauranteDto.getDireccion());
     }
 
     @FXML
@@ -105,7 +125,7 @@ public class RegistroRestauranteController extends Controller implements Initial
                                     if(txtCorreo.getText().contains("@"))
                                     {
                                         correo = txtCorreo.getText();
-
+                                        System.out.println("Se procede a guardar los datos correctamente ");
                                     }
                                     else
                                     {
@@ -149,6 +169,7 @@ public class RegistroRestauranteController extends Controller implements Initial
     @Override
     public void initialize()
     {
+        load();
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

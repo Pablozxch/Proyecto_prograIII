@@ -45,7 +45,6 @@ public class ItemController extends Controller implements Initializable
     {
         if(object.getClass() == RestauranteDto.class)
         {
-            System.out.println("Restaurantes");
             this.restauranteDto = ((RestauranteDto) object);
             lblNombreItem.setText(((RestauranteDto) object).getNombre());
             Image img2 = new Image(new ByteArrayInputStream(((RestauranteDto) object).getFoto()));//crea un objeto imagen, transforma el byte[] a un buffered imagen
@@ -53,10 +52,16 @@ public class ItemController extends Controller implements Initializable
         }
         if(object.getClass() == SalonDto.class)
         {
-            System.out.println("Salones");
             this.salonDto = ((SalonDto) object);
             lblNombreItem.setText(((SalonDto) object).getNombre());
             Image img2 = new Image(new ByteArrayInputStream(((SalonDto) object).getFoto()));//crea un objeto imagen, transforma el byte[] a un buffered imagen
+            imgItem.setImage(img2);
+        }
+        if(object.getClass() == ProductoDto.class)
+        {
+            this.productoDto = ((ProductoDto) object);
+            lblNombreItem.setText(((ProductoDto) object).getNombre());
+            Image img2 = new Image(new ByteArrayInputStream(((ProductoDto) object).getFoto()));//crea un objeto imagen, transforma el byte[] a un buffered imagen
             imgItem.setImage(img2);
         }
         this.myListener = myListener;
