@@ -164,6 +164,7 @@ public class MainController extends Controller implements Initializable
     {
         if(event.getSource() == btnAgregarRestaurante)
         {
+            System.out.println("Agregeando Restaurante");
             FlowController.getInstance().goViewInWindowModal("RegistroRestaurante" , (Stage) btnAgregarRestaurante.getScene().getWindow() , false);
         }
         if(event.getSource() == btnBuscar)
@@ -181,18 +182,23 @@ public class MainController extends Controller implements Initializable
         if(event.getSource() == btnContinuar)
         {
 
-            FlowController.getInstance().goViewInStage("Principal" , (Stage) btnContinuar.getScene().getWindow());            
+            FlowController.getInstance().goViewInStage("Principal" , (Stage) btnContinuar.getScene().getWindow());
         }
         if(event.getSource() == btnEditar)
         {
-            FlowController.getInstance().goViewInWindowModal("RegistroRestaurante" , (Stage) btnAgregarRestaurante.getScene().getWindow() , false);
+            RegistroRestauranteController registroRestauranteController = (RegistroRestauranteController) FlowController.getInstance().getController("RegistroRestaurante");
+            registroRestauranteController.load();
+            FlowController.getInstance().goViewInWindowModal("RegistroRestaurante" , (Stage) btnContinuar.getScene().getWindow() , false);
+            registroRestauranteController.unbinRestaurante();
+
         }
         if(event.getSource() == btnEliminar)
         {
 
+//            AppContext.getInstance().delete("Restaurante"); NOTA PROBARLO DESPUES. QUE PEREZA 
             RestauranteDto res = (RestauranteDto) AppContext.getInstance().get("Restaurante");
             restauranteService.eliminarRestaurante(res.getId());
-
+            loadItems("aux");
         }
     }
 

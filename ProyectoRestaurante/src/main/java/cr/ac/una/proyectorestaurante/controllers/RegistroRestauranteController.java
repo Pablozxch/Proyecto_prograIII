@@ -14,12 +14,26 @@ import cr.ac.una.proyectorestaurante.utils.*;
 import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.stage.*;
+import java.io.*;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.event.*;
+import javafx.fxml.*;
+import javafx.scene.control.*;
+import javafx.scene.image.*;
+import javafx.stage.*;
+import java.awt.image.*;
+import java.time.*;
+import java.util.*;
+import java.util.logging.*;
+import javax.imageio.*;
 
 /**
  * FXML Controller class
@@ -51,7 +65,7 @@ public class RegistroRestauranteController extends Controller implements Initial
      */
     File x;
     RestauranteDto restauranteDto = new RestauranteDto();
-    RestauranteService service = new RestauranteService();
+    RestauranteService restauranteService = new RestauranteService();
 
     @Override
     public void initialize(URL url , ResourceBundle rb)
@@ -65,6 +79,7 @@ public class RegistroRestauranteController extends Controller implements Initial
         restauranteDto = (RestauranteDto) AppContext.getInstance().get("Restaurante");
         if(restauranteDto != null)
         {
+            unbinRestaurante();
             bindRestaurante();
         }
     }
@@ -77,6 +92,15 @@ public class RegistroRestauranteController extends Controller implements Initial
         imvImagen.setImage(img2);
         txtCorreo.setText(restauranteDto.getCorreo());
         txtDreccion.setText(restauranteDto.getDireccion());
+    }
+
+    public void unbinRestaurante()
+    {
+        txtNombre.clear();
+        txtDetalle.clear();
+        imvImagen.setImage(null);
+        txtCorreo.clear();
+        txtDreccion.clear();
     }
 
     @FXML
@@ -107,6 +131,7 @@ public class RegistroRestauranteController extends Controller implements Initial
         if(event.getSource() == btnContinuar)
         {
             String nombre, detalle, correo, direccion;
+            Long impV, impS;
             if(!txtNombre.getText().isBlank())
             {
                 nombre = txtNombre.getText();
@@ -125,7 +150,27 @@ public class RegistroRestauranteController extends Controller implements Initial
                                     if(txtCorreo.getText().contains("@"))
                                     {
                                         correo = txtCorreo.getText();
-                                        System.out.println("Se procede a guardar los datos correctamente ");
+                                        if(imvImagen.getImage() != null || x != null)
+                                        {
+                                            restauranteDto.setNombre(nombre);
+                                            restauranteDto.setDetalle(detalle);
+                                            restauranteDto.setCorreo(correo);
+                                            restauranteDto.setDireccion(direccion);
+//                                            restauranteDto.setImpServ(impS);
+//                                            restauranteDto.setImpVen(impS);
+                                            BufferedImage bufferimage;
+                                            bufferimage = ImageIO.read(x);
+                                            ByteArrayOutputStream output = new ByteArrayOutputStream();
+                                            ImageIO.write(bufferimage , "jpg" , output);
+                                            byte[] data = output.toByteArray();
+                                            restauranteDto.setFoto(data);
+                                            restauranteService.guardarRestaurante(restauranteDto);
+                                            System.out.println("Se procede a guardar correctamente");
+                                        }
+                                        else
+                                        {
+                                            new Mensaje().show(Alert.AlertType.WARNING , "Error en los Datos ingresador" , "Problemas con la imagen");
+                                        }
                                     }
                                     else
                                     {
@@ -169,7 +214,6 @@ public class RegistroRestauranteController extends Controller implements Initial
     @Override
     public void initialize()
     {
-        load();
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
