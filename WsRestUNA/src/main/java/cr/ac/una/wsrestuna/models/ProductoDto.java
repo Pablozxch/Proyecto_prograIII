@@ -1,4 +1,3 @@
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,6 +14,7 @@ public class ProductoDto
 
     private Long id;
     private String nombre;
+    private String nombrecorto;
     private String detalle;
     private byte[] foto;
     private Long costo;
@@ -22,11 +22,11 @@ public class ProductoDto
     private String accesoRapido;
     private Long cantidadV;
     private Boolean modificado;
+    private RestauranteDto restauranteDto;
 
     public ProductoDto()
     {
         this.modificado = false;
-
     }
 
     public ProductoDto(Producto producto)
@@ -34,12 +34,14 @@ public class ProductoDto
         this();
         this.id = producto.getProId();
         this.nombre = producto.getProNombre();
+        this.nombrecorto = producto.getProNombrecorto();
         this.detalle = producto.getProDetalle();
         this.foto = producto.getProFoto();
         this.costo = producto.getProCosto();
         this.cantidad = producto.getProCantidad();
         this.accesoRapido = producto.getProAccesoRapido();
         this.cantidadV = producto.getProCantidadv();
+        this.restauranteDto = new RestauranteDto(producto.getResId());
     }
 
     public Long getId()
@@ -60,6 +62,16 @@ public class ProductoDto
     public void setNombre(String nombre)
     {
         this.nombre = nombre;
+    }
+
+    public String getNombrecorto()
+    {
+        return nombrecorto;
+    }
+
+    public void setNombrecorto(String nombrecorto)
+    {
+        this.nombrecorto = nombrecorto;
     }
 
     public String getDetalle()
@@ -102,14 +114,14 @@ public class ProductoDto
         this.cantidad = cantidad;
     }
 
-    public Boolean getModificado()
+    public String getAccesoRapido()
     {
-        return modificado;
+        return accesoRapido;
     }
 
-    public void setModificado(Boolean modificado)
+    public void setAccesoRapido(String accesoRapido)
     {
-        this.modificado = modificado;
+        this.accesoRapido = accesoRapido;
     }
 
     public Long getCantidadV()
@@ -122,14 +134,24 @@ public class ProductoDto
         this.cantidadV = cantidadV;
     }
 
-    public String getAccesoRapido()
+    public Boolean getModificado()
     {
-        return accesoRapido;
+        return modificado;
     }
 
-    public void setAccesoRapido(String accesoRapido)
+    public void setModificado(Boolean modificado)
     {
-        this.accesoRapido = accesoRapido;
+        this.modificado = modificado;
+    }
+
+    public RestauranteDto getRestauranteDto()
+    {
+        return restauranteDto;
+    }
+
+    public void setRestauranteDto(RestauranteDto restauranteDto)
+    {
+        this.restauranteDto = restauranteDto;
     }
 
     @Override
@@ -138,12 +160,14 @@ public class ProductoDto
         StringBuilder sb = new StringBuilder();
         sb.append("ProductoDto{id=").append(id);
         sb.append(", nombre=").append(nombre);
+        sb.append(", nombrecorto=").append(nombrecorto);
         sb.append(", detalle=").append(detalle);
         sb.append(", foto=").append(foto);
         sb.append(", costo=").append(costo);
         sb.append(", cantidad=").append(cantidad);
         sb.append(", accesoRapido=").append(accesoRapido);
         sb.append(", cantidadV=").append(cantidadV);
+        sb.append(", restauranteDto=").append(restauranteDto.toString());
         sb.append('}');
         return sb.toString();
     }

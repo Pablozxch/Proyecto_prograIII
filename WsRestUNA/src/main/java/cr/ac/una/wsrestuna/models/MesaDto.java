@@ -15,9 +15,9 @@ public class MesaDto
     private Long id;
     private String nombre;
     private String estado;
-    private Long posx;
-    private Long posy;
-    private SalonDto salon;
+    private Long posX;
+    private Long posY;
+    private SalonDto salonDto;
     private Boolean modificado;
 
     public MesaDto()
@@ -27,13 +27,12 @@ public class MesaDto
 
     public MesaDto(Mesa mesa)
     {
-        this();
-        this.id=mesa.getMesaId();
-        this.nombre=mesa.getMesaNombre();
-        this.estado=mesa.getMesaEstado();
-        this.posx=mesa.getMesaPosx();
-        this.posy=mesa.getMesaPosy();
-        this.salon=new SalonDto(mesa.getSalId());
+        this.id = mesa.getMesaId();
+        this.nombre = mesa.getMesaNombre();
+        this.estado = mesa.getMesaEstado();
+        this.posX = mesa.getMesaPosx();
+        this.posY = mesa.getMesaPosy();
+        this.salonDto = new SalonDto(mesa.getSalId());
     }
 
     public Long getId()
@@ -66,34 +65,34 @@ public class MesaDto
         this.estado = estado;
     }
 
-    public Long getPosx()
+    public Long getPosX()
     {
-        return posx;
+        return posX;
     }
 
-    public void setPosx(Long posx)
+    public void setPosX(Long posX)
     {
-        this.posx = posx;
+        this.posX = posX;
     }
 
-    public Long getPosy()
+    public Long getPosY()
     {
-        return posy;
+        return posY;
     }
 
-    public void setPosy(Long posy)
+    public void setPosY(Long posY)
     {
-        this.posy = posy;
+        this.posY = posY;
     }
 
-    public SalonDto getSalon()
+    public SalonDto getSalonDto()
     {
-        return salon;
+        return salonDto;
     }
 
-    public void setSalon(SalonDto salon)
+    public void setSalonDto(SalonDto salonDto)
     {
-        this.salon = salon;
+        this.salonDto = salonDto;
     }
 
     public Boolean getModificado()
@@ -105,5 +104,19 @@ public class MesaDto
     {
         this.modificado = modificado;
     }
-    
+
+    @Override
+    public String toString()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append("MesaDto{id=").append(id);
+        sb.append(", nombre=").append(nombre);
+        sb.append(", estado=").append(estado);
+        sb.append(", posX=").append(posX);
+        sb.append(", posY=").append(posY);
+        sb.append(", salonDto=").append(salonDto.toString());
+        sb.append('}');
+        return sb.toString();
+    }
+
 }

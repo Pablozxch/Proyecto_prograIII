@@ -92,7 +92,7 @@ public class CodigodescService
                 {
                     return new Respuesta(false , CodigoRespuesta.ERROR_NOENCONTRADO , "No se encrontró el codigodesc a modificar." , "guardarCodigodesc NoResultException");
                 }
-                codigodesc.actualizarCodigos(codigodescDto);
+                codigodesc.actualizarCodigodesc(codigodescDto);
                 codigodesc = em.merge(codigodesc);
             }
             else

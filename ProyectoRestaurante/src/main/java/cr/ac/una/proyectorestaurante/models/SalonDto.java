@@ -17,19 +17,18 @@ public class SalonDto
     private SimpleStringProperty id;
     private SimpleStringProperty nombre;
     private ObjectProperty<byte[]> foto;
-    private SimpleStringProperty barraMesa;
-    private ObjectProperty<RestauranteDto> resid;
-
     private Boolean modificado;
+    private SimpleStringProperty barraMesa;
+    private RestauranteDto restauranteDto;
 
     public SalonDto()
     {
-        this.modificado = false;
         this.id = new SimpleStringProperty();
         this.nombre = new SimpleStringProperty();
         this.foto = new SimpleObjectProperty();
         this.barraMesa = new SimpleStringProperty();
-        this.resid = new SimpleObjectProperty();
+        this.modificado = false;
+
     }
 
     public Long getId()
@@ -89,22 +88,27 @@ public class SalonDto
         this.barraMesa.set(barraMesa);
     }
 
-     public RestauranteDto getResid()
+    public RestauranteDto getRestauranteDto()
     {
-        return resid.get();
+        return restauranteDto;
     }
 
-    public void setResid(RestauranteDto resid)
+    public void setRestauranteDto(RestauranteDto restauranteDto)
     {
-        this.resid.set(resid);
+        this.restauranteDto = restauranteDto;
     }
 
     @Override
     public String toString()
     {
-        return "SalonDto{" + "id=" + id + ", nombre=" + nombre + ", foto=" + foto + ", modificado=" + modificado + ", resid=" + resid.toString() + ", barraMesa=" + barraMesa + '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append("SalonDto{id=").append(id);
+        sb.append(", nombre=").append(nombre);
+        sb.append(", foto=").append(foto);
+        sb.append(", barraMesa=").append(barraMesa);
+        sb.append(", restauranteDto=").append(restauranteDto);
+        sb.append('}');
+        return sb.toString();
     }
-
-
 
 }

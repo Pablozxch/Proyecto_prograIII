@@ -77,7 +77,6 @@ public class RestauranteService
             if(request.isError())
             {
                 return new Respuesta(false , request.getError() , "");
-
             }
 
             return new Respuesta(true , "" , "");

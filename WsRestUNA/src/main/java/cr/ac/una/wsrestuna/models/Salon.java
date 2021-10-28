@@ -32,7 +32,7 @@ public class Salon implements Serializable
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @SequenceGenerator(name = "TBL_SALON_SAL_ID_GENERATOR" , sequenceName = "RESTUNA.TBL_SALON_SEQ01" , allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "TBL_SALON_SAL_ID_GENERATOR")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "TBL_SALON_SAL_ID1_GENERATOR")
     @Basic(optional = false)
     @NotNull
     @Column(name = "SAL_ID")
@@ -54,10 +54,9 @@ public class Salon implements Serializable
     private String salBarraomesa;
     @Basic(optional = false)
     @NotNull
-    @Version
     @Column(name = "SAL_VERSION")
     private Long salVersion;
-    @JoinColumn(name = "RES_ID" , referencedColumnName = "RES_ID", nullable = false)
+    @JoinColumn(name = "RES_ID" , referencedColumnName = "RES_ID")
     @ManyToOne(optional = false , fetch = FetchType.LAZY)
     private Restaurante resId;
     @OneToMany(cascade = CascadeType.ALL , mappedBy = "salId" , fetch = FetchType.LAZY)
@@ -91,7 +90,7 @@ public class Salon implements Serializable
         this.salNombre = salonDto.getNombre();
         this.salImagen = salonDto.getFoto();
         this.salBarraomesa = salonDto.getBarraMesa();
-        this.resId = new Restaurante(salonDto.getResid());
+        this.resId = new Restaurante(salonDto.getRestauranteDto());
     }
 
     public Long getSalId()

@@ -109,21 +109,20 @@ public class Restaurante implements Serializable
         this.resServ = resServ;
     }
 
-    public Restaurante(RestauranteDto resDto)
+    public Restaurante(RestauranteDto restauranteDto)
     {
-        this.resId = resDto.getId();
-        actualizarRestaurante(resDto);
+        this.resId = restauranteDto.getId();
     }
 
-    public void actualizarRestaurante(RestauranteDto resDto)
+    public void actualizarRestaurante(RestauranteDto restauranteDto)
     {
-        this.resNombre = resDto.getNombre();
-        this.resDetalle = resDto.getDetalle();
-        this.resDireccion = resDto.getDireccion();
-        this.resCorreo = resDto.getCorreo();
-        this.resFoto = resDto.getFoto();
-        this.resImpv = resDto.getImpVen();
-        this.resServ = resDto.getImpServ();
+        this.resNombre = restauranteDto.getNombre();
+        this.resDetalle = restauranteDto.getDetalle();
+        this.resDireccion = restauranteDto.getDireccion();
+        this.resCorreo = restauranteDto.getCorreo();
+        this.resFoto = restauranteDto.getFoto();
+        this.resImpv = restauranteDto.getImpVen();
+        this.resServ = restauranteDto.getImpServ();
     }
 
     public Long getResId()

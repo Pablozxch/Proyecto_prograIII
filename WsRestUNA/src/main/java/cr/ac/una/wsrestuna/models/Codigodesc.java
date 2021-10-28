@@ -66,7 +66,7 @@ public class Codigodesc implements Serializable
     @ManyToOne(fetch = FetchType.LAZY)
     private Restaurante resId;
     @OneToMany(mappedBy = "codId" , fetch = FetchType.LAZY)
-    private List<Orden> ordenList;
+    private List<Factura> facturaList;
 
     public Codigodesc()
     {
@@ -86,19 +86,19 @@ public class Codigodesc implements Serializable
         this.codCant = codCant;
     }
 
-    public Codigodesc(CodigodescDto codigoDto)
+    public Codigodesc(CodigodescDto codigodescDto)
     {
-        this.codId = codigoDto.getId();
-        actualizarCodigos(codigoDto);
+        this.codId = codigodescDto.getId();
+        actualizarCodigodesc(codigodescDto);
     }
 
-    public void actualizarCodigos(CodigodescDto codigoDto)
+    public void actualizarCodigodesc(CodigodescDto codigodescDto)
     {
-        this.codNombre = codigoDto.getNombre();
-        this.codCant = codigoDto.getCantidad();
-        this.codUrl = codigoDto.getUrl();
-        this.codDesc = codigoDto.getCantidaddesc();
-        this.resId = new Restaurante(codigoDto.getResid());
+        this.codNombre = codigodescDto.getNombre();
+        this.codDesc = codigodescDto.getDesc();
+        this.codUrl = codigodescDto.getUrl();
+        this.codCant = codigodescDto.getCantidadusar();
+        this.resId = new Restaurante(codigodescDto.getRestaurante());
     }
 
     public Long getCodId()
@@ -171,14 +171,14 @@ public class Codigodesc implements Serializable
         this.resId = resId;
     }
 
-    public List<Orden> getOrdenList()
+    public List<Factura> getFacturaList()
     {
-        return ordenList;
+        return facturaList;
     }
 
-    public void setOrdenList(List<Orden> ordenList)
+    public void setFacturaList(List<Factura> facturaList)
     {
-        this.ordenList = ordenList;
+        this.facturaList = facturaList;
     }
 
     @Override

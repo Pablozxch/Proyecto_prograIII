@@ -13,21 +13,25 @@ import javafx.beans.property.*;
  */
 public class CodigodescDto
 {
-    
+
     private SimpleStringProperty id;
     private SimpleStringProperty nombre;
-    private SimpleStringProperty cantidad;
-    private SimpleStringProperty cantidaddesc;
-    private Boolean modificado;
+    private SimpleStringProperty desc;
     private SimpleStringProperty url;
-    private ObjectProperty<RestauranteDto> resid;
-    
+    private SimpleStringProperty cantidadusar;//cantidad dispon para su suso
+    private RestauranteDto restaurante;
+    private Boolean modificado;
+
     public CodigodescDto()
     {
+        this.id = new SimpleStringProperty();
+        this.nombre = new SimpleStringProperty();
+        this.desc = new SimpleStringProperty();
+        this.url = new SimpleStringProperty();
+        this.cantidadusar = new SimpleStringProperty();
         this.modificado = false;
-        
     }
-    
+
     public Long getId()
     {
         if(id.get() != null && !id.get().isEmpty())
@@ -39,98 +43,98 @@ public class CodigodescDto
             return null;
         }
     }
-    
+
     public void setId(Long id)
     {
         this.id.set(id.toString());
     }
-    
+
     public String getNombre()
     {
         return nombre.get();
     }
-    
+
     public void setNombre(String nombre)
     {
         this.nombre.set(nombre);
     }
-    
-    public Long getCantidad()
+
+    public Long getDesc()
     {
-        if(cantidad.get() != null && !cantidad.get().isEmpty())
+        if(desc.get() != null && !desc.get().isEmpty())
         {
-            return Long.valueOf(cantidad.get());
+            return Long.valueOf(desc.get());
         }
         else
         {
             return null;
         }
     }
-    
-    public void setCantidad(Long cantidad)
+
+    public void setDesc(Long desc)
     {
-        this.cantidad.set(cantidad.toString());
+        this.desc.set(desc.toString());
     }
-    
-    public Boolean getModificado()
-    {
-        return modificado;
-    }
-    
-    public void setModificado(Boolean modificado)
-    {
-        this.modificado = modificado;
-    }
-    
+
     public String getUrl()
     {
         return url.get();
     }
-    
+
     public void setUrl(String url)
     {
         this.url.set(url);
     }
-    
-    public RestauranteDto getResid()
+
+    public Long getCantidadusar()
     {
-        return resid.get();
-    }
-    
-    public void setResid(RestauranteDto resid)
-    {
-        this.resid.set(resid);
-    }
-    
-    public Long getCantidaddesc()
-    {
-        if(cantidaddesc.get() != null && !cantidaddesc.get().isEmpty())
+        if(cantidadusar.get() != null && !cantidadusar.get().isEmpty())
         {
-            return Long.valueOf(cantidaddesc.get());
+            return Long.valueOf(cantidadusar.get());
         }
         else
         {
             return null;
         }
     }
-    
-    public void setCantidaddesc(Long cantidaddesc)
+
+    public void setCantidadusar(Long cantidadusar)
     {
-        this.cantidaddesc.set(cantidaddesc.toString());
+        this.cantidadusar.set(cantidadusar.toString());
     }
-    
+
+    public RestauranteDto getRestaurante()
+    {
+        return restaurante;
+    }
+
+    public void setRestaurante(RestauranteDto restaurante)
+    {
+        this.restaurante = restaurante;
+    }
+
+    public Boolean getModificado()
+    {
+        return modificado;
+    }
+
+    public void setModificado(Boolean modificado)
+    {
+        this.modificado = modificado;
+    }
+
     @Override
     public String toString()
     {
         StringBuilder sb = new StringBuilder();
-        sb.append("CodigosdescDto{id=").append(id);
+        sb.append("CodigodescDto{id=").append(id);
         sb.append(", nombre=").append(nombre);
-        sb.append(", cantidad=").append(cantidad);
-        sb.append(", cantidaddesc=").append(cantidaddesc);
+        sb.append(", desc=").append(desc);
         sb.append(", url=").append(url);
-        sb.append(", resid=").append(resid);
+        sb.append(", cantidadusar=").append(cantidadusar);
+        sb.append(", restaurante=").append(restaurante.toString());
         sb.append('}');
         return sb.toString();
     }
-    
+
 }

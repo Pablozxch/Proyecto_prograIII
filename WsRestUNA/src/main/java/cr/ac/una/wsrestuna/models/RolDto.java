@@ -11,18 +11,20 @@ package cr.ac.una.wsrestuna.models;
  */
 public class RolDto
 {
+
     private Long id;
     private String nombre;
     private Boolean modificado;
+
     public RolDto()
     {
-        this.modificado=false;
+        this.modificado = false;
     }
+
     public RolDto(Rol rol)
     {
-        this();
-        this.id=rol.getRolId();
-        this.nombre=rol.getRolNombre();
+        this.id = rol.getRolId();
+        this.nombre = rol.getRolNombre();
     }
 
     public Long getId()
@@ -64,5 +66,5 @@ public class RolDto
         sb.append('}');
         return sb.toString();
     }
-    
+
 }

@@ -126,7 +126,7 @@ public class MainController extends Controller implements Initializable
 
                 ItemController itemrest = fxmlLoader.getController();
                 itemrest.setData(restaurantes.get(i) , myListenerRess);
-                if(column == 3)
+                if(column == 6)
                 {
                     column = 0;
                     row++;
@@ -181,9 +181,7 @@ public class MainController extends Controller implements Initializable
         if(event.getSource() == btnContinuar)
         {
 
-            FlowController.getInstance().goViewInStage("Principal" , (Stage) btnContinuar.getScene().getWindow());
-            Stage s = (Stage) btnContinuar.getScene().getWindow();
-            s.close();
+            FlowController.getInstance().goViewInStage("Principal" , (Stage) btnContinuar.getScene().getWindow());            
         }
         if(event.getSource() == btnEditar)
         {

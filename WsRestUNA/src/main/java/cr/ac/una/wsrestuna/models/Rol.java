@@ -31,7 +31,7 @@ public class Rol implements Serializable
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @SequenceGenerator(name = "TBL_ROL_ROL_ID_GENERATOR" , sequenceName = "RESTUNA.TBL_ROL_SEQ01" , allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "TBL_ROL_ROL_ID_GENERATOR")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "TBL_ROL_ROL_ID1_GENERATOR")
     @Basic(optional = false)
     @NotNull
     @Column(name = "ROL_ID")
@@ -66,7 +66,7 @@ public class Rol implements Serializable
 
     public Rol(RolDto rolDto)
     {
-        this.rolId = rolDto.getId();
+        this.rolId=rolDto.getId();
         actualizarRol(rolDto);
     }
 

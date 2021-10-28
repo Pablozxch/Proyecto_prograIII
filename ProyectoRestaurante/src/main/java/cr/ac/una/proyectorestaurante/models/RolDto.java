@@ -20,9 +20,9 @@ public class RolDto
 
     public RolDto()
     {
+        this.id = new SimpleStringProperty();
+        this.nombre = new SimpleStringProperty();
         this.modificado = false;
-        this.id=new SimpleStringProperty();
-        this.nombre=new SimpleStringProperty();
     }
 
     public Long getId()

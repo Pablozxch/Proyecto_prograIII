@@ -15,11 +15,10 @@ public class OrdenDto
 {
 
     private Long id;
-    private Long facTotal;
     private Date fecha;
-    private Long desc;
-    private EmpleadoDto emp;
-    private MesaDto mesa;
+    private String estado;
+    private EmpleadoDto empleadoDto;
+    private MesaDto mesaDto;
     private Boolean modificado;
 
     public OrdenDto()
@@ -30,11 +29,10 @@ public class OrdenDto
     public OrdenDto(Orden orden)
     {
         this.id = orden.getOrdId();
-        this.facTotal = orden.getFacTotal();
-        this.fecha = orden.getFacFecha();
-        this.desc = orden.getFacDesc();
-        this.emp = new EmpleadoDto(orden.getEmpId());
-        this.mesa = new MesaDto(orden.getMesaId());
+        this.fecha = orden.getOrdFecha();
+        this.estado = orden.getOrdEstado();
+        this.empleadoDto = new EmpleadoDto(orden.getEmpId());
+        this.mesaDto = new MesaDto(orden.getMesaId());
     }
 
     public Long getId()
@@ -47,16 +45,6 @@ public class OrdenDto
         this.id = id;
     }
 
-    public Long getFacTotal()
-    {
-        return facTotal;
-    }
-
-    public void setFacTotal(Long facTotal)
-    {
-        this.facTotal = facTotal;
-    }
-
     public Date getFecha()
     {
         return fecha;
@@ -67,34 +55,34 @@ public class OrdenDto
         this.fecha = fecha;
     }
 
-    public Long getDesc()
+    public String getEstado()
     {
-        return desc;
+        return estado;
     }
 
-    public void setDesc(Long desc)
+    public void setEstado(String estado)
     {
-        this.desc = desc;
+        this.estado = estado;
     }
 
-    public EmpleadoDto getEmp()
+    public EmpleadoDto getEmpleadoDto()
     {
-        return emp;
+        return empleadoDto;
     }
 
-    public void setEmp(EmpleadoDto emp)
+    public void setEmpleadoDto(EmpleadoDto empleadoDto)
     {
-        this.emp = emp;
+        this.empleadoDto = empleadoDto;
     }
 
-    public MesaDto getMesa()
+    public MesaDto getMesaDto()
     {
-        return mesa;
+        return mesaDto;
     }
 
-    public void setMesa(MesaDto mesa)
+    public void setMesaDto(MesaDto mesaDto)
     {
-        this.mesa = mesa;
+        this.mesaDto = mesaDto;
     }
 
     public Boolean getModificado()
@@ -111,12 +99,11 @@ public class OrdenDto
     public String toString()
     {
         StringBuilder sb = new StringBuilder();
-        sb.append("OrdenesDto{id=").append(id);
-        sb.append(", facTotal=").append(facTotal);
+        sb.append("OrdenDto{id=").append(id);
         sb.append(", fecha=").append(fecha);
-        sb.append(", desc=").append(desc);
-        sb.append(", emp=").append(emp);
-        sb.append(", mesa=").append(mesa);
+        sb.append(", estado=").append(estado);
+        sb.append(", empleadoDto=").append(empleadoDto.toString());
+        sb.append(", mesaDto=").append(mesaDto.toString());
         sb.append(", modificado=").append(modificado);
         sb.append('}');
         return sb.toString();

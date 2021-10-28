@@ -28,9 +28,7 @@ import javax.validation.constraints.*;
               @NamedQuery(name = "Producto.findByProCantidad" , query = "SELECT p FROM Producto p WHERE p.proCantidad = :proCantidad") ,
               @NamedQuery(name = "Producto.findByProAccesoRapido" , query = "SELECT p FROM Producto p WHERE p.proAccesoRapido = :proAccesoRapido") ,
               @NamedQuery(name = "Producto.findByProCantidadv" , query = "SELECT p FROM Producto p WHERE p.proCantidadv = :proCantidadv") ,
-              @NamedQuery(name = "Producto.findByProVersion" , query = "SELECT p FROM Producto p WHERE p.proVersion = :proVersion"),
-              @NamedQuery(name = "Producto.findByNombreCosto" , query = "SELECT p FROM Producto p WHERE UPPER(p.proNombre) like :proNombre and UPPER(p.proCosto) like :proCosto" , hints = @QueryHint(name = "eclipselink.refresh" , value = "true")),
-
+              @NamedQuery(name = "Producto.findByProVersion" , query = "SELECT p FROM Producto p WHERE p.proVersion = :proVersion")
           })
 public class Producto implements Serializable
 {
@@ -79,17 +77,17 @@ public class Producto implements Serializable
     private String proAccesoRapido;
     @Basic(optional = false)
     @NotNull
+    @Version
     @Column(name = "PRO_CANTIDADV")
     private Long proCantidadv;
     @Basic(optional = false)
     @NotNull
-    @Version
     @Column(name = "PRO_VERSION")
     private Long proVersion;
     @ManyToMany(mappedBy = "productoList" , fetch = FetchType.LAZY)
     private List<Categoria> categoriaList;
     @OneToMany(cascade = CascadeType.ALL , mappedBy = "proId" , fetch = FetchType.LAZY)
-    private List<Productosxorden> productosxordenList;
+    private List<Detallexorden> detallexordenList;
     @JoinColumn(name = "RES_ID" , referencedColumnName = "RES_ID")
     @ManyToOne(optional = false , fetch = FetchType.LAZY)
     private Restaurante resId;
@@ -119,18 +117,19 @@ public class Producto implements Serializable
     public Producto(ProductoDto productoDto)
     {
         this.proId = productoDto.getId();
-        actualizarProducto(productoDto);
+
     }
 
     public void actualizarProducto(ProductoDto productoDto)
     {
         this.proNombre = productoDto.getNombre();
+        this.proNombrecorto = productoDto.getNombrecorto();
         this.proDetalle = productoDto.getDetalle();
         this.proFoto = productoDto.getFoto();
         this.proCosto = productoDto.getCosto();
         this.proCantidad = productoDto.getCantidad();
         this.proAccesoRapido = productoDto.getAccesoRapido();
-        this.proCantidadv=productoDto.getCantidadV();
+        this.proCantidadv = productoDto.getCantidadV();
     }
 
     public Long getProId()
@@ -243,14 +242,14 @@ public class Producto implements Serializable
         this.categoriaList = categoriaList;
     }
 
-    public List<Productosxorden> getProductosxordenList()
+    public List<Detallexorden> getDetallexordenList()
     {
-        return productosxordenList;
+        return detallexordenList;
     }
 
-    public void setProductosxordenList(List<Productosxorden> productosxordenList)
+    public void setDetallexordenList(List<Detallexorden> detallexordenList)
     {
-        this.productosxordenList = productosxordenList;
+        this.detallexordenList = detallexordenList;
     }
 
     public Restaurante getResId()

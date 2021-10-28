@@ -21,10 +21,9 @@ import javax.validation.constraints.*;
           {
               @NamedQuery(name = "Orden.findAll" , query = "SELECT o FROM Orden o") ,
               @NamedQuery(name = "Orden.findByOrdId" , query = "SELECT o FROM Orden o WHERE o.ordId = :ordId") ,
-              @NamedQuery(name = "Orden.findByFacTotal" , query = "SELECT o FROM Orden o WHERE o.facTotal = :facTotal") ,
-              @NamedQuery(name = "Orden.findByFacFecha" , query = "SELECT o FROM Orden o WHERE o.facFecha = :facFecha") ,
-              @NamedQuery(name = "Orden.findByFacDesc" , query = "SELECT o FROM Orden o WHERE o.facDesc = :facDesc") ,
-              @NamedQuery(name = "Orden.findByFacVersion" , query = "SELECT o FROM Orden o WHERE o.facVersion = :facVersion")
+              @NamedQuery(name = "Orden.findByOrdFecha" , query = "SELECT o FROM Orden o WHERE o.ordFecha = :ordFecha") ,
+              @NamedQuery(name = "Orden.findByOrdEstado" , query = "SELECT o FROM Orden o WHERE o.ordEstado = :ordEstado") ,
+              @NamedQuery(name = "Orden.findByOrdVersion" , query = "SELECT o FROM Orden o WHERE o.ordVersion = :ordVersion")
           })
 public class Orden implements Serializable
 {
@@ -40,27 +39,23 @@ public class Orden implements Serializable
     private Long ordId;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "FAC_TOTAL")
-    private Long facTotal;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "FAC_FECHA")
+    @Column(name = "ORD_FECHA")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date facFecha;
+    private Date ordFecha;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "FAC_DESC")
-    private Long facDesc;
+    @Size(min = 1 , max = 1)
+    @Column(name = "ORD_ESTADO")
+    private String ordEstado;
     @Basic(optional = false)
     @NotNull
     @Version
-    @Column(name = "FAC_VERSION")
-    private Long facVersion;
+    @Column(name = "ORD_VERSION")
+    private Long ordVersion;
     @OneToMany(cascade = CascadeType.ALL , mappedBy = "ordId" , fetch = FetchType.LAZY)
-    private List<Productosxorden> productosxordenList;
-    @JoinColumn(name = "COD_ID" , referencedColumnName = "COD_ID")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Codigodesc codId;
+    private List<Detallexorden> detallexordenList;
+    @OneToMany(cascade = CascadeType.ALL , mappedBy = "ordId" , fetch = FetchType.LAZY)
+    private List<Factura> facturaList;
     @JoinColumn(name = "EMP_ID" , referencedColumnName = "EMP_ID")
     @ManyToOne(optional = false , fetch = FetchType.LAZY)
     private Empleado empId;
@@ -77,12 +72,11 @@ public class Orden implements Serializable
         this.ordId = ordId;
     }
 
-    public Orden(Long ordId , Long facTotal , Date facFecha , Long facDesc)
+    public Orden(Long ordId , Date ordFecha , String ordEstado)
     {
         this.ordId = ordId;
-        this.facTotal = facTotal;
-        this.facFecha = facFecha;
-        this.facDesc = facDesc;
+        this.ordFecha = ordFecha;
+        this.ordEstado = ordEstado;
     }
 
     public Orden(OrdenDto ordenDto)
@@ -93,11 +87,11 @@ public class Orden implements Serializable
 
     public void actualizarOrden(OrdenDto ordenDto)
     {
-        this.facTotal = ordenDto.getFacTotal();
-        this.facFecha = ordenDto.getFecha();
-        this.facTotal = ordenDto.getDesc();
-        this.empId = new Empleado(ordenDto.getEmp());
-        this.mesaId = new Mesa(ordenDto.getMesa());
+        this.ordFecha = ordenDto.getFecha();
+        this.ordEstado = ordenDto.getEstado();
+        this.mesaId = new Mesa(ordenDto.getMesaDto());
+        this.empId = new Empleado(ordenDto.getEmpleadoDto());
+
     }
 
     public Long getOrdId()
@@ -110,64 +104,54 @@ public class Orden implements Serializable
         this.ordId = ordId;
     }
 
-    public Long getFacTotal()
+    public Date getOrdFecha()
     {
-        return facTotal;
+        return ordFecha;
     }
 
-    public void setFacTotal(Long facTotal)
+    public void setOrdFecha(Date ordFecha)
     {
-        this.facTotal = facTotal;
+        this.ordFecha = ordFecha;
     }
 
-    public Date getFacFecha()
+    public String getOrdEstado()
     {
-        return facFecha;
+        return ordEstado;
     }
 
-    public void setFacFecha(Date facFecha)
+    public void setOrdEstado(String ordEstado)
     {
-        this.facFecha = facFecha;
+        this.ordEstado = ordEstado;
     }
 
-    public Long getFacDesc()
+    public Long getOrdVersion()
     {
-        return facDesc;
+        return ordVersion;
     }
 
-    public void setFacDesc(Long facDesc)
+    public void setOrdVersion(Long ordVersion)
     {
-        this.facDesc = facDesc;
+        this.ordVersion = ordVersion;
     }
 
-    public Long getFacVersion()
+    public List<Detallexorden> getDetallexordenList()
     {
-        return facVersion;
+        return detallexordenList;
     }
 
-    public void setFacVersion(Long facVersion)
+    public void setDetallexordenList(List<Detallexorden> detallexordenList)
     {
-        this.facVersion = facVersion;
+        this.detallexordenList = detallexordenList;
     }
 
-    public List<Productosxorden> getProductosxordenList()
+    public List<Factura> getFacturaList()
     {
-        return productosxordenList;
+        return facturaList;
     }
 
-    public void setProductosxordenList(List<Productosxorden> productosxordenList)
+    public void setFacturaList(List<Factura> facturaList)
     {
-        this.productosxordenList = productosxordenList;
-    }
-
-    public Codigodesc getCodId()
-    {
-        return codId;
-    }
-
-    public void setCodId(Codigodesc codId)
-    {
-        this.codId = codId;
+        this.facturaList = facturaList;
     }
 
     public Empleado getEmpId()

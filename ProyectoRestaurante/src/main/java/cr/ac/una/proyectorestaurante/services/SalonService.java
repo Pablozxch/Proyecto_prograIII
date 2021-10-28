@@ -63,7 +63,7 @@ public class SalonService
             {
             });
             RestauranteDto id=(RestauranteDto)AppContext.getInstance().get("Restaurante");
-            List<SalonDto> salones2=salones.stream().filter(t->t.getResid().getId()==id.getId()).collect(Collectors.toList());
+            List<SalonDto> salones2=salones.stream().filter(t->t.getRestauranteDto().getId()==id.getId()).collect(Collectors.toList());
             return new Respuesta(true , "" , "" , "Salones" , salones2);
         }
         catch(Exception ex)

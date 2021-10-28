@@ -11,22 +11,22 @@ import javafx.beans.property.*;
  *
  * @author jp015
  */
-public class ProductosxordenDto
+public class DetallexordenDto
 {
 
     private SimpleStringProperty id;
     private SimpleStringProperty cantidad;
-    private SimpleObjectProperty<OrdenDto> idO;
-    private SimpleObjectProperty<ProductoDto> idP;
+    private SimpleStringProperty precio;
+    private ProductoDto productoDto;
+    private OrdenDto ordenDto;
     private Boolean modificado;
 
-    public ProductosxordenDto()
+    public DetallexordenDto()
     {
-        this.modificado = false;
         this.id = new SimpleStringProperty();
         this.cantidad = new SimpleStringProperty();
-        this.idO = new SimpleObjectProperty();
-        this.idP = new SimpleObjectProperty();
+        this.precio = new SimpleStringProperty();
+        this.modificado = false;
     }
 
     public Long getId()
@@ -63,24 +63,41 @@ public class ProductosxordenDto
         this.cantidad.set(cantidad.toString());
     }
 
-    public OrdenDto getIdO()
+    public Long getPrecio()
     {
-        return idO.get();
+        if(precio.get() != null && !precio.get().isEmpty())
+        {
+            return Long.valueOf(precio.get());
+        }
+        else
+        {
+            return null;
+        }
     }
 
-    public void setIdO(OrdenDto idO)
+    public void setPrecio(Long precio)
     {
-        this.idO.set(idO);
+        this.precio.set(precio.toString());
     }
 
-    public ProductoDto getIdP()
+    public ProductoDto getProductoDto()
     {
-        return idP.get();
+        return productoDto;
     }
 
-    public void setIdP(ProductoDto idP)
+    public void setProductoDto(ProductoDto productoDto)
     {
-        this.idP.set(idP);
+        this.productoDto = productoDto;
+    }
+
+    public OrdenDto getOrdenDto()
+    {
+        return ordenDto;
+    }
+
+    public void setOrdenDto(OrdenDto ordenDto)
+    {
+        this.ordenDto = ordenDto;
     }
 
     public Boolean getModificado()
@@ -97,10 +114,11 @@ public class ProductosxordenDto
     public String toString()
     {
         StringBuilder sb = new StringBuilder();
-        sb.append("ProductosxordenDto{id=").append(id);
+        sb.append("DetallexordenDto{id=").append(id);
         sb.append(", cantidad=").append(cantidad);
-        sb.append(", idO=").append(idO);
-        sb.append(", idP=").append(idP);
+        sb.append(", precio=").append(precio);
+        sb.append(", productoDto=").append(productoDto.toString());
+        sb.append(", ordenDto=").append(ordenDto.toString());
         sb.append('}');
         return sb.toString();
     }

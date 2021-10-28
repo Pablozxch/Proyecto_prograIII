@@ -96,8 +96,9 @@ public class Mesa implements Serializable
     {
         this.mesaNombre = mesaDto.getNombre();
         this.mesaEstado = mesaDto.getEstado();
-        this.mesaPosx = mesaDto.getPosx();
-        this.mesaPosy = mesaDto.getPosy();
+        this.mesaPosx = mesaDto.getPosX();
+        this.mesaPosy = mesaDto.getPosY();
+        this.salId = new Salon(mesaDto.getSalonDto());
     }
 
     public Long getMesaId()

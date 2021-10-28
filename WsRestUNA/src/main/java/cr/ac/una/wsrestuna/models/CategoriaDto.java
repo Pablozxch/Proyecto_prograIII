@@ -17,24 +17,21 @@ public class CategoriaDto
     private Long id;
     private String nombre;
     private String detalle;
-    private Boolean modificado;
     private List<ProductoDto> productos;
-    private List<ProductoDto> productosEliminados;
+    private Boolean modificado;
 
     public CategoriaDto()
     {
         this.modificado = false;
         productos = new ArrayList<>();
-        productosEliminados = new ArrayList<>();
     }
 
-    public CategoriaDto(Categoria categorias)
+    public CategoriaDto(Categoria categoria)
     {
         this();
-        this.id = categorias.getCatId();
-        this.nombre = categorias.getCatNombre();
-        this.detalle = categorias.getCatDetalle();
-
+        this.id = categoria.getCatId();
+        this.nombre = categoria.getCatNombre();
+        this.detalle = categoria.getCatDetalle();
     }
 
     public Long getId()
@@ -67,16 +64,6 @@ public class CategoriaDto
         this.detalle = detalle;
     }
 
-    public Boolean getModificado()
-    {
-        return modificado;
-    }
-
-    public void setModificado(Boolean modificado)
-    {
-        this.modificado = modificado;
-    }
-
     public List<ProductoDto> getProductos()
     {
         return productos;
@@ -87,26 +74,20 @@ public class CategoriaDto
         this.productos = productos;
     }
 
-    public List<ProductoDto> getProductosEliminados()
+    public Boolean getModificado()
     {
-        return productosEliminados;
+        return modificado;
     }
 
-    public void setProductosEliminados(List<ProductoDto> productosEliminados)
+    public void setModificado(Boolean modificado)
     {
-        this.productosEliminados = productosEliminados;
+        this.modificado = modificado;
     }
 
     @Override
     public String toString()
     {
-        StringBuilder sb = new StringBuilder();
-        sb.append("CategoriasDto{id=").append(id);
-        sb.append(", nombre=").append(nombre);
-        sb.append(", detalle=").append(detalle);
-        sb.append(", modificado=").append(modificado);
-        sb.append('}');
-        return sb.toString();
+        return "CategoriaDto{" + "id=" + id + ", nombre=" + nombre + ", detalle=" + detalle + ", productos=" + productos.toString() + '}';
     }
 
 }

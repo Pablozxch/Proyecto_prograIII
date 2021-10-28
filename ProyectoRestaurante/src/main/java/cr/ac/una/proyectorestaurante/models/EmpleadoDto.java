@@ -1,11 +1,10 @@
 /*
  * To change this license header, choose License Headers in Project Properties.
- * To change this templeadolate file, choose Tools | Templeadolates
- * and open the templeadolate in the editor.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package cr.ac.una.proyectorestaurante.models;
 
-import java.util.*;
 import javafx.beans.property.*;
 
 /**
@@ -20,19 +19,20 @@ public class EmpleadoDto
     private SimpleStringProperty apellido;
     private SimpleStringProperty usuario;
     private SimpleStringProperty contra;
-    private SimpleObjectProperty<byte[]> foto;
-    private ObjectProperty<RolDto> rol;
+    private ObjectProperty<byte[]> foto;
+    private RolDto rolDto;
+    private RestauranteDto restauranteDto;
     private Boolean modificado;
 
     public EmpleadoDto()
     {
-        this.modificado = false;
+        this.id = new SimpleStringProperty();
         this.nombre = new SimpleStringProperty();
         this.apellido = new SimpleStringProperty();
         this.usuario = new SimpleStringProperty();
         this.contra = new SimpleStringProperty();
-        this.foto= new SimpleObjectProperty();
-        this.rol=new SimpleObjectProperty();
+        this.foto = new SimpleObjectProperty();
+        this.modificado = false;
     }
 
     public Long getId()
@@ -102,14 +102,24 @@ public class EmpleadoDto
         this.foto.set(foto);
     }
 
-    public RolDto getRol()
+    public RolDto getRolDto()
     {
-        return rol.get();
+        return rolDto;
     }
 
-    public void setRol(RolDto rol)
+    public void setRolDto(RolDto rolDto)
     {
-        this.rol.set(rol);
+        this.rolDto = rolDto;
+    }
+
+    public RestauranteDto getRestauranteDto()
+    {
+        return restauranteDto;
+    }
+
+    public void setRestauranteDto(RestauranteDto restauranteDto)
+    {
+        this.restauranteDto = restauranteDto;
     }
 
     public Boolean getModificado()
@@ -126,13 +136,14 @@ public class EmpleadoDto
     public String toString()
     {
         StringBuilder sb = new StringBuilder();
-        sb.append("EmpleadosDto{id=").append(id);
+        sb.append("EmpleadoDto{id=").append(id);
         sb.append(", nombre=").append(nombre);
         sb.append(", apellido=").append(apellido);
         sb.append(", usuario=").append(usuario);
         sb.append(", contra=").append(contra);
         sb.append(", foto=").append(foto);
-        sb.append(", rol=").append(rol);
+        sb.append(", rolDto=").append(rolDto);
+        sb.append(", restauranteDto=").append(restauranteDto.toString());
         sb.append('}');
         return sb.toString();
     }

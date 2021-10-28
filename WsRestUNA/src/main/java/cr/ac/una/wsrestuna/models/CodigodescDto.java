@@ -14,11 +14,11 @@ public class CodigodescDto
 
     private Long id;
     private String nombre;
-    private Long cantidad;
-    private Long cantidaddesc;
-    private Boolean modificado;
+    private Long desc;
     private String url;
-    private RestauranteDto resid;
+    private Long cantidadusar;
+    private RestauranteDto restaurante;
+    private Boolean modificado;
 
     public CodigodescDto()
     {
@@ -27,13 +27,12 @@ public class CodigodescDto
 
     public CodigodescDto(Codigodesc codigodesc)
     {
-        this();
         this.id = codigodesc.getCodId();
         this.nombre = codigodesc.getCodNombre();
-        this.cantidad = codigodesc.getCodCant();
+        this.desc = codigodesc.getCodDesc();
         this.url = codigodesc.getCodUrl();
-        this.cantidaddesc=codigodesc.getCodDesc();
-        this.resid = new RestauranteDto(codigodesc.getResId());
+        this.cantidadusar = codigodesc.getCodCant();
+        this.restaurante = new RestauranteDto(codigodesc.getResId());
     }
 
     public Long getId()
@@ -56,24 +55,14 @@ public class CodigodescDto
         this.nombre = nombre;
     }
 
-    public Long getCantidad()
+    public Long getDesc()
     {
-        return cantidad;
+        return desc;
     }
 
-    public void setCantidad(Long cantidad)
+    public void setDesc(Long desc)
     {
-        this.cantidad = cantidad;
-    }
-
-    public Boolean getModificado()
-    {
-        return modificado;
-    }
-
-    public void setModificado(Boolean modificado)
-    {
-        this.modificado = modificado;
+        this.desc = desc;
     }
 
     public String getUrl()
@@ -86,35 +75,46 @@ public class CodigodescDto
         this.url = url;
     }
 
-    public RestauranteDto getResid()
+    public Long getCantidadusar()
     {
-        return resid;
+        return cantidadusar;
     }
 
-    public void setResid(RestauranteDto resid)
+    public void setCantidadusar(Long cantidadusar)
     {
-        this.resid = resid;
-    }
-    public Long getCantidaddesc()
-    {
-        return cantidaddesc;
+        this.cantidadusar = cantidadusar;
     }
 
-    public void setCantidaddesc(Long cantidaddesc)
+    public RestauranteDto getRestaurante()
     {
-        this.cantidaddesc = cantidaddesc;
+        return restaurante;
+    }
+
+    public void setRestaurante(RestauranteDto restaurante)
+    {
+        this.restaurante = restaurante;
+    }
+
+    public Boolean getModificado()
+    {
+        return modificado;
+    }
+
+    public void setModificado(Boolean modificado)
+    {
+        this.modificado = modificado;
     }
 
     @Override
     public String toString()
     {
         StringBuilder sb = new StringBuilder();
-        sb.append("CodigosdescDto{id=").append(id);
+        sb.append("CodigodescDto{id=").append(id);
         sb.append(", nombre=").append(nombre);
-        sb.append(", cantidad=").append(cantidad);
-        sb.append(", cantidaddesc=").append(cantidaddesc);
+        sb.append(", desc=").append(desc);
         sb.append(", url=").append(url);
-        sb.append(", resid=").append(resid);
+        sb.append(", cantidadusar=").append(cantidadusar);
+        sb.append(", restaurante=").append(restaurante.toString());
         sb.append('}');
         return sb.toString();
     }

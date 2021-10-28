@@ -26,9 +26,7 @@ import javax.validation.constraints.*;
               @NamedQuery(name = "Empleado.findByEmpContra" , query = "SELECT e FROM Empleado e WHERE e.empContra = :empContra") ,
               @NamedQuery(name = "Empleado.findByEmpApelllido" , query = "SELECT e FROM Empleado e WHERE e.empApelllido = :empApelllido") ,
               @NamedQuery(name = "Empleado.findByEmpVersion" , query = "SELECT e FROM Empleado e WHERE e.empVersion = :empVersion") ,
-              @NamedQuery(name = "Empleado.findByUsuClave" , query = "SELECT e FROM Empleado e WHERE e.empUsuario = :empUsuario and e.empContra = :empContra" , hints = @QueryHint(name = "eclipselink.refresh" , value = "true")) ,
-              @NamedQuery(name = "Empleado.findByNombreApellido" , query = "SELECT e FROM Empleado e WHERE UPPER(e.empNombre) like :empNombre and UPPER(e.empApelllido) like :empApelllido" , hints = @QueryHint(name = "eclipselink.refresh" , value = "true")),
-
+              @NamedQuery(name = "Empleado.findByUsuClave" , query = "SELECT e FROM Empleado e WHERE e.empUsuario = :empUsuario and e.empContra = :empContra" , hints = @QueryHint(name = "eclipselink.refresh" , value = "true"))
           })
 public class Empleado implements Serializable
 {
@@ -72,12 +70,14 @@ public class Empleado implements Serializable
     @Version
     @Column(name = "EMP__VERSION")
     private Long empVersion;
-    @JoinColumn(name = "ROL_ID" , referencedColumnName = "ROL_ID")
-    @ManyToOne(optional = false , fetch = FetchType.LAZY)
-    private Rol rolId;
     @JoinColumn(name = "RES_ID" , referencedColumnName = "RES_ID")
     @ManyToOne(optional = false , fetch = FetchType.LAZY)
     private Restaurante resId;
+    @JoinColumn(name = "ROL_ID" , referencedColumnName = "ROL_ID")
+    @ManyToOne(optional = false , fetch = FetchType.LAZY)
+    private Rol rolId;
+    @OneToMany(mappedBy = "empId" , fetch = FetchType.LAZY)
+    private List<Cierrecajas> cierrecajasList;
     @OneToMany(cascade = CascadeType.ALL , mappedBy = "empId" , fetch = FetchType.LAZY)
     private List<Orden> ordenList;
 
@@ -103,17 +103,12 @@ public class Empleado implements Serializable
     public Empleado(EmpleadoDto empleadoDto)
     {
         this.empId = empleadoDto.getId();
-        actualizarEmpleado(empleadoDto);
+
     }
 
     public void actualizarEmpleado(EmpleadoDto empleadoDto)
     {
-        this.empNombre = empleadoDto.getNombre();
-        this.empUsuario = empleadoDto.getUsuario();
-        this.empContra = empleadoDto.getContra();
-        this.empFoto = empleadoDto.getFoto();
-        this.empApelllido = empleadoDto.getApellido();
-        this.rolId = new Rol(empleadoDto.getRol());
+
     }
 
     public Long getEmpId()
@@ -186,6 +181,16 @@ public class Empleado implements Serializable
         this.empVersion = empVersion;
     }
 
+    public Restaurante getResId()
+    {
+        return resId;
+    }
+
+    public void setResId(Restaurante resId)
+    {
+        this.resId = resId;
+    }
+
     public Rol getRolId()
     {
         return rolId;
@@ -196,14 +201,14 @@ public class Empleado implements Serializable
         this.rolId = rolId;
     }
 
-    public Restaurante getResId()
+    public List<Cierrecajas> getCierrecajasList()
     {
-        return resId;
+        return cierrecajasList;
     }
 
-    public void setResId(Restaurante resId)
+    public void setCierrecajasList(List<Cierrecajas> cierrecajasList)
     {
-        this.resId = resId;
+        this.cierrecajasList = cierrecajasList;
     }
 
     public List<Orden> getOrdenList()

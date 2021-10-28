@@ -17,22 +17,21 @@ public class SalonDto
     private byte[] foto;
     private Boolean modificado;
     private String barraMesa;
-    private RestauranteDto resid;
+    private RestauranteDto restauranteDto;
 
     public SalonDto()
     {
         this.modificado = false;
-        resid = new RestauranteDto();
+
     }
 
     public SalonDto(Salon salon)
     {
-        this();
         this.id = salon.getSalId();
         this.nombre = salon.getSalNombre();
         this.foto = salon.getSalImagen();
         this.barraMesa = salon.getSalBarraomesa();
-        this.resid=new RestauranteDto(salon.getResId());
+        this.restauranteDto = new RestauranteDto(salon.getResId());
     }
 
     public Long getId()
@@ -85,24 +84,25 @@ public class SalonDto
         this.barraMesa = barraMesa;
     }
 
-    public RestauranteDto getResid()
+    public RestauranteDto getRestauranteDto()
     {
-        return resid;
+        return restauranteDto;
     }
 
-    public void setResid(RestauranteDto resid)
+    public void setRestauranteDto(RestauranteDto restauranteDto)
     {
-        this.resid = resid;
+        this.restauranteDto = restauranteDto;
     }
 
     @Override
     public String toString()
     {
         StringBuilder sb = new StringBuilder();
-        sb.append("SalonesDto{id=").append(id);
+        sb.append("SalonDto{id=").append(id);
         sb.append(", nombre=").append(nombre);
+        sb.append(", foto=").append(foto);
         sb.append(", barraMesa=").append(barraMesa);
-        sb.append(", restaurante=").append(resid.toString());
+        sb.append(", restauranteDto=").append(restauranteDto);
         sb.append('}');
         return sb.toString();
     }

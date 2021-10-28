@@ -17,20 +17,19 @@ public class MesaDto
     private SimpleStringProperty id;
     private SimpleStringProperty nombre;
     private SimpleStringProperty estado;
-    private SimpleStringProperty posx;
-    private SimpleStringProperty posy;
-    private SimpleObjectProperty<SalonDto> salon;
+    private SimpleStringProperty posX;
+    private SimpleStringProperty posY;
+    private SalonDto salonDto;
     private Boolean modificado;
 
     public MesaDto()
     {
-        this.modificado = false;
         this.id = new SimpleStringProperty();
         this.nombre = new SimpleStringProperty();
         this.estado = new SimpleStringProperty();
-        this.posx = new SimpleStringProperty();
-        this.posy = new SimpleStringProperty();
-        this.salon = new SimpleObjectProperty();
+        this.posX = new SimpleStringProperty();
+        this.posY = new SimpleStringProperty();
+        this.modificado = false;
     }
 
     public Long getId()
@@ -70,11 +69,11 @@ public class MesaDto
         this.estado.set(estado);
     }
 
-    public Long getPosx()
+    public Long getPosX()
     {
-        if(posx.get() != null && !posx.get().isEmpty())
+        if(posX.get() != null && !posX.get().isEmpty())
         {
-            return Long.valueOf(posx.get());
+            return Long.valueOf(posX.get());
         }
         else
         {
@@ -82,16 +81,16 @@ public class MesaDto
         }
     }
 
-    public void setPosx(Long posx)
+    public void setPosX(Long posX)
     {
-        this.posx.set(posx.toString());
+        this.posX.set(posX.toString());
     }
 
-    public Long getPosy()
+    public Long getPosY()
     {
-        if(posy.get() != null && !posy.get().isEmpty())
+        if(posY.get() != null && !posY.get().isEmpty())
         {
-            return Long.valueOf(posy.get());
+            return Long.valueOf(posY.get());
         }
         else
         {
@@ -99,19 +98,19 @@ public class MesaDto
         }
     }
 
-    public void setPosy(Long posy)
+    public void setPosY(Long posY)
     {
-        this.posy.set(posy.toString());
+        this.posY.set(posY.toString());
     }
 
-    public SalonDto getSalon()
+    public SalonDto getSalonDto()
     {
-        return salon.get();
+        return salonDto;
     }
 
-    public void setSalon(SalonDto salon)
+    public void setSalonDto(SalonDto salonDto)
     {
-        this.salon.set(salon);
+        this.salonDto = salonDto;
     }
 
     public Boolean getModificado()
@@ -122,6 +121,20 @@ public class MesaDto
     public void setModificado(Boolean modificado)
     {
         this.modificado = modificado;
+    }
+
+    @Override
+    public String toString()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append("MesaDto{id=").append(id);
+        sb.append(", nombre=").append(nombre);
+        sb.append(", estado=").append(estado);
+        sb.append(", posX=").append(posX);
+        sb.append(", posY=").append(posY);
+        sb.append(", salonDto=").append(salonDto.toString());
+        sb.append('}');
+        return sb.toString();
     }
 
 }

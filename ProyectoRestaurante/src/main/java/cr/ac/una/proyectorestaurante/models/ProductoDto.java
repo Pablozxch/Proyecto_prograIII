@@ -16,26 +16,29 @@ public class ProductoDto
 
     private SimpleStringProperty id;
     private SimpleStringProperty nombre;
+    private SimpleStringProperty nombrecorto;
     private SimpleStringProperty detalle;
-    private SimpleObjectProperty<byte[]> foto;
+    private ObjectProperty<byte[]> foto;
     private SimpleStringProperty costo;
     private SimpleStringProperty cantidad;
     private SimpleStringProperty accesoRapido;
     private SimpleStringProperty cantidadV;
     private Boolean modificado;
+    private RestauranteDto restauranteDto;
 
     public ProductoDto()
     {
-        this.modificado = false;
         this.id = new SimpleStringProperty();
-        this.detalle = new SimpleStringProperty();
         this.nombre = new SimpleStringProperty();
+        this.nombrecorto = new SimpleStringProperty();
+        this.detalle = new SimpleStringProperty();
         this.foto = new SimpleObjectProperty();
         this.costo = new SimpleStringProperty();
         this.cantidad = new SimpleStringProperty();
         this.accesoRapido = new SimpleStringProperty();
         this.cantidadV = new SimpleStringProperty();
 
+        this.modificado = false;
     }
 
     public Long getId()
@@ -65,6 +68,16 @@ public class ProductoDto
         this.nombre.set(nombre);
     }
 
+    public String getNombrecorto()
+    {
+        return nombrecorto.get();
+    }
+
+    public void setNombrecorto(String nombrecorto)
+    {
+        this.nombrecorto.set(nombrecorto);
+    }
+
     public String getDetalle()
     {
         return detalle.get();
@@ -77,12 +90,12 @@ public class ProductoDto
 
     public byte[] getFoto()
     {
-        return foto.getValue();
+        return foto.get();
     }
 
     public void setFoto(byte[] foto)
     {
-        this.foto.set(foto);
+        this.foto.setValue(foto);
     }
 
     public Long getCosto()
@@ -119,14 +132,14 @@ public class ProductoDto
         this.cantidad.set(cantidad.toString());
     }
 
-    public Boolean getModificado()
+    public String getAccesoRapido()
     {
-        return modificado;
+        return accesoRapido.get();
     }
 
-    public void setModificado(Boolean modificado)
+    public void setAccesoRapido(String accesoRapido)
     {
-        this.modificado = modificado;
+        this.accesoRapido.set(accesoRapido);
     }
 
     public Long getCantidadV()
@@ -146,14 +159,24 @@ public class ProductoDto
         this.cantidadV.set(cantidadV.toString());
     }
 
-    public String getAccesoRapido()
+    public Boolean getModificado()
     {
-        return accesoRapido.get();
+        return modificado;
     }
 
-    public void setAccesoRapido(String accesoRapido)
+    public void setModificado(Boolean modificado)
     {
-        this.accesoRapido .set(accesoRapido);
+        this.modificado = modificado;
+    }
+
+    public RestauranteDto getRestauranteDto()
+    {
+        return restauranteDto;
+    }
+
+    public void setRestauranteDto(RestauranteDto restauranteDto)
+    {
+        this.restauranteDto = restauranteDto;
     }
 
     @Override
@@ -162,12 +185,14 @@ public class ProductoDto
         StringBuilder sb = new StringBuilder();
         sb.append("ProductoDto{id=").append(id);
         sb.append(", nombre=").append(nombre);
+        sb.append(", nombrecorto=").append(nombrecorto);
         sb.append(", detalle=").append(detalle);
         sb.append(", foto=").append(foto);
         sb.append(", costo=").append(costo);
         sb.append(", cantidad=").append(cantidad);
         sb.append(", accesoRapido=").append(accesoRapido);
         sb.append(", cantidadV=").append(cantidadV);
+        sb.append(", restauranteDto=").append(restauranteDto.toString());
         sb.append('}');
         return sb.toString();
     }

@@ -5,8 +5,6 @@
  */
 package cr.ac.una.wsrestuna.models;
 
-import java.util.*;
-
 /**
  *
  * @author jp015
@@ -23,19 +21,14 @@ public class RestauranteDto
     private Long impVen;
     private Long impServ;
     private Boolean modificado;
-    private List<CodigodescDto> codigos;//DUDA
-    private List<CodigodescDto> codigosEliminados;
 
     public RestauranteDto()
     {
         this.modificado = false;
-        codigos = new ArrayList<>();
-        codigosEliminados = new ArrayList<>();
     }
 
     public RestauranteDto(Restaurante restaurante)
     {
-        this();
         this.id = restaurante.getResId();
         this.nombre = restaurante.getResNombre();
         this.detalle = restaurante.getResDetalle();
@@ -136,35 +129,16 @@ public class RestauranteDto
         this.modificado = modificado;
     }
 
-    public List<CodigodescDto> getCodigos()
-    {
-        return codigos;
-    }
-
-    public void setCodigos(List<CodigodescDto> codigos)
-    {
-        this.codigos = codigos;
-    }
-
-    public List<CodigodescDto> getCodigosEliminados()
-    {
-        return codigosEliminados;
-    }
-
-    public void setCodigosEliminados(List<CodigodescDto> codigosEliminados)
-    {
-        this.codigosEliminados = codigosEliminados;
-    }
-
     @Override
     public String toString()
     {
         StringBuilder sb = new StringBuilder();
-        sb.append("RestaurantesDto{id=").append(id);
+        sb.append("RestauranteDto{id=").append(id);
         sb.append(", nombre=").append(nombre);
         sb.append(", detalle=").append(detalle);
         sb.append(", direccion=").append(direccion);
         sb.append(", correo=").append(correo);
+        sb.append(", foto=").append(foto);
         sb.append(", impVen=").append(impVen);
         sb.append(", impServ=").append(impServ);
         sb.append('}');
