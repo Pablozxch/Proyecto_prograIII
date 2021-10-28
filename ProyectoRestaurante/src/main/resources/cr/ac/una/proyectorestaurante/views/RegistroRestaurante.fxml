@@ -30,6 +30,8 @@
                      </children>
                   </HBox>
                   <JFXTextField fx:id="txtCorreo" alignment="CENTER" focusColor="WHITE" labelFloat="true" promptText="Correo Electrónico" />
+                  <JFXTextField fx:id="txtImpVenta" focusColor="WHITE" labelFloat="true" promptText="Impuesto de Venta" />
+                  <JFXTextField fx:id="txtImpServicio" focusColor="WHITE" labelFloat="true" promptText="Impuesto de Servicio" />
                   <HBox alignment="CENTER" prefHeight="168.0" prefWidth="514.0" spacing="100.0">
                      <children>
                         <JFXButton fx:id="btnContinuar" onAction="#click" text="Continuar" />

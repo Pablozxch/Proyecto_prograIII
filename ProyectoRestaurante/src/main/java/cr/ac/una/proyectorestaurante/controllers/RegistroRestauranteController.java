@@ -59,6 +59,10 @@ public class RegistroRestauranteController extends Controller implements Initial
     private JFXButton btnCerrar;
     @FXML
     private JFXTextArea txtDreccion;
+    @FXML
+    private JFXTextField txtImpVenta;
+    @FXML
+    private JFXTextField txtImpServicio;
 
     /**
      * Initializes the controller class.
