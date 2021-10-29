@@ -816,6 +816,15 @@ ALTER TABLE tbl_categoria ADD CONSTRAINT rel_res_cat FOREIGN KEY (res_id) REFERE
 ;
 
 
+insert into TBL_ROL (ROL_ID, ROL_NOMBRE, ROL_VERSION)
+values (1, 'Administrativos', 1);
+
+insert into TBL_ROL (ROL_ID, ROL_NOMBRE, ROL_VERSION)
+values (2, 'Cajeros ', 1);
+
+insert into TBL_ROL (ROL_ID, ROL_NOMBRE, ROL_VERSION)
+values (3, 'Saloneros', 1);
+
 
 
 
