@@ -92,6 +92,12 @@ public class Categoria implements Serializable
         this.catNombre = categoriaDto.getNombre();
         this.catDetalle = categoriaDto.getDetalle();
         this.resId = new Restaurante(categoriaDto.getRestauranteDto());
+        List<Producto> list = new ArrayList<>();
+        categoriaDto.getProductos().forEach(t ->
+        {
+            list.add(new Producto(t));
+        });
+        this.productoList = list;
     }
 
     public Long getCatId()

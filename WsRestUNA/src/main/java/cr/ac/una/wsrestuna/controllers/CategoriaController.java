@@ -57,16 +57,14 @@ public class CategoriaController
     }
 
     @GET
-    @Path("/producto/{catNombre}/{proCosto}")
+    @Path("/categoria")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCategorias(@PathParam("catNombre") String catNombre , @PathParam("proCosto") String proCosto)
+    public Response getCategorias()
     {
         try
         {
-            String name = "%" + catNombre + "%";
-            String costo = "%" + proCosto + "%";
-            Respuesta res = categoriaService.getCategorias(name.toUpperCase() , costo.toUpperCase());
+            Respuesta res = categoriaService.getCategorias();
             if(!res.getEstado())
             {
                 return Response.status(res.getCodigoRespuesta().getValue()).entity(res.getMensaje()).build();//TODO

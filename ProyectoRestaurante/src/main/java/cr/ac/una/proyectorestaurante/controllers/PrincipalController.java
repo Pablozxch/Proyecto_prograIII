@@ -39,6 +39,8 @@ public class PrincipalController extends Controller implements Initializable
     private JFXButton btnSalir;
     @FXML
     private Label lblTitulo;
+    @FXML
+    private JFXButton btnCategorias;
 
     /**
      * Initializes the controller class.
@@ -47,7 +49,7 @@ public class PrincipalController extends Controller implements Initializable
     public void initialize(URL url , ResourceBundle rb)
     {
         // TODO
-        lblTitulo.setText("Sistema del Restaurante "+((RestauranteDto)AppContext.getInstance().get("Restaurante")).getNombre());//cambiar para ver que se ve mejor xD
+        lblTitulo.setText("Sistema del Restaurante " + ((RestauranteDto) AppContext.getInstance().get("Restaurante")).getNombre());//cambiar para ver que se ve mejor xD
     }
 
     @Override
@@ -66,6 +68,10 @@ public class PrincipalController extends Controller implements Initializable
         if(event.getSource() == btnProductos)
         {
             FlowController.getInstance().goView("MantenimientoProductos");
+        }
+        if(event.getSource() == btnCategorias)
+        {
+            FlowController.getInstance().goView("Categorias");
         }
     }
 

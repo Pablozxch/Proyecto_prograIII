@@ -54,13 +54,11 @@ public class CategoriaService
         }
     }
 
-    public Respuesta getCategorias(String catNombre , String catDetalle)
+    public Respuesta getCategorias()
     {
         try
         {
-            Query qryCategorias = em.createNamedQuery("Categoria.findByNombreDetalle" , Categoria.class);
-            qryCategorias.setParameter("catNombre" , catNombre);
-            qryCategorias.setParameter("catDetalle" , catDetalle);
+            Query qryCategorias = em.createNamedQuery("Categoria.findAll" , Categoria.class);
             List<Categoria> categorias = (List<Categoria>) qryCategorias.getResultList();
             List<CategoriaDto> categoriasDto = new ArrayList<>();
             categorias.forEach(categoria ->

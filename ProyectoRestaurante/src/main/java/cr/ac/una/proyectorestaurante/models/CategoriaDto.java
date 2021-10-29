@@ -20,6 +20,7 @@ public class CategoriaDto
     private SimpleStringProperty detalle;
     private List<ProductoDto> productos;
     private Boolean modificado;
+    private RestauranteDto restauranteDto;
 
     public CategoriaDto()
     {
@@ -28,7 +29,7 @@ public class CategoriaDto
         this.id = new SimpleStringProperty();
         this.nombre = new SimpleStringProperty();
         this.detalle = new SimpleStringProperty();
-
+        
         productos = new ArrayList<>();
     }
 
@@ -87,6 +88,16 @@ public class CategoriaDto
     public void setModificado(Boolean modificado)
     {
         this.modificado = modificado;
+    }
+
+    public RestauranteDto getRestauranteDto()
+    {
+        return restauranteDto;
+    }
+
+    public void setRestauranteDto(RestauranteDto restauranteDto)
+    {
+        this.restauranteDto = restauranteDto;
     }
 
     @Override

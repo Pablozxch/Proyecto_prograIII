@@ -34,6 +34,13 @@ public class CategoriaDto
         this.nombre = categoria.getCatNombre();
         this.detalle = categoria.getCatDetalle();
         this.restauranteDto = new RestauranteDto(categoria.getResId());
+        List<ProductoDto> list = new ArrayList<>();
+        categoria.getProductoList().forEach(t ->
+        {
+            list.add(new ProductoDto(t));
+        });
+        this.productos = list;
+
     }
 
     public Long getId()
