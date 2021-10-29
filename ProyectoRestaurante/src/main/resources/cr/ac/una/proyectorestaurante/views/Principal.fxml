@@ -16,6 +16,7 @@
                <children>
                   <JFXButton fx:id="btnSalones" onAction="#click" prefHeight="48.0" prefWidth="155.0" text="Salones" />
                   <JFXButton fx:id="btnProductos" onAction="#click" prefHeight="48.0" prefWidth="155.0" text="Productos" />
+                  <JFXButton fx:id="btnCategorias" onAction="#click" prefHeight="48.0" prefWidth="155.0" text="Categorias" />
                   <JFXButton fx:id="btnOrdenes" onAction="#click" prefHeight="48.0" prefWidth="155.0" text="Órdenes" />
                   <JFXButton fx:id="btnFacturar" onAction="#click" prefHeight="48.0" prefWidth="155.0" text="Facturar" />
                   <JFXButton fx:id="btnEmpleados" onAction="#click" prefHeight="48.0" prefWidth="155.0" text="Empleados" />

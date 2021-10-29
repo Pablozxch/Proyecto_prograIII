@@ -24,7 +24,8 @@ public class App extends Application
         FlowController.getInstance().InitializeFlow(stage , null);
         stage.getIcons().add(new Image(App.class.getResourceAsStream("/cr/ac/una/proyectorestaurante/resources/icon.png")));
         stage.setTitle("Restaurante");
-        FlowController.getInstance().goMain();
+        FlowController.getInstance().goView("Categorias");
+        //FlowController.getInstance().goMain();
     }
 
     static void setRoot(String fxml) throws IOException
