@@ -39,49 +39,35 @@ public class Producto implements Serializable
     @SequenceGenerator(name = "TBL_PRODUCTO_PRO_ID_GENERATOR" , sequenceName = "RESTUNA.TBL_PRODUCTO_SEQ01" , allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "TBL_PRODUCTO_PRO_ID_GENERATOR")
     @Basic(optional = false)
-    @NotNull
     @Column(name = "PRO_ID")
     private Long proId;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1 , max = 50)
     @Column(name = "PRO_NOMBRE")
     private String proNombre;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1 , max = 10)
     @Column(name = "PRO_NOMBRECORTO")
     private String proNombrecorto;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1 , max = 50)
     @Column(name = "PRO_DETALLE")
     private String proDetalle;
     @Basic(optional = false)
-    @NotNull
     @Lob
     @Column(name = "PRO_FOTO")
     private byte[] proFoto;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "PRO_COSTO")
     private Long proCosto;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "PRO_CANTIDAD")
     private Long proCantidad;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1 , max = 1)
     @Column(name = "PRO_ACCESO_RAPIDO")
     private String proAccesoRapido;
     @Basic(optional = false)
-    @NotNull
-    @Version
     @Column(name = "PRO_CANTIDADV")
     private Long proCantidadv;
     @Basic(optional = false)
-    @NotNull
+    @Version
     @Column(name = "PRO_VERSION")
     private Long proVersion;
     @ManyToMany(mappedBy = "productoList" , fetch = FetchType.LAZY)
@@ -117,7 +103,7 @@ public class Producto implements Serializable
     public Producto(ProductoDto productoDto)
     {
         this.proId = productoDto.getId();
-
+        actualizarProducto(productoDto);
     }
 
     public void actualizarProducto(ProductoDto productoDto)

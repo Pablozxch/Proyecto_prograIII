@@ -19,7 +19,7 @@
                <children>
                   <Label text="Registrar un producto." />
                   <JFXTextField fx:id="txtNombre" alignment="CENTER" focusColor="WHITE" labelFloat="true" onAction="#click" promptText="Nombre del producto" />
-                  <JFXTextField fx:id="txtCosto" alignment="CENTER" focusColor="WHITE" labelFloat="true" promptText="Costo en colones" />
+                  <JFXTextField fx:id="txtNombreCorto" alignment="CENTER" focusColor="WHITE" labelFloat="true" onAction="#click" prefHeight="31.0" prefWidth="132.0" promptText="Nombre Corto" />
                   <JFXComboBox fx:id="cmbFavorito" focusColor="WHITE" labelFloat="true" promptText="Incluir a menú favorito" />
                   <JFXTextArea fx:id="txtDetalle" focusColor="WHITE" labelFloat="true" prefHeight="129.0" prefWidth="202.0" promptText="Detalle del producto." />
                </children>
@@ -32,11 +32,12 @@
                         <Button fx:id="btnCargarImagen" mnemonicParsing="false" onAction="#click" text="Cargar Imagen" />
                      </children>
                   </HBox>
+                  <JFXTextField fx:id="txtCosto" alignment="CENTER" focusColor="WHITE" labelFloat="true" promptText="Costo en colones" />
                   <JFXTextField fx:id="txtCantidad" alignment="CENTER" focusColor="WHITE" labelFloat="true" promptText="Cantidad" />
                   <HBox alignment="CENTER" prefHeight="168.0" prefWidth="532.0" spacing="100.0">
                      <children>
-                        <JFXButton fx:id="btnVolver" text="Volver" />
-                        <JFXButton fx:id="btnContinuar" text="Continuar" />
+                        <JFXButton fx:id="btnVolver" onAction="#click" text="Volver" />
+                        <JFXButton fx:id="btnContinuar" onAction="#click" text="Continuar" />
                      </children>
                   </HBox>
                </children>

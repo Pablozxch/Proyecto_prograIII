@@ -37,7 +37,6 @@ public class ProductoDto
         this.cantidad = new SimpleStringProperty();
         this.accesoRapido = new SimpleStringProperty();
         this.cantidadV = new SimpleStringProperty();
-
         this.modificado = false;
     }
 

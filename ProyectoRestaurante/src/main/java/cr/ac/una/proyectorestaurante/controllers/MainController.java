@@ -85,65 +85,67 @@ public class MainController extends Controller implements Initializable
             Respuesta respuesta = restauranteService.getRestaurantes();
             restaurantes = (List<RestauranteDto>) respuesta.getResultado("Restaurantes");
         }
-
-        if(restaurantes.size() > 0)
+        if(restaurantes != null)
         {
-            setResSelect(restaurantes.get(0));
-            myListenerRess = new MyListenerItem()
+            if(restaurantes.size() > 0)
             {
-                @Override
-                public void onClickListener(Object res)
+                setResSelect(restaurantes.get(0));
+                myListenerRess = new MyListenerItem()
                 {
-                    setResSelect((RestauranteDto) res);
-                    //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                }
-            };
-        }
-        int column = 0;
-        int row = 1;
-        String name1;
-        String name2;
-        try
-        {
-            for(int i = 0; i < restaurantes.size(); i++)
-            {
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/cr/ac/una/proyectorestaurante/views/Item.fxml"));
-                AnchorPane anchorPane = fxmlLoader.load();
-                name1 = restaurantes.get(i).getNombre();
-                if(i + 1 < restaurantes.size())
-                {
-                    name2 = restaurantes.get(i + 1).getNombre();
-                    if(name1 == null ? name2 == null : name1.equals(name2))
+                    @Override
+                    public void onClickListener(Object res)
                     {
-                        break;
+                        setResSelect((RestauranteDto) res);
+                        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                     }
-                }
-
-                ItemController itemrest = fxmlLoader.getController();
-                itemrest.setData(restaurantes.get(i) , myListenerRess);
-                if(column == 6)
-                {
-                    column = 0;
-                    row++;
-                }
-                grid.add(anchorPane , column++ , row); //(child,column,row)
-                //set grid width
-                grid.setMinWidth(Region.USE_COMPUTED_SIZE);
-                grid.setPrefWidth(Region.USE_COMPUTED_SIZE);
-                grid.setMaxWidth(Region.USE_PREF_SIZE);
-
-                //set grid height
-                grid.setMinHeight(Region.USE_COMPUTED_SIZE);
-                grid.setPrefHeight(Region.USE_COMPUTED_SIZE);
-                grid.setMaxHeight(Region.USE_PREF_SIZE);
-
-                GridPane.setMargin(anchorPane , new Insets(10));
+                };
             }
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
+            int column = 0;
+            int row = 1;
+            String name1;
+            String name2;
+            try
+            {
+                for(int i = 0; i < restaurantes.size(); i++)
+                {
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    fxmlLoader.setLocation(getClass().getResource("/cr/ac/una/proyectorestaurante/views/Item.fxml"));
+                    AnchorPane anchorPane = fxmlLoader.load();
+                    name1 = restaurantes.get(i).getNombre();
+                    if(i + 1 < restaurantes.size())
+                    {
+                        name2 = restaurantes.get(i + 1).getNombre();
+                        if(name1 == null ? name2 == null : name1.equals(name2))
+                        {
+                            break;
+                        }
+                    }
+
+                    ItemController itemrest = fxmlLoader.getController();
+                    itemrest.setData(restaurantes.get(i) , myListenerRess);
+                    if(column == 6)
+                    {
+                        column = 0;
+                        row++;
+                    }
+                    grid.add(anchorPane , column++ , row); //(child,column,row)
+                    //set grid width
+                    grid.setMinWidth(Region.USE_COMPUTED_SIZE);
+                    grid.setPrefWidth(Region.USE_COMPUTED_SIZE);
+                    grid.setMaxWidth(Region.USE_PREF_SIZE);
+
+                    //set grid height
+                    grid.setMinHeight(Region.USE_COMPUTED_SIZE);
+                    grid.setPrefHeight(Region.USE_COMPUTED_SIZE);
+                    grid.setMaxHeight(Region.USE_PREF_SIZE);
+
+                    GridPane.setMargin(anchorPane , new Insets(10));
+                }
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace();
+            }
         }
     }
 

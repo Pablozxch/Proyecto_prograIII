@@ -38,7 +38,7 @@
                         <Insets />
                      </VBox.margin>
                      <children>
-                        <TextField fx:id="txtBuscar" prefHeight="40.0" prefWidth="245.0" text="Escriba aqui para buscar">
+                        <TextField fx:id="txtBuscar" prefHeight="40.0" prefWidth="245.0" promptText="Escriba aqui para buscar">
                            <font>
                               <Font name="Cambria" size="18.0" />
                            </font>

@@ -19,10 +19,10 @@ import javax.ejb.*;
  */
 @LocalBean
 @Stateless
-public class ProductoServic
+public class ProductoService
 {
 
-    private static final Logger LOG = Logger.getLogger(ProductoServic.class.getName());
+    private static final Logger LOG = Logger.getLogger(ProductoService.class.getName());
 
     @PersistenceContext(unitName = "WsRestUNA")
     private EntityManager em;
@@ -53,13 +53,11 @@ public class ProductoServic
         }
     }
 
-    public Respuesta getProductos(String proNombre , String proCosto)
+    public Respuesta getProductos()
     {
         try
         {
-            Query qryProductos = em.createNamedQuery("Producto.findByNombreCosto" , Producto.class);
-            qryProductos.setParameter("proNombre" , proNombre);
-            qryProductos.setParameter("proCosto" , proCosto);
+            Query qryProductos = em.createNamedQuery("Producto.findAll" , Producto.class);
             List<Producto> productos = (List<Producto>) qryProductos.getResultList();
             List<ProductoDto> productosDto = new ArrayList<>();
             productos.forEach(producto ->
@@ -99,6 +97,9 @@ public class ProductoServic
             else
             {
                 empleado = new Producto(empleadoDto);
+                System.out.println("El valor antes de colocar el restaurante es " + empleado.toString());
+                empleado.setResId(new Restaurante(empleadoDto.getRestauranteDto()));
+                   System.out.println("El valor despues de colocar el restaurante es " + empleado.toString());
                 em.persist(empleado);
             }
             em.flush();

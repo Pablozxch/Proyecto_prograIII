@@ -23,7 +23,7 @@ public class ProductoController
 {
 
     @EJB
-    ProductoServic productoService;
+    ProductoService productoService;
 
     @GET
     @Path("/ping")
@@ -57,16 +57,14 @@ public class ProductoController
     }
 
     @GET
-    @Path("/producto/{proNombre}/{catDetalle}")
+    @Path("/producto")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getProductos(@PathParam("proNombre") String proNombre , @PathParam("catDetalle") String catDetalle)
+    public Response getProductos()
     {
         try
         {
-            String name = "%" + proNombre + "%";
-            String costo = "%" + catDetalle + "%";
-            Respuesta res = productoService.getProductos(name.toUpperCase() , costo.toUpperCase());
+            Respuesta res = productoService.getProductos();
             if(!res.getEstado())
             {
                 return Response.status(res.getCodigoRespuesta().getValue()).entity(res.getMensaje()).build();//TODO

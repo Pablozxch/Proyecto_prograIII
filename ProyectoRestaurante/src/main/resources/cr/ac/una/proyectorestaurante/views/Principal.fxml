@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" styleClass="fondo2" stylesheets="@../styles/StylesCss.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.proyectorestaurante.controllers.PrincipalController">
    <left>
       <VBox alignment="TOP_CENTER" prefHeight="620.0" prefWidth="240.0" BorderPane.alignment="CENTER">
@@ -50,7 +49,7 @@
          <children>
             <HBox alignment="CENTER" layoutX="500.0" layoutY="-20.0" prefHeight="80.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label styleClass="titulo" text=" Sistema de Restaurantes " />
+                  <Label fx:id="lblTitulo" styleClass="titulo" text=" Sistema de Restaurantes " />
                </children>
             </HBox>
          </children>

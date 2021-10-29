@@ -6,12 +6,14 @@
 package cr.ac.una.proyectorestaurante.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import cr.ac.una.proyectorestaurante.models.*;
 import cr.ac.una.proyectorestaurante.utils.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 
 /**
  * FXML Controller class
@@ -35,6 +37,8 @@ public class PrincipalController extends Controller implements Initializable
     private JFXButton btnCerrarSesion;
     @FXML
     private JFXButton btnSalir;
+    @FXML
+    private Label lblTitulo;
 
     /**
      * Initializes the controller class.
@@ -43,6 +47,7 @@ public class PrincipalController extends Controller implements Initializable
     public void initialize(URL url , ResourceBundle rb)
     {
         // TODO
+        lblTitulo.setText("Sistema del Restaurante "+((RestauranteDto)AppContext.getInstance().get("Restaurante")).getNombre());//cambiar para ver que se ve mejor xD
     }
 
     @Override
@@ -54,11 +59,11 @@ public class PrincipalController extends Controller implements Initializable
     @FXML
     private void click(ActionEvent event)
     {
-        if(event.getSource()==btnSalones)
+        if(event.getSource() == btnSalones)
         {
             FlowController.getInstance().goView("Salones");
         }
-        if(event.getSource()==btnProductos)
+        if(event.getSource() == btnProductos)
         {
             FlowController.getInstance().goView("MantenimientoProductos");
         }
