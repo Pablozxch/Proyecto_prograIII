@@ -35,10 +35,6 @@ public class ProductoService
             List<ProductoDto> productos = (List<ProductoDto>) request.readEntity(new GenericType<List<ProductoDto>>()
             {
             });
-            productos.forEach(t ->
-            {
-                System.out.println(t.toString());
-            });
             RestauranteDto id = (RestauranteDto) AppContext.getInstance().get("Restaurante");
             List<ProductoDto> productos2 = productos.stream().filter(t -> t.getRestauranteDto().getId() == id.getId()).collect(Collectors.toList());
             return new Respuesta(true , "" , "" , "Productos" , productos2);

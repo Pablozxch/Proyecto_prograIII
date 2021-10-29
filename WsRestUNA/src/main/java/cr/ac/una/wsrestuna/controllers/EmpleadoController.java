@@ -37,7 +37,7 @@ public class EmpleadoController
     @GET
     @Path("/empleado/{usuario}/{clave}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUsuario(@PathParam("usuario") String usuario , @PathParam("clave") String clave)
+    public Response getUsuario(@PathParam("usuario") String usuario , @PathParam("clave") String clave)//este coso es el encargado de asignarle el token etc etc etc etc
     {
         try
         {
@@ -79,16 +79,14 @@ public class EmpleadoController
     }
 
     @GET
-    @Path("/empleado/{empNombre}/{empApelllido}")
+    @Path("/empleado")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getEmpleados(@PathParam("empNombre") String empNombre , @PathParam("empApelllido") String empApelllido)
+    public Response getEmpleados()
     {
         try
         {
-            String name = "%" + empNombre + "%";
-            String ap = "%" + empApelllido + "%";
-            Respuesta res = empleadoServices.getEmpleados(name.toUpperCase() , ap.toUpperCase());
+            Respuesta res = empleadoServices.getEmpleados();
             if(!res.getEstado())
             {
                 return Response.status(res.getCodigoRespuesta().getValue()).entity(res.getMensaje()).build();//TODO

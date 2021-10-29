@@ -55,13 +55,11 @@ public class EmpleadoService
         }
     }
 
-    public Respuesta getEmpleados(String empNombre , String empApelllido)
+    public Respuesta getEmpleados()
     {
         try
         {
-            Query qryEmpleados = em.createNamedQuery("Empleado.findByNombreApellido" , Empleado.class);
-            qryEmpleados.setParameter("empNombre" , empNombre);
-            qryEmpleados.setParameter("empApelllido" , empApelllido);
+            Query qryEmpleados = em.createNamedQuery("Empleado.findAll" , Empleado.class);
             List<Empleado> empleados = (List<Empleado>) qryEmpleados.getResultList();
             List<EmpleadoDto> empleadosDto = new ArrayList<>();
             empleados.forEach(empleado ->
