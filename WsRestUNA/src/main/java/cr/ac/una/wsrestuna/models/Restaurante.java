@@ -74,6 +74,8 @@ public class Restaurante implements Serializable
     private List<Producto> productoList;
     @OneToMany(cascade = CascadeType.ALL , mappedBy = "resId" , fetch = FetchType.LAZY)
     private List<Empleado> empleadoList;
+    @OneToMany(mappedBy = "resId" , fetch = FetchType.LAZY)
+    private List<Categoria> categoriaList;
 
     public Restaurante()
     {

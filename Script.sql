@@ -1,6 +1,6 @@
 /*
 Created: 10/10/2021
-Modified: 27/10/2021
+Modified: 29/10/2021
 Model: Oracle 18c
 Database: Oracle 18c
 */
@@ -17,6 +17,14 @@ CREATE SEQUENCE tbl_restaurante_seq01
 ;
 
 CREATE SEQUENCE tbl_categoria_seq01
+ INCREMENT BY 1
+ START WITH 1
+ NOMAXVALUE
+ NOMINVALUE
+ NOCACHE
+;
+
+CREATE SEQUENCE tbl_producto_seq01
  INCREMENT BY 1
  START WITH 1
  NOMAXVALUE
@@ -234,8 +242,14 @@ CREATE TABLE tbl_categoria(
   cat_id Number NOT NULL,
   cat_nombre Varchar2(50 ) NOT NULL,
   cat_detalle Varchar2(50 ) NOT NULL,
-  cat_version Number DEFAULT 1 NOT NULL
+  cat_version Number DEFAULT 1 NOT NULL,
+  res_id Number
 )
+;
+
+-- Create indexes for table tbl_categoria
+
+CREATE INDEX IX_Relationship1 ON tbl_categoria (res_id)
 ;
 
 -- Add keys for table tbl_categoria
@@ -522,6 +536,7 @@ COMMENT ON COLUMN tbl_cierrecajas.ccja_estado IS 'Detalle del cierre "C" complet
 COMMENT ON COLUMN tbl_cierrecajas.ccja_version IS 'Version del sistema'
 ;
 
+
 -- Trigger for sequence tbl_producto_seq01 for column pro_id in table tbl_producto ---------
 CREATE OR REPLACE TRIGGER tbl_producto_tgr01 BEFORE INSERT
 ON tbl_producto FOR EACH ROW
@@ -793,6 +808,11 @@ ALTER TABLE tbl_cierrecajas ADD CONSTRAINT rel_emp_ccaj FOREIGN KEY (emp_id) REF
 
 
 ALTER TABLE tbl_factura ADD CONSTRAINT rel_ccaj_dfac FOREIGN KEY (ccaj_id) REFERENCES tbl_cierrecajas (ccaj_id)
+;
+
+
+
+ALTER TABLE tbl_categoria ADD CONSTRAINT rel_res_cat FOREIGN KEY (res_id) REFERENCES tbl_restaurante (res_id)
 ;
 
 

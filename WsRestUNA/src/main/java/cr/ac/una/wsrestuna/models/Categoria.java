@@ -61,6 +61,9 @@ public class Categoria implements Serializable
     })
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Producto> productoList;
+    @JoinColumn(name = "RES_ID" , referencedColumnName = "RES_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Restaurante resId;
 
     public Categoria()
     {
@@ -88,6 +91,7 @@ public class Categoria implements Serializable
     {
         this.catNombre = categoriaDto.getNombre();
         this.catDetalle = categoriaDto.getDetalle();
+        this.resId = new Restaurante(categoriaDto.getRestauranteDto());
     }
 
     public Long getCatId()
@@ -138,6 +142,16 @@ public class Categoria implements Serializable
     public void setProductoList(List<Producto> productoList)
     {
         this.productoList = productoList;
+    }
+
+    public Restaurante getResId()
+    {
+        return resId;
+    }
+
+    public void setResId(Restaurante resId)
+    {
+        this.resId = resId;
     }
 
     @Override

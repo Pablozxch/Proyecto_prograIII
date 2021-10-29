@@ -19,6 +19,7 @@ public class CategoriaDto
     private String detalle;
     private List<ProductoDto> productos;
     private Boolean modificado;
+    private RestauranteDto restauranteDto;
 
     public CategoriaDto()
     {
@@ -32,6 +33,7 @@ public class CategoriaDto
         this.id = categoria.getCatId();
         this.nombre = categoria.getCatNombre();
         this.detalle = categoria.getCatDetalle();
+        this.restauranteDto = new RestauranteDto(categoria.getResId());
     }
 
     public Long getId()
@@ -84,10 +86,27 @@ public class CategoriaDto
         this.modificado = modificado;
     }
 
+    public RestauranteDto getRestauranteDto()
+    {
+        return restauranteDto;
+    }
+
+    public void setRestauranteDto(RestauranteDto restauranteDto)
+    {
+        this.restauranteDto = restauranteDto;
+    }
+
     @Override
     public String toString()
     {
-        return "CategoriaDto{" + "id=" + id + ", nombre=" + nombre + ", detalle=" + detalle + ", productos=" + productos.toString() + '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append("CategoriaDto{id=").append(id);
+        sb.append(", nombre=").append(nombre);
+        sb.append(", detalle=").append(detalle);
+        sb.append(", productos=").append(productos);
+        sb.append(", restauranteDto=").append(restauranteDto);
+        sb.append('}');
+        return sb.toString();
     }
 
 }

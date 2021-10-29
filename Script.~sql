@@ -313,7 +313,7 @@ ALTER TABLE tbl_salon ADD CONSTRAINT PK_tbl_salon PRIMARY KEY (sal_id)
 CREATE TABLE tbl_mesa(
   mesa_id Number NOT NULL,
   mesa_nombre Varchar2(50 ) NOT NULL,
-  mesa_estado Varchar2(1 ) DEFAULT "D" NOT NULL
+  mesa_estado Varchar2(1 ) DEFAULT 'D' NOT NULL
         CONSTRAINT tbl_mesa_ck01 CHECK (mesa_estado in ('D','O')),
   mesa_posX Number NOT NULL,
   mesa_posY Number NOT NULL,
