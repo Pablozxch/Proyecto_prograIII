@@ -73,7 +73,8 @@ public class RegistroRestauranteController extends Controller implements Initial
     public void initialize(URL url , ResourceBundle rb)
     {
         // TODO
-
+        txtDreccion.setTextFormatter(Formato.getInstance().maxLengthFormat(50));
+        txtDetalle.setTextFormatter(Formato.getInstance().letrasFormat(50));
     }
 
     public void load()
@@ -146,12 +147,12 @@ public class RegistroRestauranteController extends Controller implements Initial
                 nombre = txtNombre.getText();
                 if(!txtDetalle.getText().isBlank())
                 {
-                    if(txtDetalle.getText().length() <= 50)
+                    if(!txtDetalle.getText().isBlank())
                     {
                         detalle = txtDetalle.getText();
                         if(!txtDreccion.getText().isBlank())
                         {
-                            if(txtDreccion.getText().length() <= 50)
+                            if(!txtDreccion.getText().isBlank())
                             {
                                 direccion = txtDreccion.getText();
                                 if(!txtCorreo.getText().isBlank())

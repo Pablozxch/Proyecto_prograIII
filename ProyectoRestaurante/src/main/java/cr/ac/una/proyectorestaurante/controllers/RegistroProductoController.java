@@ -66,6 +66,10 @@ public class RegistroProductoController extends Controller implements Initializa
     {
         // TODO
         cmbFavorito.getItems().addAll("Sí" , "NO");
+        txtCosto.setTextFormatter(Formato.getInstance().integerFormat());
+        txtCantidad.setTextFormatter(Formato.getInstance().integerFormat());
+        txtNombre.setTextFormatter(Formato.getInstance().letrasFormat(50));
+        txtNombreCorto.setTextFormatter(Formato.getInstance().letrasFormat(10));
     }
 
     public void load()
@@ -185,7 +189,7 @@ public class RegistroProductoController extends Controller implements Initializa
                                         {
                                             productoDto.setFoto(productoDto.getFoto());
                                         }
-                                        productoDto.setRestauranteDto((RestauranteDto)AppContext.getInstance().get("Restaurante"));
+                                        productoDto.setRestauranteDto((RestauranteDto) AppContext.getInstance().get("Restaurante"));
                                         System.out.println("El valor a guardar es " + productoDto.toString());
                                         Respuesta res = productoService.guardarProducto(productoDto);
                                         if(res.getEstado())
