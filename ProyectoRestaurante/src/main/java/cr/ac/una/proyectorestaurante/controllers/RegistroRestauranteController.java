@@ -5,9 +5,7 @@
  */
 package cr.ac.una.proyectorestaurante.controllers;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextArea;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import cr.ac.una.proyectorestaurante.models.*;
 import cr.ac.una.proyectorestaurante.services.*;
 import cr.ac.una.proyectorestaurante.utils.*;
@@ -33,6 +31,7 @@ import java.awt.image.*;
 import java.time.*;
 import java.util.*;
 import java.util.logging.*;
+import javafx.geometry.*;
 import javax.imageio.*;
 
 /**
@@ -60,10 +59,9 @@ public class RegistroRestauranteController extends Controller implements Initial
     @FXML
     private JFXTextArea txtDreccion;
     @FXML
-    private JFXTextField txtImpVenta;
+    private JFXComboBox<String> cmbImpVenta;
     @FXML
-    private JFXTextField txtImpServicio;
-
+    private JFXComboBox<String> cmbImpServicio;
     /**
      * Initializes the controller class.
      */
@@ -86,6 +84,7 @@ public class RegistroRestauranteController extends Controller implements Initial
             unbinRestaurante();
             bindRestaurante();
         }
+        AppContext.getInstance().delete("Restaurante");
     }
 
     public void bindRestaurante()
@@ -96,6 +95,8 @@ public class RegistroRestauranteController extends Controller implements Initial
         imvImagen.setImage(img2);
         txtCorreo.setText(restauranteDto.getCorreo());
         txtDreccion.setText(restauranteDto.getDireccion());
+        cmbImpServicio.valueProperty().set(restauranteDto.getImpServ().toString());
+        cmbImpVenta.valueProperty().set(restauranteDto.getImpVen().toString());
     }
 
     public void unbinRestaurante()
@@ -105,6 +106,8 @@ public class RegistroRestauranteController extends Controller implements Initial
         imvImagen.setImage(null);
         txtCorreo.clear();
         txtDreccion.clear();
+        cmbImpServicio.valueProperty().set(null);
+        cmbImpVenta.valueProperty().set(null);
     }
 
     @FXML
@@ -134,8 +137,10 @@ public class RegistroRestauranteController extends Controller implements Initial
         }
         if(event.getSource() == btnContinuar)
         {
-            String nombre, detalle, correo, direccion;
-            Long impV, impS;
+            String nombre;
+            String detalle;
+            String correo;
+            String direccion;
             if(!txtNombre.getText().isBlank())
             {
                 nombre = txtNombre.getText();
@@ -156,20 +161,49 @@ public class RegistroRestauranteController extends Controller implements Initial
                                         correo = txtCorreo.getText();
                                         if(imvImagen.getImage() != null || x != null)
                                         {
-                                            restauranteDto.setNombre(nombre);
-                                            restauranteDto.setDetalle(detalle);
-                                            restauranteDto.setCorreo(correo);
-                                            restauranteDto.setDireccion(direccion);
-//                                            restauranteDto.setImpServ(impS);
-//                                            restauranteDto.setImpVen(impS);
-                                            BufferedImage bufferimage;
-                                            bufferimage = ImageIO.read(x);
-                                            ByteArrayOutputStream output = new ByteArrayOutputStream();
-                                            ImageIO.write(bufferimage , "jpg" , output);
-                                            byte[] data = output.toByteArray();
-                                            restauranteDto.setFoto(data);
-                                            restauranteService.guardarRestaurante(restauranteDto);
-                                            System.out.println("Se procede a guardar correctamente");
+                                            if(cmbImpServicio.getValue() != null && cmbImpVenta.getValue() != null)
+                                            {
+                                                try
+                                                {
+                                                    restauranteDto.setNombre(nombre);
+                                                    restauranteDto.setDetalle(detalle);
+                                                    restauranteDto.setCorreo(correo);
+                                                    restauranteDto.setDireccion(direccion);
+                                                    restauranteDto.setImpServ(Long.valueOf(cmbImpServicio.getValue()));
+                                                    restauranteDto.setImpVen(Long.valueOf(cmbImpVenta.getValue()));
+                                                    if(x != null)
+                                                    {
+                                                        BufferedImage bufferimage;
+                                                        bufferimage = ImageIO.read(x);
+                                                        ByteArrayOutputStream output = new ByteArrayOutputStream();
+                                                        ImageIO.write(bufferimage , "jpg" , output);
+                                                        byte[] data = output.toByteArray();
+                                                        restauranteDto.setFoto(data);
+                                                    }
+                                                    else
+                                                    {
+                                                        restauranteDto.setFoto(restauranteDto.getFoto());
+                                                    }
+                                                    Respuesta res = restauranteService.guardarRestaurante(restauranteDto);
+                                                    if(res.getEstado())
+                                                    {
+                                                        new Mensaje().show(Alert.AlertType.INFORMATION , "Gurdar Restaurante" , "Guardado Correctamente");
+                                                    }
+                                                    else
+                                                    {
+                                                        new Mensaje().show(Alert.AlertType.ERROR , "Gurdar Restaurante" , "Error al guardar");
+                                                    }
+
+                                                }
+                                                catch(IOException ex)
+                                                {
+                                                    Logger.getLogger(RegistroRestauranteController.class.getName()).log(Level.SEVERE , null , ex);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                new Mensaje().show(Alert.AlertType.WARNING , "Error en los Datos ingresador" , "Problemas con los impuestos");
+                                            }
                                         }
                                         else
                                         {
@@ -218,6 +252,11 @@ public class RegistroRestauranteController extends Controller implements Initial
     @Override
     public void initialize()
     {
+        for(int i = 0; i <= 100; i++)
+        {
+            cmbImpServicio.getItems().add(String.valueOf(i));
+            cmbImpVenta.getItems().add(String.valueOf(i));
+        }
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

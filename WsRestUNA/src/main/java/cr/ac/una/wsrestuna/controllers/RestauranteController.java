@@ -85,11 +85,11 @@ public class RestauranteController
     @Path("/restaurante")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response guardarRestaurante(RestauranteDto productoDto)
+    public Response guardarRestaurante(RestauranteDto restauranteDto)
     {
         try
         {
-            Respuesta res = restauranteService.guardarRestaurante(productoDto);
+            Respuesta res = restauranteService.guardarRestaurante(restauranteDto);
             if(!res.getEstado())
             {
                 return Response.status(res.getCodigoRespuesta().getValue()).entity(res.getMensaje()).build();

@@ -38,44 +38,31 @@ public class Restaurante implements Serializable
     @SequenceGenerator(name = "TBL_RESTAURANTE_RES_ID_GENERATOR" , sequenceName = "RESTUNA.TBL_RESTAURANTE_SEQ01" , allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "TBL_RESTAURANTE_RES_ID_GENERATOR")
     @Basic(optional = false)
-    @NotNull
     @Column(name = "RES_ID")
     private Long resId;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1 , max = 50)
     @Column(name = "RES_NOMBRE")
     private String resNombre;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1 , max = 50)
     @Column(name = "RES_DETALLE")
     private String resDetalle;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1 , max = 50)
     @Column(name = "RES_DIRECCION")
     private String resDireccion;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1 , max = 50)
     @Column(name = "RES_CORREO")
     private String resCorreo;
     @Basic(optional = false)
-    @NotNull
     @Lob
     @Column(name = "RES_FOTO")
     private byte[] resFoto;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "RES_IMPV")
     private Long resImpv;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "RES_SERV")
     private Long resServ;
     @Basic(optional = false)
-    @NotNull
     @Version
     @Column(name = "RES_VERSION")
     private Long resVersion;
@@ -112,6 +99,7 @@ public class Restaurante implements Serializable
     public Restaurante(RestauranteDto restauranteDto)
     {
         this.resId = restauranteDto.getId();
+        actualizarRestaurante(restauranteDto);
     }
 
     public void actualizarRestaurante(RestauranteDto restauranteDto)

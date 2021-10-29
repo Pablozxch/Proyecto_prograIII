@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -30,8 +32,33 @@
                      </children>
                   </HBox>
                   <JFXTextField fx:id="txtCorreo" alignment="CENTER" focusColor="WHITE" labelFloat="true" promptText="Correo Electrónico" />
-                  <JFXTextField fx:id="txtImpVenta" focusColor="WHITE" labelFloat="true" promptText="Impuesto de Venta" />
-                  <JFXTextField fx:id="txtImpServicio" focusColor="WHITE" labelFloat="true" promptText="Impuesto de Servicio" />
+                  <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label text="Impuesto Venta">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <JFXComboBox fx:id="cmbImpVenta" prefHeight="25.0" prefWidth="172.0" promptText="Máximo Impuesto Venta" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets left="3.0" />
+                           </HBox.margin>
+                        </JFXComboBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Label text="Impuesto Servicio">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <JFXComboBox fx:id="cmbImpServicio" prefHeight="25.0" prefWidth="172.0" promptText="Máximo impuesto Servicio" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
                   <HBox alignment="CENTER" prefHeight="168.0" prefWidth="514.0" spacing="100.0">
                      <children>
                         <JFXButton fx:id="btnContinuar" onAction="#click" text="Continuar" />

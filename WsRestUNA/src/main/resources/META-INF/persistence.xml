@@ -2,18 +2,6 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="WsRestUNA" transaction-type="JTA">
     <jta-data-source>jdbc/RestUNA</jta-data-source>
-    <class>cr.ac.una.wsrestuna.models.Restaurante</class>
-    <class>cr.ac.una.wsrestuna.models.Mesa</class>
-    <class>cr.ac.una.wsrestuna.models.Orden</class>
-    <class>cr.ac.una.wsrestuna.models.Factura</class>
-    <class>cr.ac.una.wsrestuna.models.Categoria</class>
-    <class>cr.ac.una.wsrestuna.models.Cierrecajas</class>
-    <class>cr.ac.una.wsrestuna.models.Producto</class>
-    <class>cr.ac.una.wsrestuna.models.Empleado</class>
-    <class>cr.ac.una.wsrestuna.models.Salon</class>
-    <class>cr.ac.una.wsrestuna.models.Rol</class>
-    <class>cr.ac.una.wsrestuna.models.Detallexorden</class>
-    <class>cr.ac.una.wsrestuna.models.Codigodesc</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="eclipselink.logging.level.sql" value="FINE"/>

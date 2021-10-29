@@ -74,18 +74,14 @@ public class MainController extends Controller implements Initializable
     {
         if(!"aux".equals(name))
         {
+            restaurantes.clear();
             Respuesta respuesta = restauranteService.getRestaurantes();
             List<RestauranteDto> aux = (List<RestauranteDto>) respuesta.getResultado("Restaurantes");
             restaurantes = aux.stream().filter(t -> t.getNombre().toUpperCase().contains(name.toUpperCase())).collect(Collectors.toList());
-
-            restaurantes.forEach(t ->
-            {
-                System.out.println("Metodo buscar");
-                t.toString();
-            });
         }
         else
         {
+            restaurantes.clear();
             Respuesta respuesta = restauranteService.getRestaurantes();
             restaurantes = (List<RestauranteDto>) respuesta.getResultado("Restaurantes");
         }
@@ -164,20 +160,14 @@ public class MainController extends Controller implements Initializable
     {
         if(event.getSource() == btnAgregarRestaurante)
         {
-            System.out.println("Agregeando Restaurante");
+            RegistroRestauranteController registroRestauranteController = (RegistroRestauranteController) FlowController.getInstance().getController("RegistroRestaurante");
             FlowController.getInstance().goViewInWindowModal("RegistroRestaurante" , (Stage) btnAgregarRestaurante.getScene().getWindow() , false);
+            registroRestauranteController.unbinRestaurante();
+            update();
         }
         if(event.getSource() == btnBuscar)
         {
-            if(!txtBuscar.getText().isBlank() || !txtBuscar.getText().isEmpty())
-            {
-                grid.getChildren().clear();
-                loadItems(txtBuscar.getText());
-            }
-            else
-            {
-                loadItems("aux");
-            }
+            update();
         }
         if(event.getSource() == btnContinuar)
         {
@@ -190,14 +180,34 @@ public class MainController extends Controller implements Initializable
             registroRestauranteController.load();
             FlowController.getInstance().goViewInWindowModal("RegistroRestaurante" , (Stage) btnContinuar.getScene().getWindow() , false);
             registroRestauranteController.unbinRestaurante();
+            update();
 
         }
         if(event.getSource() == btnEliminar)
         {
+            if(new Mensaje().showConfirmation("Eliminar el restaurante" , getStage() , "¿Esta seguro que desea eliminar el restaurante?"))
+            {
+                RestauranteDto res = (RestauranteDto) AppContext.getInstance().get("Restaurante");
+                Respuesta respuesta = restauranteService.eliminarRestaurante(res.getId());
+                if(respuesta.getEstado())
+                {
+                    new Mensaje().show(Alert.AlertType.INFORMATION , "Eliminar el restaurante" , "Eliminado Correctamente");
+                    update();
+                }
+            }
 
-//            AppContext.getInstance().delete("Restaurante"); NOTA PROBARLO DESPUES. QUE PEREZA 
-            RestauranteDto res = (RestauranteDto) AppContext.getInstance().get("Restaurante");
-            restauranteService.eliminarRestaurante(res.getId());
+        }
+    }
+
+    public void update()
+    {
+        grid.getChildren().clear();
+        if(!txtBuscar.getText().isBlank() || !txtBuscar.getText().isEmpty())
+        {
+            loadItems(txtBuscar.getText());
+        }
+        else
+        {
             loadItems("aux");
         }
     }

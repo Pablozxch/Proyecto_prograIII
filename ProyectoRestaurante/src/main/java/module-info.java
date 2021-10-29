@@ -6,12 +6,25 @@ module cr.ac.una.proyectorestaurante
     requires java.logging;
     requires com.jfoenix;
     requires java.base;
+
+    requires javafx.base;
+    requires jakarta.activation;
+
+    requires javafx.media;
+
+
+    requires java.desktop;
+
+    requires java.instrument;
+
+
+    requires AnimateFX;
     /*    
     REST
      */
     requires jakarta.ws.rs;
     requires jakarta.xml.bind;
-    requires AnimateFX;
+
 //    requires jakarta.json;
 
     opens cr.ac.una.proyectorestaurante to javafx.fxml , javafx.graphics;
