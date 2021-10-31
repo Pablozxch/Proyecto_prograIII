@@ -6,31 +6,27 @@
 package cr.ac.una.proyectorestaurante.controllers;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextArea;
-import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.GridPane;
 
-import javafx.scene.control.TextArea;
 /**
  * FXML Controller class
  *
  * @author Christopher
  */
-public class CrearCategoríaController extends Controller implements Initializable {
+public class DisenoSalonesController extends Controller implements Initializable {
 
+    @FXML
+    private JFXButton btnAgregar;
+    @FXML
+    private GridPane gripMesa;
+    @FXML
+    private JFXButton btnEliminar;
 
-    @FXML
-    private JFXTextField txtCategoria;
-    @FXML
-    private JFXButton btnVolver;
-    @FXML
-    private JFXButton btnAceptar;
-    @FXML
-    private JFXTextArea txtDetalle;
     /**
      * Initializes the controller class.
      */
@@ -46,12 +42,6 @@ public class CrearCategoríaController extends Controller implements Initializab
 
     @FXML
     private void click(ActionEvent event) {
-        if (event.getSource() == btnVolver) {
-            getStage().close();
-        }
-        if (event.getSource() == btnAceptar) {
-            getStage().close();
-        }
     }
     
 }

@@ -163,7 +163,7 @@ public class MainController extends Controller implements Initializable
         if(event.getSource() == btnAgregarRestaurante)
         {
             CrearRestauranteController registroRestauranteController = (CrearRestauranteController) FlowController.getInstance().getController("CrearRestaurante");
-            FlowController.getInstance().goViewInWindowModal("CrearRestaurante" , (Stage) btnAgregarRestaurante.getScene().getWindow() , false);
+            FlowController.getInstance().goViewInWindowModal("CrearRestaurante" , (Stage) btnAgregarRestaurante.getScene().getWindow(), false);
             registroRestauranteController.unbinRestaurante();
             update();
         }

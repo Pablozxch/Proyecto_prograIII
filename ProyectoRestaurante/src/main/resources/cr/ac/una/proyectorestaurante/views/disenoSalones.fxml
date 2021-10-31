@@ -9,14 +9,14 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="810.0" prefWidth="1111.0" styleClass="fondo2" stylesheets="@../styles/StylesCss.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/15.0.1" fx:controller="cr.ac.una.proyectorestaurante.controllers.DisenoSalonesController">
+<AnchorPane id="AnchorPane" prefHeight="810.0" prefWidth="1111.0" styleClass="fondo2" stylesheets="@../styles/StylesCss.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.proyectorestaurante.controllers.DisenoSalonesController">
    <children>
       <VBox prefHeight="810.0" prefWidth="1111.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="150.0">
                <children>
-                  <JFXButton fx:id="btnAgregar" text="Agregar Mesa" />
+                  <JFXButton fx:id="btnAgregar" onAction="#click" text="Agregar" />
+                  <JFXButton fx:id="btnEliminar" onAction="#click" text="Eliminar" />
                </children>
             </HBox>
             <VBox alignment="CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">

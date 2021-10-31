@@ -7,17 +7,16 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="420.0" prefWidth="646.0" styleClass="fondo" stylesheets="@../styles/StylesCss.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/15.0.1" fx:controller="cr.ac.una.proyectorestaurante.controllers.IndicacionesGeneralesController">
+<AnchorPane id="AnchorPane" prefHeight="420.0" prefWidth="646.0" styleClass="fondo" stylesheets="@../styles/StylesCss.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.proyectorestaurante.controllers.IndicacionesGeneralesController">
    <children>
       <HBox layoutX="108.0" layoutY="146.0" prefHeight="420.0" prefWidth="646.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <VBox alignment="CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0" spacing="35.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label text="Por favor, ingresar los siguientes aspectos generales para el restaurante.  " />
-                  <JFXTextField fx:id="txtImpVentas" focusColor="WHITE" labelFloat="true" prefHeight="30.0" prefWidth="200.0" promptText="Impuesto de ventas." />
-                  <JFXTextField fx:id="txtImpServicio" focusColor="WHITE" labelFloat="true" prefHeight="30.0" prefWidth="200.0" promptText="Impuesto de servicio." />
-                  <JFXTextField fx:id="txtDescuentoMax" focusColor="WHITE" labelFloat="true" prefHeight="30.0" prefWidth="200.0" promptText="Descuento máximo a aplicar." />
+                  <JFXTextField fx:id="txtImpVentas" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefHeight="30.0" prefWidth="200.0" promptText="Impuesto de ventas." />
+                  <JFXTextField fx:id="txtImpServicio" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefHeight="30.0" prefWidth="200.0" promptText="Impuesto de servicio." />
+                  <JFXTextField fx:id="txtDescuentoMax" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefHeight="30.0" prefWidth="200.0" promptText="Descuento máximo a aplicar." />
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="546.0" spacing="150.0">
                      <children>
                         <JFXButton fx:id="btnVolver" text="Volver" />

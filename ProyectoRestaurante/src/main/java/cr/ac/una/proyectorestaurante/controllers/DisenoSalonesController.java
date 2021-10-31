@@ -5,11 +5,13 @@
  */
 package cr.ac.una.proyectorestaurante.controllers;
 
-import com.jfoenix.controls.*;
+import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.fxml.*;
-import javafx.scene.layout.*;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.layout.GridPane;
 
 /**
  * FXML Controller class
@@ -22,6 +24,8 @@ public class DisenoSalonesController extends Controller implements Initializable
     private JFXButton btnAgregar;
     @FXML
     private GridPane gripMesa;
+    @FXML
+    private JFXButton btnEliminar;
 
     /**
      * Initializes the controller class.
@@ -32,9 +36,11 @@ public class DisenoSalonesController extends Controller implements Initializable
     }    
 
     @Override
-    public void initialize()
-    {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void initialize() {
+        }
+
+    @FXML
+    private void click(ActionEvent event) {
     }
     
 }
