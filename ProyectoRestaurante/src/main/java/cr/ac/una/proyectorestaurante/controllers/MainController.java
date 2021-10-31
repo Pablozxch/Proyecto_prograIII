@@ -162,8 +162,8 @@ public class MainController extends Controller implements Initializable
     {
         if(event.getSource() == btnAgregarRestaurante)
         {
-            RegistroRestauranteController registroRestauranteController = (RegistroRestauranteController) FlowController.getInstance().getController("RegistroRestaurante");
-            FlowController.getInstance().goViewInWindowModal("RegistroRestaurante" , (Stage) btnAgregarRestaurante.getScene().getWindow() , false);
+            CrearRestauranteController registroRestauranteController = (CrearRestauranteController) FlowController.getInstance().getController("CrearRestaurante");
+            FlowController.getInstance().goViewInWindowModal("CrearRestaurante" , (Stage) btnAgregarRestaurante.getScene().getWindow() , false);
             registroRestauranteController.unbinRestaurante();
             update();
         }
@@ -178,9 +178,9 @@ public class MainController extends Controller implements Initializable
         }
         if(event.getSource() == btnEditar)
         {
-            RegistroRestauranteController registroRestauranteController = (RegistroRestauranteController) FlowController.getInstance().getController("RegistroRestaurante");
+            CrearRestauranteController registroRestauranteController = (CrearRestauranteController) FlowController.getInstance().getController("CrearRestaurante");
             registroRestauranteController.load();
-            FlowController.getInstance().goViewInWindowModal("RegistroRestaurante" , (Stage) btnContinuar.getScene().getWindow() , false);
+            FlowController.getInstance().goViewInWindowModal("CrearRestaurante" , (Stage) btnContinuar.getScene().getWindow() , false);
             registroRestauranteController.unbinRestaurante();
             update();
 

@@ -57,7 +57,7 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Label fx:id="lblNombrePro" alignment="CENTER" prefHeight="100.0" prefWidth="336.0" text="Nombre_Empleado">
+                              <Label fx:id="lblNombreEmpleado" alignment="CENTER" prefHeight="100.0" prefWidth="336.0" text="Nombre_Empleado">
                                  <font>
                                     <Font name="Cambria Bold" size="25.0" />
                                  </font>
@@ -67,7 +67,7 @@
                               <Insets />
                            </VBox.margin>
                         </HBox>
-                        <ImageView fx:id="imgPro" fitHeight="216.0" fitWidth="292.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="imgEmpleado" fitHeight="216.0" fitWidth="292.0" pickOnBounds="true" preserveRatio="true" />
                         <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="335.0">
                            <children>
                               <Line endX="334.29290771484375" endY="0.2928932309150696" startX="-100.0" />
@@ -117,7 +117,7 @@
                         <Insets left="20.0" right="20.0" />
                      </VBox.margin>
                      <children>
-                        <JFXButton fx:id="btnAgregarProducto" onAction="#click" text="Agregar Empleado" textFill="WHITE">
+                        <JFXButton fx:id="btnAgregarEmpleado" onAction="#click" text="Agregar Empleado" textFill="WHITE">
                            <font>
                               <Font name="Cooper Black" size="24.0" />
                            </font>

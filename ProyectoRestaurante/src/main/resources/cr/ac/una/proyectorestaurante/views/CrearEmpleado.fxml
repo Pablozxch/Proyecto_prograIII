@@ -5,11 +5,12 @@
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="fondo" stylesheets="@../styles/StylesCss.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.proyectorestaurante.controllers.CrearEmpleadoController">
+<AnchorPane id="AnchorPane" prefHeight="482.0" prefWidth="852.0" styleClass="fondo" stylesheets="@../styles/StylesCss.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.proyectorestaurante.controllers.CrearEmpleadoController">
    <children>
       <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -18,12 +19,22 @@
                   <VBox alignment="CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0" spacing="35.0" HBox.hgrow="ALWAYS">
                      <children>
                         <JFXTextField fx:id="txtNombre" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefHeight="25.0" prefWidth="220.0" promptText="Nombre" viewOrder="5.61465465E8" />
+                        <JFXTextField fx:id="txtApellido" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefHeight="25.0" prefWidth="220.0" promptText="Apellido" viewOrder="5.61465465E8" />
                         <JFXComboBox fx:id="cmbRoles" labelFloat="true" nodeOrientation="LEFT_TO_RIGHT" prefHeight="15.0" prefWidth="97.0" promptText="Roles" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0" spacing="35.0" HBox.hgrow="ALWAYS">
+                  <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0" spacing="35.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <JFXTextField fx:id="txtUsuario" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefHeight="25.0" prefWidth="220.0" promptText="Usuario" />
+                        <HBox alignment="CENTER">
+                           <children>
+                              <ImageView fx:id="imvEmpleado" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                              <JFXButton fx:id="btnCargarImagen" onAction="#click" text="Cargar Imagen" />
+                           </children>
+                        </HBox>
+                        <JFXTextField fx:id="txtUsuario" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefHeight="25.0" prefWidth="220.0" promptText="Usuario">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin></JFXTextField>
                         <JFXPasswordField fx:id="txtContrasena" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefHeight="25.0" prefWidth="220.0" promptText="Contraseña" />
                      </children>
                   </VBox>

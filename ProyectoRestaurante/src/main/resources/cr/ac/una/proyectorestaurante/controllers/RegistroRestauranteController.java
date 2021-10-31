@@ -21,7 +21,7 @@ import javafx.scene.image.ImageView;
  *
  * @author Christopher
  */
-public class RegistroRestauranteController extends Controller implements Initializable {
+public class CrearRestauranteController extends Controller implements Initializable {
 
 
     @FXML

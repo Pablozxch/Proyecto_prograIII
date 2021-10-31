@@ -204,7 +204,7 @@ public class CrearProductoController extends Controller implements Initializable
                                     }
                                     catch(IOException ex)
                                     {
-                                        Logger.getLogger(RegistroRestauranteController.class.getName()).log(Level.SEVERE , null , ex);
+                                        Logger.getLogger(CrearRestauranteController.class.getName()).log(Level.SEVERE , null , ex);
                                     }
                                 }
                             }

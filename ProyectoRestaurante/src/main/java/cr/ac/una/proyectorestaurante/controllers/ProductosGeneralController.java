@@ -161,8 +161,8 @@ public class ProductosGeneralController extends Controller implements Initializa
     {
         if(event.getSource() == btnAgregarProducto)
         {
-            CrearProductoController registroProductoController = (CrearProductoController) FlowController.getInstance().getController("RegistroProducto");
-            FlowController.getInstance().goViewInWindowModal("RegistroProducto" , (Stage) btnBuscar.getScene().getWindow() , Boolean.FALSE);
+            CrearProductoController registroProductoController = (CrearProductoController) FlowController.getInstance().getController("CrearProducto");
+            FlowController.getInstance().goViewInWindowModal("CrearProducto" , (Stage) btnBuscar.getScene().getWindow() , Boolean.FALSE);
             registroProductoController.unbindProducto();
             update();
 
@@ -173,9 +173,9 @@ public class ProductosGeneralController extends Controller implements Initializa
         }
         if(event.getSource() == btnEditar)
         {
-            CrearProductoController registroProductoController = (CrearProductoController) FlowController.getInstance().getController("RegistroProducto");
+            CrearProductoController registroProductoController = (CrearProductoController) FlowController.getInstance().getController("CrearProducto");
             registroProductoController.load();
-            FlowController.getInstance().goViewInWindowModal("RegistroProducto" , (Stage) btnBuscar.getScene().getWindow() , Boolean.FALSE);
+            FlowController.getInstance().goViewInWindowModal("CrearProducto" , (Stage) btnBuscar.getScene().getWindow() , Boolean.FALSE);
             registroProductoController.unbindProducto();
             update();
         }
