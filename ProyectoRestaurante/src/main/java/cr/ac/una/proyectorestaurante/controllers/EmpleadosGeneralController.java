@@ -6,26 +6,43 @@
 package cr.ac.una.proyectorestaurante.controllers;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 /**
  * FXML Controller class
  *
  * @author Christopher
  */
-public class RolController extends Controller implements Initializable {
+public class EmpleadosGeneralController extends Controller implements Initializable {
 
 
     @FXML
-    private JFXTextField txtRol;
+    private JFXButton btnAgregarProducto;
     @FXML
-    private JFXButton btnVolver;
+    private ScrollPane scroll;
     @FXML
-    private JFXButton btnAceptar;
+    private GridPane grid;
+    @FXML
+    private TextField txtBuscar;
+    @FXML
+    private JFXButton btnBuscar;
+    @FXML
+    private Label lblNombrePro;
+    @FXML
+    private ImageView imgPro;
+    @FXML
+    private JFXButton btnEditar;
+    @FXML
+    private JFXButton btnEliminar;
     /**
      * Initializes the controller class.
      */
@@ -33,10 +50,14 @@ public class RolController extends Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+    
+    @FXML
+    private void click(ActionEvent event) {
+    }
 
     @Override
     public void initialize() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

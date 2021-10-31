@@ -26,7 +26,7 @@ import javafx.scene.paint.*;
  *
  * @author Christopher
  */
-public class CategoriasController extends Controller implements Initializable
+public class CategoriasGeneralController extends Controller implements Initializable
 {
 
     @FXML
@@ -66,6 +66,10 @@ public class CategoriasController extends Controller implements Initializable
         /*
               Encargado de cargar todos los productos del restaurante como tal
          */
+        
+        if (cmbCategorias.getSelectionModel().getSelectedItem() == null){
+            listProductos.setDisable(true);
+        }
         Respuesta res = categoriaService.getCategorias();
         productos = (List<ProductoDto>) ((Respuesta) productoServicec.getProductos()).getResultado("Productos");
         if(res.getEstado())

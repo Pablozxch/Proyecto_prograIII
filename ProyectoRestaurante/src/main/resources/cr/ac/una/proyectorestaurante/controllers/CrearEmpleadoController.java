@@ -6,6 +6,8 @@
 package cr.ac.una.proyectorestaurante.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,27 +20,29 @@ import javafx.fxml.Initializable;
  *
  * @author Christopher
  */
-public class CodigosDescuentosController extends Controller implements Initializable {
+public class CrearEmpleadoController extends Controller implements Initializable {
+
 
     @FXML
     private JFXTextField txtNombre;
     @FXML
-    private JFXTextField txtPorcentaje;
+    private JFXComboBox<String> cmbRoles;
     @FXML
-    private JFXTextField txtCantidad;
+    private JFXTextField txtUsuario;
     @FXML
-    private JFXButton btnVolver;
+    private JFXPasswordField txtContrasena;
     @FXML
-    private JFXButton btnAceptar;
-
+    private JFXButton btnRegresar;
+    @FXML
+    private JFXButton btnContinuar;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }
-
+    }    
+    
     @FXML
     private void click(ActionEvent event) {
     }

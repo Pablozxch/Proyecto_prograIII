@@ -7,45 +7,31 @@ package cr.ac.una.proyectorestaurante.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXTextArea;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXListView;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
+
 /**
  * FXML Controller class
  *
  * @author Christopher
  */
-public class RegistroProductoController extends Controller implements Initializable {
+public class CategoriasGeneralController extends Controller implements Initializable {
 
 
     @FXML
-    private JFXTextField txtNombre;
+    private JFXComboBox<String> cmbCategorias;
     @FXML
-    private JFXTextArea txtDetalle;
+    private JFXButton btnCrearCategoria;
     @FXML
-    private JFXTextField txtCosto;
+    private JFXButton btnEliminar;
     @FXML
-    private ImageView imvImagen;
-    @FXML
-    private Button btnCargarImagen;
-    @FXML
-    private JFXTextField txtCantidad;
-    @FXML
-    private JFXButton btnContinuar;
-    @FXML
-    private JFXComboBox<String> cmbFavorito;
-    @FXML
-    private JFXButton btnVolver;
+    private JFXListView<?> listProductos;
     /**
      * Initializes the controller class.
-     * @param url
-     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {

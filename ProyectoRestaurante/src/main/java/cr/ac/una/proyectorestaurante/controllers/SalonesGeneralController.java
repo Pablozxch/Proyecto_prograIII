@@ -25,7 +25,7 @@ import javafx.scene.layout.*;
  *
  * @author Christopher
  */
-public class SalonesController extends Controller implements Initializable
+public class SalonesGeneralController extends Controller implements Initializable
 {
 
     @FXML

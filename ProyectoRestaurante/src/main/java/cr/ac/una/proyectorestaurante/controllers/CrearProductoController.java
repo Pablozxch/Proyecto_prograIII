@@ -30,7 +30,7 @@ import javax.imageio.*;
  *
  * @author Christopher
  */
-public class RegistroProductoController extends Controller implements Initializable
+public class CrearProductoController extends Controller implements Initializable
 {
 
     @FXML

@@ -6,32 +6,26 @@
 package cr.ac.una.proyectorestaurante.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
-import javafx.scene.control.TableView;
 /**
  * FXML Controller class
  *
  * @author Christopher
  */
-public class MantenimientoProductosController extends Controller implements Initializable {
+public class CrearRolController extends Controller implements Initializable {
 
 
     @FXML
-    private TableView<?> tblProductos;
+    private JFXTextField txtRol;
     @FXML
-    private JFXButton btnCerrar;
+    private JFXButton btnVolver;
     @FXML
-    private JFXButton btnGuardar;
-    @FXML
-    private JFXButton btnEditar;
-    @FXML
-    private JFXButton btnAgregar;
-    @FXML
-    private JFXButton btnEliminar;
+    private JFXButton btnAceptar;
     /**
      * Initializes the controller class.
      */
@@ -42,7 +36,7 @@ public class MantenimientoProductosController extends Controller implements Init
 
     @Override
     public void initialize() {
-        
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

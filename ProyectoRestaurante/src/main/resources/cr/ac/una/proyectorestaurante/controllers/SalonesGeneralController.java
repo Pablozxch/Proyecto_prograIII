@@ -6,26 +6,29 @@
 package cr.ac.una.proyectorestaurante.controllers;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ScrollPane;
 
 /**
  * FXML Controller class
  *
  * @author Christopher
  */
-public class RolController extends Controller implements Initializable {
+public class SalonesGeneralController extends Controller implements Initializable {
 
+    @FXML
+    private JFXButton btnCrear;
+    @FXML
+    private JFXButton btnEditar;
+    @FXML
+    private JFXButton btnEliminar;
+    @FXML
+    private ScrollPane scroll;
 
-    @FXML
-    private JFXTextField txtRol;
-    @FXML
-    private JFXButton btnVolver;
-    @FXML
-    private JFXButton btnAceptar;
     /**
      * Initializes the controller class.
      */
@@ -33,6 +36,10 @@ public class RolController extends Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void click(ActionEvent event) {
+    }
 
     @Override
     public void initialize() {

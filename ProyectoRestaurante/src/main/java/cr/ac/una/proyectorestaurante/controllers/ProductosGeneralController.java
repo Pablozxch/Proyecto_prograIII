@@ -26,7 +26,7 @@ import javafx.stage.*;
  *
  * @author Christophers
  */
-public class MantenimientoProductosController extends Controller implements Initializable
+public class ProductosGeneralController extends Controller implements Initializable
 {
 
     @FXML
@@ -45,8 +45,6 @@ public class MantenimientoProductosController extends Controller implements Init
     private ImageView imgPro;
     @FXML
     private JFXButton btnEditar;
-    @FXML
-    private JFXButton btnContinuar;
     @FXML
     private JFXButton btnEliminar;
 
@@ -163,7 +161,7 @@ public class MantenimientoProductosController extends Controller implements Init
     {
         if(event.getSource() == btnAgregarProducto)
         {
-            RegistroProductoController registroProductoController = (RegistroProductoController) FlowController.getInstance().getController("RegistroProducto");
+            CrearProductoController registroProductoController = (CrearProductoController) FlowController.getInstance().getController("RegistroProducto");
             FlowController.getInstance().goViewInWindowModal("RegistroProducto" , (Stage) btnBuscar.getScene().getWindow() , Boolean.FALSE);
             registroProductoController.unbindProducto();
             update();
@@ -175,7 +173,7 @@ public class MantenimientoProductosController extends Controller implements Init
         }
         if(event.getSource() == btnEditar)
         {
-            RegistroProductoController registroProductoController = (RegistroProductoController) FlowController.getInstance().getController("RegistroProducto");
+            CrearProductoController registroProductoController = (CrearProductoController) FlowController.getInstance().getController("RegistroProducto");
             registroProductoController.load();
             FlowController.getInstance().goViewInWindowModal("RegistroProducto" , (Stage) btnBuscar.getScene().getWindow() , Boolean.FALSE);
             registroProductoController.unbindProducto();
@@ -193,10 +191,6 @@ public class MantenimientoProductosController extends Controller implements Init
                     update();
                 }
             }
-        }
-        if(event.getSource() == btnContinuar)
-        {
-
         }
     }
 

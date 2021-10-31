@@ -11,24 +11,39 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 /**
  * FXML Controller class
  *
  * @author Christopher
  */
-public class SalonesController extends Controller implements Initializable {
+public class ProductosGeneralController extends Controller implements Initializable {
 
-    @FXML
-    private JFXButton btnCrear;
+
     @FXML
     private JFXButton btnEditar;
     @FXML
     private JFXButton btnEliminar;
     @FXML
+    private JFXButton btnAgregarProducto;
+    @FXML
     private ScrollPane scroll;
-
+    @FXML
+    private GridPane grid;
+    @FXML
+    private TextField txtBuscar;
+    @FXML
+    private JFXButton btnBuscar;
+    @FXML
+    private Label lblNombrePro;
+    @FXML
+    private ImageView imgPro;
     /**
      * Initializes the controller class.
      */
@@ -37,13 +52,13 @@ public class SalonesController extends Controller implements Initializable {
         // TODO
     }    
 
-    @FXML
-    private void click(ActionEvent event) {
-    }
-
     @Override
     public void initialize() {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+    }
+
+    @FXML
+    private void click(ActionEvent event) {
     }
     
 }
