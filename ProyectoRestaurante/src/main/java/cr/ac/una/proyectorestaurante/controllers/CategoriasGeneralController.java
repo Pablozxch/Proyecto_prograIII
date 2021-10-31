@@ -26,9 +26,8 @@ import javafx.scene.paint.*;
  *
  * @author Christopher
  */
-public class CategoriasGeneralController extends Controller implements Initializable
-{
-
+public class CategoriasGeneralController extends Controller implements Initializable {
+    
     @FXML
     private JFXComboBox<String> cmbCategorias;
     @FXML
@@ -49,35 +48,33 @@ public class CategoriasGeneralController extends Controller implements Initializ
     ProductoService productoServicec = new ProductoService();
     List<ProductoDto> productos = new ArrayList<>();
     List<CategoriaDto> categorias = new ArrayList<>();
-
+    
     @Override
-
-    public void initialize(URL url , ResourceBundle rb)
-    {
+    
+    public void initialize(URL url, ResourceBundle rb) {
         /*
             Encargado de cargar todos los productos del restaurante como tal
          */
         ObservableList<String> list = FXCollections.observableArrayList();//con esto se llena la cosa
 
-        productos.forEach(t ->
-        {
+        productos.forEach(t
+                -> {
             list.add(t.getNombre());
         });
         /*
               Encargado de cargar todos los productos del restaurante como tal
          */
         
-        if (cmbCategorias.getSelectionModel().getSelectedItem() == null){
+        if (cmbCategorias.getSelectionModel().getSelectedItem() == null) {
             listProductos.setDisable(true);
         }
         Respuesta res = categoriaService.getCategorias();
         productos = (List<ProductoDto>) ((Respuesta) productoServicec.getProductos()).getResultado("Productos");
-        if(res.getEstado())
-        {
+        if (res.getEstado()) {
             categorias = (List<CategoriaDto>) res.getResultado("Categorias");
         }
-        categorias.forEach(t ->
-        {
+        categorias.forEach(t
+                -> {
             cmbCategorias.getItems().add(t.getNombre());
         });
 
@@ -90,26 +87,20 @@ public class CategoriasGeneralController extends Controller implements Initializ
 //            });
 //        });
         listProductos.setItems(list);
-
     }
-
+    
     @FXML
-    private void click(ActionEvent event)
-    {
-        if(event.getSource() == btnCrearCategoria)
-        {
-
+    private void click(ActionEvent event) {
+        if (event.getSource() == btnCrearCategoria) {
+            FlowController.getInstance().goViewInWindowModal("CrearCategoría",getStage(), false);
         }
-        if(event.getSource() == btnEliminar)
-        {
-
+        if (event.getSource() == btnEliminar) {
         }
     }
-
+    
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
 }

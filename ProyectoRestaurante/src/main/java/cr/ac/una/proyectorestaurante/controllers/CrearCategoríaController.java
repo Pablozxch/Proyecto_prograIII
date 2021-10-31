@@ -46,6 +46,12 @@ public class CrearCategoríaController extends Controller implements Initializab
 
     @FXML
     private void click(ActionEvent event) {
+        if (event.getSource() == btnVolver) {
+            getStage().close();
+        }
+        if (event.getSource() == btnAceptar) {
+            getStage().close();
+        }
     }
     
 }

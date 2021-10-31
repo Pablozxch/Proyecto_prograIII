@@ -39,7 +39,7 @@ import javax.imageio.*;
  *
  * @author Christopher
  */
-public class RegistroRestauranteController extends Controller implements Initializable
+public class CrearRestauranteController extends Controller implements Initializable
 {
 
     @FXML
@@ -198,7 +198,7 @@ public class RegistroRestauranteController extends Controller implements Initial
                                                 }
                                                 catch(IOException ex)
                                                 {
-                                                    Logger.getLogger(RegistroRestauranteController.class.getName()).log(Level.SEVERE , null , ex);
+                                                    Logger.getLogger(CrearRestauranteController.class.getName()).log(Level.SEVERE , null , ex);
                                                 }
                                             }
                                             else
