@@ -37,7 +37,8 @@ public class DisenoSalonesController extends Controller implements Initializable
 
     @Override
     public void initialize() {
-        }
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     @FXML
     private void click(ActionEvent event) {
