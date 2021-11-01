@@ -61,7 +61,7 @@ public class SalonesGeneralController extends Controller implements Initializabl
     @Override
     public void initialize(URL url , ResourceBundle rb)
     {
-        load();
+        loadItems("aux");
     }
 
     public void setSalSelect(SalonDto sal)
@@ -72,68 +72,103 @@ public class SalonesGeneralController extends Controller implements Initializabl
         AppContext.getInstance().set("Salon" , sal);
     }
 
-    public void load()
+    public void loadItems(String name)
     {
-        Respuesta respuesta = salonService.getSalones();
-        salones = (List<SalonDto>) respuesta.getResultado("Salones");
-        if(salones.size() > 0)
+        if(!"aux".equals(name))
         {
-            setSalSelect(salones.get(0));
-            myListener = new MyListenerItem()
+            if(salones != null)
             {
-                @Override
-                public void onClickListener(Object item)
-                {
-                    setSalSelect((SalonDto) item);
-                    //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                }
-            };
+                salones.clear();
+            }
+            Respuesta respuesta = salonService.getSalones();
+            List<SalonDto> aux = (List<SalonDto>) respuesta.getResultado("Salones");
+            salones = aux.stream().filter(t -> t.getNombre().toUpperCase().contains(name.toUpperCase())).collect(Collectors.toList());
         }
-        int column = 0;
-        int row = 1;
-        String name1;
-        String name2;
-        try
+        else
         {
-            for(int i = 0; i < salones.size(); i++)
+            if(salones != null)
             {
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/cr/ac/una/proyectorestaurante/views/Item.fxml"));
-                AnchorPane anchorPane = fxmlLoader.load();
-                name1 = salones.get(i).getNombre();
-                if(i + 1 < salones.size())
+                salones.clear();
+            }
+            Respuesta respuesta = salonService.getSalones();
+            salones = (List<SalonDto>) respuesta.getResultado("Salones");
+        }
+        if(salones != null)
+        {
+            if(salones.size() > 0)
+            {
+                setSalSelect(salones.get(0));
+                myListener = new MyListenerItem()
                 {
-                    name2 = salones.get(i + 1).getNombre();
-                    if(name1 == null ? name2 == null : name1.equals(name2))
+
+                    @Override
+                    public void onClickListener(Object item)
                     {
-                        break;
+                        setSalSelect((SalonDto) item);
+                        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                     }
-                }
 
-                ItemController itemcontroller = fxmlLoader.getController();
-                itemcontroller.setData(salones.get(i) , myListener);
-                if(column == 3)
+                };
+            }
+            int column = 0;
+            int row = 1;
+            String name1;
+            String name2;
+            try
+            {
+                for(int i = 0; i < salones.size(); i++)
                 {
-                    column = 0;
-                    row++;
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    fxmlLoader.setLocation(getClass().getResource("/cr/ac/una/proyectorestaurante/views/Item.fxml"));
+                    AnchorPane anchorPane = fxmlLoader.load();
+                    name1 = salones.get(i).getNombre();
+                    if(i + 1 < salones.size())
+                    {
+                        name2 = salones.get(i + 1).getNombre();
+                        if(name1 == null ? name2 == null : name1.equals(name2))
+                        {
+                            break;
+                        }
+                    }
+
+                    ItemController itemrest = fxmlLoader.getController();
+                    itemrest.setData(salones.get(i) , myListener);
+                    if(column == 6)
+                    {
+                        column = 0;
+                        row++;
+                    }
+                    grid.add(anchorPane , column++ , row); //(child,column,row)
+                    //set grid width
+                    grid.setMinWidth(Region.USE_COMPUTED_SIZE);
+                    grid.setPrefWidth(Region.USE_COMPUTED_SIZE);
+                    grid.setMaxWidth(Region.USE_PREF_SIZE);
+
+                    //set grid height
+                    grid.setMinHeight(Region.USE_COMPUTED_SIZE);
+                    grid.setPrefHeight(Region.USE_COMPUTED_SIZE);
+                    grid.setMaxHeight(Region.USE_PREF_SIZE);
+
+                    GridPane.setMargin(anchorPane , new Insets(10));
                 }
-                grid.add(anchorPane , column++ , row); //(child,column,row)
-                //set grid width
-                grid.setMinWidth(Region.USE_COMPUTED_SIZE);
-                grid.setPrefWidth(Region.USE_COMPUTED_SIZE);
-                grid.setMaxWidth(Region.USE_PREF_SIZE);
-
-                //set grid height
-                grid.setMinHeight(Region.USE_COMPUTED_SIZE);
-                grid.setPrefHeight(Region.USE_COMPUTED_SIZE);
-                grid.setMaxHeight(Region.USE_PREF_SIZE);
-
-                GridPane.setMargin(anchorPane , new Insets(10));
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace();
             }
         }
-        catch(IOException e)
+    }
+
+    private void update()
+    {
+        grid.getChildren().clear();
+        if(!txtBuscar.getText().isBlank() || !txtBuscar.getText().isEmpty())
         {
-            e.printStackTrace();
+            loadItems(txtBuscar.getText());
+        }
+        else
+        {
+            loadItems("aux");
         }
     }
 
@@ -150,28 +185,42 @@ public class SalonesGeneralController extends Controller implements Initializabl
         }
         if(event.getSource() == btnEditar)
         {
+            CrearSalonController crearSalonController = (CrearSalonController) FlowController.getInstance().getController("CrearSalon");
+            crearSalonController.load();
             FlowController.getInstance().goViewInWindowModal("CrearSalon" , (Stage) btnContinuar.getScene().getWindow() , Boolean.FALSE);
-        }
-        if(event.getSource() == btnEliminar)
-        {
+            crearSalonController.ubindSalon();
+            update();
 
+        }
+        if(event.getSource() == btnBuscar)
+        {
+            update();
         }
         if(event.getSource() == btnContinuar)
         {
+            //ir a otra venta, donde se muestran los salones como tal
 
         }
-
+        if(event.getSource() == btnEliminar)
+        {
+            if(new Mensaje().showConfirmation("Eliminar el Salon" , getStage() , "¿Esta seguro que desea eliminar el Salon?"))
+            {
+                SalonDto pro = (SalonDto) AppContext.getInstance().get("Salon");
+                Respuesta respuesta = salonService.eliminarSalon(pro.getId());
+                if(respuesta.getEstado())
+                {
+                    new Mensaje().show(Alert.AlertType.INFORMATION , "Eliminar el Salon" , "Eliminado Correctamente");
+                    update();
+                }
+            }
+        }
     }
 
     @Override
     public void initialize()
     {
+        loadItems("aux");
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void update()
-    {
-        //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

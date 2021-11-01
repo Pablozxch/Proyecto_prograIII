@@ -62,14 +62,36 @@ public class SalonService
             List<SalonDto> salones = (List<SalonDto>) request.readEntity(new GenericType<List<SalonDto>>()
             {
             });
-            RestauranteDto id=(RestauranteDto)AppContext.getInstance().get("Restaurante");
-            List<SalonDto> salones2=salones.stream().filter(t->t.getRestauranteDto().getId()==id.getId()).collect(Collectors.toList());
+            RestauranteDto id = (RestauranteDto) AppContext.getInstance().get("Restaurante");
+            List<SalonDto> salones2 = salones.stream().filter(t -> t.getRestauranteDto().getId() == id.getId()).collect(Collectors.toList());
             return new Respuesta(true , "" , "" , "Salones" , salones2);
         }
         catch(Exception ex)
         {
             Logger.getLogger(SalonService.class.getName()).log(Level.SEVERE , "Error obteniendo salones." , ex);
             return new Respuesta(false , "Error obteniendo salones." , "getSalons " + ex.getMessage());
+        }
+    }
+
+    public Respuesta eliminarSalon(Long id)
+    {
+        try
+        {
+            Map<String , Object> parametros = new HashMap<>();
+            parametros.put("id" , id);
+            Request request = new Request("SalonController/salon" , "/{id}" , parametros);
+            request.delete();
+            if(request.isError())
+            {
+                return new Respuesta(false , request.getError() , "");
+            }
+
+            return new Respuesta(true , "" , "");
+        }
+        catch(Exception ex)
+        {
+            Logger.getLogger(RestauranteService.class.getName()).log(Level.SEVERE , "Error eliminando el salon." , ex);
+            return new Respuesta(false , "Error eliminando el salon." , "eliminarSalon " + ex.getMessage());
         }
     }
 

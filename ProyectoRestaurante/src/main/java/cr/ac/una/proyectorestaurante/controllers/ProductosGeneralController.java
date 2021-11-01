@@ -68,6 +68,7 @@ public class ProductosGeneralController extends Controller implements Initializa
         lblNombrePro.setText(sal.getNombre());
         Image img2 = new Image(new ByteArrayInputStream(sal.getFoto()));//crea un objeto imagen, transforma el byte[] a un buffered imagen
         imgPro.setImage(img2);
+//        lblPrecio.settext("$"+sal.getCosto());
         AppContext.getInstance().set("Producto" , sal);
     }
 
