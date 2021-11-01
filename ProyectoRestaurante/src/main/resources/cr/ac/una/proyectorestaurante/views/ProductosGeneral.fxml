@@ -68,16 +68,19 @@
                            </VBox.margin>
                         </HBox>
                         <ImageView fx:id="imgPro" fitHeight="216.0" fitWidth="292.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label fx:id="lblPrecio" text="Precio: ¢" />
+                        <Label fx:id="lblPrecio" text="Precio: ¢">
+                           <VBox.margin>
+                              <Insets top="25.0" />
+                           </VBox.margin></Label>
                         <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="335.0">
                            <children>
-                              <Line endX="334.29290771484375" endY="0.2928932309150696" startX="-100.0" />
+                              <Line endX="334.29290771484375" endY="0.2928932309150696" startX="-74.10661315917969" startY="0.2927628755569458" />
                            </children>
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
                         </HBox>
-                        <HBox alignment="CENTER" prefHeight="46.0" prefWidth="335.0">
+                        <HBox alignment="CENTER" prefHeight="46.0" prefWidth="335.0" spacing="15.0">
                            <children>
                               <JFXButton fx:id="btnEditar" onAction="#click" prefHeight="48.0" prefWidth="113.0" text="Editar" textFill="WHITE">
                                  <HBox.margin>
@@ -102,7 +105,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="335.0">
                            <children>
-                              <Line endX="334.29290771484375" endY="0.2928932309150696" startX="-100.0" />
+                              <Line endX="334.29290771484375" endY="0.2928932309150696" startX="-73.76347351074219" startY="0.5857864618301392" />
                            </children>
                         </HBox>
                      </children>
