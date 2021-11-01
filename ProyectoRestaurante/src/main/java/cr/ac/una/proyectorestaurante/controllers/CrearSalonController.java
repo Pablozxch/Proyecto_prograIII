@@ -8,6 +8,9 @@ package cr.ac.una.proyectorestaurante.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import cr.ac.una.proyectorestaurante.models.*;
+import cr.ac.una.proyectorestaurante.services.*;
+import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -32,6 +35,9 @@ public class CrearSalonController extends Controller implements Initializable
     private JFXButton btnVolver;
     @FXML
     private JFXButton btnAceptar;
+    File x;
+    SalonDto salonDto = new SalonDto();
+    SalonService salonService = new SalonService();
 
     /**
      * Initializes the controller class.
@@ -42,25 +48,31 @@ public class CrearSalonController extends Controller implements Initializable
         // TODO
     }
 
+    void ubindSalon()
+    {
+
+    }
+
+    void bindSalon()
+    {
+
+    }
+
+    void load()
+    {
+
+    }
+
     @FXML
     private void click(ActionEvent event)
     {
+
     }
 
     @Override
     public void initialize()
     {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    void ubindSalon()
-    {
-        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    void bindSalon()
-    {
-        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

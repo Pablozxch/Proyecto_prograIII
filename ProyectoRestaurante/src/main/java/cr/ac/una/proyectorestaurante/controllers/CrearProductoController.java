@@ -51,15 +51,14 @@ public class CrearProductoController extends Controller implements Initializable
     private JFXComboBox<String> cmbFavorito;
     @FXML
     private JFXButton btnVolver;
-
+    @FXML
+    private JFXTextField txtNombreCorto;
     /**
      * Initializes the controller class.
      */
     File x;
     ProductoDto productoDto = new ProductoDto();
     ProductoService productoService = new ProductoService();
-    @FXML
-    private JFXTextField txtNombreCorto;
 
     @Override
     public void initialize(URL url , ResourceBundle rb)
