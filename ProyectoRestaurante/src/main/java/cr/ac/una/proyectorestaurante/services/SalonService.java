@@ -95,4 +95,25 @@ public class SalonService
         }
     }
 
+    public Respuesta guardarSalon(SalonDto pd)
+    {
+        try
+        {
+            Request request = new Request("SalonController/salon");
+            request.post(pd);
+            if(request.isError())
+            {
+                return new Respuesta(false , request.getError() , "");
+
+            }
+            SalonDto salon = (SalonDto) request.readEntity(SalonDto.class);//
+            return new Respuesta(true , "" , "" , "Salon" , salon);
+        }
+        catch(Exception ex)
+        {
+            Logger.getLogger(SalonService.class.getName()).log(Level.SEVERE , "Error guardando el producto." , ex);
+            return new Respuesta(false , "Error guardando el producto." , "guardarSalon " + ex.getMessage());
+        }
+    }
+
 }
