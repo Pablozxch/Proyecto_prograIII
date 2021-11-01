@@ -26,6 +26,7 @@ public class ItemController extends Controller implements Initializable
     private RestauranteDto restauranteDto;
     private SalonDto salonDto;
     private ProductoDto productoDto;
+    private EmpleadoDto empleadoDto;
     private MyListenerItem myListener;
     @FXML
     private Label lblNombreItem;
@@ -64,6 +65,13 @@ public class ItemController extends Controller implements Initializable
             Image img2 = new Image(new ByteArrayInputStream(((ProductoDto) object).getFoto()));//crea un objeto imagen, transforma el byte[] a un buffered imagen
             imgItem.setImage(img2);
         }
+        if(object.getClass() == EmpleadoDto.class)
+        {
+            this.empleadoDto = ((EmpleadoDto) object);
+            lblNombreItem.setText(((EmpleadoDto) object).getNombre());
+            Image img2 = new Image(new ByteArrayInputStream(((EmpleadoDto) object).getFoto()));//crea un objeto imagen, transforma el byte[] a un buffered imagen
+            imgItem.setImage(img2);
+        }
         this.myListener = myListener;
     }
 
@@ -76,7 +84,39 @@ public class ItemController extends Controller implements Initializable
     @FXML
     private void click(MouseEvent event)
     {
-        myListener.onClickListener(restauranteDto);
+        try
+        {
+            myListener.onClickListener(productoDto);
+        }
+        catch(Exception e)
+        {
+
+        }
+        try
+        {
+            myListener.onClickListener(restauranteDto);
+        }
+        catch(Exception e)
+        {
+
+        }
+        try
+        {
+            myListener.onClickListener(salonDto);
+        }
+        catch(Exception e)
+        {
+
+        }
+        try
+        {
+            myListener.onClickListener(empleadoDto);
+        }
+        catch(Exception e)
+        {
+
+        }
+
     }
 
 }

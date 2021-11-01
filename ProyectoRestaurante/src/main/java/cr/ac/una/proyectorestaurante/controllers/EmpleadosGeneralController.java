@@ -40,38 +40,27 @@ public class EmpleadosGeneralController extends Controller implements Initializa
     private TextField txtBuscar;
     @FXML
     private JFXButton btnBuscar;
-    private Label lblNombrePro;
-    private ImageView imgPro;
     @FXML
     private JFXButton btnEditar;
     @FXML
     private JFXButton btnEliminar;
+    @FXML
+    private Label lblNombreEmpleado;
+    @FXML
+    private ImageView imgEmpleado;
 
     /**
      * Initializes the controller class.
      */
     private MyListenerItem myListener;
     EmpleadoService empleadoService = new EmpleadoService();
-    EmpleadoDto empleadoDto = new EmpleadoDto();
     private static List<EmpleadoDto> productos = new ArrayList<>();
-    @FXML
-    private Label lblNombreEmpleado;
-    @FXML
-    private ImageView imgEmpleado;
 
     @Override
     public void initialize(URL url , ResourceBundle rb)
     {
         // TODO
         loadItems("aux");
-    }
-
-    public void setProSelect(EmpleadoDto empeladoDto)
-    {
-        lblNombrePro.setText(empeladoDto.getNombre());
-        Image img2 = new Image(new ByteArrayInputStream(empeladoDto.getFoto()));//crea un objeto imagen, transforma el byte[] a un buffered imagen
-        imgPro.setImage(img2);
-        AppContext.getInstance().set("Empleado" , empeladoDto);
     }
 
     public void loadItems(String name)
@@ -99,15 +88,17 @@ public class EmpleadosGeneralController extends Controller implements Initializa
         {
             if(productos.size() > 0)
             {
-                setProSelect(productos.get(0));
+                setEmpSelect(productos.get(0));
                 myListener = new MyListenerItem()
                 {
+
                     @Override
-                    public void onClickListener(Object pro)
+                    public void onClickListener(Object item)
                     {
-                        setProSelect((EmpleadoDto) pro);
+                        setEmpSelect((EmpleadoDto) item);
                         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                     }
+
                 };
             }
             int column = 0;
@@ -159,6 +150,15 @@ public class EmpleadosGeneralController extends Controller implements Initializa
         }
     }
 
+    public void setEmpSelect(EmpleadoDto empleadoDto)
+    {
+        lblNombreEmpleado.setText(empleadoDto.getNombre());
+
+        Image img2 = new Image(new ByteArrayInputStream(empleadoDto.getFoto()));//crea un objeto imagen, transforma el byte[] a un buffered imagen
+        imgEmpleado.setImage(img2);
+        AppContext.getInstance().set("Empleado" , empleadoDto);
+    }
+
     public void update()
     {
         grid.getChildren().clear();
@@ -179,7 +179,7 @@ public class EmpleadosGeneralController extends Controller implements Initializa
         {
             CrearEmpleadoController registroEmpleadoController = (CrearEmpleadoController) FlowController.getInstance().getController("CrearEmpleado");
             FlowController.getInstance().goViewInWindowModal("CrearEmpleado" , (Stage) btnBuscar.getScene().getWindow() , Boolean.FALSE);
-            registroEmpleadoController.unbindProducto();
+            registroEmpleadoController.unbindEmpleado();
             update();
 
         }
@@ -192,7 +192,7 @@ public class EmpleadosGeneralController extends Controller implements Initializa
             CrearEmpleadoController registroEmpleadoController = (CrearEmpleadoController) FlowController.getInstance().getController("CrearEmpleado");
             registroEmpleadoController.load();
             FlowController.getInstance().goViewInWindowModal("CrearEmpleado" , (Stage) btnBuscar.getScene().getWindow() , Boolean.FALSE);
-            registroEmpleadoController.unbindProducto();
+            registroEmpleadoController.unbindEmpleado();
             update();
         }
         if(event.getSource() == btnEliminar)

@@ -216,7 +216,7 @@ public class CrearProductoController extends Controller implements Initializable
             }
             else
             {
-
+                new Mensaje().show(Alert.AlertType.ERROR , "Faltan datos" , "Error en algun dato");
             }
         }
     }

@@ -93,11 +93,12 @@ public class MainController extends Controller implements Initializable
                 myListenerRess = new MyListenerItem()
                 {
                     @Override
-                    public void onClickListener(Object res)
+                    public void onClickListener(Object item)
                     {
-                        setResSelect((RestauranteDto) res);
-                        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        setResSelect((RestauranteDto) item);
+                        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                     }
+
                 };
             }
             int column = 0;
@@ -163,7 +164,7 @@ public class MainController extends Controller implements Initializable
         if(event.getSource() == btnAgregarRestaurante)
         {
             CrearRestauranteController registroRestauranteController = (CrearRestauranteController) FlowController.getInstance().getController("CrearRestaurante");
-            FlowController.getInstance().goViewInWindowModal("CrearRestaurante" , (Stage) btnAgregarRestaurante.getScene().getWindow(), false);
+            FlowController.getInstance().goViewInWindowModal("CrearRestaurante" , (Stage) btnAgregarRestaurante.getScene().getWindow() , false);
             registroRestauranteController.unbinRestaurante();
             update();
         }

@@ -19,6 +19,7 @@ import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.layout.*;
+import javafx.stage.*;
 
 /**
  * FXML Controller class
@@ -81,9 +82,9 @@ public class SalonesGeneralController extends Controller implements Initializabl
             myListener = new MyListenerItem()
             {
                 @Override
-                public void onClickListener(Object sal)
+                public void onClickListener(Object item)
                 {
-                    setSalSelect((SalonDto) sal);
+                    setSalSelect((SalonDto) item);
                     //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                 }
             };
@@ -141,11 +142,15 @@ public class SalonesGeneralController extends Controller implements Initializabl
     {
         if(event.getSource() == btnAgregarSalon)
         {
+            CrearSalonController crearSalonController = (CrearSalonController) FlowController.getInstance().getController("CrearSalon");
+            FlowController.getInstance().goViewInWindowModal("CrearSalon" , (Stage) btnContinuar.getScene().getWindow() , Boolean.FALSE);
+            crearSalonController.ubindSalon();
+            update();
 
         }
         if(event.getSource() == btnEditar)
         {
-
+            FlowController.getInstance().goViewInWindowModal("CrearSalon" , (Stage) btnContinuar.getScene().getWindow() , Boolean.FALSE);
         }
         if(event.getSource() == btnEliminar)
         {
@@ -162,6 +167,11 @@ public class SalonesGeneralController extends Controller implements Initializabl
     public void initialize()
     {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void update()
+    {
+        //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
