@@ -14,7 +14,7 @@ import cr.ac.una.proyectorestaurante.services.*;
 import cr.ac.una.proyectorestaurante.utils.*;
 import java.io.*;
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -37,7 +37,7 @@ public class CrearEmpleadoController extends Controller implements Initializable
     @FXML
     private JFXTextField txtUsuario;
     @FXML
-    private JFXPasswordField txtContrasena;
+    private JFXTextField txtContrasena;
     @FXML
     private JFXButton btnRegresar;
     @FXML
@@ -50,6 +50,7 @@ public class CrearEmpleadoController extends Controller implements Initializable
     EmpleadoDto empleadoDto = new EmpleadoDto();
     EmpleadoService empleadoService = new EmpleadoService();
     RolService rolService = new RolService();
+    List<RolDto> roles = new ArrayList<>();
     @FXML
     private JFXTextField txtApellido;
     @FXML
@@ -61,8 +62,15 @@ public class CrearEmpleadoController extends Controller implements Initializable
     public void initialize(URL url , ResourceBundle rb)
     {
         // TODO
-        txtNombre.setTextFormatter(Formato.getInstance().letrasFormat(50));
-        txtApellido.setTextFormatter(Formato.getInstance().letrasFormat(50));
+        Respuesta res = rolService.getRoles();
+        roles = (List<RolDto>) res.getResultado("Roles");
+        roles.forEach(t ->
+        {
+            cmbRoles.getItems().add(t.getNombre());
+        });
+
+        txtNombre.setTextFormatter(Formato.getInstance().letrasFormat(26));
+        txtApellido.setTextFormatter(Formato.getInstance().letrasFormat(26));
         txtUsuario.setTextFormatter(Formato.getInstance().maxLengthFormat(26));
         txtContrasena.setTextFormatter(Formato.getInstance().maxLengthFormat(26));
 

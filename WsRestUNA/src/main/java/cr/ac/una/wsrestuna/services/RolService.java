@@ -31,7 +31,7 @@ public class RolService
     {
         try
         {
-            Query qryRoles = em.createNamedQuery("Roles.findAll" , Rol.class);
+            Query qryRoles = em.createNamedQuery("Rol.findAll" , Rol.class);
             List<Rol> categorias = (List<Rol>) qryRoles.getResultList();
             List<RolDto> categoriasDto = new ArrayList<>();
             categorias.forEach(rol ->
