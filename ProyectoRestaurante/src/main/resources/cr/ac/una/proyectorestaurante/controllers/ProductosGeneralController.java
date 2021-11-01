@@ -44,6 +44,8 @@ public class ProductosGeneralController extends Controller implements Initializa
     private Label lblNombrePro;
     @FXML
     private ImageView imgPro;
+    @FXML
+    private Label lblPrecio;
     /**
      * Initializes the controller class.
      */

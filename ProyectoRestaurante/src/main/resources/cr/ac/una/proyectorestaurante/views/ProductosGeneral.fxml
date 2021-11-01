@@ -68,6 +68,7 @@
                            </VBox.margin>
                         </HBox>
                         <ImageView fx:id="imgPro" fitHeight="216.0" fitWidth="292.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="lblPrecio" text="Precio: ¢" />
                         <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="335.0">
                            <children>
                               <Line endX="334.29290771484375" endY="0.2928932309150696" startX="-100.0" />
