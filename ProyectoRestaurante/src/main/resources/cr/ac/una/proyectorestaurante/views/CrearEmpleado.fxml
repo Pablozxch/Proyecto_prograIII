@@ -42,7 +42,7 @@
             <HBox alignment="CENTER" prefHeight="0.0" prefWidth="600.0" spacing="85.0" VBox.vgrow="ALWAYS">
                <children>
                   <JFXButton fx:id="btnRegresar" onAction="#click" text="Regresar" />
-                  <JFXButton fx:id="btnContinuar" text="Continuar" />
+                  <JFXButton fx:id="btnContinuar" onAction="#click" text="Continuar" />
                </children>
                <VBox.margin>
                   <Insets />

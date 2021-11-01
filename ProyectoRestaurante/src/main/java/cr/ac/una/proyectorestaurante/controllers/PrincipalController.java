@@ -14,6 +14,7 @@ import javafx.event.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.stage.*;
 
 /**
  * FXML Controller class
@@ -49,7 +50,7 @@ public class PrincipalController extends Controller implements Initializable
     public void initialize(URL url , ResourceBundle rb)
     {
         // TODO
-        lblTitulo.setText(" Sistema del Restaurante " + ((RestauranteDto) AppContext.getInstance().get("Restaurante")).getNombre()+ " ");//cambiar para ver que se ve mejor xD
+        lblTitulo.setText(" Sistema del Restaurante " + ((RestauranteDto) AppContext.getInstance().get("Restaurante")).getNombre() + " ");//cambiar para ver que se ve mejor xD
     }
 
     @Override
@@ -76,6 +77,20 @@ public class PrincipalController extends Controller implements Initializable
         if(event.getSource() == btnEmpleados)
         {
             FlowController.getInstance().goView("EmpleadosGeneral");
+        }
+        if(event.getSource() == btnSalir)
+        {
+            if(new Mensaje().showConfirmation("Saliendo del Sistema" , getStage() , "¿Esta seguro que desea salir del sistema?"))
+            {
+                getStage().close();
+            }
+        }
+        if(event.getSource() == btnCerrarSesion)
+        {
+            AppContext.getInstance().delete("Usuario");//este usuario es el encargado de ingresar a todo lo que el pueda
+            FlowController.getInstance().goViewInWindowModal("LogIn" , (Stage) btnCerrarSesion.getScene().getWindow() , Boolean.FALSE);//ver que se hace con esto
+            //preguntar que si lo de crear empleados en esta vista
+
         }
     }
 

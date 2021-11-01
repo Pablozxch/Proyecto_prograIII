@@ -37,36 +37,29 @@ public class Empleado implements Serializable
     @SequenceGenerator(name = "TBL_EMPLEADO_EMP_ID_GENERATOR" , sequenceName = "RESTUNA.TBL_EMPLEADO_SEQ01" , allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "TBL_EMPLEADO_EMP_ID_GENERATOR")
     @Basic(optional = false)
-    @NotNull
     @Column(name = "EMP_ID")
     private Long empId;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1 , max = 50)
     @Column(name = "EMP_NOMBRE")
     private String empNombre;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1 , max = 50)
     @Column(name = "EMP_USUARIO")
     private String empUsuario;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1 , max = 50)
     @Column(name = "EMP_CONTRA")
     private String empContra;
     @Basic(optional = false)
-    @NotNull
     @Lob
     @Column(name = "EMP_FOTO")
     private byte[] empFoto;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1 , max = 50)
     @Column(name = "EMP_APELLLIDO")
     private String empApelllido;
     @Basic(optional = false)
-    @NotNull
     @Version
     @Column(name = "EMP__VERSION")
     private Long empVersion;
@@ -103,12 +96,18 @@ public class Empleado implements Serializable
     public Empleado(EmpleadoDto empleadoDto)
     {
         this.empId = empleadoDto.getId();
-
+        actualizarEmpleado(empleadoDto);
     }
 
     public void actualizarEmpleado(EmpleadoDto empleadoDto)
     {
-
+        this.empNombre = empleadoDto.getNombre();
+        this.empUsuario = empleadoDto.getUsuario();
+        this.empContra = empleadoDto.getContra();
+        this.empFoto = empleadoDto.getFoto();
+        this.empApelllido = empleadoDto.getApellido();
+        this.resId = new Restaurante(empleadoDto.getRestauranteDto());
+        this.rolId = new Rol(empleadoDto.getRolDto());
     }
 
     public Long getEmpId()

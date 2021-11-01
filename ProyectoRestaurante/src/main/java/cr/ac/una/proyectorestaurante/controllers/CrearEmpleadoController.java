@@ -46,7 +46,12 @@ public class CrearEmpleadoController extends Controller implements Initializable
     private JFXButton btnRegresar;
     @FXML
     private JFXButton btnContinuar;
-
+    @FXML
+    private JFXTextField txtApellido;
+    @FXML
+    private ImageView imvEmpleado;
+    @FXML
+    private JFXButton btnCargarImagen;
     /**
      * Initializes the controller class.
      */
@@ -55,17 +60,17 @@ public class CrearEmpleadoController extends Controller implements Initializable
     EmpleadoService empleadoService = new EmpleadoService();
     RolService rolService = new RolService();
     List<RolDto> roles = new ArrayList<>();
-    @FXML
-    private JFXTextField txtApellido;
-    @FXML
-    private ImageView imvEmpleado;
-    @FXML
-    private JFXButton btnCargarImagen;
 
     @Override
     public void initialize(URL url , ResourceBundle rb)
     {
         // TODO
+        Respuesta res = rolService.getRoles();
+        roles = (List<RolDto>) res.getResultado("Roles");
+        roles.forEach(t ->
+        {
+            cmbRoles.getItems().add(t.getNombre());
+        });
         txtNombre.setTextFormatter(Formato.getInstance().letrasFormat(26));
         txtApellido.setTextFormatter(Formato.getInstance().letrasFormat(26));
         txtUsuario.setTextFormatter(Formato.getInstance().maxLengthFormat(26));
@@ -126,6 +131,7 @@ public class CrearEmpleadoController extends Controller implements Initializable
                                         empleadoDto.setNombre(nombre);
                                         empleadoDto.setApellido(apellido);
                                         empleadoDto.setUsuario(user);
+                                        System.out.println("La contra es " + password);
                                         empleadoDto.setContra(password);
                                         roles.forEach(t ->
                                         {
@@ -148,6 +154,7 @@ public class CrearEmpleadoController extends Controller implements Initializable
                                         {
                                             empleadoDto.setFoto(empleadoDto.getFoto());
                                         }
+                                        System.out.println("El valor a guardar es " + empleadoDto.toString());
                                         Respuesta res = empleadoService.guardarEmpleado(empleadoDto);
                                         if(res.getEstado())
                                         {
@@ -195,12 +202,6 @@ public class CrearEmpleadoController extends Controller implements Initializable
     @Override
     public void initialize()
     {
-        Respuesta res = rolService.getRoles();
-        roles = (List<RolDto>) res.getResultado("Roles");
-        roles.forEach(t ->
-        {
-            cmbRoles.getItems().add(t.getNombre());
-        });
     }
 
     void unbindEmpleado()
