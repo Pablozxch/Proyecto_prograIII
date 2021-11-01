@@ -111,6 +111,10 @@ public class CrearSalonController extends Controller implements Initializable
                 imgSalon.setImage(imagen1);
             }
         }
+        if(event.getSource() == btnVolver)
+        {
+            getStage().close();
+        }
         if(event.getSource() == btnAceptar)
         {
             String nombre;

@@ -7,6 +7,7 @@ package cr.ac.una.wsrestuna.services;
 
 import cr.ac.una.wsrestuna.models.*;
 import cr.ac.una.wsrestuna.utils.*;
+import java.sql.*;
 import java.util.*;
 import java.util.logging.*;
 import javax.ejb.*;
@@ -79,4 +80,65 @@ public class SalonService
         }
     }
 
+    public Respuesta guardarSalon(SalonDto salonDto)
+    {
+        try
+        {
+            Salon salon;
+            if(salonDto.getId() != null && salonDto.getId() > 0)
+            {
+                salon = em.find(Salon.class , salonDto.getId());
+                if(salon == null)
+                {
+                    return new Respuesta(false , CodigoRespuesta.ERROR_NOENCONTRADO , "No se encrontró el salon a modificar." , "guardarSalon NoResultException");
+                }
+                salon.actualizarSalon(salonDto);
+                salon = em.merge(salon);
+            }
+            else
+            {
+                salon = new Salon(salonDto);
+                em.persist(salon);
+            }
+            em.flush();
+            return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "" , "Salon" , new SalonDto(salon));
+        }
+        catch(Exception ex)
+        {
+            LOG.log(Level.SEVERE , "Ocurrio un error al guardar el salon." , ex);
+            return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al guardar el salon." , "guardarSalon " + ex.getMessage());
+        }
+    }
+
+    public Respuesta eliminarSalon(Long id)
+    {
+        try
+        {
+            Salon salon;
+            if(id != null && id > 0)
+            {
+                salon = em.find(Salon.class , id);
+                if(salon == null)
+                {
+                    return new Respuesta(false , CodigoRespuesta.ERROR_NOENCONTRADO , "No se encrontró el salon a eliminar." , "eliminarSalon NoResultException");
+                }
+                em.remove(salon);
+            }
+            else
+            {
+                return new Respuesta(false , CodigoRespuesta.ERROR_NOENCONTRADO , "Debe cargar el salon a eliminar." , "eliminarSalon NoResultException");
+            }
+            em.flush();
+            return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "");
+        }
+        catch(Exception ex)
+        {
+            if(ex.getCause() != null && ex.getCause().getCause().getClass() == SQLIntegrityConstraintViolationException.class)
+            {
+                return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "No se puede eliminar el salon porque tiene relaciones con otros registros." , "eliminarSalon " + ex.getMessage());
+            }
+            LOG.log(Level.SEVERE , "Ocurrio un error al guardar el salon." , ex);
+            return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al eliminar el salon." , "eliminarSalon " + ex.getMessage());
+        }
+    }
 }

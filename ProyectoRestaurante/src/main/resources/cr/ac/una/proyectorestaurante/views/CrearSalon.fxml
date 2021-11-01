@@ -27,12 +27,12 @@
                               <ImageView fx:id="imgSalon" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </VBox>
-                        <JFXButton fx:id="btnCargar" text="Cargar" />
+                        <JFXButton fx:id="btnCargar" onAction="#click" text="Cargar" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="339.0" spacing="100.0">
                      <children>
-                        <JFXButton fx:id="btnVolver" text="Volver" />
+                        <JFXButton fx:id="btnVolver" onAction="#click" text="Volver" />
                         <JFXButton fx:id="btnAceptar" onAction="#click" text="Aceptar" />
                      </children>
                   </HBox>

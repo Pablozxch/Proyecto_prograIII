@@ -32,28 +32,24 @@ public class Salon implements Serializable
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @SequenceGenerator(name = "TBL_SALON_SAL_ID_GENERATOR" , sequenceName = "RESTUNA.TBL_SALON_SEQ01" , allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "TBL_SALON_SAL_ID1_GENERATOR")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "TBL_SALON_SAL_ID_GENERATOR")
     @Basic(optional = false)
-    @NotNull
     @Column(name = "SAL_ID")
     private Long salId;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1 , max = 50)
     @Column(name = "SAL_NOMBRE")
     private String salNombre;
     @Basic(optional = false)
-    @NotNull
     @Lob
     @Column(name = "SAL_IMAGEN")
     private byte[] salImagen;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1 , max = 1)
     @Column(name = "SAL_BARRAOMESA")
     private String salBarraomesa;
     @Basic(optional = false)
-    @NotNull
+    @Version
     @Column(name = "SAL_VERSION")
     private Long salVersion;
     @JoinColumn(name = "RES_ID" , referencedColumnName = "RES_ID")

@@ -21,10 +21,10 @@ import javax.ws.rs.core.*;
 @Path("/SalonController")
 public class SalonController
 {
-    
+
     @EJB
     SalonService salonService;
-    
+
     @GET
     @Path("/ping")
     public Response ping()
@@ -33,7 +33,7 @@ public class SalonController
                   .ok("ping Salon")
                   .build();
     }
-    
+
     @GET
     @Path("/salon/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -47,7 +47,7 @@ public class SalonController
             {
                 return Response.status(res.getCodigoRespuesta().getValue()).entity(res.getMensaje()).build();
             }
-            SalonDto sal=(SalonDto) res.getResultado("Salon");
+            SalonDto sal = (SalonDto) res.getResultado("Salon");
             return Response.ok((SalonDto) res.getResultado("Salon")).build();//TODO
         }
         catch(Exception ex)
@@ -56,7 +56,7 @@ public class SalonController
             return Response.status(CodigoRespuesta.ERROR_INTERNO.getValue()).entity("Error al obtener el salon ").build();//TODO
         }
     }
-    
+
     @GET
     @Path("/salon")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -71,7 +71,7 @@ public class SalonController
             {
                 return Response.status(res.getCodigoRespuesta().getValue()).entity(res.getMensaje()).build();//TODO
             }
-            
+
             List<SalonDto> s = (List<SalonDto>) res.getResultado("Salones");
             s.forEach(t ->
             {
@@ -80,6 +80,48 @@ public class SalonController
             return Response.ok(new GenericEntity<List<SalonDto>>((List<SalonDto>) res.getResultado("Salones"))
             {
             }).build();
+        }
+        catch(Exception ex)
+        {
+            Logger.getLogger(SalonController.class.getName()).log(Level.SEVERE , null , ex);
+            return Response.status(CodigoRespuesta.ERROR_INTERNO.getValue()).entity("Error al obtener el salon ").build();//TODO
+        }
+    }
+
+    @POST
+    @Path("/salon")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response guardarSalon(SalonDto salonDto)
+    {
+        try
+        {
+            Respuesta res = salonService.guardarSalon(salonDto);
+            if(!res.getEstado())
+            {
+                return Response.status(res.getCodigoRespuesta().getValue()).entity(res.getMensaje()).build();
+            }
+            return Response.ok((SalonDto) res.getResultado("Salon")).build();//TODO
+        }
+        catch(Exception ex)
+        {
+            Logger.getLogger(SalonController.class.getName()).log(Level.SEVERE , null , ex);
+            return Response.status(CodigoRespuesta.ERROR_INTERNO.getValue()).entity("Error al obtener el salon ").build();//TODO
+        }
+    }
+
+    @DELETE
+    @Path("/salon/{id}")
+    public Response eliminarSalon(@PathParam("id") Long id)
+    {
+        try
+        {
+            Respuesta res = salonService.eliminarSalon(id);
+            if(!res.getEstado())
+            {
+                return Response.status(res.getCodigoRespuesta().getValue()).entity(res.getMensaje()).build();
+            }
+            return Response.ok().build();
         }
         catch(Exception ex)
         {
