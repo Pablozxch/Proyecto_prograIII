@@ -103,7 +103,7 @@ public class FlowController
     {
         try
         {
-            this.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("/cr/ac/una/proyectorestaurante/views/Main.fxml") , this.idioma)));
+            this.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("/cr/ac/una/proyectorestaurante/views/LogIn.fxml") , this.idioma)));
             mainStage.setMinHeight(830);
             mainStage.setMinWidth(1345);
             this.mainStage.show();

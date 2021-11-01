@@ -46,6 +46,7 @@ public class CrearEmpleadoController extends Controller implements Initializable
     private JFXButton btnRegresar;
     @FXML
     private JFXButton btnContinuar;
+    
 
     /**
      * Initializes the controller class.
