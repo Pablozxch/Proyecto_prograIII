@@ -29,8 +29,7 @@ public class CategoriaDto
         this.id = new SimpleStringProperty();
         this.nombre = new SimpleStringProperty();
         this.detalle = new SimpleStringProperty();
-        
-        productos = new ArrayList<>();
+        this.productos = new ArrayList<>();
     }
 
     public Long getId()

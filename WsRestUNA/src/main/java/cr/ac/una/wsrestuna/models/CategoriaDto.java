@@ -24,7 +24,7 @@ public class CategoriaDto
     public CategoriaDto()
     {
         this.modificado = false;
-        productos = new ArrayList<>();
+        this.productos = new ArrayList<>();
     }
 
     public CategoriaDto(Categoria categoria)

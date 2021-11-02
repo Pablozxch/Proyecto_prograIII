@@ -11,7 +11,6 @@ import com.jfoenix.controls.JFXListView;
 import cr.ac.una.proyectorestaurante.models.*;
 import cr.ac.una.proyectorestaurante.services.*;
 import cr.ac.una.proyectorestaurante.utils.*;
-import io.github.palexdev.materialfx.controls.*;
 import java.net.URL;
 import java.util.*;
 import javafx.beans.value.*;
@@ -57,41 +56,17 @@ public class CategoriasGeneralController extends Controller implements Initializ
     List<CategoriaDto> categorias = new ArrayList<>();
     ObservableList<String> list = FXCollections.observableArrayList();//con esto se llena la cosa
     boolean x = false;
+    CategoriaDto cat = new CategoriaDto();
 
     @Override
 
     public void initialize(URL url , ResourceBundle rb)
     {
-        llenarCategorias();
-        categorias.forEach(t ->
-        {
-            t.getProductos().forEach(p ->
-            {
-                list.add(p.getNombre());
-            });
-        });
-
-        //la de productos generales
-        productos.forEach(t ->
-        {
-            //se ecnarga de evaluar la lista de productos a la lista de productos de la caregoria como tal
-            list.forEach(y ->
-            {
-                if(t.getNombre().toUpperCase().equals(y.toUpperCase()))
-                {
-                    x = true;
-                }
-            });
-            listProductos.getItems().add(create(t.getNombre() , x));
-            x = false;
-        });
-        //esta es la de la categoria
-
-        //   listProductos.getItems().addAll(create("Coca") , create("asd") , create("1234e") , create("asdcs"));
     }
 
     public HBox create(String name , boolean x)//workea
     {
+        System.out.println("El nombre a crear es " + name + x);
         CheckBox ch = new CheckBox();
         ch.setSelected(x);
         HBox hBox = new HBox(20);
@@ -104,31 +79,67 @@ public class CategoriasGeneralController extends Controller implements Initializ
         return hBox;
     }
 
-    public void llenarCategorias()
+    public void load()
     {
         Respuesta res = categoriaService.getCategorias();
         if(res.getEstado())
         {
+            categorias.clear();
             categorias = (List<CategoriaDto>) res.getResultado("Categorias");
+            cmbCategorias.getItems().clear();
+            categorias.forEach(t ->
+            {
+                cmbCategorias.getItems().add(t.getNombre());
+            });
         }
-        categorias.forEach(t ->
-        {
-            cmbCategorias.getItems().add(t.getNombre());
-        });
-        cmbCategorias.setValue(categorias.get(0).getNombre());
-        productos = (List<ProductoDto>) ((Respuesta) productoServicec.getProductos()).getResultado("Productos");
+
     }
 
     @FXML
     private void click(ActionEvent event)
     {
+        if(event.getSource() == btnBuscar)
+        {
+            list.clear();
+            listProductos.getItems().clear();
+            categorias.forEach(t ->
+            {
+                if(t.getNombre().toUpperCase().equals(cmbCategorias.getValue().toUpperCase()))
+                {
+                    t.getProductos().forEach(p ->
+                    {
+                        System.out.println(t + p.getNombre());
+                        list.add(p.getNombre());
+                    });
+                }
+
+            });
+
+            productos.forEach(t ->
+            {
+                //se ecnarga de evaluar la lista de productos a la lista de productos de la caregoria como tal
+                list.forEach(y ->
+                {
+
+                    if(y.toUpperCase().equals(t.getNombre().toUpperCase()))
+                    {
+                        System.out.println("El valor esta en ambas es  " + y);
+                        x = true;
+                    }
+                });
+                listProductos.getItems().add(create(t.getNombre() , x));
+                x = false;
+            });
+
+        }
         if(event.getSource() == btnCrearCategoria)
         {
             FlowController.getInstance().goViewInWindowModal("CrearCategoría" , getStage() , false);
+            load();
         }
         if(event.getSource() == btnEliminar)
         {
-
+            load();
         }
         if(event.getSource() == btnGuardar)
         {
@@ -157,19 +168,30 @@ public class CategoriasGeneralController extends Controller implements Initializ
                 {
                     t.getProductos().clear();
                     t.setProductos(productosSave);
+                    cat = t;
                     //una lista que creo antes de inclusive buscar entre categorias
                 }
             });
+            cat.getProductos().forEach(t ->
+            {
+                System.out.println("El producto es " + t.getNombre());
+            });
+            Respuesta res = categoriaService.guardarCategoria(cat);
+            if(res.getEstado())
+            {
+                new Mensaje().show(Alert.AlertType.CONFIRMATION , "Guardado Con exito" , "Se guardo con exito toda la informacion");
+                load();
+            }
+
         }
     }
 
     @Override
     public void initialize()
     {
-
+        load();
+        productos = (List<ProductoDto>) ((Respuesta) productoServicec.getProductos()).getResultado("Productos");
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-  
 
 }

@@ -21,22 +21,47 @@ import javax.persistence.*;
 @Stateless
 public class CategoriaService
 {
-
+    
     private static final Logger LOG = Logger.getLogger(EmpleadoService.class.getName());
 
     //TODO
     @PersistenceContext(unitName = "WsRestUNA")
     private EntityManager em;
-
+    
+    public Respuesta getCategoriabyNamae(String CatNombre)// Un unico producto por id
+    {
+        try
+        {
+            Query qryCategoria = em.createNamedQuery("   Categoria.findByCatNombre" , Categoria.class);
+            qryCategoria.setParameter("CatNombre" , CatNombre);
+            return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "" , "Categoria" , new CategoriaDto((Categoria) qryCategoria.getSingleResult()));
+        }
+        catch(NoResultException ex)
+        {
+            return new Respuesta(false , CodigoRespuesta.ERROR_NOENCONTRADO , "No existe un categoria con el nombre ingresado." , "getCategoria NoResultException");
+        }
+        catch(NonUniqueResultException ex)
+        {
+            LOG.log(Level.SEVERE , "Ocurrio un error al consultar el categoria." , ex);
+            return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al consultar el categoria." , "getCategoria NonUniqueResultException");
+        }
+        catch(Exception ex)
+        {
+            LOG.log(Level.SEVERE , "Ocurrio un error al consultar el categoria." , ex);
+            return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al consultar el categoria." , "getCategoria " + ex.getMessage());
+        }
+        
+    }
+    
     public Respuesta getCategoria(Long catId)// Un unico producto por id
     {
         try
         {
             Query qryCategoria = em.createNamedQuery("Categoria.findByCatId" , Categoria.class);
             qryCategoria.setParameter("catId" , catId);
-
+            
             return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "" , "Categoria" , new CategoriaDto((Categoria) qryCategoria.getSingleResult()));
-
+            
         }
         catch(NoResultException ex)
         {
@@ -53,7 +78,7 @@ public class CategoriaService
             return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al consultar el categoria." , "getCategoria " + ex.getMessage());
         }
     }
-
+    
     public Respuesta getCategorias()
     {
         try
@@ -65,9 +90,9 @@ public class CategoriaService
             {
                 categoriasDto.add(new CategoriaDto(categoria));
             });
-
+            
             return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "" , "Categorias" , categoriasDto);
-
+            
         }
         catch(NoResultException ex)
         {
@@ -79,7 +104,7 @@ public class CategoriaService
             return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al consultar el categoria." , "getCategorias " + ex.getMessage());
         }
     }
-
+    
     public Respuesta guardarCategoria(CategoriaDto categoriaDto)
     {
         try
@@ -109,7 +134,7 @@ public class CategoriaService
             return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al guardar el categoria." , "guardarCategoria " + ex.getMessage());
         }
     }
-
+    
     public Respuesta eliminarCategoria(Long id)
     {
         try

@@ -46,4 +46,47 @@ public class CategoriaService
             return new Respuesta(false , "Error obteniendo categorias." , "getCategorias " + ex.getMessage());
         }
     }
+
+    public Respuesta eliminarCategoria(Long id)
+    {
+        try
+        {
+            Map<String , Object> parametros = new HashMap<>();
+            parametros.put("id" , id);
+            Request request = new Request("CategoriaController/categoria" , "/{id}" , parametros);
+            request.delete();
+            if(request.isError())
+            {
+                return new Respuesta(false , request.getError() , "");
+            }
+
+            return new Respuesta(true , "" , "");
+        }
+        catch(Exception ex)
+        {
+            Logger.getLogger(CategoriaService.class.getName()).log(Level.SEVERE , "Error eliminando el categoria." , ex);
+            return new Respuesta(false , "Error eliminando el categoria." , "eliminarCategoria " + ex.getMessage());
+        }
+    }
+
+    public Respuesta guardarCategoria(CategoriaDto pd)
+    {
+        try
+        {
+            Request request = new Request("CategoriaController/categoria");
+            request.post(pd);
+            if(request.isError())
+            {
+                return new Respuesta(false , request.getError() , "");
+
+            }
+            CategoriaDto categoria = (CategoriaDto) request.readEntity(CategoriaDto.class);//
+            return new Respuesta(true , "" , "" , "Categoria" , categoria);
+        }
+        catch(Exception ex)
+        {
+            Logger.getLogger(CategoriaService.class.getName()).log(Level.SEVERE , "Error guardando el categoria." , ex);
+            return new Respuesta(false , "Error guardando el categoria." , "guardarCategoria " + ex.getMessage());
+        }
+    }
 }

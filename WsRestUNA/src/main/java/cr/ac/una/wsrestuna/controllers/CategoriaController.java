@@ -122,4 +122,5 @@ public class CategoriaController
             return Response.status(CodigoRespuesta.ERROR_INTERNO.getValue()).entity("Error al obtener la categoria ").build();//TODO
         }
     }
+
 }
