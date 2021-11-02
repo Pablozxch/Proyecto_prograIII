@@ -2,7 +2,7 @@ module cr.ac.una.proyectorestaurante
 {
     requires javafx.controls;
     requires javafx.fxml;
-
+    requires MaterialFX;
     requires java.logging;
     requires com.jfoenix;
     requires java.base;
@@ -12,11 +12,9 @@ module cr.ac.una.proyectorestaurante
 
     requires javafx.media;
 
-
     requires java.desktop;
 
     requires java.instrument;
-
 
     requires AnimateFX;
     /*    
@@ -26,7 +24,6 @@ module cr.ac.una.proyectorestaurante
     requires jakarta.xml.bind;
 
 //    requires jakarta.json;
-
     opens cr.ac.una.proyectorestaurante to javafx.fxml , javafx.graphics;
     opens cr.ac.una.proyectorestaurante.controllers to javafx.fxml , javafx.graphics;
     exports cr.ac.una.proyectorestaurante.models;

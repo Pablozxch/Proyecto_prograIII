@@ -11,6 +11,7 @@ import com.jfoenix.controls.JFXListView;
 import cr.ac.una.proyectorestaurante.models.*;
 import cr.ac.una.proyectorestaurante.services.*;
 import cr.ac.una.proyectorestaurante.utils.*;
+import io.github.palexdev.materialfx.controls.*;
 import java.net.URL;
 import java.util.*;
 import javafx.beans.value.*;
@@ -18,16 +19,18 @@ import javafx.collections.*;
 import javafx.event.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.*;
 import javafx.scene.control.*;
-import javafx.scene.paint.*;
+import javafx.scene.layout.*;
 
 /**
  * FXML Controller class
  *
  * @author Christopher
  */
-public class CategoriasGeneralController extends Controller implements Initializable {
-    
+public class CategoriasGeneralController extends Controller implements Initializable
+{
+
     @FXML
     private JFXComboBox<String> cmbCategorias;
     @FXML
@@ -35,8 +38,7 @@ public class CategoriasGeneralController extends Controller implements Initializ
     @FXML
     private JFXButton btnEliminar;
     @FXML
-    private JFXListView<String> listProductos;
-
+    private JFXListView<HBox> listProductos;
     /**
      * Initializes the controller class.
      *
@@ -48,59 +50,96 @@ public class CategoriasGeneralController extends Controller implements Initializ
     ProductoService productoServicec = new ProductoService();
     List<ProductoDto> productos = new ArrayList<>();
     List<CategoriaDto> categorias = new ArrayList<>();
-    
-    @Override
-    
-    public void initialize(URL url, ResourceBundle rb) {
-        /*
-            Encargado de cargar todos los productos del restaurante como tal
-         */
-        ObservableList<String> list = FXCollections.observableArrayList();//con esto se llena la cosa
+    ObservableList<String> list = FXCollections.observableArrayList();//con esto se llena la cosa
+    boolean x = false;
 
-        productos.forEach(t
-                -> {
-            list.add(t.getNombre());
+    @Override
+
+    public void initialize(URL url , ResourceBundle rb)
+    {
+        llenarCategorias();
+        categorias.forEach(t ->
+        {
+            t.getProductos().forEach(p ->
+            {
+                list.add(p.getNombre());
+                System.out.println("El nombre es " + p.getNombre());
+            });
         });
-        /*
-              Encargado de cargar todos los productos del restaurante como tal
-         */
-        
-        if (cmbCategorias.getSelectionModel().getSelectedItem() == null) {
-            listProductos.setDisable(true);
-        }
-        Respuesta res = categoriaService.getCategorias();
+
         productos = (List<ProductoDto>) ((Respuesta) productoServicec.getProductos()).getResultado("Productos");
-        if (res.getEstado()) {
+        //la de productos generales
+
+        productos.forEach(t ->
+        {
+            //se ecnarga de evaluar la lista de productos a la lista de productos de la caregoria como tal
+            list.forEach(y ->
+            {
+                if(t.getNombre().toUpperCase().equals(y.toUpperCase()))
+                {
+                    x = true;
+                }
+            });
+            listProductos.getItems().add(create(t.getNombre() , x));
+            x = false;
+        });
+        //esta es la de la categoria
+
+        //   listProductos.getItems().addAll(create("Coca") , create("asd") , create("1234e") , create("asdcs"));
+    }
+
+    public HBox create(String name , boolean x)//workea
+    {
+        CheckBox ch = new CheckBox();
+        ch.setSelected(x);
+        HBox hBox = new HBox(20);
+        hBox.setPadding(new Insets(0 , 10 , 0 , 10));
+        hBox.setPrefSize(200 , 30);
+        Label label2 = new Label(name);
+        label2.setPrefSize(200 , 30);
+        label2.setStyle("-fx-text-fill: #000000");
+        hBox.getChildren().addAll(label2 , ch);
+        return hBox;
+    }
+
+    public void llenarCategorias()
+    {
+        Respuesta res = categoriaService.getCategorias();
+        if(res.getEstado())
+        {
             categorias = (List<CategoriaDto>) res.getResultado("Categorias");
         }
         categorias.forEach(t
-                -> {
+                  ->
+        {
             cmbCategorias.getItems().add(t.getNombre());
         });
+        cmbCategorias.setValue(categorias.get(0).getNombre());
+    }
 
-//        categorias.forEach(t ->
-//        {
-//            t.getProductos().forEach(p ->
-//            {
-//                list.add(p.getNombre());
-//                System.out.println("El nombre es " + p.getNombre());
-//            });
-//        });
-        listProductos.setItems(list);
-    }
-    
     @FXML
-    private void click(ActionEvent event) {
-        if (event.getSource() == btnCrearCategoria) {
-            FlowController.getInstance().goViewInWindowModal("CrearCategoría",getStage(), false);
+    private void click(ActionEvent event)
+    {
+        if(event.getSource() == btnCrearCategoria)
+        {
+            FlowController.getInstance().goViewInWindowModal("CrearCategoría" , getStage() , false);
         }
-        if (event.getSource() == btnEliminar) {
+        if(event.getSource() == btnEliminar)
+        {
+            listProductos.getItems().forEach(t ->
+            {
+                if(((CheckBox) t.getChildren().get(1)).isSelected())
+                {
+                    System.out.println("El valor seleccionado es " + ((Label) t.getChildren().get(0)).getText());
+                }
+            });
         }
     }
-    
+
     @Override
-    public void initialize() {
+    public void initialize()
+    {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

@@ -137,14 +137,15 @@ and open the template in the editor.
 }
 .JFXList-View:filled:selected:focused, .JFXList-Viewl:filled:selected {
     -fx-background-color: linear-gradient(#328BDB 0%, #207BCF 25%, #1973C9 75%, #0A65BF 100%);
-    -fx-text-fill: white;
+    -fx-text-fill: #000000;
 }
 
 .JFXList-View:even { /* <=== changed to even */
     -fx-background-color: white;
+
 }
 
 .JFXList-View:filled:hover {
     -fx-background-color: #cccccc;
-    -fx-text-fill: white;
+    -fx-text-fill: #000000;
 }

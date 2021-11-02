@@ -21,7 +21,7 @@
                      </children>
                   </HBox>
                   <JFXComboBox fx:id="cmbCategorias" focusColor="WHITE" labelFloat="true" prefHeight="25.0" prefWidth="181.0" promptText="Categoría" />
-                  <JFXListView fx:id="listProductos" prefHeight="399.0" prefWidth="308.0">
+                  <JFXListView fx:id="listProductos" prefHeight="399.0" prefWidth="308.0" styleClass="dddd">
                      <VBox.margin>
                         <Insets bottom="15.0" />
                      </VBox.margin>
