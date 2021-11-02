@@ -21,6 +21,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.*;
 import javafx.scene.control.*;
+import javafx.scene.input.*;
 import javafx.scene.layout.*;
 
 /**
@@ -52,6 +53,8 @@ public class CategoriasGeneralController extends Controller implements Initializ
     List<CategoriaDto> categorias = new ArrayList<>();
     ObservableList<String> list = FXCollections.observableArrayList();//con esto se llena la cosa
     boolean x = false;
+    @FXML
+    private JFXButton btnGuardar;
 
     @Override
 
@@ -63,13 +66,10 @@ public class CategoriasGeneralController extends Controller implements Initializ
             t.getProductos().forEach(p ->
             {
                 list.add(p.getNombre());
-                System.out.println("El nombre es " + p.getNombre());
             });
         });
 
-        productos = (List<ProductoDto>) ((Respuesta) productoServicec.getProductos()).getResultado("Productos");
         //la de productos generales
-
         productos.forEach(t ->
         {
             //se ecnarga de evaluar la lista de productos a la lista de productos de la caregoria como tal
@@ -109,12 +109,12 @@ public class CategoriasGeneralController extends Controller implements Initializ
         {
             categorias = (List<CategoriaDto>) res.getResultado("Categorias");
         }
-        categorias.forEach(t
-                  ->
+        categorias.forEach(t ->
         {
             cmbCategorias.getItems().add(t.getNombre());
         });
         cmbCategorias.setValue(categorias.get(0).getNombre());
+        productos = (List<ProductoDto>) ((Respuesta) productoServicec.getProductos()).getResultado("Productos");
     }
 
     @FXML
@@ -126,11 +126,36 @@ public class CategoriasGeneralController extends Controller implements Initializ
         }
         if(event.getSource() == btnEliminar)
         {
+
+        }
+        if(event.getSource() == btnGuardar)
+        {
+            List<ProductoDto> productosSave = new ArrayList<>();
             listProductos.getItems().forEach(t ->
             {
                 if(((CheckBox) t.getChildren().get(1)).isSelected())
                 {
                     System.out.println("El valor seleccionado es " + ((Label) t.getChildren().get(0)).getText());
+                    productos.forEach(p ->
+                    {
+                        if(((Label) t.getChildren().get(0)).getText().equals(p.getNombre()))
+                        {
+                            productosSave.add(p);
+                        }
+                    });
+                }
+            });
+            productosSave.forEach(t ->
+            {
+                System.out.println("Los valores son" + t.toString());
+            });
+            categorias.forEach(t ->
+            {
+                if(t.getNombre().equals(cmbCategorias.getValue()))
+                {
+                    t.getProductos().clear();
+                    t.setProductos(productosSave);
+                    //una lista que creo antes de inclusive buscar entre categorias
                 }
             });
         }
@@ -139,7 +164,10 @@ public class CategoriasGeneralController extends Controller implements Initializ
     @Override
     public void initialize()
     {
+
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+  
 
 }
