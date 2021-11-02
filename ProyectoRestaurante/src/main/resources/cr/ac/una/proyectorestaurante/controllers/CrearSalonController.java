@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.image.ImageView;
 
 /**
  * FXML Controller class
@@ -31,6 +32,8 @@ public class CrearSalonController extends Controller implements Initializable {
     private JFXButton btnVolver;
     @FXML
     private JFXButton btnAceptar;
+    @FXML
+    private ImageView imgSalon;
 
     /**
      * Initializes the controller class.

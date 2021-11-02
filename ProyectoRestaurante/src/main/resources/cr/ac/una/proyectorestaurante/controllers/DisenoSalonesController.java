@@ -6,6 +6,7 @@
 package cr.ac.una.proyectorestaurante.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -26,6 +27,8 @@ public class DisenoSalonesController extends Controller implements Initializable
     private GridPane gripMesa;
     @FXML
     private JFXButton btnEliminar;
+    @FXML
+    private JFXCheckBox chkEditar;
 
     /**
      * Initializes the controller class.

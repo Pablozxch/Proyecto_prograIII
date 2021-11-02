@@ -20,13 +20,18 @@
                         <JFXButton fx:id="btnEliminar" onAction="#click" text="Eliminar" />
                      </children>
                   </HBox>
-                  <JFXComboBox fx:id="cmbCategorias" focusColor="WHITE" labelFloat="true" prefHeight="25.0" prefWidth="181.0" promptText="Categoría" />
+                  <HBox alignment="CENTER" prefHeight="70.0" prefWidth="353.0" spacing="35.0">
+                     <children>
+                        <JFXComboBox fx:id="cmbCategorias" focusColor="WHITE" labelFloat="true" prefHeight="25.0" prefWidth="181.0" promptText="Categoría" />
+                        <JFXButton fx:id="btnBuscar" onAction="#click" text="Buscar" />
+                     </children>
+                  </HBox>
                   <JFXListView fx:id="listProductos" prefHeight="399.0" prefWidth="308.0" styleClass="dddd">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
                   </JFXListView>
-                  <JFXButton fx:id="btnGuardar" onAction="#click">
+                  <JFXButton fx:id="btnGuardar" onAction="#click" text="Guardar">
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>

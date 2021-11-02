@@ -42,11 +42,11 @@ public class CrearSalonController extends Controller implements Initializable
     private JFXButton btnVolver;
     @FXML
     private JFXButton btnAceptar;
+    @FXML
+    private ImageView imgSalon;
     File x;
     SalonDto salonDto = new SalonDto();
     SalonService salonService = new SalonService();
-    @FXML
-    private ImageView imgSalon;
 
     /**
      * Initializes the controller class.

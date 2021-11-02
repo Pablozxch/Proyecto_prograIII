@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -17,6 +18,7 @@
                <children>
                   <JFXButton fx:id="btnAgregar" onAction="#click" text="Agregar" />
                   <JFXButton fx:id="btnEliminar" onAction="#click" text="Eliminar" />
+                  <JFXCheckBox fx:id="chkEditar" text="Editar " />
                </children>
             </HBox>
             <VBox alignment="CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">

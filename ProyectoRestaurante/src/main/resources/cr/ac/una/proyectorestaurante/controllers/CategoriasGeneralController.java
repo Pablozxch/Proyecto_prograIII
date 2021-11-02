@@ -30,6 +30,10 @@ public class CategoriasGeneralController extends Controller implements Initializ
     private JFXButton btnEliminar;
     @FXML
     private JFXListView<?> listProductos;
+    @FXML
+    private JFXButton btnBuscar;
+    @FXML
+    private JFXButton btnGuardar;
     /**
      * Initializes the controller class.
      */

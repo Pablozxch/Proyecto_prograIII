@@ -40,6 +40,10 @@ public class CategoriasGeneralController extends Controller implements Initializ
     private JFXButton btnEliminar;
     @FXML
     private JFXListView<HBox> listProductos;
+    @FXML
+    private JFXButton btnBuscar;
+    @FXML
+    private JFXButton btnGuardar;
     /**
      * Initializes the controller class.
      *
@@ -53,8 +57,6 @@ public class CategoriasGeneralController extends Controller implements Initializ
     List<CategoriaDto> categorias = new ArrayList<>();
     ObservableList<String> list = FXCollections.observableArrayList();//con esto se llena la cosa
     boolean x = false;
-    @FXML
-    private JFXButton btnGuardar;
 
     @Override
 

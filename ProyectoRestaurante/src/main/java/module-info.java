@@ -2,7 +2,7 @@ module cr.ac.una.proyectorestaurante
 {
     requires javafx.controls;
     requires javafx.fxml;
-    requires MaterialFX;
+    //requires MaterialFX;
     requires java.logging;
     requires com.jfoenix;
     requires java.base;

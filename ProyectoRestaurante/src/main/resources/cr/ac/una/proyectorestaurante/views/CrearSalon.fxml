@@ -10,21 +10,21 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="434.0" prefWidth="362.0" styleClass="fondo" stylesheets="@../styles/StylesCss.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.proyectorestaurante.controllers.CrearSalonController">
+<AnchorPane id="AnchorPane" prefHeight="521.0" prefWidth="528.0" styleClass="fondo" stylesheets="@../styles/StylesCss.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.proyectorestaurante.controllers.CrearSalonController">
    <children>
       <HBox layoutX="46.0" layoutY="98.0" prefHeight="432.0" prefWidth="631.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox alignment="CENTER" fillWidth="false" prefHeight="257.0" prefWidth="340.0" spacing="35.0" HBox.hgrow="ALWAYS">
+            <VBox alignment="CENTER" fillWidth="false" prefHeight="521.0" prefWidth="518.0" spacing="35.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label text="Registrar un salón." />
-                  <JFXTextField fx:id="txtNombre" focusColor="WHITE" labelFloat="true" promptText="Nombre" />
+                  <JFXTextField fx:id="txtNombre" alignment="CENTER" focusColor="WHITE" labelFloat="true" promptText="Nombre" />
                   <JFXComboBox fx:id="cmbBarraoMesa" focusColor="WHITE" labelFloat="true" onAction="#click" promptText="Seleccione" />
-                  <HBox alignment="CENTER" prefHeight="186.0" prefWidth="352.0" spacing="10.0">
+                  <HBox alignment="CENTER" prefHeight="195.0" prefWidth="425.0" spacing="10.0">
                      <children>
-                        <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0">
+                        <VBox prefHeight="195.0" prefWidth="280.0" spacing="15.0">
                            <children>
                               <Label text="Imagen para las mesas: " />
-                              <ImageView fx:id="imgSalon" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="imgSalon" fitHeight="172.0" fitWidth="226.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </VBox>
                         <JFXButton fx:id="btnCargar" onAction="#click" text="Cargar" />
@@ -35,6 +35,9 @@
                         <JFXButton fx:id="btnVolver" onAction="#click" text="Volver" />
                         <JFXButton fx:id="btnAceptar" onAction="#click" text="Aceptar" />
                      </children>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
                   </HBox>
                </children>
                <padding>
