@@ -58,7 +58,7 @@ public class CategoriasGeneralController extends Controller implements Initializ
     boolean x = false;
     CategoriaDto cat = new CategoriaDto();
 
-    @Override
+     @Override
 
     public void initialize(URL url , ResourceBundle rb)
     {
