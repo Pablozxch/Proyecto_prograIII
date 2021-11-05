@@ -6,7 +6,7 @@
 package cr.ac.una.proyectorestaurante.controllers;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXComboBox;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -14,38 +14,41 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 /**
  * FXML Controller class
  *
  * @author Christopher
  */
-public class CrearPedidoController extends Controller implements Initializable {
+public class MenuController extends Controller implements Initializable {
 
 
     @FXML
-    private JFXTextField txtNombre;
+    private JFXComboBox<String> cmbCategorias;
     @FXML
-    private JFXTextField txtNombreCorto;
+    private JFXButton btnBuscarCategoria;
+    @FXML
+    private ScrollPane scroll;
+    @FXML
+    private GridPane grid;
+    @FXML
+    private VBox lblCantidadTotal;
+    @FXML
+    private TextField txtBuscar;
     @FXML
     private JFXButton btnBuscar;
     @FXML
-    private JFXButton btnMenu;
+    private Label lblNombrePro;
     @FXML
-    private Label lblNombre;
-    @FXML
-    private Label lblCantidadTotal;
-    @FXML
-    private JFXTextField txtCantidad;
-    @FXML
-    private JFXButton btnSumar;
-    @FXML
-    private JFXButton btnRestar;
+    private ImageView imgPro;
     @FXML
     private Label lblPrecio;
     @FXML
-    private JFXButton btnAnadir;
-    @FXML
-    private JFXButton btnEliminar;
+    private JFXButton btnContinuar;
     /**
      * Initializes the controller class.
      */
