@@ -28,7 +28,7 @@ import javafx.stage.*;
  */
 public class SalonesGeneralController extends Controller implements Initializable
 {
-
+    
     @FXML
     private JFXButton btnAgregarSalon;
     @FXML
@@ -52,18 +52,18 @@ public class SalonesGeneralController extends Controller implements Initializabl
     /**
      * Initializes the controller class.
      */
-
+    
     private MyListenerItem myListener;
     SalonService salonService = new SalonService();
     SalonDto salonDto = new SalonDto();
     private static List<SalonDto> salones = new ArrayList<>();
-
+    
     @Override
     public void initialize(URL url , ResourceBundle rb)
     {
         loadItems("aux");
     }
-
+    
     public void setSalSelect(SalonDto sal)
     {
         lblNombreSalon.setText(sal.getNombre());
@@ -71,7 +71,7 @@ public class SalonesGeneralController extends Controller implements Initializabl
         imgSal.setImage(img2);
         AppContext.getInstance().set("Salon" , sal);
     }
-
+    
     public void loadItems(String name)
     {
         if(!"aux".equals(name))
@@ -100,14 +100,14 @@ public class SalonesGeneralController extends Controller implements Initializabl
                 setSalSelect(salones.get(0));
                 myListener = new MyListenerItem()
                 {
-
+                    
                     @Override
                     public void onClickListener(Object item)
                     {
                         setSalSelect((SalonDto) item);
                         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                     }
-
+                    
                 };
             }
             int column = 0;
@@ -130,7 +130,7 @@ public class SalonesGeneralController extends Controller implements Initializabl
                             break;
                         }
                     }
-
+                    
                     ItemController itemrest = fxmlLoader.getController();
                     itemrest.setData(salones.get(i) , myListener);
                     if(column == 6)
@@ -148,7 +148,7 @@ public class SalonesGeneralController extends Controller implements Initializabl
                     grid.setMinHeight(Region.USE_COMPUTED_SIZE);
                     grid.setPrefHeight(Region.USE_COMPUTED_SIZE);
                     grid.setMaxHeight(Region.USE_PREF_SIZE);
-
+                    
                     GridPane.setMargin(anchorPane , new Insets(10));
                 }
             }
@@ -158,7 +158,7 @@ public class SalonesGeneralController extends Controller implements Initializabl
             }
         }
     }
-
+    
     private void update()
     {
         grid.getChildren().clear();
@@ -171,7 +171,7 @@ public class SalonesGeneralController extends Controller implements Initializabl
             loadItems("aux");
         }
     }
-
+    
     @FXML
     private void click(ActionEvent event)
     {
@@ -181,7 +181,7 @@ public class SalonesGeneralController extends Controller implements Initializabl
             FlowController.getInstance().goViewInWindowModal("CrearSalon" , (Stage) btnContinuar.getScene().getWindow() , Boolean.FALSE);
             crearSalonController.ubindSalon();
             update();
-
+            
         }
         if(event.getSource() == btnEditar)
         {
@@ -190,7 +190,7 @@ public class SalonesGeneralController extends Controller implements Initializabl
             FlowController.getInstance().goViewInWindowModal("CrearSalon" , (Stage) btnContinuar.getScene().getWindow() , Boolean.FALSE);
             crearSalonController.ubindSalon();
             update();
-
+            
         }
         if(event.getSource() == btnBuscar)
         {
@@ -199,7 +199,8 @@ public class SalonesGeneralController extends Controller implements Initializabl
         if(event.getSource() == btnContinuar)
         {
             //ir a otra venta, donde se muestran los salones como tal
-
+            FlowController.getInstance().goView("disenoSalones");
+            
         }
         if(event.getSource() == btnEliminar)
         {
@@ -215,12 +216,12 @@ public class SalonesGeneralController extends Controller implements Initializabl
             }
         }
     }
-
+    
     @Override
     public void initialize()
     {
         loadItems("aux");
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
 }
