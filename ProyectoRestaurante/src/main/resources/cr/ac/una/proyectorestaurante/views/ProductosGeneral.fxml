@@ -68,7 +68,7 @@
                            </VBox.margin>
                         </HBox>
                         <ImageView fx:id="imgPro" fitHeight="216.0" fitWidth="292.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label fx:id="lblPrecio" text="Precio: ¢">
+                        <Label fx:id="lblPrecio" text="Precio: ₡">
                            <VBox.margin>
                               <Insets top="25.0" />
                            </VBox.margin></Label>

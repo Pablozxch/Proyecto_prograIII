@@ -1,34 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="622.0" prefWidth="773.0" styleClass="fondo" stylesheets="@../styles/StylesCss.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/15.0.1" fx:controller="cr.ac.una.proyectorestaurante.controllers.CrearPedidoController">
+<AnchorPane id="AnchorPane" prefHeight="794.0" prefWidth="1087.0" styleClass="fondo" stylesheets="@../styles/StylesCss.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.proyectorestaurante.controllers.CrearPedidoController">
    <children>
       <HBox layoutX="56.0" layoutY="129.0" prefHeight="599.0" prefWidth="722.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox alignment="CENTER" prefHeight="599.0" prefWidth="381.0" HBox.hgrow="ALWAYS">
+            <VBox alignment="CENTER" prefHeight="622.0" prefWidth="556.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Label text="Crear Pedido" />
-                  <HBox alignment="CENTER" prefHeight="74.0" prefWidth="501.0" spacing="10.0">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <TextField />
-                        <JFXButton fx:id="btnBuscar" onAction="#click" text="Buscar" />
+                        <VBox alignment="CENTER" prefHeight="113.0" prefWidth="160.0" spacing="15.0">
+                           <children>
+                              <Label text="Nombre:" />
+                              <Label text="Nombre Corto:" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="123.0" prefWidth="115.0" spacing="15.0">
+                           <children>
+                              <JFXTextField fx:id="txtNombre" />
+                              <JFXTextField fx:id="txtNombreCorto" />
+                           </children>
+                        </VBox>
+                        <JFXButton fx:id="btnBuscar" onAction="#click" text="Buscar">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </JFXButton>
+                        <JFXButton fx:id="btnMenu" onAction="#click" text="Menú">
+                           <HBox.margin>
+                              <Insets left="35.0" />
+                           </HBox.margin>
+                        </JFXButton>
                      </children>
+                     <VBox.margin>
+                        <Insets bottom="15.0" />
+                     </VBox.margin>
                   </HBox>
-                  <TableView prefHeight="344.0" prefWidth="501.0" />
+                  <TableView prefHeight="483.0" prefWidth="701.0">
+                     <VBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </VBox.margin></TableView>
                </children>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="35.0" HBox.hgrow="ALWAYS">
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" HBox.hgrow="ALWAYS">
                <children>
-                  <JFXButton fx:id="btnAnadir" onAction="#click" text="Añadir producto" />
-                  <JFXButton fx:id="btnEliminar" onAction="#click" text="Eliminar producto" />
+                  <Label fx:id="lblNombre" text="Nombre:" />
+                  <Label fx:id="lblCantidadTotal" text="Cantidad disponible: " />
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <HBox alignment="CENTER" prefHeight="46.0" prefWidth="365.0" spacing="10.0">
+                     <children>
+                        <Label text="Cantidad:" />
+                        <JFXTextField fx:id="txtCantidad" prefHeight="31.0" prefWidth="57.0" />
+                        <VBox alignment="CENTER" prefHeight="46.0" prefWidth="45.0">
+                           <children>
+                              <JFXButton fx:id="btnSumar" onAction="#click" prefHeight="25.0" prefWidth="49.0" styleClass="jfx-btnimg-tbveliminar" text="+" />
+                              <JFXButton fx:id="btnRestar" onAction="#click" prefHeight="25.0" prefWidth="46.0" styleClass="jfx-btnimg-tbveliminar" text="-" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <Label fx:id="lblPrecio" text="Precio: ₡" />
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="280.0" spacing="35.0">
+                     <children>
+                        <JFXButton fx:id="btnAnadir" onAction="#click" text="Añadir" />
+                        <JFXButton fx:id="btnEliminar" onAction="#click" text="Eliminar" />
+                     </children>
+                  </VBox>
                </children>
             </VBox>
          </children>

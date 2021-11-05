@@ -24,6 +24,13 @@ and open the template in the editor.
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
     -fx-font-size: 22;
 }
+.jfx-btnimg-tbveliminar{
+    -fx-opacity: 0.8;
+    -fx-background-position: center;
+    -fx-background-radius: 1;
+    -fx-background-color: #cccccc;
+    -fx-font-size: 15;
+}
 .button:hover
 {
     -fx-font-size: 24;
