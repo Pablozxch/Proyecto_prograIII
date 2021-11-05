@@ -15,7 +15,7 @@ public class SalonDto
 {
 
     private SimpleStringProperty id;
-    private SimpleStringProperty nombre;
+    public SimpleStringProperty nombre;
     private ObjectProperty<byte[]> foto;
     private Boolean modificado;
     private SimpleStringProperty barraMesa;

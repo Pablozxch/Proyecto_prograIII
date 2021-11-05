@@ -45,7 +45,7 @@
                         <Insets bottom="15.0" />
                      </VBox.margin>
                   </HBox>
-                  <TableView prefHeight="483.0" prefWidth="701.0">
+                  <TableView fx:id="tblpedido" prefHeight="483.0" prefWidth="701.0">
                      <VBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </VBox.margin></TableView>
@@ -59,7 +59,7 @@
                   <HBox alignment="CENTER" prefHeight="46.0" prefWidth="365.0" spacing="10.0">
                      <children>
                         <Label text="Cantidad:" />
-                        <JFXTextField fx:id="txtCantidad" prefHeight="31.0" prefWidth="57.0" />
+                        <JFXTextField fx:id="txtCantidad" editable="false" prefHeight="31.0" prefWidth="57.0" />
                         <VBox alignment="CENTER" prefHeight="46.0" prefWidth="45.0">
                            <children>
                               <JFXButton fx:id="btnSumar" onAction="#click" prefHeight="25.0" prefWidth="49.0" styleClass="jfx-btnimg-tbveliminar" text="+" />

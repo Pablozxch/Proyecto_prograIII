@@ -5,6 +5,7 @@
  */
 package cr.ac.una.proyectorestaurante.models;
 
+import java.util.*;
 import javafx.beans.property.*;
 
 /**
@@ -15,11 +16,11 @@ public class DetallexordenDto
 {
 
     private SimpleStringProperty id;
-    private SimpleStringProperty cantidad;
-    private SimpleStringProperty precio;
+    public SimpleStringProperty cantidad;
+    public SimpleStringProperty precio;
     private ProductoDto productoDto;
-    private OrdenDto ordenDto;
     private Boolean modificado;
+
 
     public DetallexordenDto()
     {
@@ -90,16 +91,6 @@ public class DetallexordenDto
         this.productoDto = productoDto;
     }
 
-    public OrdenDto getOrdenDto()
-    {
-        return ordenDto;
-    }
-
-    public void setOrdenDto(OrdenDto ordenDto)
-    {
-        this.ordenDto = ordenDto;
-    }
-
     public Boolean getModificado()
     {
         return modificado;
@@ -110,6 +101,8 @@ public class DetallexordenDto
         this.modificado = modificado;
     }
 
+  
+
     @Override
     public String toString()
     {
@@ -117,8 +110,7 @@ public class DetallexordenDto
         sb.append("DetallexordenDto{id=").append(id);
         sb.append(", cantidad=").append(cantidad);
         sb.append(", precio=").append(precio);
-        sb.append(", productoDto=").append(productoDto.toString());
-        sb.append(", ordenDto=").append(ordenDto.toString());
+        sb.append(", productoDto=").append(productoDto);
         sb.append('}');
         return sb.toString();
     }

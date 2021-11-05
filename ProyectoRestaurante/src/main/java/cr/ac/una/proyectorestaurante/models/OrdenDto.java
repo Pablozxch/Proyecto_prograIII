@@ -17,16 +17,20 @@ public class OrdenDto
 
     private SimpleStringProperty id;
     private ObjectProperty<Date> fecha;
-    private SimpleStringProperty estado;
-    private EmpleadoDto empleadoDto;
-    private MesaDto mesaDto;
+    public SimpleStringProperty estado;
+    private ObjectProperty<EmpleadoDto> empleadoDto;
+    private ObjectProperty<MesaDto> mesaDto;
     private Boolean modificado;
+    private List<DetallexordenDto> detallexordenDtos;
 
     public OrdenDto()
     {
         this.id = new SimpleStringProperty();
         this.fecha = new SimpleObjectProperty<>();
         this.estado = new SimpleStringProperty();
+        this.empleadoDto = new SimpleObjectProperty<>();
+        this.mesaDto = new SimpleObjectProperty<>();
+        this.detallexordenDtos = new ArrayList<>();
         this.modificado = false;
     }
 
@@ -69,22 +73,22 @@ public class OrdenDto
 
     public EmpleadoDto getEmpleadoDto()
     {
-        return empleadoDto;
+        return empleadoDto.get();
     }
 
     public void setEmpleadoDto(EmpleadoDto empleadoDto)
     {
-        this.empleadoDto = empleadoDto;
+        this.empleadoDto.set(empleadoDto);
     }
 
     public MesaDto getMesaDto()
     {
-        return mesaDto;
+        return mesaDto.get();
     }
 
     public void setMesaDto(MesaDto mesaDto)
     {
-        this.mesaDto = mesaDto;
+        this.mesaDto.set(mesaDto);
     }
 
     public Boolean getModificado()
@@ -97,6 +101,16 @@ public class OrdenDto
         this.modificado = modificado;
     }
 
+    public List<DetallexordenDto> getDetallexordenDtos()
+    {
+        return detallexordenDtos;
+    }
+
+    public void setDetallexordenDtos(List<DetallexordenDto> detallexordenDtos)
+    {
+        this.detallexordenDtos = detallexordenDtos;
+    }
+
     @Override
     public String toString()
     {
@@ -104,9 +118,9 @@ public class OrdenDto
         sb.append("OrdenDto{id=").append(id);
         sb.append(", fecha=").append(fecha);
         sb.append(", estado=").append(estado);
-        sb.append(", empleadoDto=").append(empleadoDto.toString());
-        sb.append(", mesaDto=").append(mesaDto.toString());
-        sb.append(", modificado=").append(modificado);
+        sb.append(", empleadoDto=").append(empleadoDto);
+        sb.append(", mesaDto=").append(mesaDto);
+        sb.append(", detallexordenDtos=").append(detallexordenDtos.toString());
         sb.append('}');
         return sb.toString();
     }

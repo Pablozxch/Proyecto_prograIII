@@ -74,6 +74,10 @@ public class PrincipalController extends Controller implements Initializable
         {
             FlowController.getInstance().goView("CategoriasGeneral");
         }
+        if(event.getSource() == btnOrdenes)
+        {
+            FlowController.getInstance().goView("OrdenesGeneral");
+        }
         if(event.getSource() == btnEmpleados)
         {
             FlowController.getInstance().goView("EmpleadosGeneral");

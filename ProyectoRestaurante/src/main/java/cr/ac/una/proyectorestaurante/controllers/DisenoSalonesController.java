@@ -65,7 +65,7 @@ public class DisenoSalonesController extends Controller implements Initializable
 
         load();
         loadgrid();
-        loadEvent();
+       // loadEvent();
     }
 
     void load()//con este metodo se carga la lista de iamgeviews para poder empezar a colocarlas en el grid
@@ -96,121 +96,78 @@ public class DisenoSalonesController extends Controller implements Initializable
     }
     Node n = null;
 
-    void loadEvent()
-    {
-
-        iMloads.forEach(t ->
-        {
-            t.getIm().setOnDragDetected(new EventHandler<MouseEvent>()
-            {
-                @Override
-                public void handle(MouseEvent event)
-                {
-                    Dragboard db = t.getIm().startDragAndDrop(TransferMode.COPY_OR_MOVE);
-                    n = t.getIm();
-                    ClipboardContent content = new ClipboardContent();
-                    Image checker = t.getIm().getImage();
-                    content.putImage(checker);
-                    db.setContent(content);
-
-                    System.out.println("Drag detectado");
-                    event.consume();
-                }
-            });
-            t.getIm().setOnDragOver(new EventHandler<DragEvent>()
-            {
-                @Override
-                public void handle(DragEvent ev)
-                {
-                    if(ev.getDragboard().hasImage())|   
-                    {
-                        ev.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-                    }
-                    System.out.println(ev.getSceneX());
-                    ev.consume();
-                }
-
-            });
-
-            t.getIm().setOnDragDone(new EventHandler<DragEvent>()
-            {
-                @Override
-                public void handle(DragEvent d2)
-                {
-
-                    System.out.println(d2.getSceneX());
-                    System.out.println("Wenas");
-                    for(int k = 0; k < 10; k++)
-                    {
-                        for(int z = 0; z < 10; z++)
-                        {
-
-                            if(gripMesa.getCellBounds(k , z).contains(d2.getSceneX() , d2.getSceneY()))//buscar el click dentro del anchor pane de dentro dD))
-                            {
-//                                xx = GridPane.getRowIndex(n3);
-//                                yy = GridPane.getColumnIndex(n3);
-                                GridPane.setConstraints(n , k , z);
-                            }
-                        }
-                    }
-
-//                    d2.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-//                    Dragboard db = d2.getDragboard();
-//                    System.out.println("Drop detected");
-//                    d2.consume();
-                }
-            });
-
-        });
-    }
+//    void loadEvent()
+//    {
+//
+//        iMloads.forEach(t ->
+//        {
+//            t.getIm().setOnDragDetected(new EventHandler<MouseEvent>()
+//            {
+//                @Override
+//                public void handle(MouseEvent event)
+//                {
+//                    Dragboard db = t.getIm().startDragAndDrop(TransferMode.COPY_OR_MOVE);
+//                    n = t.getIm();
+//                    ClipboardContent content = new ClipboardContent();
+//                    Image checker = t.getIm().getImage();
+//                    content.putImage(checker);
+//                    db.setContent(content);
+//
+//                    System.out.println("Drag detectado");
+//                    event.consume();
+//                }
+//            });
+//            t.getIm().setOnDragOver(new EventHandler<DragEvent>()
+//            {
+//                @Override
+//                public void handle(DragEvent ev)
+//                {
+//                    if(ev.getDragboard().hasImage())|   
+//                    {
+//                        ev.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+//                    }
+//                    System.out.println(ev.getSceneX());
+//                    ev.consume();
+//                }
+//
+//            });
+//
+//            t.getIm().setOnDragDone(new EventHandler<DragEvent>()
+//            {
+//                @Override
+//                public void handle(DragEvent d2)
+//                {
+//
+//                    System.out.println(d2.getSceneX());
+//                    System.out.println("Wenas");
+//                    for(int k = 0; k < 10; k++)
+//                    {
+//                        for(int z = 0; z < 10; z++)
+//                        {
+//
+//                            if(gripMesa.getCellBounds(k , z).contains(d2.getSceneX() , d2.getSceneY()))//buscar el click dentro del anchor pane de dentro dD))
+//                            {
+////                                xx = GridPane.getRowIndex(n3);
+////                                yy = GridPane.getColumnIndex(n3);
+//                                GridPane.setConstraints(n , k , z);
+//                            }
+//                        }
+//                    }
+//
+////                    d2.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+////                    Dragboard db = d2.getDragboard();
+////                    System.out.println("Drop detected");
+////                    d2.consume();
+//                }
+//            });
+//
+//        });
+//    }
 
     @Override
     public void initialize()
     {
     }
-
-    void prueba()
-    {
-        taskThread = new Thread(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                for(int i = 0; i < f; i++)
-                {
-                    f += 50;
-                    try
-                    {
-                        Thread.sleep(1);
-                    }
-                    catch(InterruptedException e)
-                    {
-                        e.printStackTrace();
-                    }
-                    Platform.runLater(new Runnable()
-                    {
-                        @Override
-
-                        public void run()
-                        {
-                            rt.addEventHandler(MouseEvent.ANY , (j) ->
-                            {
-                                mx = (int) j.getSceneX();
-                                my = (int) j.getSceneY();
-                                System.out.println(mx + my);
-                            });
-                        }
-
-                    });
-
-                }
-
-            }
-        });
-
-        taskThread.start();
-    }
-
     @FXML
     private void click(ActionEvent event
     )

@@ -15,7 +15,7 @@ public class MesaDto
 {
 
     private SimpleStringProperty id;
-    private SimpleStringProperty nombre;
+    public SimpleStringProperty nombre;
     private SimpleStringProperty estado;
     private SimpleStringProperty posX;
     private SimpleStringProperty posY;

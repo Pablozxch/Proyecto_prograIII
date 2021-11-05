@@ -15,7 +15,7 @@ public class EmpleadoDto
 {
 
     private SimpleStringProperty id;
-    private SimpleStringProperty nombre;
+    public SimpleStringProperty nombre;
     private SimpleStringProperty apellido;
     private SimpleStringProperty usuario;
     private SimpleStringProperty contra;

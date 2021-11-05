@@ -15,8 +15,8 @@ public class ProductoDto
 {
 
     private SimpleStringProperty id;
-    private SimpleStringProperty nombre;
-    private SimpleStringProperty nombrecorto;
+    public SimpleStringProperty nombre;
+    public SimpleStringProperty nombrecorto;
     private SimpleStringProperty detalle;
     private ObjectProperty<byte[]> foto;
     private SimpleStringProperty costo;
