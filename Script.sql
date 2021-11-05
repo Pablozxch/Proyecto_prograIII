@@ -364,7 +364,7 @@ CREATE TABLE tbl_orden(
   ord_id Number NOT NULL,
   ord_fecha Date NOT NULL,
   ord_estado Varchar2(1 ) DEFAULT 'P' NOT NULL
-        CONSTRAINT tbl_oirden_ck01 CHECK (ord_estado in ('A','C')),
+        CONSTRAINT tbl_oirden_ck01 CHECK (ord_estado in ('P','C')),
   mesa_id Number NOT NULL,
   emp_id Number NOT NULL,
   ord_version Number DEFAULT 1 NOT NULL
