@@ -122,7 +122,7 @@ public class DisenoSalonesController extends Controller implements Initializable
                 @Override
                 public void handle(DragEvent ev)
                 {
-                    if(ev.getDragboard().hasImage())
+                    if(ev.getDragboard().hasImage())|   
                     {
                         ev.acceptTransferModes(TransferMode.COPY_OR_MOVE);
                     }

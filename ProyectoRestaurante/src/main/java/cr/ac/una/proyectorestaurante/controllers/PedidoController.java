@@ -5,26 +5,17 @@
  */
 package cr.ac.una.proyectorestaurante.controllers;
 
-import com.jfoenix.controls.*;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.*;
-import javafx.fxml.*;
+import javafx.fxml.Initializable;
 
 /**
  * FXML Controller class
  *
- * @author Christopher
+ * @author jp015
  */
-public class OrdenesGeneralController extends Controller implements Initializable
+public class PedidoController extends Controller implements Initializable
 {
-
-    @FXML
-    private JFXButton btnFacturar;
-    @FXML
-    private JFXButton btnEditar;
-    @FXML
-    private JFXButton btnVolver;
 
     /**
      * Initializes the controller class.
@@ -35,15 +26,10 @@ public class OrdenesGeneralController extends Controller implements Initializabl
         // TODO
     }
 
-    @FXML
-    private void click(ActionEvent event)
-    {
-    }
-
     @Override
     public void initialize()
     {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
