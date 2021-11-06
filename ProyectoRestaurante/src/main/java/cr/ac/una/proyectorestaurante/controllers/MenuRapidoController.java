@@ -6,51 +6,43 @@
 package cr.ac.una.proyectorestaurante.controllers;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+
 /**
  * FXML Controller class
  *
  * @author Christopher
  */
-public class CrearPedidoController extends Controller implements Initializable {
-
+public class MenuRapidoController extends Controller implements Initializable {
 
     @FXML
-    private JFXTextField txtNombre;
+    private ScrollPane scroll;
     @FXML
-    private JFXTextField txtNombreCorto;
+    private GridPane grid;
+    @FXML
+    private TextField txtBuscar;
     @FXML
     private JFXButton btnBuscar;
     @FXML
-    private JFXButton btnMenu;
+    private Label lblNombrePro;
     @FXML
-    private Label lblNombre;
-    @FXML
-    private Label lblCantidadTotal;
-    @FXML
-    private JFXTextField txtCantidad;
-    @FXML
-    private JFXButton btnSumar;
-    @FXML
-    private JFXButton btnRestar;
+    private ImageView imgPro;
     @FXML
     private Label lblPrecio;
     @FXML
-    private JFXButton btnAnadir;
+    private Label lblCantidadTotal;
     @FXML
-    private JFXButton btnEliminar;
-    @FXML
-    private JFXButton btnMenuRapido;
-    @FXML
-    private TableView tblpedido;
+    private JFXButton btnContinuar;
+
     /**
      * Initializes the controller class.
      */
@@ -58,7 +50,7 @@ public class CrearPedidoController extends Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-    
+
     @FXML
     private void click(ActionEvent event) {
     }
@@ -67,5 +59,5 @@ public class CrearPedidoController extends Controller implements Initializable {
     public void initialize() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
 }
