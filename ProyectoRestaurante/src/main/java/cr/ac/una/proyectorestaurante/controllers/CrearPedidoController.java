@@ -142,7 +142,37 @@ public class CrearPedidoController extends Controller implements Initializable
         }
         if(event.getSource() == btnEliminar)
         {
-            //se elimina un producto de la lista de productos,
+            finded = false;
+            if(pro != null)
+            {
+                System.out.println("Delete");
+                productos.forEach(t ->
+                {
+                    System.out.println(t.getProductoDto().getNombre());
+                });
+                DetallexordenDto dettodelte = (DetallexordenDto) tblpedido.getSelectionModel().getSelectedItem();
+                productos.remove(dettodelte);
+                productos.forEach(t ->
+                {
+                    System.out.println(t.getProductoDto().getNombre());
+                });
+                ObservableList<DetallexordenDto> ords = FXCollections.observableList(productos);
+                detallexordenDtos = productos;
+                ordenDto.setDetallexordenDtos(productos);
+                tblpedido.setItems(ords);
+                tblpedido.refresh();
+
+                Respuesta res2 = detallexordenService.eliminarDetalle(dettodelte.getId());
+                if(res2.getEstado())
+                {
+                    System.out.println("done");
+                }
+                else
+                {
+                    System.out.println("rip");
+                }
+
+            }
         }
         if(event.getSource() == btnMenu)
         {
