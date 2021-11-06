@@ -62,6 +62,7 @@ public class MenuController extends Controller implements Initializable
     CategoriaService categoriaService = new CategoriaService();
     List<CategoriaDto> categorias = new ArrayList<>();
     ProductoDto productoDto = new ProductoDto();
+    ProductoDto proorden = new ProductoDto();
     private static List<ProductoDto> productos = new ArrayList<>();
 
     @Override
@@ -78,7 +79,13 @@ public class MenuController extends Controller implements Initializable
         imgPro.setImage(img2);
         lblCantidadTotal.setText("Cantidad : " + sal.getCantidad().toString());
         lblPrecio.setText("Precio Unidad: ₡" + sal.getCosto().toString());
-        AppContext.getInstance().set("ProductoOrden" , sal);
+        proorden = sal;
+
+    }
+
+    public ProductoDto retornarproducto()
+    {
+        return proorden;
     }
 
     public void loadItems(String name)
@@ -196,6 +203,10 @@ public class MenuController extends Controller implements Initializable
         if(event.getSource() == btnBuscarCategoria)
         {
             updatebyCategories();
+        }
+        if(event.getSource() == btnContinuar)
+        {
+            getStage().close();
         }
     }
 

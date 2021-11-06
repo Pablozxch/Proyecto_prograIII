@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXTextField;
 import cr.ac.una.proyectorestaurante.models.*;
 import cr.ac.una.proyectorestaurante.services.*;
 import cr.ac.una.proyectorestaurante.utils.*;
+import java.io.*;
 import java.net.URL;
 import java.util.*;
 import javafx.collections.*;
@@ -18,6 +19,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 import javafx.scene.control.*;
+import javafx.scene.image.*;
+import javafx.stage.*;
 
 /**
  * FXML Controller class
@@ -61,12 +64,18 @@ public class CrearPedidoController extends Controller implements Initializable
      */
     DetallexordenService detallexordenService = new DetallexordenService();
     List<DetallexordenDto> detallexordenDtos = new ArrayList<>();
+    ProductoDto pro = new ProductoDto();
+    List<DetallexordenDto> productos = new ArrayList<>();
+    @FXML
+    private ImageView imgProducto;
+    int cantidad = 1;
+    int cantidadtodal = 0;
 
     @Override
     public void initialize(URL url , ResourceBundle rb)
     {
         // TODO
-        load();
+
     }
 
     void load()
@@ -102,7 +111,7 @@ public class CrearPedidoController extends Controller implements Initializable
     void loadItems()
     {
         OrdenDto orden = (OrdenDto) AppContext.getInstance().get("Orden");
-        List<DetallexordenDto> productos = (List<DetallexordenDto>) orden.getDetallexordenDtos();
+        productos = (List<DetallexordenDto>) orden.getDetallexordenDtos();
         ObservableList<DetallexordenDto> ords = FXCollections.observableList(productos);
         tblpedido.setItems(ords);
         tblpedido.refresh();
@@ -129,16 +138,75 @@ public class CrearPedidoController extends Controller implements Initializable
         {
             //se elimina un producto de la lista de productos,
         }
-        if(event.getSource()==btnMenu)
+        if(event.getSource() == btnMenu)
         {
-            FlowController.getInstance().goViewInWindowModal("Menu", getStage() , Boolean.FALSE);
+            MenuController menu = (MenuController) FlowController.getInstance().getController("Menu");
+            FlowController.getInstance().goViewInWindowModal("Menu" , (Stage) btnMenu.getScene().getWindow() , Boolean.FALSE);
+            pro = menu.retornarproducto();
+            llenar(pro);
+        }
+        if(event.getSource() == btnSumar)
+        {
+            if(cantidad + 1 <= cantidadtodal)
+            {
+                txtCantidad.setText(String.valueOf(cantidad += 1));
+                lblPrecio.setText("Precio: ₡" + cantidad * pro.getCosto());
+            }
+        }
+        if(event.getSource() == btnRestar)
+        {
+
+            if(cantidad - 1 > 0)
+            {
+                txtCantidad.setText(String.valueOf(cantidad -= 1));
+                lblPrecio.setText("Precio: ₡" + cantidad * pro.getCosto());
+            }
+        }
+        if(event.getSource() == btnAnadir)
+        {
+            if(pro != null)
+            {
+                DetallexordenDto det = new DetallexordenDto();
+                det.setProductoDto(pro);
+                det.setCantidad(Long.valueOf(cantidad));
+                det.setPrecio(cantidad * pro.getCosto());
+                System.out.println(det.toString());
+                productos.add(det);
+                ObservableList<DetallexordenDto> ords = FXCollections.observableList(productos);
+                tblpedido.setItems(ords);
+                tblpedido.refresh();
+            }
         }
 
+    }
+
+    void llenar(ProductoDto pro)
+    {
+        lblNombre.setText(pro.getNombre());
+        lblCantidadTotal.setText("Cantidad en Sistema: " + pro.getCantidad().toString());
+        txtCantidad.setText(String.valueOf(cantidad));
+        Image img2 = new Image(new ByteArrayInputStream(pro.getFoto()));//crea un objeto imagen, transforma el byte[] a un buffered imagen
+        imgProducto.setImage(img2);
+        lblPrecio.setText("Precio: ₡" + pro.getCosto());
+        cantidadtodal = pro.getCantidad().intValue();
+        clear();
+
+    }
+
+    void clear()
+    {
+        lblNombre.setText("Nombre Producto");
+        lblCantidadTotal.setText("Cantidad en Sistema: " + pro.getCantidad().toString());
+        txtCantidad.setText("0");
+        imgProducto.setImage(null);
+        lblPrecio.setText("Precio: ₡" + 00000);
+        pro = null;
     }
 
     @Override
     public void initialize()
     {
+        load();
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
