@@ -11,6 +11,7 @@ import cr.ac.una.proyectorestaurante.utils.Request;
 import jakarta.ws.rs.core.*;
 import java.util.*;
 import java.util.logging.*;
+import java.util.stream.*;
 
 /**
  *
@@ -23,7 +24,7 @@ public class OrdenService
     {
         try
         {
-            
+
             Request request = new Request("OrdenController/orden");
             request.get();
             if(request.isError())
@@ -35,13 +36,12 @@ public class OrdenService
             List<OrdenDto> Ordenes = (List<OrdenDto>) request.readEntity(new GenericType<List<OrdenDto>>()
             {
             });
-            Ordenes.forEach(t ->
-            {
-                System.out.println(t.toString());
-            });
             RestauranteDto id = (RestauranteDto) AppContext.getInstance().get("Restaurante");
-            //List<OrdenDto> Ordenes2 = Ordenes.stream().filter(t -> t.getEmpleadoDto().getRestauranteDto() == id).collect(Collectors.toList());
-
+            List<OrdenDto> Ordenes2 = Ordenes.stream().filter(t -> t.getEmpleadoDto().getRestauranteDto().getId() == id.getId()).collect(Collectors.toList());
+            Ordenes2.forEach(j ->
+            {
+                System.out.println(j.toString());
+            });
             return new Respuesta(true , "" , "" , "Ordenes" , Ordenes);
         }
         catch(Exception ex)

@@ -15,6 +15,7 @@ import java.io.*;
 import java.net.URL;
 import java.util.*;
 import java.util.List;
+import java.util.stream.*;
 import javafx.application.*;
 import javafx.event.*;
 import javafx.fxml.*;
@@ -39,6 +40,7 @@ public class DisenoSalonesController extends Controller implements Initializable
     int xx = 0;
     int yy = 0;
     int mx, my;
+    int k, l;
     @FXML
     private JFXButton btnAgregar;
     @FXML
@@ -55,7 +57,12 @@ public class DisenoSalonesController extends Controller implements Initializable
     MesaService mesaService = new MesaService();
     SalonDto salon = (SalonDto) AppContext.getInstance().get("Salon");//colocar 
     List<IMload> iMloads = new ArrayList<IMload>();
+    OrdenService orden = new OrdenService();
+    List<OrdenDto> ordenes = new ArrayList<>();
     List<MesaDto> mesaDtos = new ArrayList<>();
+    List<OrdenDto> list = new ArrayList<>();
+
+    MesaDto mesaclick = new MesaDto();
     @FXML
     private AnchorPane rt;
 
@@ -65,7 +72,52 @@ public class DisenoSalonesController extends Controller implements Initializable
 
         load();
         loadgrid();
-       // loadEvent();
+        // loadEvent();
+        gripMesa.addEventHandler(MouseEvent.MOUSE_CLICKED , (t) ->
+        {
+            for(int z = 0; z < 10; z++)
+            {
+                for(int v = 0; v < 10; v++)
+                {
+                    if(gripMesa.getCellBounds(z , v).contains(t.getX() , t.getY()))
+                    {
+                        k = z;
+                        l = v;
+                        mesaDtos.forEach(m ->
+                        {
+                            if(m.getPosX() == k && m.getPosY() == l)
+                            {
+                                // System.out.println("El valor del click fue " + m.toString());
+                                mesaclick = m;
+                                Respuesta res = orden.getOrdenes();
+                                if(res.getEstado())
+                                {
+                                    ordenes = (List<OrdenDto>) res.getResultado("Ordenes");
+                                }
+                            }
+                        });
+
+                    }
+                }
+            }
+            try
+            {
+                System.out.println(mesaclick.toString());
+                list = (List<OrdenDto>) ordenes.stream().filter(o -> o.getMesaDto().getId() == mesaclick.getId()).collect(Collectors.toList());
+                list.forEach(y ->
+                {
+                    System.out.println("La orden es");
+                    System.out.println(y.toString());
+                });
+                ordenes.clear();
+                AppContext.getInstance().set("Orden" , list.get(0));
+                FlowController.getInstance().goViewInWindowModal("CrearPedido" , getStage() , Boolean.FALSE);
+            }
+            catch(Exception e)
+            {
+
+            }
+        });
     }
 
     void load()//con este metodo se carga la lista de iamgeviews para poder empezar a colocarlas en el grid
@@ -79,7 +131,10 @@ public class DisenoSalonesController extends Controller implements Initializable
         mesaDtos.forEach(t ->
         {
             Image img2 = new Image(new ByteArrayInputStream(salon.getFoto()));//crea un objeto imagen, transforma el byte[] a un buffered imagen
-            iMloads.add(new IMload(new ImageView(img2) , t.getPosX() , t.getPosY()));
+            ImageView im = new ImageView(img2);
+            im.setFitHeight(50);
+            im.setFitWidth(50);
+            iMloads.add(new IMload(im , t.getPosX() , t.getPosY()));
         });
     }
 
@@ -94,83 +149,14 @@ public class DisenoSalonesController extends Controller implements Initializable
 
         });
     }
-    Node n = null;
-
-//    void loadEvent()
-//    {
-//
-//        iMloads.forEach(t ->
-//        {
-//            t.getIm().setOnDragDetected(new EventHandler<MouseEvent>()
-//            {
-//                @Override
-//                public void handle(MouseEvent event)
-//                {
-//                    Dragboard db = t.getIm().startDragAndDrop(TransferMode.COPY_OR_MOVE);
-//                    n = t.getIm();
-//                    ClipboardContent content = new ClipboardContent();
-//                    Image checker = t.getIm().getImage();
-//                    content.putImage(checker);
-//                    db.setContent(content);
-//
-//                    System.out.println("Drag detectado");
-//                    event.consume();
-//                }
-//            });
-//            t.getIm().setOnDragOver(new EventHandler<DragEvent>()
-//            {
-//                @Override
-//                public void handle(DragEvent ev)
-//                {
-//                    if(ev.getDragboard().hasImage())|   
-//                    {
-//                        ev.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-//                    }
-//                    System.out.println(ev.getSceneX());
-//                    ev.consume();
-//                }
-//
-//            });
-//
-//            t.getIm().setOnDragDone(new EventHandler<DragEvent>()
-//            {
-//                @Override
-//                public void handle(DragEvent d2)
-//                {
-//
-//                    System.out.println(d2.getSceneX());
-//                    System.out.println("Wenas");
-//                    for(int k = 0; k < 10; k++)
-//                    {
-//                        for(int z = 0; z < 10; z++)
-//                        {
-//
-//                            if(gripMesa.getCellBounds(k , z).contains(d2.getSceneX() , d2.getSceneY()))//buscar el click dentro del anchor pane de dentro dD))
-//                            {
-////                                xx = GridPane.getRowIndex(n3);
-////                                yy = GridPane.getColumnIndex(n3);
-//                                GridPane.setConstraints(n , k , z);
-//                            }
-//                        }
-//                    }
-//
-////                    d2.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-////                    Dragboard db = d2.getDragboard();
-////                    System.out.println("Drop detected");
-////                    d2.consume();
-//                }
-//            });
-//
-//        });
-//    }
 
     @Override
     public void initialize()
     {
     }
+
     @FXML
-    private void click(ActionEvent event
-    )
+    private void click(ActionEvent event)
     {
 
     }
