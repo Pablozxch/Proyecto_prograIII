@@ -79,7 +79,7 @@ public class MenuController extends Controller implements Initializable
         imgPro.setImage(img2);
         lblCantidadTotal.setText("Cantidad : " + sal.getCantidad().toString());
         lblPrecio.setText("Precio Unidad: ₡" + sal.getCosto().toString());
-        proorden = sal;
+        this.proorden = sal;
 
     }
 

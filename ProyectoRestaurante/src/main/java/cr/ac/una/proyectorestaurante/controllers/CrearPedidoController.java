@@ -70,6 +70,7 @@ public class CrearPedidoController extends Controller implements Initializable
     private ImageView imgProducto;
     int cantidad = 1;
     int cantidadtodal = 0;
+    boolean finded = false;
 
     @Override
     public void initialize(URL url , ResourceBundle rb)
@@ -143,6 +144,7 @@ public class CrearPedidoController extends Controller implements Initializable
             MenuController menu = (MenuController) FlowController.getInstance().getController("Menu");
             FlowController.getInstance().goViewInWindowModal("Menu" , (Stage) btnMenu.getScene().getWindow() , Boolean.FALSE);
             pro = menu.retornarproducto();
+            System.out.println(pro.toString());
             llenar(pro);
         }
         if(event.getSource() == btnSumar)
@@ -164,17 +166,35 @@ public class CrearPedidoController extends Controller implements Initializable
         }
         if(event.getSource() == btnAnadir)
         {
+            finded = false;
             if(pro != null)
             {
-                DetallexordenDto det = new DetallexordenDto();
-                det.setProductoDto(pro);
-                det.setCantidad(Long.valueOf(cantidad));
-                det.setPrecio(cantidad * pro.getCosto());
-                System.out.println(det.toString());
-                productos.add(det);
-                ObservableList<DetallexordenDto> ords = FXCollections.observableList(productos);
-                tblpedido.setItems(ords);
-                tblpedido.refresh();
+                productos.forEach(t ->
+                {
+                    if(Objects.equals(t.getProductoDto().getId() , pro.getId()))
+                    {
+                        finded = true;
+                        t.setCantidad(t.getCantidad() + cantidad);
+                        System.out.println(t.getPrecio());
+                        t.setPrecio(t.getCantidad() * pro.getCosto());
+                        System.out.println(t.getPrecio() + "asda" + t.getCantidad() * pro.getCosto());
+                        ObservableList<DetallexordenDto> ords = FXCollections.observableList(productos);
+                        tblpedido.setItems(ords);
+                        tblpedido.refresh();
+                    }
+                });
+                if(finded == false)
+                {
+                    DetallexordenDto det = new DetallexordenDto();
+                    det.setProductoDto(pro);
+                    det.setCantidad(Long.valueOf(cantidad));
+                    det.setPrecio(cantidad * pro.getCosto());
+                    productos.add(det);
+                    ObservableList<DetallexordenDto> ords = FXCollections.observableList(productos);
+                    tblpedido.setItems(ords);
+                    tblpedido.refresh();
+                }
+                clear();
             }
         }
 
@@ -189,14 +209,13 @@ public class CrearPedidoController extends Controller implements Initializable
         imgProducto.setImage(img2);
         lblPrecio.setText("Precio: ₡" + pro.getCosto());
         cantidadtodal = pro.getCantidad().intValue();
-        clear();
 
     }
 
     void clear()
     {
         lblNombre.setText("Nombre Producto");
-        lblCantidadTotal.setText("Cantidad en Sistema: " + pro.getCantidad().toString());
+        lblCantidadTotal.setText("Cantidad en Sistema: " + 00000);
         txtCantidad.setText("0");
         imgProducto.setImage(null);
         lblPrecio.setText("Precio: ₡" + 00000);
