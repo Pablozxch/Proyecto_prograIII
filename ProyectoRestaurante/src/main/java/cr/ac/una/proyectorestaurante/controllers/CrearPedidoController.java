@@ -161,7 +161,14 @@ public class CrearPedidoController extends Controller implements Initializable
                 ordenDto.setDetallexordenDtos(productos);
                 tblpedido.setItems(ords);
                 tblpedido.refresh();
-
+                /*
+                @   ACTUALIZAR LOS DATOS RESPECTIVOS DEL PRODUCTO, YA QUE LA PERSONA NO QUIERE ESTE PRODUCTO
+                @   EJEMPLOS 
+                @   LA CANTIDAD DE ESTOS EN EL SISTEMA 
+                @   LA CANTIDAD VENDIDA
+                @   GUARDAR EL PRODUCTO CON LOS DATOS CORREGIDOS
+                
+                 */
                 Respuesta res2 = detallexordenService.eliminarDetalle(dettodelte.getId());
                 if(res2.getEstado())
                 {
