@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.layout.*;
 
 /**
  * FXML Controller class
@@ -39,28 +40,32 @@ public class OrdenesGeneralController extends Controller implements Initializabl
      */
     OrdenService ordenService = new OrdenService();
     List<OrdenDto> ordenes = new ArrayList<OrdenDto>();
+    @FXML
+    private AnchorPane rt;
 
     @Override
     public void initialize(URL url , ResourceBundle rb)
     {
         // TODO
+        llenar();
 
     }
 
     void llenar()
     {
+        tblpedidos.getColumns().clear();
         TableColumn<OrdenDto , String> NombreSalon = new TableColumn<>("Nombre Salon");
-        NombreSalon.setPrefWidth(tblpedidos.getPrefWidth() / 3);
+        NombreSalon.setPrefWidth(tblpedidos.getPrefWidth()/2);
         NombreSalon.setCellValueFactory(cd -> cd.getValue().getMesaDto().getSalonDto().nombre);
         NombreSalon.setResizable(false);
 
         TableColumn<OrdenDto , String> nombreMesa = new TableColumn<>("Nombre Mesa");
-        nombreMesa.setPrefWidth(tblpedidos.getPrefWidth() / 3);
+        nombreMesa.setPrefWidth(tblpedidos.getPrefWidth()/2);
         nombreMesa.setCellValueFactory(cd -> cd.getValue().getMesaDto().nombre);
         nombreMesa.setResizable(false);
 //
         TableColumn<OrdenDto , String> nombreempelado = new TableColumn<>("Empleado");
-        nombreempelado.setPrefWidth(tblpedidos.getPrefWidth() / 3);
+        nombreempelado.setPrefWidth(tblpedidos.getPrefWidth()/2);
         nombreempelado.setCellValueFactory(cd -> cd.getValue().getEmpleadoDto().nombre);
         nombreempelado.setResizable(false);
 
@@ -68,7 +73,7 @@ public class OrdenesGeneralController extends Controller implements Initializabl
         tblpedidos.getColumns().add(nombreMesa);
         tblpedidos.getColumns().add(nombreempelado);
         tblpedidos.refresh();
-        ObtencionDatos();
+
     }
 
     void ObtencionDatos()
@@ -112,7 +117,7 @@ public class OrdenesGeneralController extends Controller implements Initializabl
     @Override
     public void initialize()
     {
-        llenar();
+        ObtencionDatos();
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

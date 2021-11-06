@@ -87,7 +87,6 @@ public class CrearPedidoController extends Controller implements Initializable
 
     void load()
     {
-        tblpedido.getColumns().clear();
         TableColumn<DetallexordenDto , String> nombreCorto = new TableColumn<>("Nombre Corto");
         nombreCorto.setPrefWidth(tblpedido.getPrefWidth() / 4);
         nombreCorto.setCellValueFactory(cd -> cd.getValue().getProductoDto().nombrecorto);
@@ -113,6 +112,7 @@ public class CrearPedidoController extends Controller implements Initializable
         tblpedido.getColumns().add(cantidad);
         tblpedido.getColumns().add(precio);
         tblpedido.refresh();
+
 
     }
 

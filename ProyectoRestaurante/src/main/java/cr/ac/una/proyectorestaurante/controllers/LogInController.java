@@ -37,7 +37,6 @@ public class LogInController extends Controller implements Initializable
     @FXML
     private JFXButton btnContinuar;
 
-
     /**
      * Initializes the controller class.
      */
@@ -69,9 +68,11 @@ public class LogInController extends Controller implements Initializable
 //                    cierre.setMontoInicial(Long.MIN_VALUE); pensar donde se pide la vara
                     AppContext.getInstance().set("CierreCajasActual+" , cierre);
                 }
+                RolDto rol = new RolDto();
+                rol = emp.getRolDto();
+                AppContext.getInstance().set("RolActual" , rol);
                 AppContext.getInstance().set("EmpleadoActual" , emp);
-                //crear un appcontext para rol
-                new Mensaje().show(Alert.AlertType.INFORMATION , "Datos" , "Empleado "+emp.getNombre()+" Encontrado ");
+                new Mensaje().show(Alert.AlertType.INFORMATION , "Datos" , "Empleado " + emp.getNombre() + " Encontrado ");
                 getStage().close();
             }
             else
