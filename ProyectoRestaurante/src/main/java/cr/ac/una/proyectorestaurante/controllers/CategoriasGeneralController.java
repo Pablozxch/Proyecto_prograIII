@@ -66,7 +66,6 @@ public class CategoriasGeneralController extends Controller implements Initializ
 
     public HBox create(String name , boolean x)//workea
     {
-        System.out.println("El nombre a crear es " + name + x);
         CheckBox ch = new CheckBox();
         ch.setSelected(x);
         HBox hBox = new HBox(20);
@@ -123,7 +122,6 @@ public class CategoriasGeneralController extends Controller implements Initializ
 
                     if(y.toUpperCase().equals(t.getNombre().toUpperCase()))
                     {
-                        System.out.println("El valor esta en ambas es  " + y);
                         x = true;
                     }
                 });

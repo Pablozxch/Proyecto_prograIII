@@ -127,6 +127,10 @@ public class CrearPedidoController extends Controller implements Initializable
         {
             //se elimina un producto de la lista de productos,
         }
+        if(event.getSource()==btnMenu)
+        {
+            FlowController.getInstance().goViewInWindowModal("Menu", getStage() , Boolean.FALSE);
+        }
 
     }
 

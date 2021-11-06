@@ -16,12 +16,11 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="920.0" prefWidth="1435.0" stylesheets="@../styles/StylesCss.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/15.0.1" fx:controller="cr.ac.una.proyectorestaurante.controllers.MenuController">
+<AnchorPane id="AnchorPane" prefHeight="920.0" prefWidth="1435.0" stylesheets="@../styles/StylesCss.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.proyectorestaurante.controllers.MenuController">
    <children>
       <BorderPane layoutX="60.0" layoutY="70.0" prefHeight="546.0" prefWidth="721.0" styleClass="fondo" stylesheets="@../styles/StylesCss.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <right>
-            <VBox fx:id="lblCantidadTotal" prefHeight="200.0" prefWidth="100.0" styleClass="barra-derecha" BorderPane.alignment="CENTER">
+            <VBox prefHeight="200.0" prefWidth="100.0" styleClass="barra-derecha" BorderPane.alignment="CENTER">
                <children>
                   <HBox alignment="CENTER" prefHeight="110.0" prefWidth="200.0">
                      <children>
@@ -75,7 +74,7 @@
                               <Insets top="25.0" />
                            </VBox.margin>
                         </Label>
-                        <Label text="Cantidad total: ">
+                        <Label fx:id="lblCantidadTotal" text="Cantidad total: ">
                            <VBox.margin>
                               <Insets bottom="5.0" left="50.0" right="50.0" top="50.0" />
                            </VBox.margin>
