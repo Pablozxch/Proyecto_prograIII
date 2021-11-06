@@ -51,11 +51,11 @@ public class DisenoSalonesController extends Controller implements Initializable
     private JFXCheckBox chkEditar;
     @FXML
     private ImageView imvCajero;
-    
+
     public int f = 20;
     public Thread taskThread;
     /**
-     * 
+     *
      * Initializes the controller class.
      */
     MesaService mesaService = new MesaService();
@@ -104,22 +104,17 @@ public class DisenoSalonesController extends Controller implements Initializable
                     }
                 }
             }
-            try
+            if(list != null)
             {
-                System.out.println(mesaclick.toString());
                 list = (List<OrdenDto>) ordenes.stream().filter(o -> o.getMesaDto().getId() == mesaclick.getId()).collect(Collectors.toList());
-                list.forEach(y ->
-                {
-                    System.out.println("La orden es");
-                    System.out.println(y.toString());
-                });
                 ordenes.clear();
                 AppContext.getInstance().set("Orden" , list.get(0));
                 FlowController.getInstance().goViewInWindowModal("CrearPedido" , getStage() , Boolean.FALSE);
             }
-            catch(Exception e)
+            else
             {
-
+                AppContext.getInstance().set("Orden" , new OrdenDto());
+                FlowController.getInstance().goViewInWindowModal("CrearPedido" , getStage() , Boolean.FALSE);
             }
         });
     }

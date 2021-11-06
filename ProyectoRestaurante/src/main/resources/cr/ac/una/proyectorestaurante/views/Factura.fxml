@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="895.0" prefWidth="844.0" styleClass="fondoFactura" stylesheets="@../styles/StylesCss.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/15.0.1" fx:controller="cr.ac.una.proyectorestaurante.controllers.FacturaController">
+<AnchorPane id="AnchorPane" prefHeight="895.0" prefWidth="844.0" styleClass="fondoFactura" stylesheets="@../styles/StylesCss.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.proyectorestaurante.controllers.FacturaController">
    <children>
       <VBox layoutX="139.0" layoutY="50.0" prefHeight="895.0" prefWidth="844.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -60,19 +59,19 @@
                         <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="422.0" spacing="15.0">
                            <children>
                               <Label text="Sub-total:  " />
-                              <JFXTextField fx:id="txtSubtotal" />
+                              <JFXTextField fx:id="txtSubtotal" editable="false" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="422.0" spacing="15.0">
                            <children>
                               <Label text="Descuento:" />
-                              <JFXTextField fx:id="txtDescuento" />
+                              <JFXTextField fx:id="txtDescuento" editable="false" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="422.0" spacing="15.0">
                            <children>
                               <Label text="Total:         " />
-                              <JFXTextField fx:id="txtTotal" />
+                              <JFXTextField fx:id="txtTotal" editable="false" />
                            </children>
                         </HBox>
                         <JFXButton fx:id="btnEnviar" onAction="#click" text="Enviar">
