@@ -76,9 +76,9 @@ public class MenuController extends Controller implements Initializable
         lblNombrePro.setText(sal.getNombre());
         Image img2 = new Image(new ByteArrayInputStream(sal.getFoto()));//crea un objeto imagen, transforma el byte[] a un buffered imagen
         imgPro.setImage(img2);
-        lblCantidadTotal.setText(sal.getCantidad().toString());
+        lblCantidadTotal.setText("Cantidad : " + sal.getCantidad().toString());
         lblPrecio.setText("Precio Unidad: ₡" + sal.getCosto().toString());
-        AppContext.getInstance().set("Producto" , sal);
+        AppContext.getInstance().set("ProductoOrden" , sal);
     }
 
     public void loadItems(String name)
@@ -100,6 +100,18 @@ public class MenuController extends Controller implements Initializable
             {
                 productos.clear();
             }
+            categorias.forEach(t ->
+            {
+                if(t.getNombre().toUpperCase().equals(cmbCategorias.getValue().toUpperCase()))
+                {
+                    t.getProductos().forEach(p ->
+                    {
+                        productos.add(p);
+                    });
+                }
+
+            });
+
         }
         else
         {

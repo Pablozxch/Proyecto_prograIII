@@ -107,7 +107,6 @@ public class CategoriasGeneralController extends Controller implements Initializ
                 {
                     t.getProductos().forEach(p ->
                     {
-                        System.out.println(t + p.getNombre());
                         list.add(p.getNombre());
                     });
                 }
