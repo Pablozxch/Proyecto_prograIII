@@ -3,6 +3,8 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -16,6 +18,14 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="150.0">
                <children>
+                  <ImageView fx:id="imvCajero" fitHeight="95.0" fitWidth="155.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@../resources/cajero.png" />
+                     </image>
+                  </ImageView>
                   <JFXButton fx:id="btnAgregar" onAction="#click" text="Agregar" />
                   <JFXButton fx:id="btnEliminar" onAction="#click" text="Eliminar" />
                   <JFXCheckBox fx:id="chkEditar" text="Editar " />

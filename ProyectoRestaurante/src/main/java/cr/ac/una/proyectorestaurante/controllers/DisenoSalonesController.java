@@ -49,9 +49,13 @@ public class DisenoSalonesController extends Controller implements Initializable
     private JFXButton btnEliminar;
     @FXML
     private JFXCheckBox chkEditar;
+    @FXML
+    private ImageView imvCajero;
+    
     public int f = 20;
     public Thread taskThread;
     /**
+     * 
      * Initializes the controller class.
      */
     MesaService mesaService = new MesaService();

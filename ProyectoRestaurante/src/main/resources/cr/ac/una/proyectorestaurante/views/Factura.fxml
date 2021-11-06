@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="895.0" prefWidth="844.0" styleClass="fondoFactura" stylesheets="@../styles/StylesCss.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/15.0.1" fx:controller="cr.ac.una.proyectorestaurante.controllers.FacturaController">
+   <children>
+      <VBox layoutX="139.0" layoutY="50.0" prefHeight="895.0" prefWidth="844.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox prefHeight="150.0" prefWidth="844.0">
+               <children>
+                  <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="53.0" prefWidth="422.0" spacing="15.0">
+                           <children>
+                              <Label text="Nombre:" />
+                              <JFXTextField fx:id="txtNombre" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="53.0" prefWidth="422.0" spacing="15.0">
+                           <children>
+                              <Label text="Correo:  " />
+                              <JFXTextField fx:id="txtCorreo" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox prefHeight="527.0" prefWidth="824.0">
+               <children>
+                  <TableView fx:id="tblOrdenes" prefHeight="602.0" prefWidth="843.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="177.0" prefWidth="844.0">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <HBox prefHeight="77.0" prefWidth="422.0" spacing="15.0">
+                           <children>
+                              <Label text="Código de descuento: " />
+                              <JFXTextField fx:id="txtCodigoDescuento" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="422.0" spacing="15.0">
+                           <children>
+                              <Label text="Sub-total:  " />
+                              <JFXTextField fx:id="txtSubtotal" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="422.0" spacing="15.0">
+                           <children>
+                              <Label text="Descuento:" />
+                              <JFXTextField fx:id="txtDescuento" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="422.0" spacing="15.0">
+                           <children>
+                              <Label text="Total:         " />
+                              <JFXTextField fx:id="txtTotal" />
+                           </children>
+                        </HBox>
+                        <JFXButton fx:id="btnEnviar" onAction="#click" text="Enviar">
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </JFXButton>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

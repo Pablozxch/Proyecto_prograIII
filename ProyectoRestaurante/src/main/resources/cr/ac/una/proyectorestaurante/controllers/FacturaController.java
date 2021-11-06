@@ -6,36 +6,38 @@
 package cr.ac.una.proyectorestaurante.controllers;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 
+import javafx.scene.control.TableView;
 /**
  * FXML Controller class
  *
  * @author Christopher
  */
-public class DisenoSalonesController extends Controller implements Initializable {
+public class FacturaController extends Controller implements Initializable {
+
 
     @FXML
-    private JFXButton btnAgregar;
+    private JFXTextField txtNombre;
     @FXML
-    private GridPane gripMesa;
+    private JFXTextField txtCorreo;
     @FXML
-    private JFXButton btnEliminar;
+    private TableView<?> tblOrdenes;
     @FXML
-    private JFXCheckBox chkEditar;
+    private JFXTextField txtCodigoDescuento;
     @FXML
-    private AnchorPane rt;
+    private JFXTextField txtSubtotal;
     @FXML
-    private ImageView imvCajero;
-
+    private JFXTextField txtDescuento;
+    @FXML
+    private JFXTextField txtTotal;
+    @FXML
+    private JFXButton btnEnviar;
     /**
      * Initializes the controller class.
      */
@@ -43,14 +45,14 @@ public class DisenoSalonesController extends Controller implements Initializable
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+    
+    @FXML
+    private void click(ActionEvent event) {
+    }
 
     @Override
     public void initialize() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @FXML
-    private void click(ActionEvent event) {
-    }
-    
 }

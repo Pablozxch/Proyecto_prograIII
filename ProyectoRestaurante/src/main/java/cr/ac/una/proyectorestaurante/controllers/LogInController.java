@@ -6,6 +6,7 @@
 package cr.ac.una.proyectorestaurante.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import cr.ac.una.proyectorestaurante.models.*;
 import cr.ac.una.proyectorestaurante.services.*;
@@ -30,13 +31,12 @@ public class LogInController extends Controller implements Initializable
     @FXML
     private JFXTextField txtUsuario;
     @FXML
-    private JFXTextField txtContrasena;
+    private JFXPasswordField txtContrasena;
     @FXML
     private JFXButton btnCancelar;
     @FXML
     private JFXButton btnContinuar;
-    @FXML
-    private JFXButton btnCrear;
+
 
     /**
      * Initializes the controller class.
@@ -54,10 +54,7 @@ public class LogInController extends Controller implements Initializable
     @FXML
     private void click(ActionEvent event)
     {
-        if(event.getSource() == btnCrear)
-        {
-            FlowController.getInstance().goViewInWindowModal("CrearEmpleado" , (Stage) btnCrear.getScene().getWindow() , false);
-        }
+
         if(event.getSource() == btnContinuar)
         {
             String user = txtUsuario.getText();

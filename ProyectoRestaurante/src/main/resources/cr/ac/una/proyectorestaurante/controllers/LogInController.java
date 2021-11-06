@@ -6,6 +6,7 @@
 package cr.ac.una.proyectorestaurante.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -26,13 +27,11 @@ public class LogInController extends Controller implements Initializable {
     @FXML
     private JFXTextField txtUsuario;
     @FXML
-    private JFXTextField txtContrasena;
+    private JFXPasswordField txtContrasena;
     @FXML
     private JFXButton btnCancelar;
     @FXML
     private JFXButton btnContinuar;
-    @FXML
-    private JFXButton btnCrear;
     /**
      * Initializes the controller class.
      */
