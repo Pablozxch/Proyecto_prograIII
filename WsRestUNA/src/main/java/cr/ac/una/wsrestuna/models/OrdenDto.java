@@ -20,13 +20,11 @@ public class OrdenDto
     private EmpleadoDto empleadoDto;
     private MesaDto mesaDto;
     private Boolean modificado;
-    private List<DetallexordenDto> detallexordenDtos;
 
     //deberia de tener la lista de productos que se van a comprar 
     public OrdenDto()
     {
         this.modificado = false;
-        this.detallexordenDtos = new ArrayList<>();
     }
 
     public OrdenDto(Orden orden)
@@ -37,12 +35,6 @@ public class OrdenDto
         this.estado = orden.getOrdEstado();
         this.empleadoDto = new EmpleadoDto(orden.getEmpId());
         this.mesaDto = new MesaDto(orden.getMesaId());
-        List<DetallexordenDto> list = new ArrayList<>();
-        orden.getDetallexordenList().forEach(t ->
-        {
-            list.add(new DetallexordenDto(t));
-        });
-        this.detallexordenDtos = list;
 
     }
 
@@ -104,30 +96,6 @@ public class OrdenDto
     public void setModificado(Boolean modificado)
     {
         this.modificado = modificado;
-    }
-
-    public List<DetallexordenDto> getDetallexordenDtos()
-    {
-        return detallexordenDtos;
-    }
-
-    public void setDetallexordenDtos(List<DetallexordenDto> detallexordenDtos)
-    {
-        this.detallexordenDtos = detallexordenDtos;
-    }
-
-    @Override
-    public String toString()
-    {
-        StringBuilder sb = new StringBuilder();
-        sb.append("OrdenDto{id=").append(id);
-        sb.append(", fecha=").append(fecha);
-        sb.append(", estado=").append(estado);
-        sb.append(", empleadoDto=").append(empleadoDto);
-        sb.append(", mesaDto=").append(mesaDto);
-        sb.append(", detallexordenDtos=").append(detallexordenDtos.toString());
-        sb.append('}');
-        return sb.toString();
     }
 
   

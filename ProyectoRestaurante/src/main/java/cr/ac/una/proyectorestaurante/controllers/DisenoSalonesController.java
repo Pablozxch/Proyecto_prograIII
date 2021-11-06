@@ -73,55 +73,12 @@ public class DisenoSalonesController extends Controller implements Initializable
     @Override
     public void initialize(URL url , ResourceBundle rb)
     {
-
-        load();
-        loadgrid();
-        // loadEvent();
-        gripMesa.addEventHandler(MouseEvent.MOUSE_CLICKED , (t) ->
-        {
-            for(int z = 0; z < 10; z++)
-            {
-                for(int v = 0; v < 10; v++)
-                {
-                    if(gripMesa.getCellBounds(z , v).contains(t.getX() , t.getY()))
-                    {
-                        k = z;
-                        l = v;
-                        mesaDtos.forEach(m ->
-                        {
-                            if(m.getPosX() == k && m.getPosY() == l)
-                            {
-                                // System.out.println("El valor del click fue " + m.toString());
-                                mesaclick = m;
-                                Respuesta res = orden.getOrdenes();
-                                if(res.getEstado())
-                                {
-                                    ordenes = (List<OrdenDto>) res.getResultado("Ordenes");
-                                }
-                            }
-                        });
-
-                    }
-                }
-            }
-            if(list != null)
-            {
-                list = (List<OrdenDto>) ordenes.stream().filter(o -> o.getMesaDto().getId() == mesaclick.getId()).collect(Collectors.toList());
-                ordenes.clear();
-                AppContext.getInstance().set("Orden" , list.get(0));
-                FlowController.getInstance().goViewInWindowModal("CrearPedido" , getStage() , Boolean.FALSE);
-            }
-            else
-            {
-                AppContext.getInstance().set("Orden" , new OrdenDto());
-                FlowController.getInstance().goViewInWindowModal("CrearPedido" , getStage() , Boolean.FALSE);
-            }
-        });
     }
 
     void load()//con este metodo se carga la lista de iamgeviews para poder empezar a colocarlas en el grid
     {
 
+        mesaDtos.clear();
         Respuesta res = mesaService.getMesas();
         if(res.getEstado())
         {
@@ -152,6 +109,71 @@ public class DisenoSalonesController extends Controller implements Initializable
     @Override
     public void initialize()
     {
+        load();
+        loadgrid();
+        // loadEvent();
+        gripMesa.addEventHandler(MouseEvent.MOUSE_CLICKED , (t) ->
+        {
+            for(int z = 0; z < 10; z++)
+            {
+                for(int v = 0; v < 10; v++)
+                {
+                    if(gripMesa.getCellBounds(z , v).contains(t.getX() , t.getY()))
+                    {
+                        k = z;
+                        l = v;
+                        mesaDtos.forEach(m ->
+                        {
+                            if(m.getPosX() == k && m.getPosY() == l)
+                            {
+                                System.out.println("El valor del click fue " + m.toString());
+                                mesaclick = m;
+                                Respuesta res = orden.getOrdenes();
+                                if(res.getEstado())
+                                {
+                                    ordenes = (List<OrdenDto>) res.getResultado("Ordenes");
+                                }
+                            }
+                        });
+
+                    }
+                }
+            }
+            if("O".equals(mesaclick.getEstado()))
+            {
+                System.out.println("La mesa tiene orden existente");
+                list = (List<OrdenDto>) ordenes.stream().filter(o -> Objects.equals(o.getMesaDto().getId() , mesaclick.getId())).collect(Collectors.toList());
+                System.out.println("xD " + list.get(0).toString());;
+                ordenes.clear();
+                AppContext.getInstance().set("Orden" , list.get(0));
+                FlowController.getInstance().goViewInWindowModal("CrearPedido" , getStage() , Boolean.FALSE);
+                list.clear();
+            }
+            else//se procede a craer una orden para la mesa 
+            {
+                System.out.println("La mesa no tiene orden");
+                EmpleadoDto emp = (EmpleadoDto) AppContext.getInstance().get("EmpleadoActual");
+                OrdenDto odd = new OrdenDto();
+                odd.setEmpleadoDto(emp);
+                odd.setFecha(new Date());
+                odd.setMesaDto(mesaclick);
+                odd.setEstado("P");
+                orden.guardarOrden(odd);
+                mesaclick.setEstado("O");
+                ordenes.clear();
+                AppContext.getInstance().set("Orden" , new OrdenDto());
+                FlowController.getInstance().goViewInWindowModal("CrearPedido" , getStage() , Boolean.FALSE);
+                list.clear();
+                mesaDtos.forEach(g ->
+                {
+                    if(Objects.equals(g.getId() , mesaclick.getId()))
+                    {
+                        g = mesaclick;
+                    }
+                });
+            }
+            mesaService.guardarMesa(mesaclick);
+        });
     }
 
     @FXML

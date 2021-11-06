@@ -44,7 +44,7 @@ public class OrdenesGeneralController extends Controller implements Initializabl
     public void initialize(URL url , ResourceBundle rb)
     {
         // TODO
-        llenar();
+
     }
 
     void llenar()
@@ -112,6 +112,7 @@ public class OrdenesGeneralController extends Controller implements Initializabl
     @Override
     public void initialize()
     {
+        llenar();
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

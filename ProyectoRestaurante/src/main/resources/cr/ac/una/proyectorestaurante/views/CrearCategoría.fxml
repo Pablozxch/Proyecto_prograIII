@@ -21,7 +21,7 @@
                   <HBox alignment="CENTER" prefHeight="72.0" prefWidth="590.0" spacing="150.0">
                      <children>
                         <JFXButton fx:id="btnVolver" onAction="#click" text="Volver" />
-                        <JFXButton fx:id="btnAceptar" text="Aceptar" />
+                        <JFXButton fx:id="btnAceptar" onAction="#click" text="Aceptar" />
                      </children>
                   </HBox>
                </children>

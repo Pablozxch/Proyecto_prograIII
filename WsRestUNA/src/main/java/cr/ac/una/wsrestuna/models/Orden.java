@@ -87,13 +87,6 @@ public class Orden implements Serializable
         this.ordEstado = ordenDto.getEstado();
         this.mesaId = new Mesa(ordenDto.getMesaDto());
         this.empId = new Empleado(ordenDto.getEmpleadoDto());
-        List<Detallexorden> list = new ArrayList<>();
-        ordenDto.getDetallexordenDtos().forEach(t ->
-        {
-            list.add(new Detallexorden(t));
-        });
-        this.detallexordenList = list;
-
     }
 
     public Long getOrdId()

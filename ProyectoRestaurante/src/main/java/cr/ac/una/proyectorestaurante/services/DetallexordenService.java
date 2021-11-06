@@ -35,7 +35,9 @@ public class DetallexordenService
             List<DetallexordenDto> detallexordens = (List<DetallexordenDto>) request.readEntity(new GenericType<List<DetallexordenDto>>()
             {
             });
-            return new Respuesta(true , "" , "" , "Detalles" , detallexordens);
+            RestauranteDto id = (RestauranteDto) AppContext.getInstance().get("Restaurante");
+            List<DetallexordenDto> dd = detallexordens.stream().filter(y -> Objects.equals(y.getProductoDto().getRestauranteDto().getId() , id.getId())).collect(Collectors.toList());
+            return new Respuesta(true , "" , "" , "Detalles" , dd);
         }
         catch(Exception ex)
         {

@@ -70,6 +70,7 @@ public class LogInController extends Controller implements Initializable
                     AppContext.getInstance().set("CierreCajasActual+" , cierre);
                 }
                 AppContext.getInstance().set("EmpleadoActual" , emp);
+                //crear un appcontext para rol
                 new Mensaje().show(Alert.AlertType.INFORMATION , "Datos" , "Empleado "+emp.getNombre()+" Encontrado ");
                 getStage().close();
             }

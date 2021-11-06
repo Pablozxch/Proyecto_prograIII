@@ -38,7 +38,7 @@ public class DetallexordenController
     @Path("/detallexorden")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getOrdenees()
+    public Response getDetalles()
     {
         try
         {
@@ -54,7 +54,7 @@ public class DetallexordenController
         }
         catch(Exception ex)
         {
-            Logger.getLogger(CategoriaController.class.getName()).log(Level.SEVERE , null , ex);
+            Logger.getLogger(DetallexordenController.class.getName()).log(Level.SEVERE , null , ex);
             return Response.status(CodigoRespuesta.ERROR_INTERNO.getValue()).entity("Error al obtener la orden ").build();//TODO
         }
     }
@@ -63,7 +63,7 @@ public class DetallexordenController
     @Path("/detallexorden")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response guardarCategoria(DetallexordenDto detallexordenDto)
+    public Response guardarDetalle(DetallexordenDto detallexordenDto)
     {
         try
         {
@@ -76,14 +76,14 @@ public class DetallexordenController
         }
         catch(Exception ex)
         {
-            Logger.getLogger(CategoriaController.class.getName()).log(Level.SEVERE , null , ex);
+            Logger.getLogger(DetallexordenController.class.getName()).log(Level.SEVERE , null , ex);
             return Response.status(CodigoRespuesta.ERROR_INTERNO.getValue()).entity("Error al obtener la categoria ").build();//TODO
         }
     }
 
     @DELETE
     @Path("/detallexorden/{id}")
-    public Response eliminarCategoria(@PathParam("id") Long id)
+    public Response eliminarDetallexorden(@PathParam("id") Long id)
     {
         try
         {
@@ -96,7 +96,7 @@ public class DetallexordenController
         }
         catch(Exception ex)
         {
-            Logger.getLogger(CategoriaController.class.getName()).log(Level.SEVERE , null , ex);
+            Logger.getLogger(DetallexordenController.class.getName()).log(Level.SEVERE , null , ex);
             return Response.status(CodigoRespuesta.ERROR_INTERNO.getValue()).entity("Error al obtener la categoria ").build();//TODO
         }
     }

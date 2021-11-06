@@ -79,6 +79,7 @@ public class Detallexorden implements Serializable
         this.dxoCantidad = detallexordenDto.getCantidad();
         this.dxoPrecioc = detallexordenDto.getPrecio();
         this.proId = new Producto(detallexordenDto.getProductoDto());
+        this.ordId = new Orden(detallexordenDto.getOrdenId());
     }
 
     public Long getDxoId()

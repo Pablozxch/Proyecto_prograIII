@@ -21,7 +21,6 @@ public class OrdenDto
     private ObjectProperty<EmpleadoDto> empleadoDto;
     private ObjectProperty<MesaDto> mesaDto;
     private Boolean modificado;
-    private List<DetallexordenDto> detallexordenDtos;
 
     public OrdenDto()
     {
@@ -30,7 +29,6 @@ public class OrdenDto
         this.estado = new SimpleStringProperty();
         this.empleadoDto = new SimpleObjectProperty<>();
         this.mesaDto = new SimpleObjectProperty<>();
-        this.detallexordenDtos = new ArrayList<>();
         this.modificado = false;
     }
 
@@ -101,16 +99,6 @@ public class OrdenDto
         this.modificado = modificado;
     }
 
-    public List<DetallexordenDto> getDetallexordenDtos()
-    {
-        return detallexordenDtos;
-    }
-
-    public void setDetallexordenDtos(List<DetallexordenDto> detallexordenDtos)
-    {
-        this.detallexordenDtos = detallexordenDtos;
-    }
-
     @Override
     public String toString()
     {
@@ -120,9 +108,10 @@ public class OrdenDto
         sb.append(", estado=").append(estado);
         sb.append(", empleadoDto=").append(empleadoDto);
         sb.append(", mesaDto=").append(mesaDto);
-        sb.append(", detallexordenDtos=").append(detallexordenDtos.toString());
         sb.append('}');
         return sb.toString();
     }
+
+   
 
 }

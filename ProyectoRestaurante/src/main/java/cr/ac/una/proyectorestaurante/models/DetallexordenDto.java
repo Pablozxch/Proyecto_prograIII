@@ -20,13 +20,14 @@ public class DetallexordenDto
     public SimpleStringProperty precio;
     private ProductoDto productoDto;
     private Boolean modificado;
-
+    private OrdenDto ordenId;
 
     public DetallexordenDto()
     {
         this.id = new SimpleStringProperty();
         this.cantidad = new SimpleStringProperty();
         this.precio = new SimpleStringProperty();
+
         this.modificado = false;
     }
 
@@ -101,16 +102,25 @@ public class DetallexordenDto
         this.modificado = modificado;
     }
 
-  
+    public OrdenDto getOrdenId()
+    {
+        return ordenId;
+    }
+
+    public void setOrdenId(OrdenDto ordenId)
+    {
+        this.ordenId = ordenId;
+    }
 
     @Override
     public String toString()
     {
         StringBuilder sb = new StringBuilder();
-        sb.append("DetallexordenDto{id=").append(id);
-        sb.append(", cantidad=").append(cantidad);
-        sb.append(", precio=").append(precio);
-        sb.append(", productoDto=").append(productoDto);
+//        sb.append("DetallexordenDto{id=").append(id);
+//        sb.append(", cantidad=").append(cantidad);
+//        sb.append(", precio=").append(precio);
+//        sb.append(", productoDto=").append(productoDto);
+        sb.append(", ordenId=").append(ordenId);
         sb.append('}');
         return sb.toString();
     }

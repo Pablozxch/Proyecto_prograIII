@@ -13,6 +13,7 @@ import cr.ac.una.proyectorestaurante.utils.*;
 import java.io.*;
 import java.net.URL;
 import java.util.*;
+import java.util.stream.*;
 import javafx.collections.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -81,11 +82,12 @@ public class CrearPedidoController extends Controller implements Initializable
     public void initialize(URL url , ResourceBundle rb)
     {
         // TODO
-
+        load();
     }
 
     void load()
     {
+        tblpedido.getColumns().clear();
         TableColumn<DetallexordenDto , String> nombreCorto = new TableColumn<>("Nombre Corto");
         nombreCorto.setPrefWidth(tblpedido.getPrefWidth() / 4);
         nombreCorto.setCellValueFactory(cd -> cd.getValue().getProductoDto().nombrecorto);
@@ -111,15 +113,29 @@ public class CrearPedidoController extends Controller implements Initializable
         tblpedido.getColumns().add(cantidad);
         tblpedido.getColumns().add(precio);
         tblpedido.refresh();
-        loadItems();
+
     }
 
     void loadItems()
     {
         ordenDto = (OrdenDto) AppContext.getInstance().get("Orden");
-        productos = (List<DetallexordenDto>) ordenDto.getDetallexordenDtos();
-        ObservableList<DetallexordenDto> ords = FXCollections.observableList(productos);
-        tblpedido.setItems(ords);
+        Respuesta res = detallexordenService.getDetalles();
+
+        List<DetallexordenDto> dett = (List<DetallexordenDto>) res.getResultado("Detalles");
+        List<DetallexordenDto> detf = dett.stream().filter(t -> t.getOrdenId().getId() == ordenDto.getId()).collect(Collectors.toList());
+        if(detf == null)
+        {
+            List<DetallexordenDto> deta = new ArrayList<>();
+            productos = (List<DetallexordenDto>) deta;
+            ObservableList<DetallexordenDto> ords = FXCollections.observableList(productos);
+            tblpedido.setItems(ords);
+        }
+        else
+        {
+            productos = (List<DetallexordenDto>) detf;
+            ObservableList<DetallexordenDto> ords = FXCollections.observableList(productos);
+            tblpedido.setItems(ords);
+        }
         tblpedido.refresh();
 
     }
@@ -135,10 +151,6 @@ public class CrearPedidoController extends Controller implements Initializable
         {
             //implementar la parte de buscar ya sea por nombre o nombre corto
             //y guardar estos datos en una variable de tipo producto para poder agregarla a la lista de productos 
-        }
-        if(event.getSource() == btnAnadir)
-        {
-            //se anade el prodcuto del de buscar a la lsita de productos
         }
         if(event.getSource() == btnEliminar)
         {
@@ -158,7 +170,6 @@ public class CrearPedidoController extends Controller implements Initializable
                 });
                 ObservableList<DetallexordenDto> ords = FXCollections.observableList(productos);
                 detallexordenDtos = productos;
-                ordenDto.setDetallexordenDtos(productos);
                 tblpedido.setItems(ords);
                 tblpedido.refresh();
                 /*
@@ -229,7 +240,6 @@ public class CrearPedidoController extends Controller implements Initializable
                         t.setPrecio(t.getCantidad() * pro.getCosto());
                         ObservableList<DetallexordenDto> ords = FXCollections.observableList(productos);
                         detallexordenDtos = productos;
-                        ordenDto.setDetallexordenDtos(productos);
                         tblpedido.setItems(ords);
                         tblpedido.refresh();
                         proo = t.getProductoDto();
@@ -244,15 +254,19 @@ public class CrearPedidoController extends Controller implements Initializable
                     productos.add(det);
                     ObservableList<DetallexordenDto> ords = FXCollections.observableList(productos);
                     detallexordenDtos = productos;
-                    ordenDto.setDetallexordenDtos((List<DetallexordenDto>) ords);
+
                     tblpedido.setItems(ords);
                     tblpedido.refresh();
                     proo = pro;
                 }
 
-                System.out.println(ordenDto.toString());
                 detallexordenDtos.forEach(t ->
                 {
+                    if(t.getOrdenId() == null)
+                    {
+                        t.setOrdenId(ordenDto);
+                    }
+                    System.out.println(t.toString());
                     Respuesta res2 = detallexordenService.guardarDetalle(t);
                     if(res2.getEstado())
                     {
@@ -308,7 +322,8 @@ public class CrearPedidoController extends Controller implements Initializable
     @Override
     public void initialize()
     {
-        load();
+
+        loadItems();
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

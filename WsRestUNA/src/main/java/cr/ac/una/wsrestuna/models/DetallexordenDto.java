@@ -17,6 +17,7 @@ public class DetallexordenDto
     private Long precio;
     private ProductoDto productoDto;
     private Boolean modificado;
+    private OrdenDto ordenId;
 
     public DetallexordenDto()
     {
@@ -30,6 +31,8 @@ public class DetallexordenDto
         this.cantidad = detallexorden.getDxoCantidad();
         this.precio = detallexorden.getDxoPrecioc();
         this.productoDto = new ProductoDto(detallexorden.getProId());
+        this.ordenId = new OrdenDto(detallexorden.getOrdId());
+
     }
 
     public Long getId()
@@ -71,6 +74,7 @@ public class DetallexordenDto
     {
         this.productoDto = productoDto;
     }
+
     public Boolean getModificado()
     {
         return modificado;
@@ -81,6 +85,16 @@ public class DetallexordenDto
         this.modificado = modificado;
     }
 
+    public OrdenDto getOrdenId()
+    {
+        return ordenId;
+    }
+
+    public void setOrdenId(OrdenDto ordenId)
+    {
+        this.ordenId = ordenId;
+    }
+
     @Override
     public String toString()
     {
@@ -88,9 +102,12 @@ public class DetallexordenDto
         sb.append("DetallexordenDto{id=").append(id);
         sb.append(", cantidad=").append(cantidad);
         sb.append(", precio=").append(precio);
-        sb.append(", productoDto=").append(productoDto.toString());
+        sb.append(", productoDto=").append(productoDto);
+        sb.append(", ordenId=").append(ordenId);
         sb.append('}');
         return sb.toString();
     }
+    
+
 
 }
