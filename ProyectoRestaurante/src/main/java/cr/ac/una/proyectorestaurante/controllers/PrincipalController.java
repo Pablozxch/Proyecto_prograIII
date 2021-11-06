@@ -62,25 +62,66 @@ public class PrincipalController extends Controller implements Initializable
     @FXML
     private void click(ActionEvent event)
     {
+
         if(event.getSource() == btnSalones)
         {
-            FlowController.getInstance().goView("SalonesGeneral");
+
+            if(((EmpleadoDto) AppContext.getInstance().get("EmpleadoActual")) == null)
+            {
+                FlowController.getInstance().goViewInWindowModal("LogIn" , (Stage) btnCerrarSesion.getScene().getWindow() , Boolean.FALSE);//ver que se hace con esto
+            }
+            else
+            {
+                FlowController.getInstance().goView("SalonesGeneral");
+            }
         }
         if(event.getSource() == btnProductos)
         {
-            FlowController.getInstance().goView("ProductosGeneral");
+            if(((EmpleadoDto) AppContext.getInstance().get("EmpleadoActual")) == null)
+            {
+                FlowController.getInstance().goViewInWindowModal("LogIn" , (Stage) btnCerrarSesion.getScene().getWindow() , Boolean.FALSE);//ver que se hace con esto
+            }
+            else
+            {
+                FlowController.getInstance().goView("ProductosGeneral");
+            }
+
         }
         if(event.getSource() == btnCategorias)
         {
-            FlowController.getInstance().goView("CategoriasGeneral");
+            if(((EmpleadoDto) AppContext.getInstance().get("EmpleadoActual")) == null)
+            {
+                FlowController.getInstance().goViewInWindowModal("LogIn" , (Stage) btnCerrarSesion.getScene().getWindow() , Boolean.FALSE);//ver que se hace con esto
+            }
+            else
+            {
+                FlowController.getInstance().goView("CategoriasGeneral");
+            }
+
         }
         if(event.getSource() == btnOrdenes)
         {
-            FlowController.getInstance().goView("OrdenesGeneral");
+            if(((EmpleadoDto) AppContext.getInstance().get("EmpleadoActual")) == null)
+            {
+                FlowController.getInstance().goViewInWindowModal("LogIn" , (Stage) btnCerrarSesion.getScene().getWindow() , Boolean.FALSE);//ver que se hace con esto
+            }
+            else
+            {
+                FlowController.getInstance().goView("OrdenesGeneral");
+            }
+
         }
         if(event.getSource() == btnEmpleados)
         {
-            FlowController.getInstance().goView("EmpleadosGeneral");
+            if(((EmpleadoDto) AppContext.getInstance().get("EmpleadoActual")) == null)
+            {
+                FlowController.getInstance().goViewInWindowModal("LogIn" , (Stage) btnCerrarSesion.getScene().getWindow() , Boolean.FALSE);//ver que se hace con esto
+            }
+            else
+            {
+                FlowController.getInstance().goView("EmpleadosGeneral");
+            }
+
         }
         if(event.getSource() == btnSalir)
         {
@@ -91,11 +132,12 @@ public class PrincipalController extends Controller implements Initializable
         }
         if(event.getSource() == btnCerrarSesion)
         {
-            AppContext.getInstance().delete("Usuario");//este usuario es el encargado de ingresar a todo lo que el pueda
+            AppContext.getInstance().delete("EmpleadoActual");//este usuario es el encargado de ingresar a todo lo que el pueda
             FlowController.getInstance().goViewInWindowModal("LogIn" , (Stage) btnCerrarSesion.getScene().getWindow() , Boolean.FALSE);//ver que se hace con esto
             //preguntar que si lo de crear empleados en esta vista
 
         }
+
     }
 
 }

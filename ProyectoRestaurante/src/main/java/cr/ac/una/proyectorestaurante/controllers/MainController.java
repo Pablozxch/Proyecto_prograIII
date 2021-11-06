@@ -174,7 +174,6 @@ public class MainController extends Controller implements Initializable
         }
         if(event.getSource() == btnContinuar)
         {
-
             FlowController.getInstance().goViewInStage("Principal" , (Stage) btnContinuar.getScene().getWindow());
         }
         if(event.getSource() == btnEditar)
