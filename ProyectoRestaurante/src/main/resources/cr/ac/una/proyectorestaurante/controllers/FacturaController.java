@@ -38,6 +38,12 @@ public class FacturaController extends Controller implements Initializable {
     private JFXTextField txtTotal;
     @FXML
     private JFXButton btnEnviar;
+    @FXML
+    private JFXTextField txtNombreRest;
+    @FXML
+    private JFXTextField txtCorreoRest;
+    @FXML
+    private JFXTextField txtDireccionRest;
     /**
      * Initializes the controller class.
      */
