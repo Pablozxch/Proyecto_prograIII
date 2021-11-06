@@ -31,6 +31,7 @@ public class FacturaDto
 
     public FacturaDto(Factura factura)
     {
+        this();
         this.id = factura.getFacId();
         this.descuento = factura.getFacDesc();
         this.efetivoTarjeta = factura.getFacEfectivotarjeta();

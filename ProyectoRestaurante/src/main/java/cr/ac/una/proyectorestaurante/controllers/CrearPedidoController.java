@@ -20,6 +20,7 @@ import javafx.fxml.Initializable;
 
 import javafx.scene.control.*;
 import javafx.scene.image.*;
+import javafx.scene.input.*;
 import javafx.stage.*;
 
 /**
@@ -63,7 +64,11 @@ public class CrearPedidoController extends Controller implements Initializable
      * Initializes the controller class.
      */
     DetallexordenService detallexordenService = new DetallexordenService();
+    ProductoService proservice = new ProductoService();
+    ProductoDto proo = new ProductoDto();
     List<DetallexordenDto> detallexordenDtos = new ArrayList<>();
+    OrdenService ordenService = new OrdenService();
+    OrdenDto ordenDto = new OrdenDto();
     ProductoDto pro = new ProductoDto();
     List<DetallexordenDto> productos = new ArrayList<>();
     @FXML
@@ -111,8 +116,8 @@ public class CrearPedidoController extends Controller implements Initializable
 
     void loadItems()
     {
-        OrdenDto orden = (OrdenDto) AppContext.getInstance().get("Orden");
-        productos = (List<DetallexordenDto>) orden.getDetallexordenDtos();
+        ordenDto = (OrdenDto) AppContext.getInstance().get("Orden");
+        productos = (List<DetallexordenDto>) ordenDto.getDetallexordenDtos();
         ObservableList<DetallexordenDto> ords = FXCollections.observableList(productos);
         tblpedido.setItems(ords);
         tblpedido.refresh();
@@ -153,6 +158,10 @@ public class CrearPedidoController extends Controller implements Initializable
             {
                 txtCantidad.setText(String.valueOf(cantidad += 1));
                 lblPrecio.setText("Precio: ₡" + cantidad * pro.getCosto());
+                int cantidares = pro.getCantidad().intValue() - 1;
+                pro.setCantidad(Long.valueOf(cantidares));
+                cantidadtodal = cantidares;
+                lblCantidadTotal.setText("Cantidad en Sistema: " + (pro.getCantidad()));
             }
         }
         if(event.getSource() == btnRestar)
@@ -162,10 +171,15 @@ public class CrearPedidoController extends Controller implements Initializable
             {
                 txtCantidad.setText(String.valueOf(cantidad -= 1));
                 lblPrecio.setText("Precio: ₡" + cantidad * pro.getCosto());
+                int cantidares = pro.getCantidad().intValue() + 1;
+                cantidadtodal = cantidares;
+                pro.setCantidad(Long.valueOf(cantidares));
+                lblCantidadTotal.setText("Cantidad en Sistema: " + (pro.getCantidad()));
             }
         }
         if(event.getSource() == btnAnadir)
         {
+
             finded = false;
             if(pro != null)
             {
@@ -174,27 +188,45 @@ public class CrearPedidoController extends Controller implements Initializable
                     if(Objects.equals(t.getProductoDto().getId() , pro.getId()))
                     {
                         finded = true;
-                        t.setCantidad(t.getCantidad() + cantidad);
-                        System.out.println(t.getPrecio());
+                        t.setCantidad(Long.valueOf(txtCantidad.getText()));
                         t.setPrecio(t.getCantidad() * pro.getCosto());
-                        System.out.println(t.getPrecio() + "asda" + t.getCantidad() * pro.getCosto());
                         ObservableList<DetallexordenDto> ords = FXCollections.observableList(productos);
+                        detallexordenDtos = productos;
+                        ordenDto.setDetallexordenDtos(productos);
                         tblpedido.setItems(ords);
                         tblpedido.refresh();
+                        proo = t.getProductoDto();
                     }
                 });
                 if(finded == false)
                 {
                     DetallexordenDto det = new DetallexordenDto();
                     det.setProductoDto(pro);
-                    det.setCantidad(Long.valueOf(cantidad));
-                    det.setPrecio(cantidad * pro.getCosto());
+                    det.setCantidad(Long.valueOf(txtCantidad.getText()));
+                    det.setPrecio(det.getCantidad() * pro.getCosto());
                     productos.add(det);
                     ObservableList<DetallexordenDto> ords = FXCollections.observableList(productos);
+                    detallexordenDtos = productos;
+                    ordenDto.setDetallexordenDtos((List<DetallexordenDto>) ords);
                     tblpedido.setItems(ords);
                     tblpedido.refresh();
+                    proo = pro;
                 }
-                clear();
+
+                System.out.println(ordenDto.toString());
+                detallexordenDtos.forEach(t ->
+                {
+                    Respuesta res2 = detallexordenService.guardarDetalle(t);
+                    if(res2.getEstado())
+                    {
+                        System.out.println("done");
+                    }
+                    else
+                    {
+                        System.out.println("rip");
+                    }
+                });
+
             }
         }
 
@@ -212,9 +244,23 @@ public class CrearPedidoController extends Controller implements Initializable
 
     }
 
+    void llenarTb(DetallexordenDto det)
+    {
+        lblNombre.setText(pro.getNombre());
+        lblCantidadTotal.setText("Cantidad en Sistema: " + pro.getCantidad().toString());
+        cantidad = det.getCantidad().intValue();
+        txtCantidad.setText(String.valueOf(det.getCantidad()));
+        Image img2 = new Image(new ByteArrayInputStream(pro.getFoto()));//crea un objeto imagen, transforma el byte[] a un buffered imagen
+        imgProducto.setImage(img2);
+        lblPrecio.setText("Precio: ₡" + pro.getCosto() * det.getCantidad());
+        cantidadtodal = pro.getCantidad().intValue();
+
+    }
+
     void clear()
     {
         lblNombre.setText("Nombre Producto");
+        cantidad = 0;
         lblCantidadTotal.setText("Cantidad en Sistema: " + 00000);
         txtCantidad.setText("0");
         imgProducto.setImage(null);
@@ -229,4 +275,15 @@ public class CrearPedidoController extends Controller implements Initializable
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @FXML
+    private void ObtenerResultado(MouseEvent event)
+    {
+        if(event.isPrimaryButtonDown() && event.getClickCount() == 2)
+        {
+            DetallexordenDto det = (DetallexordenDto) tblpedido.getSelectionModel().getSelectedItem();
+            this.pro = det.getProductoDto();
+            llenarTb(det);
+
+        }
+    }
 }

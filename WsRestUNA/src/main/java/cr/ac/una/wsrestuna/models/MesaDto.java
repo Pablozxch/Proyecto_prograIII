@@ -27,6 +27,7 @@ public class MesaDto
 
     public MesaDto(Mesa mesa)
     {
+        this();
         this.id = mesa.getMesaId();
         this.nombre = mesa.getMesaNombre();
         this.estado = mesa.getMesaEstado();

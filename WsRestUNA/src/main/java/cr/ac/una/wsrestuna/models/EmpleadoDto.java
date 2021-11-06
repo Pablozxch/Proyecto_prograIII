@@ -29,6 +29,7 @@ public class EmpleadoDto
 
     public EmpleadoDto(Empleado empleado)
     {
+        this();
         this.id = empleado.getEmpId();
         this.nombre = empleado.getEmpNombre();
         this.apellido = empleado.getEmpApelllido();

@@ -103,7 +103,7 @@ public class OrdenesGeneralController extends Controller implements Initializabl
         {
             if(tblpedidos.getSelectionModel().getSelectedItem() != null)
             {
-                System.out.println("No ha seleccionado nada");
+
             }
         }
 

@@ -58,6 +58,7 @@ public class OrdenService
     {
         try
         {
+            System.out.println(ordenDto.toString());
             Orden orden;
             if(ordenDto.getId() != null && ordenDto.getId() > 0)
             {

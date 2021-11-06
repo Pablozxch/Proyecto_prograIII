@@ -34,21 +34,17 @@ public class Orden implements Serializable
     @SequenceGenerator(name = "TBL_ORDEN_ORD_ID_GENERATOR" , sequenceName = "RESTUNA.TBL_ORDEN_SEQ01" , allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "TBL_ORDEN_ORD_ID_GENERATOR")
     @Basic(optional = false)
-    @NotNull
     @Column(name = "ORD_ID")
     private Long ordId;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "ORD_FECHA")
     @Temporal(TemporalType.TIMESTAMP)
     private Date ordFecha;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1 , max = 1)
     @Column(name = "ORD_ESTADO")
     private String ordEstado;
     @Basic(optional = false)
-    @NotNull
     @Version
     @Column(name = "ORD_VERSION")
     private Long ordVersion;

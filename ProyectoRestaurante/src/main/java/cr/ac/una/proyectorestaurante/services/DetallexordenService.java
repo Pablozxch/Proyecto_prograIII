@@ -66,19 +66,19 @@ public class DetallexordenService
         }
     }
 
-    public Respuesta guardarDetalle(CategoriaDto pd)
+    public Respuesta guardarDetalle(DetallexordenDto dt)
     {
         try
         {
             Request request = new Request("DetallexordenController/detallexorden");
-            request.post(pd);
+            request.post(dt);
             if(request.isError())
             {
                 return new Respuesta(false , request.getError() , "");
 
             }
-            CategoriaDto detallexorden = (CategoriaDto) request.readEntity(CategoriaDto.class);//
-            return new Respuesta(true , "" , "" , "Categoria" , detallexorden);
+            DetallexordenDto detallexorden = (DetallexordenDto) request.readEntity(DetallexordenDto.class);//
+            return new Respuesta(true , "" , "" , "Detalle" , detallexorden);
         }
         catch(Exception ex)
         {

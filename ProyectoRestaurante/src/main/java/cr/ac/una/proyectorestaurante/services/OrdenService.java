@@ -77,7 +77,7 @@ public class OrdenService
     {
         try
         {
-            Request request = new Request("OrdenController/orden");
+            Request request = new Request("OrdenController/ordenn");
             request.post(pd);
             if(request.isError())
             {

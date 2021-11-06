@@ -54,16 +54,16 @@ public class OrdenController
         }
         catch(Exception ex)
         {
-            Logger.getLogger(CategoriaController.class.getName()).log(Level.SEVERE , null , ex);
+            Logger.getLogger(OrdenController.class.getName()).log(Level.SEVERE , null , ex);
             return Response.status(CodigoRespuesta.ERROR_INTERNO.getValue()).entity("Error al obtener la orden ").build();//TODO
         }
     }
 
     @POST
-    @Path("/orden")
+    @Path("/ordenn")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response guardarCategoria(OrdenDto ordenDto)
+    public Response guardarOrden(OrdenDto ordenDto)
     {
         try
         {
@@ -76,14 +76,14 @@ public class OrdenController
         }
         catch(Exception ex)
         {
-            Logger.getLogger(CategoriaController.class.getName()).log(Level.SEVERE , null , ex);
+            Logger.getLogger(OrdenController.class.getName()).log(Level.SEVERE , null , ex);
             return Response.status(CodigoRespuesta.ERROR_INTERNO.getValue()).entity("Error al obtener la categoria ").build();//TODO
         }
     }
 
     @DELETE
     @Path("/orden/{id}")
-    public Response eliminarCategoria(@PathParam("id") Long id)
+    public Response eliminarOrden(@PathParam("id") Long id)
     {
         try
         {
@@ -96,7 +96,7 @@ public class OrdenController
         }
         catch(Exception ex)
         {
-            Logger.getLogger(CategoriaController.class.getName()).log(Level.SEVERE , null , ex);
+            Logger.getLogger(OrdenController.class.getName()).log(Level.SEVERE , null , ex);
             return Response.status(CodigoRespuesta.ERROR_INTERNO.getValue()).entity("Error al obtener la categoria ").build();//TODO
         }
     }

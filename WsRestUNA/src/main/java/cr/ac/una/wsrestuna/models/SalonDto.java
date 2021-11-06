@@ -27,6 +27,7 @@ public class SalonDto
 
     public SalonDto(Salon salon)
     {
+        this();
         this.id = salon.getSalId();
         this.nombre = salon.getSalNombre();
         this.foto = salon.getSalImagen();

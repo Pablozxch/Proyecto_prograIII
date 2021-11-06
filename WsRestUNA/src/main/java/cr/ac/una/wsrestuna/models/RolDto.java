@@ -23,6 +23,7 @@ public class RolDto
 
     public RolDto(Rol rol)
     {
+        this();
         this.id = rol.getRolId();
         this.nombre = rol.getRolNombre();
     }

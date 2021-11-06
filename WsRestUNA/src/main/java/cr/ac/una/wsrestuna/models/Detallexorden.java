@@ -33,19 +33,15 @@ public class Detallexorden implements Serializable
     @SequenceGenerator(name = "TBL_DETALLEXORDEN_DXO_ID_GENERATOR" , sequenceName = "RESTUNA.TBL_DETALLEXORDEN_SEQ01" , allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "TBL_DETALLEXORDEN_DXO_ID_GENERATOR")
     @Basic(optional = false)
-    @NotNull
     @Column(name = "DXO_ID")
     private Long dxoId;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "DXO_CANTIDAD")
     private Long dxoCantidad;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "DXO_PRECIOC")
     private Long dxoPrecioc;
     @Basic(optional = false)
-    @NotNull
     @Version
     @Column(name = "DXO_VERSION")
     private Long dxoVersion;

@@ -27,6 +27,7 @@ public class CodigodescDto
 
     public CodigodescDto(Codigodesc codigodesc)
     {
+        this();
         this.id = codigodesc.getCodId();
         this.nombre = codigodesc.getCodNombre();
         this.desc = codigodesc.getCodDesc();

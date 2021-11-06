@@ -29,6 +29,7 @@ public class RestauranteDto
 
     public RestauranteDto(Restaurante restaurante)
     {
+        this();
         this.id = restaurante.getResId();
         this.nombre = restaurante.getResNombre();
         this.detalle = restaurante.getResDetalle();

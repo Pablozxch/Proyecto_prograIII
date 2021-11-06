@@ -28,6 +28,7 @@ public class CierrecajasDto
 
     public CierrecajasDto(Cierrecajas cierrecajas)
     {
+        this();
         this.id = cierrecajas.getCcajId();
         this.montoInicial = cierrecajas.getCcajMontoinicial();
         this.montoFinal = cierrecajas.getCcjaMontofinal();
