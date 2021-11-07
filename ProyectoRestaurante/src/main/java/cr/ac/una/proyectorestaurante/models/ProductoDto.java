@@ -19,7 +19,7 @@ public class ProductoDto
     public SimpleStringProperty nombrecorto;
     private SimpleStringProperty detalle;
     private ObjectProperty<byte[]> foto;
-    private SimpleStringProperty costo;
+    public SimpleStringProperty costo;
     private SimpleStringProperty cantidad;
     private SimpleStringProperty accesoRapido;
     private SimpleStringProperty cantidadV;

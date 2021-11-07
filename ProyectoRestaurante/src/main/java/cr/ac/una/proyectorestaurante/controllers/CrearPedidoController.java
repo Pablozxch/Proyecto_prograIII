@@ -236,7 +236,7 @@ public class CrearPedidoController extends Controller implements Initializable
                     if(Objects.equals(t.getProductoDto().getId() , pro.getId()))
                     {
                         finded = true;
-                        t.setCantidad(Long.valueOf(txtCantidad.getText()));
+                        t.setCantidad(t.getCantidad()+Long.valueOf(txtCantidad.getText()));
                         t.setPrecio(t.getCantidad() * pro.getCosto());
                         ObservableList<DetallexordenDto> ords = FXCollections.observableList(productos);
                         detallexordenDtos = productos;
@@ -254,7 +254,6 @@ public class CrearPedidoController extends Controller implements Initializable
                     productos.add(det);
                     ObservableList<DetallexordenDto> ords = FXCollections.observableList(productos);
                     detallexordenDtos = productos;
-
                     tblpedido.setItems(ords);
                     tblpedido.refresh();
                     proo = pro;

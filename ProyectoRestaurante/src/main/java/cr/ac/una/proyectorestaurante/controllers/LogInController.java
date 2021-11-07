@@ -72,6 +72,7 @@ public class LogInController extends Controller implements Initializable
                 rol = emp.getRolDto();
                 AppContext.getInstance().set("RolActual" , rol);
                 AppContext.getInstance().set("EmpleadoActual" , emp);
+                //crear un appcontext para rol
                 new Mensaje().show(Alert.AlertType.INFORMATION , "Datos" , "Empleado " + emp.getNombre() + " Encontrado ");
                 getStage().close();
             }

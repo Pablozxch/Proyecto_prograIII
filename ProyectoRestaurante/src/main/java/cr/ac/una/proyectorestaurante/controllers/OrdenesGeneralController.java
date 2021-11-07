@@ -55,17 +55,17 @@ public class OrdenesGeneralController extends Controller implements Initializabl
     {
         tblpedidos.getColumns().clear();
         TableColumn<OrdenDto , String> NombreSalon = new TableColumn<>("Nombre Salon");
-        NombreSalon.setPrefWidth(tblpedidos.getPrefWidth()/2);
+        NombreSalon.setPrefWidth(tblpedidos.getPrefWidth() / 2);
         NombreSalon.setCellValueFactory(cd -> cd.getValue().getMesaDto().getSalonDto().nombre);
         NombreSalon.setResizable(false);
 
         TableColumn<OrdenDto , String> nombreMesa = new TableColumn<>("Nombre Mesa");
-        nombreMesa.setPrefWidth(tblpedidos.getPrefWidth()/2);
+        nombreMesa.setPrefWidth(tblpedidos.getPrefWidth() / 2);
         nombreMesa.setCellValueFactory(cd -> cd.getValue().getMesaDto().nombre);
         nombreMesa.setResizable(false);
 //
         TableColumn<OrdenDto , String> nombreempelado = new TableColumn<>("Empleado");
-        nombreempelado.setPrefWidth(tblpedidos.getPrefWidth()/2);
+        nombreempelado.setPrefWidth(tblpedidos.getPrefWidth() / 2);
         nombreempelado.setCellValueFactory(cd -> cd.getValue().getEmpleadoDto().nombre);
         nombreempelado.setResizable(false);
 
@@ -108,6 +108,8 @@ public class OrdenesGeneralController extends Controller implements Initializabl
         {
             if(tblpedidos.getSelectionModel().getSelectedItem() != null)
             {
+                AppContext.getInstance().set("Orden" , (OrdenDto) tblpedidos.getSelectionModel().getSelectedItem());
+                FlowController.getInstance().goViewInWindowModal("Factura" , getStage() , Boolean.FALSE);
 
             }
         }
