@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -10,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="895.0" prefWidth="844.0" styleClass="fondoFactura" stylesheets="@../styles/StylesCss.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.proyectorestaurante.controllers.FacturaController">
+<AnchorPane id="AnchorPane" prefHeight="895.0" prefWidth="1250.0" styleClass="fondoFactura" stylesheets="@../styles/StylesCss.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.proyectorestaurante.controllers.FacturaController">
    <children>
       <VBox layoutX="139.0" layoutY="50.0" prefHeight="895.0" prefWidth="844.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -22,13 +23,25 @@
                            <children>
                               <Label text="Nombre cliente:" />
                               <JFXTextField fx:id="txtNombre" prefHeight="31.0" prefWidth="206.0" />
+                              <JFXCheckBox fx:id="chkEfectivo" checkedColor="#f9d5a7" text="Efectivo">
+                                 <HBox.margin>
+                                    <Insets right="1.0" />
+                                 </HBox.margin>
+                              </JFXCheckBox>
                            </children>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="53.0" prefWidth="422.0" spacing="15.0">
                            <children>
                               <Label text="Correo cliente:  " />
-                              <JFXTextField fx:id="txtCorreo" prefHeight="31.0" prefWidth="206.0" />
+                              <JFXTextField fx:id="txtCorreo" prefHeight="31.0" prefWidth="207.0" />
+                              <JFXCheckBox fx:id="chkTarjeta" checkedColor="#f9d5a7" text="Tarjeta" />
                            </children>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
                         </HBox>
                      </children>
                      <HBox.margin>
@@ -41,7 +54,7 @@
                         <HBox alignment="CENTER_LEFT" prefHeight="53.0" prefWidth="200.0" spacing="15.0">
                            <children>
                               <Label text="Nombre restaurante:" />
-                              <JFXTextField fx:id="txtNombreRest" />
+                              <JFXTextField fx:id="txtNombreRest" editable="false" prefHeight="31.0" prefWidth="246.0" />
                            </children>
                            <VBox.margin>
                               <Insets left="10.0" />
@@ -50,7 +63,7 @@
                         <HBox alignment="CENTER_LEFT" prefHeight="53.0" prefWidth="200.0" spacing="15.0">
                            <children>
                               <Label text="Correo restaurante:  " />
-                              <JFXTextField fx:id="txtCorreoRest" prefHeight="31.0" prefWidth="171.0" />
+                              <JFXTextField fx:id="txtCorreoRest" editable="false" prefHeight="31.0" prefWidth="248.0" />
                            </children>
                            <VBox.margin>
                               <Insets left="10.0" />
@@ -59,7 +72,7 @@
                         <HBox alignment="CENTER_LEFT" prefHeight="53.0" prefWidth="200.0" spacing="15.0">
                            <children>
                               <Label text="Dirección:" />
-                              <JFXTextField fx:id="txtDireccionRest" prefHeight="31.0" prefWidth="264.0" />
+                              <JFXTextField fx:id="txtDireccionRest" editable="false" prefHeight="31.0" prefWidth="342.0" />
                            </children>
                            <VBox.margin>
                               <Insets left="10.0" />
@@ -71,9 +84,9 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </HBox>
-            <HBox prefHeight="527.0" prefWidth="824.0">
+            <HBox alignment="CENTER" prefHeight="527.0" prefWidth="824.0">
                <children>
-                  <TableView fx:id="tblOrdenes" prefHeight="602.0" prefWidth="843.0" />
+                  <TableView fx:id="tblOrdenes" prefHeight="505.0" prefWidth="1120.0" />
                </children>
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -81,42 +94,68 @@
             </HBox>
             <HBox prefHeight="177.0" prefWidth="844.0">
                <children>
-                  <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                  <VBox fillWidth="false" prefHeight="217.0" prefWidth="0.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <HBox alignment="CENTER_LEFT" prefHeight="77.0" prefWidth="422.0" spacing="15.0">
+                        <HBox alignment="CENTER_LEFT" prefHeight="77.0" prefWidth="422.0" spacing="10.0">
                            <children>
                               <Label text="Código de descuento: " />
                               <JFXTextField fx:id="txtCodigoDescuento" />
                            </children>
                         </HBox>
+                        <HBox alignment="CENTER" prefHeight="45.0" prefWidth="401.0" spacing="25.0" />
                      </children>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
                   </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                  <VBox alignment="CENTER" prefHeight="217.0" prefWidth="215.0" spacing="10.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="422.0" spacing="15.0">
+                        <HBox alignment="CENTER_RIGHT" prefHeight="44.0" prefWidth="422.0" spacing="15.0">
                            <children>
                               <Label text="Sub-total:  " />
-                              <JFXTextField fx:id="txtSubtotal" editable="false" />
+                              <JFXTextField fx:id="txtSubtotal" editable="false" focusColor="WHITE" />
                            </children>
+                           <padding>
+                              <Insets right="65.0" />
+                           </padding>
                         </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="422.0" spacing="15.0">
+                        <HBox alignment="CENTER_RIGHT" prefHeight="44.0" prefWidth="422.0" spacing="15.0">
                            <children>
                               <Label text="Descuento:" />
-                              <JFXTextField fx:id="txtDescuento" editable="false" />
+                              <JFXTextField fx:id="txtDescuento" editable="false" focusColor="WHITE" />
                            </children>
+                           <padding>
+                              <Insets right="65.0" />
+                           </padding>
                         </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="422.0" spacing="15.0">
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+                           <children>
+                              <Label text="Impuestos:" />
+                              <JFXTextField fx:id="txtImpuestos" focusColor="WHITE" />
+                           </children>
+                           <padding>
+                              <Insets right="65.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="44.0" prefWidth="422.0" spacing="15.0">
                            <children>
                               <Label text="Total:         " />
-                              <JFXTextField fx:id="txtTotal" editable="false" />
+                              <JFXTextField fx:id="txtTotal" editable="false" focusColor="WHITE" />
+                           </children>
+                           <padding>
+                              <Insets right="65.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="150.0">
+                           <children>
+                              <JFXButton fx:id="btnGuardar" onAction="#click" text="Guardar" />
+                              <JFXButton fx:id="btnEnviar" onAction="#click" text="Enviar" />
                            </children>
                         </HBox>
-                        <JFXButton fx:id="btnEnviar" onAction="#click" text="Enviar">
-                           <VBox.margin>
-                              <Insets top="5.0" />
-                           </VBox.margin>
-                        </JFXButton>
                      </children>
+                     <padding>
+                        <Insets bottom="15.0" />
+                     </padding>
                   </VBox>
                </children>
             </HBox>

@@ -6,6 +6,7 @@
 package cr.ac.una.proyectorestaurante.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -44,6 +45,14 @@ public class FacturaController extends Controller implements Initializable {
     private JFXTextField txtCorreoRest;
     @FXML
     private JFXTextField txtDireccionRest;
+    @FXML
+    private JFXCheckBox chkEfectivo;
+    @FXML
+    private JFXCheckBox chkTarjeta;
+    @FXML
+    private JFXTextField txtImpuestos;
+    @FXML
+    private JFXButton btnGuardar;
     /**
      * Initializes the controller class.
      */
