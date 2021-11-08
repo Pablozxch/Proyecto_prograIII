@@ -57,6 +57,7 @@ public class CategoriasGeneralController extends Controller implements Initializ
     ObservableList<String> list = FXCollections.observableArrayList();//con esto se llena la cosa
     boolean x = false;
     CategoriaDto cat = new CategoriaDto();
+    CategoriaDto catDelete = new CategoriaDto();
 
     @Override
 
@@ -99,34 +100,41 @@ public class CategoriasGeneralController extends Controller implements Initializ
     {
         if(event.getSource() == btnBuscar)
         {
-            list.clear();
-            listProductos.getItems().clear();
-            categorias.forEach(t ->
+            if(cmbCategorias.getValue() != null)
             {
-                if(t.getNombre().toUpperCase().equals(cmbCategorias.getValue().toUpperCase()))
+                list.clear();
+                listProductos.getItems().clear();
+                categorias.forEach(t ->
                 {
-                    t.getProductos().forEach(p ->
+                    if(t.getNombre().toUpperCase().equals(cmbCategorias.getValue().toUpperCase()))
                     {
-                        list.add(p.getNombre());
-                    });
-                }
-
-            });
-
-            productos.forEach(t ->
-            {
-                //se ecnarga de evaluar la lista de productos a la lista de productos de la caregoria como tal
-                list.forEach(y ->
-                {
-
-                    if(y.toUpperCase().equals(t.getNombre().toUpperCase()))
-                    {
-                        x = true;
+                        t.getProductos().forEach(p ->
+                        {
+                            list.add(p.getNombre());
+                        });
                     }
+
                 });
-                listProductos.getItems().add(create(t.getNombre() , x));
-                x = false;
-            });
+
+                productos.forEach(t ->
+                {
+                    //se ecnarga de evaluar la lista de productos a la lista de productos de la caregoria como tal
+                    list.forEach(y ->
+                    {
+
+                        if(y.toUpperCase().equals(t.getNombre().toUpperCase()))
+                        {
+                            x = true;
+                        }
+                    });
+                    listProductos.getItems().add(create(t.getNombre() , x));
+                    x = false;
+                });
+            }
+            else
+            {
+                new Mensaje().show(Alert.AlertType.INFORMATION , "Categoria" , "No tiene ninguna categoria seleccionada");
+            }
 
         }
         if(event.getSource() == btnCrearCategoria)
@@ -136,50 +144,82 @@ public class CategoriasGeneralController extends Controller implements Initializ
         }
         if(event.getSource() == btnEliminar)
         {
+            if(cmbCategorias.getValue() != null)
+            {
+                if(new Mensaje().showConfirmation("Eliminacion de Categorias" , getStage() , "¿Está seguro que desea eliminar la cantegoria " + cmbCategorias.getValue() + "?"))
+                {
+                    categorias.forEach(t ->
+                    {
+                        if(t.getNombre().toUpperCase().equals(cmbCategorias.getValue().toUpperCase()))
+                        {
+                            catDelete = t;
+                        }
+
+                    });
+                    Respuesta res = categoriaService.eliminarCategoria(catDelete.getId());
+                    if(res.getEstado())
+                    {
+                        new Mensaje().show(Alert.AlertType.INFORMATION , "Categoria Eliminada" , "La categoria " + catDelete.getNombre() + " ah sido eliminada correctamente");
+                    }
+                }
+            }
+            else
+            {
+                new Mensaje().show(Alert.AlertType.INFORMATION , "Categoria" , "No tiene ninguna categoria seleccionada");
+            }
+            list.clear();
+            listProductos.getItems().clear();
+            catDelete = null;
             load();
         }
         if(event.getSource() == btnGuardar)
         {
-            List<ProductoDto> productosSave = new ArrayList<>();
-            listProductos.getItems().forEach(t ->
+            if(cmbCategorias.getValue() != null)
             {
-                if(((CheckBox) t.getChildren().get(1)).isSelected())
+                List<ProductoDto> productosSave = new ArrayList<>();
+                listProductos.getItems().forEach(t ->
                 {
-                    System.out.println("El valor seleccionado es " + ((Label) t.getChildren().get(0)).getText());
-                    productos.forEach(p ->
+                    if(((CheckBox) t.getChildren().get(1)).isSelected())
                     {
-                        if(((Label) t.getChildren().get(0)).getText().equals(p.getNombre()))
+                        System.out.println("El valor seleccionado es " + ((Label) t.getChildren().get(0)).getText());
+                        productos.forEach(p ->
                         {
-                            productosSave.add(p);
-                        }
-                    });
-                }
-            });
-            productosSave.forEach(t ->
-            {
-                System.out.println("Los valores son" + t.toString());
-            });
-            categorias.forEach(t ->
-            {
-                if(t.getNombre().equals(cmbCategorias.getValue()))
+                            if(((Label) t.getChildren().get(0)).getText().equals(p.getNombre()))
+                            {
+                                productosSave.add(p);
+                            }
+                        });
+                    }
+                });
+                productosSave.forEach(t ->
                 {
-                    t.getProductos().clear();
-                    t.setProductos(productosSave);
-                    cat = t;
-                    //una lista que creo antes de inclusive buscar entre categorias
+                    System.out.println("Los valores son" + t.toString());
+                });
+                categorias.forEach(t ->
+                {
+                    if(t.getNombre().equals(cmbCategorias.getValue()))
+                    {
+                        t.getProductos().clear();
+                        t.setProductos(productosSave);
+                        cat = t;
+                        //una lista que creo antes de inclusive buscar entre categorias
+                    }
+                });
+                cat.getProductos().forEach(t ->
+                {
+                    System.out.println("El producto es " + t.getNombre());
+                });
+                Respuesta res = categoriaService.guardarCategoria(cat);
+                if(res.getEstado())
+                {
+                    new Mensaje().show(Alert.AlertType.CONFIRMATION , "Guardado Con exito" , "Se guardo con exito toda la informacion");
+                    load();
                 }
-            });
-            cat.getProductos().forEach(t ->
-            {
-                System.out.println("El producto es " + t.getNombre());
-            });
-            Respuesta res = categoriaService.guardarCategoria(cat);
-            if(res.getEstado())
-            {
-                new Mensaje().show(Alert.AlertType.CONFIRMATION , "Guardado Con exito" , "Se guardo con exito toda la informacion");
-                load();
             }
-
+            else
+            {
+                new Mensaje().show(Alert.AlertType.INFORMATION , "Categoria" , "No tiene ninguna categoria seleccionada");
+            }
         }
     }
 

@@ -43,6 +43,7 @@ public class LogInController extends Controller implements Initializable
     EmpleadoService empleadoService = new EmpleadoService();
     EmpleadoDto emp = new EmpleadoDto();
     CierrecajasDto cierre = new CierrecajasDto();
+    RolDto rol = new RolDto();
 
     @Override
     public void initialize(URL url , ResourceBundle rb)
@@ -68,7 +69,6 @@ public class LogInController extends Controller implements Initializable
 //                    cierre.setMontoInicial(Long.MIN_VALUE); pensar donde se pide la vara
                     AppContext.getInstance().set("CierreCajasActual+" , cierre);
                 }
-                RolDto rol = new RolDto();
                 rol = emp.getRolDto();
                 AppContext.getInstance().set("RolActual" , rol);
                 AppContext.getInstance().set("EmpleadoActual" , emp);

@@ -12,8 +12,10 @@ import cr.ac.una.proyectorestaurante.services.*;
 import cr.ac.una.proyectorestaurante.utils.*;
 import java.io.*;
 import java.net.URL;
+import java.text.*;
 import java.util.*;
 import java.util.stream.*;
+import javafx.beans.property.*;
 import javafx.collections.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -77,6 +79,7 @@ public class CrearPedidoController extends Controller implements Initializable
     int cantidad = 1;
     int cantidadtodal = 0;
     boolean finded = false;
+    DecimalFormat currency = new DecimalFormat("₡ 0.00");
 
     @Override
     public void initialize(URL url , ResourceBundle rb)
@@ -104,7 +107,13 @@ public class CrearPedidoController extends Controller implements Initializable
 
         TableColumn<DetallexordenDto , String> precio = new TableColumn<>("Precio");
         precio.setPrefWidth(tblpedido.getPrefWidth() / 4);
-        precio.setCellValueFactory(cd -> cd.getValue().precio);
+        precio.setCellValueFactory(cd ->
+        {
+
+            double total = cd.getValue().getPrecio();
+            String formattedCost = currency.format(total);
+            return new SimpleStringProperty(formattedCost);
+        });
         precio.setResizable(false);
 
         tblpedido.getColumns().add(nombreCorto);
@@ -112,7 +121,6 @@ public class CrearPedidoController extends Controller implements Initializable
         tblpedido.getColumns().add(cantidad);
         tblpedido.getColumns().add(precio);
         tblpedido.refresh();
-
 
     }
 
@@ -200,6 +208,16 @@ public class CrearPedidoController extends Controller implements Initializable
             System.out.println(pro.toString());
             llenar(pro);
         }
+        if(event.getSource() == btnMenuRapido)
+        {
+            MenuRapidoController menuR = (MenuRapidoController) FlowController.getInstance().getController("MenuRapido");
+            FlowController.getInstance().goViewInWindowModal("MenuRapido" , (Stage) btnMenu.getScene().getWindow() , Boolean.FALSE);
+            pro = menuR.retornarproducto();
+            if(pro != null)
+            {
+                llenar(pro);
+            }
+        }
         if(event.getSource() == btnSumar)
         {
             if(cantidad + 1 <= cantidadtodal)
@@ -236,7 +254,7 @@ public class CrearPedidoController extends Controller implements Initializable
                     if(Objects.equals(t.getProductoDto().getId() , pro.getId()))
                     {
                         finded = true;
-                        t.setCantidad(t.getCantidad()+Long.valueOf(txtCantidad.getText()));
+                        t.setCantidad(t.getCantidad() + Long.valueOf(txtCantidad.getText()));
                         t.setPrecio(t.getCantidad() * pro.getCosto());
                         ObservableList<DetallexordenDto> ords = FXCollections.observableList(productos);
                         detallexordenDtos = productos;
