@@ -3,7 +3,7 @@ reportes jasper igual a la vista de factura
 
 drag and drop (que graficamente se vea como )
 
-buscar del crear orden y menu rapido agregar el simbolo de colones al precio (poner mensajes para confirmar eliminaciones y demas)
+buscar del crear orden
 
 crear diferentes mesas
 
@@ -11,9 +11,7 @@ cierres de caja
 
 roles (acceso)
 
-preguntar a ver si mi jasper report da problema por tener diferente bd 18c 11g
-
- hacer el security filter
+hacer el security filter
 
 a qué cosas tiene acceso el salonero
 
@@ -21,5 +19,10 @@ preguntarle al profe a ver que quiere que se vea el primer reporte jasper
 
 preguntarle bien como se exportan los datos desde el plsql
 
+export de la base base de datos 
 
 verificar si es una barra o mesa, y cargar la vista de ordenes general para ver si el salon es con barra o mesa 
+
+streams y base de datos (consulta)
+
+
