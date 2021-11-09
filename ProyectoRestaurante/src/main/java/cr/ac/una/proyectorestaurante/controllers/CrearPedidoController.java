@@ -62,6 +62,8 @@ public class CrearPedidoController extends Controller implements Initializable
     private TableView tblpedido;
     @FXML
     private JFXButton btnMenuRapido;
+    @FXML
+    private JFXButton btnFacturar;
 
     /**
      * Initializes the controller class.

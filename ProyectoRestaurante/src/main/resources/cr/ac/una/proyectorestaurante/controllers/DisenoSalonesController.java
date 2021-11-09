@@ -13,8 +13,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 
 /**
  * FXML Controller class
@@ -26,8 +28,6 @@ public class DisenoSalonesController extends Controller implements Initializable
     @FXML
     private JFXButton btnAgregar;
     @FXML
-    private GridPane gripMesa;
-    @FXML
     private JFXButton btnEliminar;
     @FXML
     private JFXCheckBox chkEditar;
@@ -35,6 +35,8 @@ public class DisenoSalonesController extends Controller implements Initializable
     private AnchorPane rt;
     @FXML
     private ImageView imvCajero;
+    @FXML
+    private Pane pane;
 
     /**
      * Initializes the controller class.
@@ -51,6 +53,14 @@ public class DisenoSalonesController extends Controller implements Initializable
 
     @FXML
     private void click(ActionEvent event) {
+    }
+
+    @FXML
+    private void dragOver(DragEvent event) {
+    }
+
+    @FXML
+    private void dragDropped(DragEvent event) {
     }
     
 }

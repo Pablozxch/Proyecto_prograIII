@@ -15,6 +15,8 @@ import javafx.fxml.Initializable;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 /**
  * FXML Controller class
  *
@@ -23,11 +25,6 @@ import javafx.scene.control.TableView;
 public class CrearPedidoController extends Controller implements Initializable {
 
 
-    @FXML
-    private JFXTextField txtNombre;
-    @FXML
-    private JFXTextField txtNombreCorto;
-    @FXML
     private JFXButton btnBuscar;
     @FXML
     private JFXButton btnMenu;
@@ -51,6 +48,10 @@ public class CrearPedidoController extends Controller implements Initializable {
     private JFXButton btnMenuRapido;
     @FXML
     private TableView tblpedido;
+    @FXML
+    private ImageView imgProducto;
+    @FXML
+    private JFXButton btnFacturar;
     /**
      * Initializes the controller class.
      */
@@ -66,6 +67,10 @@ public class CrearPedidoController extends Controller implements Initializable {
     @Override
     public void initialize() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @FXML
+    private void ObtenerResultado(MouseEvent event) {
     }
 
 }

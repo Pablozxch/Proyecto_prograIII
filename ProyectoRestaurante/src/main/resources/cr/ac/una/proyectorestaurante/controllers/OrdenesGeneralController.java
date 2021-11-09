@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
@@ -28,6 +29,10 @@ public class OrdenesGeneralController extends Controller implements Initializabl
     private JFXButton btnEditar;
     @FXML
     private JFXButton btnVolver;
+    @FXML
+    private AnchorPane rt;
+    @FXML
+    private JFXButton btnAnadir;
 
     /**
      * Initializes the controller class.

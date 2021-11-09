@@ -23,8 +23,7 @@ import javafx.scene.layout.*;
  *
  * @author Christopher
  */
-public class OrdenesGeneralController extends Controller implements Initializable
-{
+public class OrdenesGeneralController extends Controller implements Initializable {
 
     @FXML
     private TableView tblpedidos;
@@ -34,6 +33,8 @@ public class OrdenesGeneralController extends Controller implements Initializabl
     private JFXButton btnEditar;
     @FXML
     private JFXButton btnVolver;
+    @FXML
+    private JFXButton btnAnadir;
 
     /**
      * Initializes the controller class.
@@ -44,27 +45,25 @@ public class OrdenesGeneralController extends Controller implements Initializabl
     private AnchorPane rt;
 
     @Override
-    public void initialize(URL url , ResourceBundle rb)
-    {
+    public void initialize(URL url, ResourceBundle rb) {
         // TODO
         llenar();
 
     }
 
-    void llenar()
-    {
+    void llenar() {
         tblpedidos.getColumns().clear();
-        TableColumn<OrdenDto , String> NombreSalon = new TableColumn<>("Nombre Salon");
+        TableColumn<OrdenDto, String> NombreSalon = new TableColumn<>("Nombre Salon");
         NombreSalon.setPrefWidth(tblpedidos.getPrefWidth() / 2);
         NombreSalon.setCellValueFactory(cd -> cd.getValue().getMesaDto().getSalonDto().nombre);
         NombreSalon.setResizable(false);
 
-        TableColumn<OrdenDto , String> nombreMesa = new TableColumn<>("Nombre Mesa");
+        TableColumn<OrdenDto, String> nombreMesa = new TableColumn<>("Nombre Mesa");
         nombreMesa.setPrefWidth(tblpedidos.getPrefWidth() / 2);
         nombreMesa.setCellValueFactory(cd -> cd.getValue().getMesaDto().nombre);
         nombreMesa.setResizable(false);
 //
-        TableColumn<OrdenDto , String> nombreempelado = new TableColumn<>("Empleado");
+        TableColumn<OrdenDto, String> nombreempelado = new TableColumn<>("Empleado");
         nombreempelado.setPrefWidth(tblpedidos.getPrefWidth() / 2);
         nombreempelado.setCellValueFactory(cd -> cd.getValue().getEmpleadoDto().nombre);
         nombreempelado.setResizable(false);
@@ -76,15 +75,11 @@ public class OrdenesGeneralController extends Controller implements Initializabl
 
     }
 
-    void ObtencionDatos()
-    {
+    void ObtencionDatos() {
         Respuesta res = ordenService.getOrdenes();
-        if(res.getEstado())
-        {
+        if (res.getEstado()) {
             ordenes = (List<OrdenDto>) res.getResultado("Ordenes");
-        }
-        else
-        {
+        } else {
             System.out.println("HGH");
         }
         ObservableList<OrdenDto> ords = FXCollections.observableList(ordenes);
@@ -94,22 +89,17 @@ public class OrdenesGeneralController extends Controller implements Initializabl
     }
 
     @FXML
-    private void click(ActionEvent event)
-    {
-        if(event.getSource() == btnEditar)
-        {
-            if(tblpedidos.getSelectionModel().getSelectedItem() != null)
-            {
-                AppContext.getInstance().set("Orden" , (OrdenDto) tblpedidos.getSelectionModel().getSelectedItem());
-                FlowController.getInstance().goViewInWindowModal("CrearPedido" , getStage() , Boolean.FALSE);
+    private void click(ActionEvent event) {
+        if (event.getSource() == btnEditar) {
+            if (tblpedidos.getSelectionModel().getSelectedItem() != null) {
+                AppContext.getInstance().set("Orden", (OrdenDto) tblpedidos.getSelectionModel().getSelectedItem());
+                FlowController.getInstance().goViewInWindowModal("CrearPedido", getStage(), Boolean.FALSE);
             }
         }
-        if(event.getSource() == btnFacturar)
-        {
-            if(tblpedidos.getSelectionModel().getSelectedItem() != null)
-            {
-                AppContext.getInstance().set("Orden" , (OrdenDto) tblpedidos.getSelectionModel().getSelectedItem());
-                FlowController.getInstance().goViewInWindowModal("Factura" , getStage() , Boolean.FALSE);
+        if (event.getSource() == btnFacturar) {
+            if (tblpedidos.getSelectionModel().getSelectedItem() != null) {
+                AppContext.getInstance().set("Orden", (OrdenDto) tblpedidos.getSelectionModel().getSelectedItem());
+                FlowController.getInstance().goViewInWindowModal("Factura", getStage(), Boolean.FALSE);
 
             }
         }
@@ -117,8 +107,7 @@ public class OrdenesGeneralController extends Controller implements Initializabl
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         ObtencionDatos();
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
