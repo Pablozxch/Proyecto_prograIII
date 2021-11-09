@@ -21,3 +21,5 @@ preguntarle al profe a ver que quiere que se vea el primer reporte jasper
 
 preguntarle bien como se exportan los datos desde el plsql
 
+
+verificar si es una barra o mesa, y cargar la vista de ordenes general para ver si el salon es con barra o mesa 
