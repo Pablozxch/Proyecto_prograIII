@@ -197,6 +197,11 @@ public class MenuRapidoController extends Controller implements Initializable
     @Override
     public void initialize()
     {
+        grid.getChildren().clear();
+        if(productos != null)
+        {
+            productos.clear();
+        }
         loadItems("aux");
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

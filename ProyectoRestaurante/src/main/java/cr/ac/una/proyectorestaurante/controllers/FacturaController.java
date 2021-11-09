@@ -113,10 +113,6 @@ public class FacturaController extends Controller implements Initializable
         nombreCorto.setCellValueFactory(cd -> cd.getValue().getProductoDto().nombrecorto);
         nombreCorto.setResizable(false);
 
-        TableColumn<DetallexordenDto , String> nombre = new TableColumn<>("Nombre");
-        nombre.setPrefWidth(tblOrdenes.getPrefWidth() / 4);
-        nombre.setCellValueFactory(cd -> cd.getValue().getProductoDto().nombre);
-        nombre.setResizable(false);
 //
         TableColumn<DetallexordenDto , String> cantidad = new TableColumn<>("Cantidad");
         cantidad.setPrefWidth(tblOrdenes.getPrefWidth() / 4);
@@ -132,26 +128,6 @@ public class FacturaController extends Controller implements Initializable
         });
         precioUnidad.setResizable(false);
 
-        TableColumn<DetallexordenDto , String> impUnidada = new TableColumn<>("Impuesto Unidad");
-        impUnidada.setPrefWidth(tblOrdenes.getPrefWidth() / 4);
-        impUnidada.setCellValueFactory(cellData ->
-        {
-            double total = (double) (cellData.getValue().getProductoDto().getCosto() * impA);
-            String formattedCost = currency.format(total);
-            return new SimpleStringProperty(formattedCost);
-        });
-        impUnidada.setResizable(false);
-
-        TableColumn<DetallexordenDto , String> subtotal = new TableColumn<>("Sub Total");
-        subtotal.setPrefWidth(tblOrdenes.getPrefWidth() / 4);
-        subtotal.setCellValueFactory(cellData ->
-        {
-            double totalF = (double) (cellData.getValue().getPrecio());
-            String formattedCost = currency.format(totalF);
-            return new SimpleStringProperty(formattedCost);
-        });
-        subtotal.setResizable(false);
-
         TableColumn<DetallexordenDto , String> total = new TableColumn<>("Total");
         total.setPrefWidth(tblOrdenes.getPrefWidth() / 4);
         total.setCellValueFactory(cellData ->
@@ -163,11 +139,8 @@ public class FacturaController extends Controller implements Initializable
         total.setResizable(false);
 
         tblOrdenes.getColumns().add(nombreCorto);
-        tblOrdenes.getColumns().add(nombre);
         tblOrdenes.getColumns().add(cantidad);
         tblOrdenes.getColumns().add(precioUnidad);
-        tblOrdenes.getColumns().add(impUnidada);
-        tblOrdenes.getColumns().add(subtotal);
         tblOrdenes.getColumns().add(total);
 
         tblOrdenes.refresh();

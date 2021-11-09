@@ -81,6 +81,9 @@ public class CategoriasGeneralController extends Controller implements Initializ
 
     public void load()
     {
+        list.clear();
+        listProductos.getItems().clear();
+        productos = (List<ProductoDto>) ((Respuesta) productoServicec.getProductos()).getResultado("Productos");
         Respuesta res = categoriaService.getCategorias();
         if(res.getEstado())
         {
@@ -227,7 +230,6 @@ public class CategoriasGeneralController extends Controller implements Initializ
     public void initialize()
     {
         load();
-        productos = (List<ProductoDto>) ((Respuesta) productoServicec.getProductos()).getResultado("Productos");
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

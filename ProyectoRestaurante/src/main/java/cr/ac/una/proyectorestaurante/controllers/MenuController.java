@@ -65,11 +65,14 @@ public class MenuController extends Controller implements Initializable
     ProductoDto proorden = new ProductoDto();
     private static List<ProductoDto> productos = new ArrayList<>();
 
+    private static List<ProductoDto> productosddelete = new ArrayList<>();
+
     @Override
     public void initialize(URL url , ResourceBundle rb)
     {
         // TODO
-
+        Respuesta respuesta = productoService.getProductos();
+        productos = (List<ProductoDto>) respuesta.getResultado("Productos");
     }
 
     public void setProSelect(ProductoDto sal)
@@ -90,22 +93,19 @@ public class MenuController extends Controller implements Initializable
 
     public void loadItems(String name)
     {
-        if(!"aux".equals(name))
+        if(!"aux".equals(name) && !"cat".equals(name))
         {
-            if(productos != null)
-            {
-                productos.clear();
-            }
-            Respuesta respuesta = productoService.getProductos();
-            List<ProductoDto> aux = (List<ProductoDto>) respuesta.getResultado("Productos");
-            productos = aux.stream().filter(t -> t.getNombre().toUpperCase().contains(name.toUpperCase())).collect(Collectors.toList());
+            System.out.println("El nombre del producto a buscar  es " + name);
+            grid.getChildren().clear();
+            productosddelete=productos;
+            productosddelete = productos.stream().filter(t -> t.getNombre().toUpperCase().contains(name.toUpperCase())).collect(Collectors.toList());
         }
-        if("cat".equals(name))
+        else if("cat".equals(name))
         {
             //necesito pasar todos los productos de x categoria a la lista de prodcutos principal para poder jugar con eesto
-            if(productos != null)
+            if(productosddelete != null)
             {
-                productos.clear();
+                productosddelete.clear();
             }
             categorias.forEach(t ->
             {
@@ -113,7 +113,7 @@ public class MenuController extends Controller implements Initializable
                 {
                     t.getProductos().forEach(p ->
                     {
-                        productos.add(p);
+                        productosddelete.add(p);
                     });
                 }
 
@@ -122,18 +122,19 @@ public class MenuController extends Controller implements Initializable
         }
         else
         {
-            if(productos != null)
+            if(productosddelete != null)
             {
-                productos.clear();
+                productosddelete.clear();
             }
             Respuesta respuesta = productoService.getProductos();
             productos = (List<ProductoDto>) respuesta.getResultado("Productos");
+            productosddelete= productos;
         }
-        if(productos != null)
+        if(productosddelete != null)
         {
-            if(productos.size() > 0)
+            if(productosddelete.size() > 0)
             {
-                setProSelect(productos.get(0));
+                setProSelect(productosddelete.get(0));
                 myListener = new MyListenerItem()
                 {
                     @Override
@@ -150,15 +151,15 @@ public class MenuController extends Controller implements Initializable
             String name2;
             try
             {
-                for(int i = 0; i < productos.size(); i++)
+                for(int i = 0; i < productosddelete.size(); i++)
                 {
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     fxmlLoader.setLocation(getClass().getResource("/cr/ac/una/proyectorestaurante/views/Item.fxml"));
                     AnchorPane anchorPane = fxmlLoader.load();
-                    name1 = productos.get(i).getNombre();
-                    if(i + 1 < productos.size())
+                    name1 = productosddelete.get(i).getNombre();
+                    if(i + 1 < productosddelete.size())
                     {
-                        name2 = productos.get(i + 1).getNombre();
+                        name2 = productosddelete.get(i + 1).getNombre();
                         if(name1 == null ? name2 == null : name1.equals(name2))
                         {
                             break;
@@ -166,7 +167,7 @@ public class MenuController extends Controller implements Initializable
                     }
 
                     ItemController itemrest = fxmlLoader.getController();
-                    itemrest.setData(productos.get(i) , myListener);
+                    itemrest.setData(productosddelete.get(i) , myListener);
                     if(column == 6)
                     {
                         column = 0;
@@ -200,11 +201,11 @@ public class MenuController extends Controller implements Initializable
         {
             update();
         }
-        if(event.getSource() == btnBuscarCategoria)
+        else if(event.getSource() == btnBuscarCategoria)
         {
             updatebyCategories();
         }
-        if(event.getSource() == btnContinuar)
+        else if(event.getSource() == btnContinuar)
         {
             getStage().close();
         }
@@ -248,6 +249,8 @@ public class MenuController extends Controller implements Initializable
     @Override
     public void initialize()
     {
+        Respuesta respuesta = productoService.getProductos();
+        productos = (List<ProductoDto>) respuesta.getResultado("Productos");
         loadItems("aux");
         loadCat();
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

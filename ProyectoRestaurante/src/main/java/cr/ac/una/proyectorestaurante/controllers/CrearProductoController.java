@@ -64,7 +64,7 @@ public class CrearProductoController extends Controller implements Initializable
     public void initialize(URL url , ResourceBundle rb)
     {
         // TODO
-        cmbFavorito.getItems().addAll("Sí" , "NO");
+        cmbFavorito.getItems().addAll("SI" , "NO");
         txtCosto.setTextFormatter(Formato.getInstance().integerFormat());
         txtCantidad.setTextFormatter(Formato.getInstance().integerFormat());
         txtNombre.setTextFormatter(Formato.getInstance().letrasFormat(50));
@@ -85,6 +85,7 @@ public class CrearProductoController extends Controller implements Initializable
     public void bindProducto()
     {
         txtNombre.setText(productoDto.getNombre());
+        txtNombreCorto.setText(productoDto.getNombrecorto());
         txtDetalle.setText(productoDto.getDetalle());
         Image img2 = new Image(new ByteArrayInputStream(productoDto.getFoto()));//crea un objeto imagen, transforma el byte[] a un buffered imagen
         imvImagen.setImage(img2);
@@ -104,6 +105,7 @@ public class CrearProductoController extends Controller implements Initializable
     public void unbindProducto()
     {
         txtNombre.clear();
+        txtNombreCorto.clear();
         txtDetalle.clear();
         imvImagen.setImage(null);
         txtCosto.clear();
@@ -197,7 +199,7 @@ public class CrearProductoController extends Controller implements Initializable
                                         }
                                         else
                                         {
-                                            new Mensaje().show(Alert.AlertType.ERROR , "Gurdar Restaurante" , "Error al guardar");
+                                            new Mensaje().show(Alert.AlertType.ERROR , "Gurdar Producto" , "Error al guardarProducto");
                                         }
 
                                     }
@@ -206,16 +208,35 @@ public class CrearProductoController extends Controller implements Initializable
                                         Logger.getLogger(CrearRestauranteController.class.getName()).log(Level.SEVERE , null , ex);
                                     }
                                 }
+                                else
+                                {
+                                    new Mensaje().show(Alert.AlertType.ERROR , "Faltan datos" , "Error en el combo");
+                                }
+                            }
+                            else
+                            {
+                                new Mensaje().show(Alert.AlertType.ERROR , "Faltan datos" , "Error en cantidad");
                             }
                         }
+                        else
+                        {
+                            new Mensaje().show(Alert.AlertType.ERROR , "Faltan datos" , "Error costo");
+                        }
+                    }
+                    else
+                    {
+                        new Mensaje().show(Alert.AlertType.ERROR , "Faltan datos" , "Error detalle");
                     }
 
                 }
-
+                else
+                {
+                    new Mensaje().show(Alert.AlertType.ERROR , "Faltan datos" , "Error nombrecorto");
+                }
             }
             else
             {
-                new Mensaje().show(Alert.AlertType.ERROR , "Faltan datos" , "Error en algun dato");
+                new Mensaje().show(Alert.AlertType.ERROR , "Faltan datos" , "Error en nombre");
             }
         }
     }

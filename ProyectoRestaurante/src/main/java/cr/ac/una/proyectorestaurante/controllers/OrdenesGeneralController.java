@@ -54,17 +54,17 @@ public class OrdenesGeneralController extends Controller implements Initializabl
     void llenar() {
         tblpedidos.getColumns().clear();
         TableColumn<OrdenDto, String> NombreSalon = new TableColumn<>("Nombre Salon");
-        NombreSalon.setPrefWidth(tblpedidos.getPrefWidth() / 2);
+        NombreSalon.setPrefWidth(tblpedidos.getPrefWidth() / 3);
         NombreSalon.setCellValueFactory(cd -> cd.getValue().getMesaDto().getSalonDto().nombre);
         NombreSalon.setResizable(false);
 
         TableColumn<OrdenDto, String> nombreMesa = new TableColumn<>("Nombre Mesa");
-        nombreMesa.setPrefWidth(tblpedidos.getPrefWidth() / 2);
+        nombreMesa.setPrefWidth(tblpedidos.getPrefWidth() / 3);
         nombreMesa.setCellValueFactory(cd -> cd.getValue().getMesaDto().nombre);
         nombreMesa.setResizable(false);
 //
         TableColumn<OrdenDto, String> nombreempelado = new TableColumn<>("Empleado");
-        nombreempelado.setPrefWidth(tblpedidos.getPrefWidth() / 2);
+        nombreempelado.setPrefWidth(tblpedidos.getPrefWidth() / 3);
         nombreempelado.setCellValueFactory(cd -> cd.getValue().getEmpleadoDto().nombre);
         nombreempelado.setResizable(false);
 
