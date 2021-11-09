@@ -1,15 +1,13 @@
 
 reportes jasper igual a la vista de factura
 
-drag and drop (que graficamente se vea como )
+drag and drop (que graficamente se vea como)
 
 buscar del crear orden
 
 crear diferentes mesas
 
 cierres de caja
-
-roles (acceso) 
 
 admin: tiene acceso a todo.
 
@@ -43,19 +41,18 @@ listado de facturas tiene que mostrar: (como en la factura,)
 
 
 
-arreglar el buscar del menu rapido lagunos de los dos
+Emmanuel L G
+arreglar el buscar del menu rapido algunos de los dos
 
+COMO LIMPIAR GRID Y QUE FUNQUE MANTENIENDO LINEAS (ESTETICA)
 
-
-mandar al menu rapido por medio de las categorias ver las categorias y que 
+mandar al menu rapido por medio de las categorias ver las categorias y que se seleccione el poducto del menu rapido
 .
 categorias con imagenes, que toque la categoria 
 
 parte del correo, envio de gmail con correo ya existente
 
-arreglar combobox (mas alto, letra grande)
-
 normalmente hacerlo con un panel, 
 
-agregar un boton en la de crear pedidos y el del pedidos general
+
 
