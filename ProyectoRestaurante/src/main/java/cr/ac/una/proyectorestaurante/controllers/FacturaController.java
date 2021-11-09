@@ -79,6 +79,8 @@ public class FacturaController extends Controller implements Initializable
     double impA = 0;
     double subtotal = 0;
     DecimalFormat currency = new DecimalFormat("₡ 0.00");
+    @FXML
+    private JFXButton btnBuscarCodDescuento;
 
     @Override
 

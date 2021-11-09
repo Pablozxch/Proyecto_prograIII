@@ -21,6 +21,7 @@ import javafx.event.*;
 import javafx.fxml.*;
 import javafx.geometry.*;
 import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.effect.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -28,6 +29,7 @@ import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.shape.*;
+import javafx.stage.*;
 
 /**
  * FXML Controller class
@@ -42,13 +44,7 @@ public class DisenoSalonesController extends Controller implements Initializable
     int mx, my;
     int k, l;
     @FXML
-    private JFXButton btnAgregar;
-    @FXML
     private GridPane gripMesa;
-    @FXML
-    private JFXButton btnEliminar;
-    @FXML
-    private JFXCheckBox chkEditar;
     @FXML
     private ImageView imvCajero;
     @FXML
@@ -69,10 +65,12 @@ public class DisenoSalonesController extends Controller implements Initializable
     List<OrdenDto> ordenes = new ArrayList<>();
     List<MesaDto> mesaDtos = new ArrayList<>();
     List<OrdenDto> list = new ArrayList<>();
-
+    RolDto rolDto = new RolDto();
     MesaDto mesaclick = new MesaDto();
     @FXML
     private AnchorPane rt;
+    @FXML
+    private JFXButton btnEditar;
 
     @Override
     public void initialize(URL url , ResourceBundle rb)
@@ -119,7 +117,7 @@ public class DisenoSalonesController extends Controller implements Initializable
     {
         load();
         loadgrid();
-
+        rolDto = (RolDto) AppContext.getInstance().get("RolActual");
         // loadEvent();
         gripMesa.addEventHandler(MouseEvent.MOUSE_CLICKED , (t)
                   ->
@@ -191,36 +189,18 @@ public class DisenoSalonesController extends Controller implements Initializable
     @FXML
     private void click(ActionEvent event)
     {
+        if(event.getSource() == btnEditar)
+        {
+            if("Administrativos".equals(rolDto.getNombre()))
+            {
+                FlowController.getInstance().goViewInWindowModal("disenoSalones" , FlowController.getInstance().getController("Principal").getStage() , Boolean.FALSE);
+            }
+            else
+            {
+                new Mensaje().show(Alert.AlertType.ERROR , "Permisos" , "Permisos innecesarios para acceder a este apartado");
+            }
+        }
 
-    }
-
-    private void dragOver(DragEvent event)
-    {
-
-        Dragboard db = event.getDragboard();
-        event.acceptTransferModes(TransferMode.ANY);
-        System.out.println("Dragging over");
-        event.consume();
-    }
-
-    private void dragDropped(DragEvent event)
-    {
-
-        Dragboard board = event.getDragboard();
-        event.acceptTransferModes(TransferMode.ANY);
-
-        double dragX = event.getSceneX();
-        double dragY = event.getSceneY();
-
-//        double newPosX = dragX + oldX;
-//        double newPosY = dragY + oldY;
-//
-//        pa.setLayoutX(newPosX);
-//        pane.setLayoutY(newPosY);
-//
-//        de.setDropCompleted(true);
-//        System.out.println("Drag Dropped");
-//        de.consume();
     }
 
     class IMload

@@ -27,8 +27,6 @@
                         <Image url="@../resources/cajero.png" />
                      </image>
                   </ImageView>
-                  <JFXButton fx:id="btnAgregar" onAction="#click" text="Agregar" />
-                  <JFXButton fx:id="btnEliminar" onAction="#click" text="Eliminar" />
                   <JFXButton fx:id="btnEditar" onAction="#click" text="Editar" />
                </children>
             </HBox>

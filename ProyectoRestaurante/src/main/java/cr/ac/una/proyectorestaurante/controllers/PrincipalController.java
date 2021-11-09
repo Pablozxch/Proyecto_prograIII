@@ -47,6 +47,8 @@ public class PrincipalController extends Controller implements Initializable
      * Initializes the controller class.
      */
     RolDto rolDto = new RolDto();
+    @FXML
+    private Button btnRestaurante;
 
     @Override
     public void initialize(URL url , ResourceBundle rb)
@@ -58,13 +60,12 @@ public class PrincipalController extends Controller implements Initializable
     @Override
     public void initialize()
     {
-        rolDto = (RolDto) AppContext.getInstance().get("RolActual");
+
     }
 
     @FXML
     private void click(ActionEvent event)
     {
-
         if(event.getSource() == btnSalones)
         {
 
@@ -85,7 +86,15 @@ public class PrincipalController extends Controller implements Initializable
             }
             else
             {
-                FlowController.getInstance().goView("ProductosGeneral");
+                rolDto = (RolDto) AppContext.getInstance().get("RolActual");
+                if("Administrativos".equals(rolDto.getNombre()))
+                {
+                    FlowController.getInstance().goView("ProductosGeneral");
+                }
+                else
+                {
+                    new Mensaje().show(Alert.AlertType.ERROR , "Permisos" , "Permisos innecesarios para acceder a este apartado");
+                }
             }
 
         }
@@ -97,7 +106,16 @@ public class PrincipalController extends Controller implements Initializable
             }
             else
             {
-                FlowController.getInstance().goView("CategoriasGeneral");
+                rolDto = (RolDto) AppContext.getInstance().get("RolActual");
+                if("Administrativos".equals(rolDto.getNombre()))
+                {
+                    FlowController.getInstance().goView("CategoriasGeneral");
+                }
+                else
+                {
+                    new Mensaje().show(Alert.AlertType.ERROR , "Permisos" , "Permisos innecesarios para acceder a este apartado");
+                }
+
             }
 
         }
@@ -121,7 +139,15 @@ public class PrincipalController extends Controller implements Initializable
             }
             else
             {
-                FlowController.getInstance().goView("EmpleadosGeneral");
+                rolDto = (RolDto) AppContext.getInstance().get("RolActual");
+                if("Administrativos".equals(rolDto.getNombre()))
+                {
+                    FlowController.getInstance().goView("EmpleadosGeneral");
+                }
+                else
+                {
+                    new Mensaje().show(Alert.AlertType.ERROR , "Permisos" , "Permisos innecesarios para acceder a este apartado");
+                }
             }
 
         }

@@ -28,7 +28,7 @@ import javafx.stage.*;
  */
 public class SalonesGeneralController extends Controller implements Initializable
 {
-    
+
     @FXML
     private JFXButton btnAgregarSalon;
     @FXML
@@ -52,18 +52,19 @@ public class SalonesGeneralController extends Controller implements Initializabl
     /**
      * Initializes the controller class.
      */
-    
+
     private MyListenerItem myListener;
     SalonService salonService = new SalonService();
     SalonDto salonDto = new SalonDto();
     private static List<SalonDto> salones = new ArrayList<>();
-    
+    RolDto rolDto = new RolDto();
+
     @Override
     public void initialize(URL url , ResourceBundle rb)
     {
         loadItems("aux");
     }
-    
+
     public void setSalSelect(SalonDto sal)
     {
         lblNombreSalon.setText(sal.getNombre());
@@ -71,7 +72,7 @@ public class SalonesGeneralController extends Controller implements Initializabl
         imgSal.setImage(img2);
         AppContext.getInstance().set("Salon" , sal);
     }
-    
+
     public void loadItems(String name)
     {
         if(!"aux".equals(name))
@@ -100,14 +101,14 @@ public class SalonesGeneralController extends Controller implements Initializabl
                 setSalSelect(salones.get(0));
                 myListener = new MyListenerItem()
                 {
-                    
+
                     @Override
                     public void onClickListener(Object item)
                     {
                         setSalSelect((SalonDto) item);
                         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                     }
-                    
+
                 };
             }
             int column = 0;
@@ -130,7 +131,7 @@ public class SalonesGeneralController extends Controller implements Initializabl
                             break;
                         }
                     }
-                    
+
                     ItemController itemrest = fxmlLoader.getController();
                     itemrest.setData(salones.get(i) , myListener);
                     if(column == 6)
@@ -148,7 +149,7 @@ public class SalonesGeneralController extends Controller implements Initializabl
                     grid.setMinHeight(Region.USE_COMPUTED_SIZE);
                     grid.setPrefHeight(Region.USE_COMPUTED_SIZE);
                     grid.setMaxHeight(Region.USE_PREF_SIZE);
-                    
+
                     GridPane.setMargin(anchorPane , new Insets(10));
                 }
             }
@@ -158,7 +159,7 @@ public class SalonesGeneralController extends Controller implements Initializabl
             }
         }
     }
-    
+
     private void update()
     {
         grid.getChildren().clear();
@@ -171,26 +172,39 @@ public class SalonesGeneralController extends Controller implements Initializabl
             loadItems("aux");
         }
     }
-    
+
     @FXML
     private void click(ActionEvent event)
     {
         if(event.getSource() == btnAgregarSalon)
         {
-            CrearSalonController crearSalonController = (CrearSalonController) FlowController.getInstance().getController("CrearSalon");
-            FlowController.getInstance().goViewInWindowModal("CrearSalon" , (Stage) btnContinuar.getScene().getWindow() , Boolean.FALSE);
-            crearSalonController.ubindSalon();
-            update();
-            
+            if("Administrativos".equals(rolDto.getNombre()))
+            {
+                CrearSalonController crearSalonController = (CrearSalonController) FlowController.getInstance().getController("CrearSalon");
+                FlowController.getInstance().goViewInWindowModal("CrearSalon" , (Stage) btnContinuar.getScene().getWindow() , Boolean.FALSE);
+                crearSalonController.ubindSalon();
+                update();
+            }
+            else
+            {
+                new Mensaje().show(Alert.AlertType.ERROR , "Permisos" , "Permisos innecesarios para acceder a este apartado");
+            }
+
         }
         if(event.getSource() == btnEditar)
         {
-            CrearSalonController crearSalonController = (CrearSalonController) FlowController.getInstance().getController("CrearSalon");
-            crearSalonController.load();
-            FlowController.getInstance().goViewInWindowModal("CrearSalon" , (Stage) btnContinuar.getScene().getWindow() , Boolean.FALSE);
-            crearSalonController.ubindSalon();
-            update();
-            
+            if("Administrativos".equals(rolDto.getNombre()))
+            {
+                CrearSalonController crearSalonController = (CrearSalonController) FlowController.getInstance().getController("CrearSalon");
+                crearSalonController.load();
+                FlowController.getInstance().goViewInWindowModal("CrearSalon" , (Stage) btnContinuar.getScene().getWindow() , Boolean.FALSE);
+                crearSalonController.ubindSalon();
+                update();
+            }
+            else
+            {
+                new Mensaje().show(Alert.AlertType.ERROR , "Permisos" , "Permisos innecesarios para acceder a este apartado");
+            }
         }
         if(event.getSource() == btnBuscar)
         {
@@ -198,30 +212,37 @@ public class SalonesGeneralController extends Controller implements Initializabl
         }
         if(event.getSource() == btnContinuar)
         {
-            //ir a otra venta, donde se muestran los salones como tal
-            FlowController.getInstance().goView("disenoSalones");
-            
+            FlowController.getInstance().goView("disenoSalones");//verificar si el salon que estoy accediendo es una barra o una mesa para mostrar cosas diferentes 
+
         }
         if(event.getSource() == btnEliminar)
         {
-            if(new Mensaje().showConfirmation("Eliminar el Salon" , getStage() , "¿Esta seguro que desea eliminar el Salon?"))
+            if("Administrativos".equals(rolDto.getNombre()))
             {
-                SalonDto pro = (SalonDto) AppContext.getInstance().get("Salon");
-                Respuesta respuesta = salonService.eliminarSalon(pro.getId());
-                if(respuesta.getEstado())
+                if(new Mensaje().showConfirmation("Eliminar el Salon" , getStage() , "¿Esta seguro que desea eliminar el Salon?"))
                 {
-                    new Mensaje().show(Alert.AlertType.INFORMATION , "Eliminar el Salon" , "Eliminado Correctamente");
-                    update();
+                    SalonDto pro = (SalonDto) AppContext.getInstance().get("Salon");
+                    Respuesta respuesta = salonService.eliminarSalon(pro.getId());
+                    if(respuesta.getEstado())
+                    {
+                        new Mensaje().show(Alert.AlertType.INFORMATION , "Eliminar el Salon" , "Eliminado Correctamente");
+                        update();
+                    }
                 }
+            }
+            else
+            {
+                new Mensaje().show(Alert.AlertType.ERROR , "Permisos" , "Permisos innecesarios para acceder a este apartado");
             }
         }
     }
-    
+
     @Override
     public void initialize()
     {
         loadItems("aux");
+        rolDto = (RolDto) AppContext.getInstance().get("RolActual");
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

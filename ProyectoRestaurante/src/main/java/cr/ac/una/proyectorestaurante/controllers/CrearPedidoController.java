@@ -35,12 +35,6 @@ public class CrearPedidoController extends Controller implements Initializable
 {
 
     @FXML
-    private JFXTextField txtNombre;
-    @FXML
-    private JFXTextField txtNombreCorto;
-    @FXML
-    private JFXButton btnBuscar;
-    @FXML
     private JFXButton btnMenu;
     @FXML
     private Label lblNombre;
@@ -83,11 +77,13 @@ public class CrearPedidoController extends Controller implements Initializable
     boolean finded = false;
     DecimalFormat currency = new DecimalFormat("₡ 0.00");
 
+    RolDto rolDto = new RolDto();
+
     @Override
     public void initialize(URL url , ResourceBundle rb)
     {
         // TODO
-        load();
+
     }
 
     void load()
@@ -132,7 +128,7 @@ public class CrearPedidoController extends Controller implements Initializable
         Respuesta res = detallexordenService.getDetalles();
 
         List<DetallexordenDto> dett = (List<DetallexordenDto>) res.getResultado("Detalles");
-        List<DetallexordenDto> detf = dett.stream().filter(t -> t.getOrdenId().getId() == ordenDto.getId()).collect(Collectors.toList());
+        List<DetallexordenDto> detf = dett.stream().filter(t -> Objects.equals(t.getOrdenId().getId() , ordenDto.getId())).collect(Collectors.toList());
         if(detf == null)
         {
             List<DetallexordenDto> deta = new ArrayList<>();
@@ -154,20 +150,11 @@ public class CrearPedidoController extends Controller implements Initializable
     private void click(ActionEvent event)
     {
 
-        /*
-            @RECORDAR ESTAR CAMBIANDO Y ACTUALIZANDO  LOS VALORES DE VENDIDOS Y PRODUCTOS RESTANTES
-         */
-        if(event.getSource() == btnBuscar)
-        {
-            //implementar la parte de buscar ya sea por nombre o nombre corto
-            //y guardar estos datos en una variable de tipo producto para poder agregarla a la lista de productos 
-        }
         if(event.getSource() == btnEliminar)
         {
             finded = false;
             if(pro != null)
             {
-                System.out.println("Delete");
                 productos.forEach(t ->
                 {
                     System.out.println(t.getProductoDto().getNombre());
@@ -234,7 +221,6 @@ public class CrearPedidoController extends Controller implements Initializable
         }
         if(event.getSource() == btnRestar)
         {
-
             if(cantidad - 1 > 0)
             {
                 txtCantidad.setText(String.valueOf(cantidad -= 1));
@@ -299,6 +285,18 @@ public class CrearPedidoController extends Controller implements Initializable
 
             }
         }
+        if(event.getSource() == btnFacturar)
+        {
+            if("Cajeros".equals(rolDto.getNombre()) || "Administrativos".equals(rolDto.getNombre()))
+            {
+                AppContext.getInstance().set("Orden" , ordenDto);
+                FlowController.getInstance().goViewInWindowModal("Factura" , getStage() , Boolean.FALSE);
+            }
+            else
+            {
+                new Mensaje().show(Alert.AlertType.ERROR , "Permisos" , "Permisos innecesarios para acceder a este apartado");
+            }
+        }
 
     }
 
@@ -341,7 +339,8 @@ public class CrearPedidoController extends Controller implements Initializable
     @Override
     public void initialize()
     {
-
+        rolDto = (RolDto) AppContext.getInstance().get("RolActual");
+        load();
         loadItems();
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
