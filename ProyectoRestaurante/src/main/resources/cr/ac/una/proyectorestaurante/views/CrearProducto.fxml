@@ -16,13 +16,13 @@
          <children>
             <VBox alignment="CENTER" fillWidth="false" prefHeight="482.0" prefWidth="39.0" spacing="35.0" HBox.hgrow="ALWAYS">
                <children>
-                  <JFXTextField fx:id="txtNombre" alignment="CENTER" focusColor="WHITE" labelFloat="true" onAction="#click" promptText="Nombre del producto" />
-                  <JFXTextField fx:id="txtNombreCorto" alignment="CENTER" focusColor="WHITE" labelFloat="true" onAction="#click" prefHeight="31.0" prefWidth="132.0" promptText="Nombre Corto" />
-                  <JFXComboBox fx:id="cmbFavorito" focusColor="WHITE" labelFloat="true" promptText="Incluir a menú favorito" />
-                  <JFXTextArea fx:id="txtDetalle" focusColor="WHITE" labelFloat="true" prefHeight="86.0" prefWidth="206.0" promptText="Detalle del producto." />
+                  <JFXTextField fx:id="txtNombre" alignment="CENTER" focusColor="WHITE" labelFloat="true" onAction="#click" prefHeight="31.0" prefWidth="205.0" promptText="Nombre del producto" />
+                  <JFXTextField fx:id="txtNombreCorto" alignment="CENTER" focusColor="WHITE" labelFloat="true" onAction="#click" prefHeight="31.0" prefWidth="205.0" promptText="Nombre corto" />
+                  <JFXComboBox fx:id="cmbFavorito" focusColor="WHITE" labelFloat="true" prefWidth="271.0" promptText="Incluir a menú favorito" />
+                  <JFXTextArea fx:id="txtDetalle" focusColor="WHITE" labelFloat="true" prefHeight="86.0" prefWidth="205.0" promptText="Detalle del producto" />
                </children>
             </VBox>
-            <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0" spacing="35.0" HBox.hgrow="ALWAYS">
+            <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="482.0" prefWidth="263.0" spacing="35.0" HBox.hgrow="ALWAYS">
                <children>
                   <HBox alignment="CENTER" prefHeight="213.0" prefWidth="565.0" spacing="35.0">
                      <children>
@@ -30,8 +30,8 @@
                         <Button fx:id="btnCargarImagen" mnemonicParsing="false" onAction="#click" text="Cargar Imagen" />
                      </children>
                   </HBox>
-                  <JFXTextField fx:id="txtCosto" alignment="CENTER" focusColor="WHITE" labelFloat="true" promptText="Costo en colones" />
-                  <JFXTextField fx:id="txtCantidad" alignment="CENTER" focusColor="WHITE" labelFloat="true" promptText="Cantidad" />
+                  <JFXTextField fx:id="txtCosto" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefWidth="205.0" promptText="Costo en colones" />
+                  <JFXTextField fx:id="txtCantidad" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefWidth="205.0" promptText="Cantidad" />
                   <HBox alignment="CENTER" prefHeight="168.0" prefWidth="532.0" spacing="100.0">
                      <children>
                         <JFXButton fx:id="btnVolver" onAction="#click" text="Volver" />

@@ -114,7 +114,7 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="65.0" prefWidth="200.0" spacing="35.0" VBox.vgrow="SOMETIMES">
                      <VBox.margin>
-                        <Insets left="20.0" right="20.0" />
+                        <Insets left="20.0" right="20.0" top="30.0" />
                      </VBox.margin>
                      <children>
                         <JFXComboBox fx:id="cmbCategorias" focusColor="WHITE" labelFloat="true" prefHeight="25.0" prefWidth="171.0" promptText="Categorias" />
@@ -132,7 +132,7 @@
                               </GridPane>
                            </content>
                            <VBox.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                              <Insets bottom="15.0" left="15.0" right="5.0" top="5.0" />
                            </VBox.margin>
                         </ScrollPane>
                      </children>

@@ -25,7 +25,7 @@
                               <JFXTextField fx:id="txtNombre" prefHeight="31.0" prefWidth="206.0" />
                               <JFXCheckBox fx:id="chkEfectivo" checkedColor="#f9d5a7" text="Efectivo">
                                  <HBox.margin>
-                                    <Insets right="1.0" />
+                                    <Insets left="15.0" />
                                  </HBox.margin>
                               </JFXCheckBox>
                            </children>
@@ -37,7 +37,10 @@
                            <children>
                               <Label text="Correo cliente:  " />
                               <JFXTextField fx:id="txtCorreo" prefHeight="31.0" prefWidth="207.0" />
-                              <JFXCheckBox fx:id="chkTarjeta" checkedColor="#f9d5a7" text="Tarjeta" />
+                              <JFXCheckBox fx:id="chkTarjeta" checkedColor="#f9d5a7" text="Tarjeta">
+                                 <HBox.margin>
+                                    <Insets left="15.0" />
+                                 </HBox.margin></JFXCheckBox>
                            </children>
                            <padding>
                               <Insets left="10.0" />
@@ -81,7 +84,7 @@
                      </children></VBox>
                </children>
                <VBox.margin>
-                  <Insets top="10.0" />
+                  <Insets top="15.0" />
                </VBox.margin>
             </HBox>
             <HBox alignment="CENTER" prefHeight="527.0" prefWidth="824.0">
@@ -96,10 +99,11 @@
                <children>
                   <VBox fillWidth="false" prefHeight="217.0" prefWidth="0.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <HBox alignment="CENTER_LEFT" prefHeight="77.0" prefWidth="422.0" spacing="10.0">
+                        <HBox alignment="CENTER_LEFT" prefHeight="77.0" prefWidth="541.0" spacing="15.0">
                            <children>
                               <Label text="Código de descuento: " />
                               <JFXTextField fx:id="txtCodigoDescuento" />
+                              <JFXButton fx:id="btnBuscarCodDescuento" onAction="#click" text="Buscar" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="45.0" prefWidth="401.0" spacing="25.0" />

@@ -14,7 +14,7 @@
             <VBox alignment="CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0" spacing="35.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label text="Defina el nombre para el rol del empleado: " />
-                  <JFXTextField fx:id="txtRol" focusColor="WHITE" labelFloat="true" promptText="Rol" />
+                  <JFXTextField fx:id="txtRol" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefWidth="210.0" promptText="Rol" />
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="555.0" spacing="150.0">
                      <children>
                         <JFXButton fx:id="btnVolver" text="Volver" />

@@ -17,8 +17,6 @@ cajero: lo mismo que el salonero + facturacion.
 
 hacer el security filter
 
-a qué cosas tiene acceso el salonero
-
 preguntarle al profe a ver que quiere que se vea el primer reporte jasper
 
 preguntarle bien como se exportan los datos desde el plsql
@@ -34,7 +32,9 @@ streams y base de datos (consulta)
 
 16
 
-llevar encabezado (info del rest, del cliente, al correo que se envió), detalles del factura lleva nombre corto, precio por unidad, cant, si quiere total
+llevar encabezado (info del rest, del cliente, al correo que se envió), detalles del 
+factura lleva nombre corto, precio por unidad, cant, si quiere total
+
 al final del reporte esa ultima parte
 
 listado de facturas tiene que mostrar: (como en la factura,)
@@ -46,13 +46,17 @@ arreglar el buscar del menu rapido algunos de los dos
 
 COMO LIMPIAR GRID Y QUE FUNQUE MANTENIENDO LINEAS (ESTETICA)
 
-mandar al menu rapido por medio de las categorias ver las categorias y que se seleccione el poducto del menu rapido
-.
+mandar al menu rapido por medio de las categorias ver las categorias y que se 
+seleccione el poducto del menu rapido
+
 categorias con imagenes, que toque la categoria 
 
 parte del correo, envio de gmail con correo ya existente
 
 normalmente hacerlo con un panel, 
+
+
+hacer make controller a Factura, Principal
 
 
 

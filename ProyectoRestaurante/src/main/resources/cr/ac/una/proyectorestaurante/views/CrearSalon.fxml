@@ -17,8 +17,8 @@
             <VBox alignment="CENTER" fillWidth="false" prefHeight="521.0" prefWidth="518.0" spacing="35.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label text="Registrar un salón." />
-                  <JFXTextField fx:id="txtNombre" alignment="CENTER" focusColor="WHITE" labelFloat="true" promptText="Nombre" />
-                  <JFXComboBox fx:id="cmbBarraoMesa" focusColor="WHITE" labelFloat="true" onAction="#click" promptText="Seleccione" />
+                  <JFXTextField fx:id="txtNombre" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefHeight="31.0" prefWidth="210.0" promptText="Nombre" />
+                  <JFXComboBox fx:id="cmbBarraoMesa" focusColor="WHITE" labelFloat="true" onAction="#click" prefWidth="210.0" promptText="Seleccione" />
                   <HBox alignment="CENTER" prefHeight="195.0" prefWidth="425.0" spacing="10.0">
                      <children>
                         <VBox prefHeight="195.0" prefWidth="280.0" spacing="15.0">

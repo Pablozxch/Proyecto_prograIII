@@ -19,7 +19,7 @@
                      <children>
                         <JFXTextField fx:id="txtNombre" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefHeight="25.0" prefWidth="220.0" promptText="Nombre" viewOrder="5.61465465E8" />
                         <JFXTextField fx:id="txtApellido" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefHeight="25.0" prefWidth="220.0" promptText="Apellido" viewOrder="5.61465465E8" />
-                        <JFXComboBox fx:id="cmbRoles" labelFloat="true" prefHeight="25.0" prefWidth="126.0" promptText="Rol" VBox.vgrow="ALWAYS" />
+                        <JFXComboBox fx:id="cmbRoles" labelFloat="true" prefHeight="25.0" prefWidth="235.0" promptText="Rol" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
                   <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0" spacing="35.0" HBox.hgrow="ALWAYS">
