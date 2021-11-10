@@ -3,8 +3,6 @@ reportes jasper igual a la vista de factura
 
 drag and drop (que graficamente se vea como)
 
-buscar del crear orden
-
 crear diferentes mesas
 
 cierres de caja
@@ -21,7 +19,8 @@ preguntarle al profe a ver que quiere que se vea el primer reporte jasper
 
 preguntarle bien como se exportan los datos desde el plsql
 
-export de la base base de datos 
+
+
 
 verificar si es una barra o mesa, y cargar la vista de ordenes general para ver si el salon es con barra o mesa 
 
@@ -54,9 +53,3 @@ categorias con imagenes, que toque la categoria
 parte del correo, envio de gmail con correo ya existente
 
 normalmente hacerlo con un panel, 
-
-
-hacer make controller a Factura, Principal
-
-
-

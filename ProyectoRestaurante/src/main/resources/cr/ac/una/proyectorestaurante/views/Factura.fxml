@@ -106,7 +106,22 @@
                               <JFXButton fx:id="btnBuscarCodDescuento" onAction="#click" text="Buscar" />
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" prefHeight="45.0" prefWidth="401.0" spacing="25.0" />
+                        <VBox alignment="CENTER" prefHeight="148.0" prefWidth="389.0">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="389.0" spacing="25.0">
+                                 <children>
+                                    <Label text="Monto a pagar:          " />
+                                    <JFXTextField fx:id="txtMontoAPagar" editable="false" focusColor="WHITE" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="387.0" spacing="15.0">
+                                 <children>
+                                    <Label text="Paga con:                     " />
+                                    <JFXTextField fx:id="txtPagaCon" focusColor="WHITE" prefHeight="31.0" prefWidth="170.0" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                      </children>
                      <padding>
                         <Insets left="10.0" />
@@ -152,8 +167,8 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="150.0">
                            <children>
-                              <JFXButton fx:id="btnGuardar" onAction="#click" text="Guardar" />
-                              <JFXButton fx:id="btnEnviar" onAction="#click" text="Enviar" />
+                              <JFXButton fx:id="btnGuardar" onAction="#click" text="Enviar al correo" />
+                              <JFXButton fx:id="btnPagar" onAction="#click" text="Pagar" />
                            </children>
                         </HBox>
                      </children>
