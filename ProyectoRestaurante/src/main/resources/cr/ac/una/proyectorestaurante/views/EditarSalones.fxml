@@ -12,8 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="810.0" prefWidth="1111.0" styleClass="fondo" stylesheets="@../styles/StylesCss.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/15.0.1" fx:controller="cr.ac.una.proyectorestaurante.controllers.EditarSalonesController">
+<AnchorPane id="AnchorPane" fx:id="rt" prefHeight="810.0" prefWidth="1111.0" styleClass="fondo" stylesheets="@../styles/StylesCss.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.proyectorestaurante.controllers.EditarSalonesController">
    <children>
       <VBox layoutX="10.0" layoutY="10.0" prefHeight="810.0" prefWidth="1111.0">
          <children>
