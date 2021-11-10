@@ -52,6 +52,8 @@ public class DisenoSalonesController extends Controller implements Initializable
     double oldX;
     double oldY;
 
+    double posx, posy = 0;
+
     public int f = 20;
     public Thread taskThread;
     /**
@@ -112,15 +114,88 @@ public class DisenoSalonesController extends Controller implements Initializable
 
     }
 
-    @Override
-    public void initialize()
+    void loadEvent()
     {
-        load();
-        loadgrid();
-        rolDto = (RolDto) AppContext.getInstance().get("RolActual");
-        // loadEvent();
-        gripMesa.addEventHandler(MouseEvent.MOUSE_CLICKED , (t)
-                  ->
+  
+        iMloads.forEach(t ->
+        {
+            t.getIm().setOnDragDetected(new EventHandler<MouseEvent>()
+            {
+                public void handle(MouseEvent event)
+                {
+                    Dragboard db = t.getIm().startDragAndDrop(TransferMode.COPY_OR_MOVE);
+                    ClipboardContent content = new ClipboardContent();
+                    Image checker = t.getIm().getImage();
+                    content.putImage(checker);
+                    content.putString(String.valueOf(t.getPosx()) + "H" + String.valueOf(t.getPosy()));
+                    db.setContent(content);
+
+                    posx = t.getPosx();
+                    posy = t.getPosy();
+                    System.out.println("Drag detectado");
+                    event.consume();
+
+                }
+            });
+
+            t.getIm().setOnDragOver(new EventHandler<DragEvent>()
+            {
+                public void handle(DragEvent event)
+                {
+                    if(event.getDragboard().hasImage())
+                    {
+                        event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+
+                        System.out.println("Drag over detectado");
+                    }
+
+                    event.consume();
+                }
+            });
+        });
+        imvCajero.setOnDragEntered(new EventHandler<DragEvent>()
+        {
+            public void handle(DragEvent event)
+            {
+
+                event.acceptTransferModes(TransferMode.ANY);
+                System.out.println("Drop detected");
+                String numeros = event.getDragboard().getString();
+                char[] s = numeros.toCharArray();
+                String num1 = String.valueOf(s[0]);
+                String num2 = String.valueOf(s[2]);
+
+                Long nm1 = Long.valueOf(num1);
+                Long nm2 = Long.valueOf(num2);
+                event.consume();
+                if(event.isConsumed())
+                {
+                    System.out.println("El numero 1 es " + nm1);
+                    System.out.println("El numero 2 es " + nm2);
+                    ordenes.forEach(y ->
+                    {
+                        System.out.println("POS X " + y.getMesaDto().getPosX());
+                        System.out.println("POS Y" + y.getMesaDto().getPosY());
+                    });
+                    list = (List<OrdenDto>) ordenes.stream().filter(o -> Objects.equals(o.getMesaDto().getPosX() , nm1) && Objects.equals(o.getMesaDto().getPosY() , nm2)).collect(Collectors.toList());
+                    System.out.println("AS " + list.get(0));
+                    ordenes.clear();
+                    AppContext.getInstance().set("Orden" , list.get(0));
+                    FlowController.getInstance().goViewInWindowModal("Factura" , (Stage) btnEditar.getScene().getWindow() , Boolean.FALSE);
+                }
+
+            }
+        });
+    }
+
+    void loadthings()
+    {
+        Respuesta res = orden.getOrdenes();
+        if(res.getEstado())
+        {
+            ordenes = (List<OrdenDto>) res.getResultado("Ordenes");
+        }
+        gripMesa.addEventHandler(MouseEvent.MOUSE_CLICKED , t ->
         {
             for(int z = 0; z < 10; z++)
             {
@@ -130,18 +205,13 @@ public class DisenoSalonesController extends Controller implements Initializable
                     {
                         k = z;
                         l = v;
-                        mesaDtos.forEach(m
-                                  ->
+                        mesaDtos.forEach(m ->
                         {
                             if(m.getPosX() == k && m.getPosY() == l)
                             {
+                                mesaclick = null;
                                 System.out.println("El valor del click fue " + m.toString());
                                 mesaclick = m;
-                                Respuesta res = orden.getOrdenes();
-                                if(res.getEstado())
-                                {
-                                    ordenes = (List<OrdenDto>) res.getResultado("Ordenes");
-                                }
                             }
                         });
 
@@ -151,12 +221,21 @@ public class DisenoSalonesController extends Controller implements Initializable
             if("O".equals(mesaclick.getEstado()))
             {
                 System.out.println("La mesa tiene orden existente");
+                ordenes.forEach(y ->
+                {
+                    System.out.println("POS X " + y.getMesaDto().getPosX());
+                    System.out.println("POS Y" + y.getMesaDto().getPosY());
+                });
                 list = (List<OrdenDto>) ordenes.stream().filter(o -> Objects.equals(o.getMesaDto().getId() , mesaclick.getId())).collect(Collectors.toList());
-                System.out.println("xD " + list.get(0).toString());;
-                ordenes.clear();
+                list.forEach(z ->
+                {
+                    System.out.println("POS X " + z.getMesaDto().getPosX());
+                    System.out.println("POS Y" + z.getMesaDto().getPosY());
+                });
                 AppContext.getInstance().set("Orden" , list.get(0));
                 FlowController.getInstance().goViewInWindowModal("CrearPedido" , getStage() , Boolean.FALSE);
                 list.clear();
+                mesaclick = null;
             }
             else//se procede a craer una orden para la mesa 
             {
@@ -169,8 +248,7 @@ public class DisenoSalonesController extends Controller implements Initializable
                 odd.setEstado("P");
                 orden.guardarOrden(odd);
                 mesaclick.setEstado("O");
-                ordenes.clear();
-                AppContext.getInstance().set("Orden" , new OrdenDto());
+//                AppContext.getInstance().set("Orden" , odd);
                 FlowController.getInstance().goViewInWindowModal("CrearPedido" , getStage() , Boolean.FALSE);
                 list.clear();
                 mesaDtos.forEach(g
@@ -186,6 +264,17 @@ public class DisenoSalonesController extends Controller implements Initializable
         });
     }
 
+    @Override
+    public void initialize()
+    {
+        load();
+        loadgrid();
+        rolDto = (RolDto) AppContext.getInstance().get("RolActual");
+        loadEvent();
+        loadthings();
+
+    }
+
     @FXML
     private void click(ActionEvent event)
     {
@@ -193,7 +282,7 @@ public class DisenoSalonesController extends Controller implements Initializable
         {
             if("Administrativos".equals(rolDto.getNombre()))
             {
-                FlowController.getInstance().goViewInWindowModal("disenoSalones" , FlowController.getInstance().getController("Principal").getStage() , Boolean.FALSE);
+                FlowController.getInstance().goViewInWindowModal("EditarSalones" , (Stage) btnEditar.getScene().getWindow() , Boolean.FALSE);
             }
             else
             {

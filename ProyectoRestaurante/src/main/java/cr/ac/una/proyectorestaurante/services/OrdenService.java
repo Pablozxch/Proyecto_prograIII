@@ -38,10 +38,6 @@ public class OrdenService
             });
             RestauranteDto id = (RestauranteDto) AppContext.getInstance().get("Restaurante");
             List<OrdenDto> Ordenes2 = Ordenes.stream().filter(t -> t.getEmpleadoDto().getRestauranteDto().getId() == id.getId()).collect(Collectors.toList());
-            Ordenes2.forEach(j ->
-            {
-                System.out.println(j.toString());
-            });
             return new Respuesta(true , "" , "" , "Ordenes" , Ordenes);
         }
         catch(Exception ex)
