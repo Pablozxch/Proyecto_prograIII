@@ -29,10 +29,11 @@ public class FacturaService
             parametros.put("correoPersona" , correoPersona);
             parametros.put("idFac" , idFac);
             Request request = new Request("FacturaController/factura" , "/{idRes}/{nombrePersona}/{correoPersona}/{idFac}" , parametros);
-            request.delete();
+            request.get();
             if(request.isError())
             {
                 return new Respuesta(false , request.getError() , "");
+
             }
 
             return new Respuesta(true , "" , "");
@@ -40,7 +41,29 @@ public class FacturaService
         catch(Exception ex)
         {
             Logger.getLogger(FacturaService.class.getName()).log(Level.SEVERE , "Error eliminando el factura." , ex);
-            return new Respuesta(false , "Error eliminando el factura." , "eliminarFactura " + ex.getMessage());
+            return new Respuesta(false , "Error enviando correo." , "eliminarFactura " + ex.getMessage());
+        }
+    }
+
+    public Respuesta lasto()
+    {
+        try
+        {
+            Request request = new Request("FacturaController/facturalast");
+            request.get();
+            if(request.isError())
+            {
+                return new Respuesta(false , request.getError() , "");
+
+            }
+            FacturaDto facturaDto = (FacturaDto) request.readEntity(FacturaDto.class);
+
+            return new Respuesta(true , "" , "" , "Factura" , facturaDto);
+        }
+        catch(Exception ex)
+        {
+            Logger.getLogger(FacturaService.class.getName()).log(Level.SEVERE , "Error obteniendo facturas." , ex);
+            return new Respuesta(false , "Error obteniendo facturas." , "getFacturas " + ex.getMessage());
         }
     }
 
@@ -65,28 +88,6 @@ public class FacturaService
         {
             Logger.getLogger(FacturaService.class.getName()).log(Level.SEVERE , "Error obteniendo facturas." , ex);
             return new Respuesta(false , "Error obteniendo facturas." , "getFacturas " + ex.getMessage());
-        }
-    }
-
-    public Respuesta eliminarFactura(Long id)
-    {
-        try
-        {
-            Map<String , Object> parametros = new HashMap<>();
-            parametros.put("id" , id);
-            Request request = new Request("FacturaController/factura" , "/{id}" , parametros);
-            request.delete();
-            if(request.isError())
-            {
-                return new Respuesta(false , request.getError() , "");
-            }
-
-            return new Respuesta(true , "" , "");
-        }
-        catch(Exception ex)
-        {
-            Logger.getLogger(FacturaService.class.getName()).log(Level.SEVERE , "Error eliminando el factura." , ex);
-            return new Respuesta(false , "Error eliminando el factura." , "eliminarFactura " + ex.getMessage());
         }
     }
 

@@ -40,7 +40,7 @@ public class FacturaDto
         this.montoFinal = factura.getFacMontocdesc();
         this.ordenDto = new OrdenDto(factura.getOrdId());
         this.cierrecajasDto = new CierrecajasDto(factura.getCcajId());
-        this.codigodescDto = new CodigodescDto(factura.getCodId());
+      
     }
 
     public Long getId()
@@ -142,6 +142,7 @@ public class FacturaDto
     {
         this.modificado = modificado;
     }
+
 
     @Override
     public String toString()

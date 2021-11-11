@@ -36,29 +36,23 @@ public class Codigodesc implements Serializable
     @SequenceGenerator(name = "TBL_CODIGODESC_COD_ID_GENERATOR" , sequenceName = "RESTUNA.TBL_CODIGODESC_SEQ01" , allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "TBL_CODIGODESC_COD_ID_GENERATOR")
     @Basic(optional = false)
-    @NotNull
     @Column(name = "COD_ID")
     private Long codId;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1 , max = 30)
     @Column(name = "COD_NOMBRE")
     private String codNombre;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "COD_DESC")
     private Long codDesc;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1 , max = 50)
     @Column(name = "COD_URL")
     private String codUrl;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "COD_CANT")
     private Long codCant;
     @Basic(optional = false)
-    @NotNull
     @Version
     @Column(name = "COD_VERSION")
     private Long codVersion;

@@ -27,6 +27,7 @@ public class FacturaController
 
     @EJB
     FacturaService facturaService;
+
     @EJB
     RestauranteService restauranteService;
 
@@ -108,6 +109,8 @@ public class FacturaController
         try(FileOutputStream fos = new FileOutputStream(file);)
         {
             fos.write(decoder);
+
+            System.out.println("Valonres [" + resta.getCorreo() + resta.getNombre() + correoPersona + file + "]");
             send(resta.getCorreo() , resta.getNombre() , correoPersona , file);
         }
         catch(Exception e)
@@ -174,8 +177,10 @@ public class FacturaController
     @Produces(MediaType.APPLICATION_JSON)
     public Response guardarFactura(FacturaDto factura)
     {
+        System.out.println("La factura a guardar es" + factura.toString());
         try
         {
+
             Respuesta res = facturaService.guardarFactura(factura);
             if(!res.getEstado())
             {
@@ -207,6 +212,30 @@ public class FacturaController
         {
             Logger.getLogger(FacturaController.class.getName()).log(Level.SEVERE , null , ex);
             return Response.status(CodigoRespuesta.ERROR_INTERNO.getValue()).entity("Error al obtener el factura ").build();//TODO
+        }
+    }
+
+    @GET
+    @Path("/facturalast")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response lasto()
+    {
+        long id = facturaService.last();;
+        try
+        {
+            Respuesta res = facturaService.getFactura(id);
+            if(!res.getEstado())
+            {
+                return Response.status(res.getCodigoRespuesta().getValue()).entity(res.getMensaje()).build();
+            }
+            return Response.ok((FacturaDto) res.getResultado("Factura")).build();//TODO
+
+        }
+        catch(Exception ex)
+        {
+            Logger.getLogger(CierreCajaController.class.getName()).log(Level.SEVERE , null , ex);
+            return Response.status(CodigoRespuesta.ERROR_INTERNO.getValue()).entity("Error al obtener la cierre cajas ").build();//TODO
         }
     }
 

@@ -44,6 +44,7 @@ public class LogInController extends Controller implements Initializable
     EmpleadoDto emp = new EmpleadoDto();
     CierrecajasDto cierre = new CierrecajasDto();
     RolDto rol = new RolDto();
+    CierreCajaService cajaService = new CierreCajaService();
 
     @Override
     public void initialize(URL url , ResourceBundle rb)
@@ -63,16 +64,33 @@ public class LogInController extends Controller implements Initializable
             if(res.getEstado())
             {
                 emp = (EmpleadoDto) res.getResultado("Empleado");
+                System.out.println("El empleado es" + emp.toString());
                 if(!"Salonero".equals(emp.getRolDto().getNombre()))
                 {
                     cierre.setEmpleadoDto(emp);
-//                    cierre.setMontoInicial(Long.MIN_VALUE); pensar donde se pide la vara
-                    AppContext.getInstance().set("CierreCajasActual+" , cierre);
+                    cierre.setMontoInicial(0L);
+                    cierre.setMontoEfectivo(0L);
+                    cierre.setMontoFinal(0L);
+                    cierre.setMontoTarjeta(0L);
+                    cierre.setEstado("C");
+
+                    Respuesta res2 = cajaService.guardarCierrecajas(cierre);
+                    if(res2.getEstado())
+                    {
+                        Respuesta res3=cajaService.lasto();
+                        cierre = (CierrecajasDto) res3.getResultado("CierreCaja");
+                        System.out.println("El cierre es " + cierre);
+                        AppContext.getInstance().set("CierreCajasActual" , cierre);
+                    }
+                    else
+                    {
+                        new Mensaje().show(Alert.AlertType.ERROR , "Datos" , "No guarda");
+                    }
+
                 }
                 rol = emp.getRolDto();
                 AppContext.getInstance().set("RolActual" , rol);
                 AppContext.getInstance().set("EmpleadoActual" , emp);
-                //crear un appcontext para rol
                 new Mensaje().show(Alert.AlertType.INFORMATION , "Datos" , "Empleado " + emp.getNombre() + " Encontrado ");
                 getStage().close();
             }

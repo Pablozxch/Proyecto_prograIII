@@ -128,7 +128,7 @@ public class CierrecajasDto
         sb.append(", MontoTarjeta=").append(MontoTarjeta);
         sb.append(", montoEfectivo=").append(montoEfectivo);
         sb.append(", estado=").append(estado);
-        sb.append(", empleadoDto=").append(empleadoDto.toString());
+        sb.append(", empleadoDto=").append(empleadoDto);
         sb.append(", modificado=").append(modificado);
         sb.append('}');
         return sb.toString();

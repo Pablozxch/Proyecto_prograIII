@@ -79,8 +79,9 @@ public class FacturaController extends Controller implements Initializable
     List<DetallexordenDto> detallexordenDtos = new ArrayList<>();
 
     double impA = 0;
-    double subtotal = 0;
-    DecimalFormat currency = new DecimalFormat("₡ 0.00");
+    long subtotal = 0;
+    DecimalFormat currency = new DecimalFormat("₡");
+
     @FXML
     private JFXButton btnBuscarCodDescuento;
     @FXML
@@ -89,7 +90,9 @@ public class FacturaController extends Controller implements Initializable
     private JFXTextField txtPagaCon;
     @FXML
     private JFXButton btnEnviarCorreo;
-    private FacturaService facturaService=new FacturaService();
+    FacturaService facturaService = new FacturaService();
+    long descuento = 0;
+
     @Override
 
     public void initialize(URL url , ResourceBundle rb)
@@ -100,11 +103,50 @@ public class FacturaController extends Controller implements Initializable
     @FXML
     private void click(ActionEvent event) throws MessagingException
     {
-        RestauranteDto r = (RestauranteDto) AppContext.getInstance().get("Restaurante");
-        
         if(event.getSource() == btnEnviarCorreo)
         {
-            facturaService.sendByEmail(r.getId() , txtNombre.getText() , txtCorreo.getText() , "valor de factura");      
+            RestauranteDto r = (RestauranteDto) AppContext.getInstance().get("Restaurante");
+            Respuesta res2 = facturaService.lasto();
+            FacturaDto ff = (FacturaDto) res2.getResultado("Factura");
+            if(res2.getEstado())
+            {
+                String nombre = txtNombre.getText();
+                String correo = txtCorreo.getText();
+                Respuesta email = facturaService.sendByEmail(r.getId() , nombre , correo , ff.getId());
+                if(email.getEstado())
+                {
+                    new Mensaje().show(Alert.AlertType.INFORMATION , "Envio de Correo" , "Enviado con Exito");
+                }
+                else
+                {
+                    System.out.println("Problemas");
+                }
+            }
+            btnEnviarCorreo.setDisable(true);
+        }
+        if(event.getSource() == btnPagar)
+        {
+            MesaService mesaService=new MesaService();
+            CierrecajasDto cierre = (CierrecajasDto) AppContext.getInstance().get("CierreCajasActual");
+            MesaDto mesaDto=ordenDto.getMesaDto();
+            mesaDto.setEstado("D");
+            mesaService.guardarMesa(mesaDto);//se actualiza el estado de la mesa para no tomar ordenes ya canceladas
+            FacturaDto fac = new FacturaDto();
+            fac.setCierrecajasDto(cierre);
+            fac.setEfetivoTarjeta("T");//CAMBIAR EL VALOR DEPENDIENDO DE LO OTRO
+            double total = Double.valueOf(txtSubtotal.getText()) * (impA);
+            long ttotal = Long.valueOf(String.valueOf((long) total + subtotal));
+            long finalmont = Long.valueOf(String.valueOf(((long) total + subtotal) - descuento));
+            fac.setSubtotal(subtotal);
+            fac.setTotal(ttotal);
+            fac.setMontoFinal(finalmont);
+            fac.setDescuento(descuento);
+            ordenDto.setEstado("C");
+            fac.setOrdenDto(ordenDto);
+            System.out.println("fac " + fac.toString());
+            ordenService.guardarOrden(ordenDto);
+            facturaService.guardarFactura(fac);
+            btnPagar.setDisable(true);
         }
     }
 
@@ -195,14 +237,19 @@ public class FacturaController extends Controller implements Initializable
         {
             subtotal += t.getPrecio();
         });
+        System.out.println("subtotal " + subtotal);
+        txtDescuento.setText(String.valueOf(descuento));
         txtSubtotal.setText(String.valueOf(subtotal));
-        double total = Double.valueOf(txtSubtotal.getText()) * (impA);
+        long total = (long) ((long) Long.valueOf(txtSubtotal.getText()) * (impA));
+        System.out.println(total);
         txtTotal.setText(String.valueOf(total + subtotal));
     }
 
     @Override
     public void initialize()
     {
+        btnEnviarCorreo.setDisable(false);
+        btnPagar.setDisable(false);
         loadRes();
         load();
         loadItems();

@@ -31,7 +31,6 @@ public class CierrecajasDto
         this.MontoTarjeta = new SimpleStringProperty();
         this.montoEfectivo = new SimpleStringProperty();
         this.estado = new SimpleStringProperty();
-//        this.empleadoDto = new EmpleadoDto();
         this.modificado = false;
     }
 
@@ -160,7 +159,7 @@ public class CierrecajasDto
         sb.append(", MontoTarjeta=").append(MontoTarjeta);
         sb.append(", montoEfectivo=").append(montoEfectivo);
         sb.append(", estado=").append(estado);
-        sb.append(", empleadoDto=").append(empleadoDto.toString());
+        sb.append(", empleadoDto=").append(empleadoDto);
         sb.append(", modificado=").append(modificado);
         sb.append('}');
         return sb.toString();

@@ -33,16 +33,13 @@ public class Rol implements Serializable
     @SequenceGenerator(name = "TBL_ROL_ROL_ID_GENERATOR" , sequenceName = "RESTUNA.TBL_ROL_SEQ01" , allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "TBL_ROL_ROL_ID1_GENERATOR")
     @Basic(optional = false)
-    @NotNull
     @Column(name = "ROL_ID")
     private Long rolId;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1 , max = 30)
     @Column(name = "ROL_NOMBRE")
     private String rolNombre;
     @Basic(optional = false)
-    @NotNull
     @Version
     @Column(name = "ROL_VERSION")
     private Long rolVersion;

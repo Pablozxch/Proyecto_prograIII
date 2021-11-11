@@ -25,7 +25,8 @@ import javax.validation.constraints.*;
               @NamedQuery(name = "Factura.findByFacSubtotal" , query = "SELECT f FROM Factura f WHERE f.facSubtotal = :facSubtotal") ,
               @NamedQuery(name = "Factura.findByFacTotal" , query = "SELECT f FROM Factura f WHERE f.facTotal = :facTotal") ,
               @NamedQuery(name = "Factura.findByFacMontocdesc" , query = "SELECT f FROM Factura f WHERE f.facMontocdesc = :facMontocdesc") ,
-              @NamedQuery(name = "Factura.findByFacVersion" , query = "SELECT f FROM Factura f WHERE f.facVersion = :facVersion")
+              @NamedQuery(name = "Factura.findByFacVersion" , query = "SELECT f FROM Factura f WHERE f.facVersion = :facVersion") ,
+              @NamedQuery(name = "Factura.findlast" , query = "SELECT max(c.facId) FROM Factura c ")
           })
 public class Factura implements Serializable
 {
@@ -36,32 +37,25 @@ public class Factura implements Serializable
     @SequenceGenerator(name = "TBL_FACTURA_FAC_ID_GENERATOR" , sequenceName = "RESTUNA.TBL_FACTURA_SEQ01" , allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "TBL_FACTURA_FAC_ID_GENERATOR")
     @Basic(optional = false)
-    @NotNull
     @Column(name = "FAC_ID")
     private Long facId;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "FAC_DESC")
     private Long facDesc;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1 , max = 1)
     @Column(name = "FAC_EFECTIVOTARJETA")
     private String facEfectivotarjeta;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "FAC_SUBTOTAL")
     private Long facSubtotal;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "FAC_TOTAL")
     private Long facTotal;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "FAC_MONTOCDESC")
     private Long facMontocdesc;
     @Basic(optional = false)
-    @NotNull
     @Version
     @Column(name = "FAC_VERSION")
     private Long facVersion;
@@ -102,11 +96,14 @@ public class Factura implements Serializable
 
     public void actualizarFactura(FacturaDto facturaDto)
     {
-        this.facDesc = facDesc;
-        this.facEfectivotarjeta = facEfectivotarjeta;
-        this.facSubtotal = facSubtotal;
-        this.facTotal = facTotal;
-        this.facMontocdesc = facMontocdesc;
+        this.facDesc = facturaDto.getDescuento();
+        this.facEfectivotarjeta = facturaDto.getEfetivoTarjeta();
+        this.facSubtotal = facturaDto.getSubtotal();
+        this.facTotal = facturaDto.getTotal();
+        this.facMontocdesc = facturaDto.getMontoFinal();
+        this.ordId = new Orden(facturaDto.getOrdenDto());
+        this.ccajId = new Cierrecajas(facturaDto.getCierrecajasDto());
+
     }
 
     public Long getFacId()

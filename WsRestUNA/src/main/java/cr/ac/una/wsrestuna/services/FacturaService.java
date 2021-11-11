@@ -25,46 +25,21 @@ import net.sf.jasperreports.engine.*;
 @Stateless
 public class FacturaService
 {
-    
-    private static final Logger LOG = Logger.getLogger(EmpleadoService.class.getName());
+
+    private static final Logger LOG = Logger.getLogger(FacturaService.class.getName());
 
     //TODO
     @PersistenceContext(unitName = "WsRestUNA")
     private EntityManager em;
-    
-    public Respuesta getFacturabyNamae(String CatNombre)// Un unico producto por id
+
+    public Respuesta getFactura(Long facId)// Un unico producto por id
     {
         try
         {
-            Query qryFactura = em.createNamedQuery("   Factura.findByCatNombre" , Factura.class);
-            qryFactura.setParameter("CatNombre" , CatNombre);
+            Query qryFactura = em.createNamedQuery("Factura.findByFacId" , Factura.class);
+            qryFactura.setParameter("facId" , facId);
             return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "" , "Factura" , new FacturaDto((Factura) qryFactura.getSingleResult()));
-        }
-        catch(NoResultException ex)
-        {
-            return new Respuesta(false , CodigoRespuesta.ERROR_NOENCONTRADO , "No existe un factura con el nombre ingresado." , "getFactura NoResultException");
-        }
-        catch(NonUniqueResultException ex)
-        {
-            LOG.log(Level.SEVERE , "Ocurrio un error al consultar el factura." , ex);
-            return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al consultar el factura." , "getFactura NonUniqueResultException");
-        }
-        catch(Exception ex)
-        {
-            LOG.log(Level.SEVERE , "Ocurrio un error al consultar el factura." , ex);
-            return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al consultar el factura." , "getFactura " + ex.getMessage());
-        }
-        
-    }
-    
-    public Respuesta getFactura(Long catId)// Un unico producto por id
-    {
-        try
-        {
-            Query qryFactura = em.createNamedQuery("Factura.findByCatId" , Factura.class);
-            qryFactura.setParameter("catId" , catId);
-            return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "" , "Factura" , new FacturaDto((Factura) qryFactura.getSingleResult()));
-            
+
         }
         catch(NoResultException ex)
         {
@@ -81,7 +56,7 @@ public class FacturaService
             return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al consultar el factura." , "getFactura " + ex.getMessage());
         }
     }
-    
+
     public Respuesta getFacturas()
     {
         try
@@ -93,9 +68,9 @@ public class FacturaService
             {
                 facturasDto.add(new FacturaDto(factura));
             });
-            
+
             return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "" , "Facturas" , facturasDto);
-            
+
         }
         catch(NoResultException ex)
         {
@@ -107,7 +82,15 @@ public class FacturaService
             return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al consultar el factura." , "getFacturas " + ex.getMessage());
         }
     }
-    
+
+    public Long last()
+    {
+
+        Query qryFacturas = em.createNamedQuery("Factura.findlast" , Factura.class);
+        long idLast = (long) qryFacturas.getSingleResult();
+        return idLast;
+    }
+
     public Respuesta guardarFactura(FacturaDto facturaDto)
     {
         try
@@ -137,7 +120,7 @@ public class FacturaService
             return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al guardar el factura." , "guardarFactura " + ex.getMessage());
         }
     }
-    
+
     public Respuesta eliminarFactura(Long id)
     {
         try
@@ -169,10 +152,10 @@ public class FacturaService
             return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al eliminar el factura." , "eliminarFactura " + ex.getMessage());
         }
     }
-    
+
     public Respuesta reporteFactura(Long idFac , String correo , String nombre)
     {
-        
+
         try
         {
             InputStream x = FacturaService.class.getClassLoader().getResourceAsStream("/cr/ac/una/wsrestuna/reportes/ParaCorreo.jrxml");
@@ -180,7 +163,7 @@ public class FacturaService
             InitialContext initialContext = new InitialContext();
             DataSource dataSource = (DataSource) initialContext.lookup("jdbc/RestUNA");
             Connection connection = dataSource.getConnection();
-            
+
             HashMap<String , Object> map = new HashMap<>();
             map.put("ID_FACTURA" , idFac);
             map.put("CORREO" , correo);
@@ -190,13 +173,13 @@ public class FacturaService
             System.out.println(a);
             byte[] s = JasperExportManager.exportReportToPdf(print);
             return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "" , "Factura" , s);
-            
+
         }
         catch(Exception ex)
         {
             LOG.log(Level.SEVERE , "Ocurrio un error al guardar el registro." , ex);
             return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al eliminar el factura." , "eliminarFactura " + ex.getMessage());
         }
-        
+
     }
 }

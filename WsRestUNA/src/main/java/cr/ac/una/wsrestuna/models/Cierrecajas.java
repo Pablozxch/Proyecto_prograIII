@@ -26,8 +26,10 @@ import javax.validation.constraints.*;
               @NamedQuery(name = "Cierrecajas.findByCcajMontotarjeta" , query = "SELECT c FROM Cierrecajas c WHERE c.ccajMontotarjeta = :ccajMontotarjeta") ,
               @NamedQuery(name = "Cierrecajas.findByCcajMontoefectivo" , query = "SELECT c FROM Cierrecajas c WHERE c.ccajMontoefectivo = :ccajMontoefectivo") ,
               @NamedQuery(name = "Cierrecajas.findByCcjaEstado" , query = "SELECT c FROM Cierrecajas c WHERE c.ccjaEstado = :ccjaEstado") ,
-              @NamedQuery(name = "Cierrecajas.findByCcjaVersion" , query = "SELECT c FROM Cierrecajas c WHERE c.ccjaVersion = :ccjaVersion")
+              @NamedQuery(name = "Cierrecajas.findByCcjaVersion" , query = "SELECT c FROM Cierrecajas c WHERE c.ccjaVersion = :ccjaVersion") ,
+              @NamedQuery(name = "Cierrecajas.findlast" , query = "SELECT max(c.ccajId) FROM Cierrecajas c ")
           })
+//SELECT * from tbl_cierrecajas c where c.ccaj_id=(SELECT max(d.ccaj_id) from tbl_cierrecajas d )
 public class Cierrecajas implements Serializable
 {
 
@@ -37,28 +39,23 @@ public class Cierrecajas implements Serializable
     @SequenceGenerator(name = "TBL_CIERRECAJAS_CCAJ_ID_GENERATOR" , sequenceName = "RESTUNA.TBL_CIERRECAJAS_SEQ01" , allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "TBL_CIERRECAJAS_CCAJ_ID_GENERATOR")
     @Basic(optional = false)
-    @NotNull
     @Column(name = "CCAJ_ID")
     private Long ccajId;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "CCAJ_MONTOINICIAL")
     private Long ccajMontoinicial;
     @Column(name = "CCJA_MONTOFINAL")
     private Long ccjaMontofinal;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "CCAJ_MONTOTARJETA")
     private Long ccajMontotarjeta;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "CCAJ_MONTOEFECTIVO")
     private Long ccajMontoefectivo;
     @Size(max = 1)
     @Column(name = "CCJA_ESTADO")
     private String ccjaEstado;
     @Basic(optional = false)
-    @NotNull
     @Version
     @Column(name = "CCJA_VERSION")
     private Long ccjaVersion;
@@ -98,6 +95,7 @@ public class Cierrecajas implements Serializable
         this.ccajMontotarjeta = cierrecajasDto.getMontoTarjeta();
         this.ccajMontoefectivo = cierrecajasDto.getMontoEfectivo();
         this.ccjaEstado = cierrecajasDto.getEstado();
+        this.empId = new Empleado(cierrecajasDto.getEmpleadoDto());
     }
 
     public Long getCcajId()
