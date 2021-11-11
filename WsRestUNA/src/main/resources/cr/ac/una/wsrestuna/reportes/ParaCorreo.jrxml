@@ -139,48 +139,48 @@ WHERE
 				<reportElement x="0" y="0" width="550" height="100" backcolor="#E3E07F" uuid="be00e623-c5c1-4b7e-af7d-ffd2627e6801"/>
 			</rectangle>
 			<textField>
-				<reportElement x="420" y="0" width="124" height="30" uuid="52e1a7af-619f-4864-9f17-c1cacb2bcacd"/>
+				<reportElement x="390" y="0" width="160" height="30" uuid="52e1a7af-619f-4864-9f17-c1cacb2bcacd"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{RES_NOMBRE}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="420" y="30" width="124" height="30" uuid="93080619-dea6-4466-a29b-12ac5ddec27d"/>
+				<reportElement x="390" y="30" width="160" height="30" uuid="93080619-dea6-4466-a29b-12ac5ddec27d"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{RES_DIRECCION}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="420" y="60" width="124" height="30" uuid="8143e816-7ba3-402d-a329-ed15d88c1a61"/>
+				<reportElement x="390" y="60" width="160" height="30" uuid="8143e816-7ba3-402d-a329-ed15d88c1a61"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{RES_CORREO}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="320" y="0" width="100" height="30" uuid="abfa04c2-7b73-4ea2-9fb8-9c36dff116c2"/>
+				<reportElement x="290" y="0" width="100" height="30" uuid="abfa04c2-7b73-4ea2-9fb8-9c36dff116c2"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial Black"/>
 				</textElement>
 				<text><![CDATA[Nombre de restaurante]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="320" y="30" width="100" height="30" uuid="e5c16e67-1e19-4c7d-9b5d-25eab845ce8f"/>
+				<reportElement x="290" y="30" width="100" height="30" uuid="e5c16e67-1e19-4c7d-9b5d-25eab845ce8f"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial Black"/>
 				</textElement>
 				<text><![CDATA[Direccion]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="320" y="60" width="100" height="30" uuid="a6f16eb0-afc4-4f77-a472-9e59fd59d9b8"/>
+				<reportElement x="290" y="60" width="100" height="30" uuid="a6f16eb0-afc4-4f77-a472-9e59fd59d9b8"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial Black"/>
 				</textElement>
 				<text><![CDATA[Correo del restaurante]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="120" y="50" width="170" height="30" uuid="3d0acff1-f705-42f7-ba64-1d10c8c8e630"/>
+				<reportElement x="110" y="50" width="170" height="30" uuid="3d0acff1-f705-42f7-ba64-1d10c8c8e630"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{CORREO}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="120" y="20" width="170" height="30" uuid="076a32da-ea10-476a-9741-2cc3b180b123"/>
+				<reportElement x="110" y="20" width="170" height="30" uuid="076a32da-ea10-476a-9741-2cc3b180b123"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{NOMBRE}]]></textFieldExpression>
 			</textField>
@@ -250,7 +250,7 @@ WHERE
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="34" splitType="Stretch">
+		<band height="30" splitType="Stretch">
 			<textField>
 				<reportElement x="140" y="0" width="90" height="30" uuid="126921e8-7595-487c-b198-9c6944f8c624">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="176a671d-cdbb-414c-b5e2-9657f3532880"/>
@@ -404,7 +404,7 @@ WHERE
 			</staticText>
 			<textField>
 				<reportElement x="130" y="30" width="120" height="30" uuid="5c0a9a99-6f88-48e0-9fd6-60b33a5c4d6e"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{EMP_NOMBRE}]]></textFieldExpression>
 			</textField>
 		</band>
