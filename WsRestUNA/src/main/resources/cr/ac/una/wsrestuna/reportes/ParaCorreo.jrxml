@@ -139,18 +139,18 @@ WHERE
 				<reportElement x="0" y="0" width="550" height="100" backcolor="#E3E07F" uuid="be00e623-c5c1-4b7e-af7d-ffd2627e6801"/>
 			</rectangle>
 			<textField>
-				<reportElement x="420" y="0" width="100" height="30" uuid="52e1a7af-619f-4864-9f17-c1cacb2bcacd"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement x="420" y="0" width="124" height="30" uuid="52e1a7af-619f-4864-9f17-c1cacb2bcacd"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{RES_NOMBRE}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="420" y="30" width="100" height="30" uuid="93080619-dea6-4466-a29b-12ac5ddec27d"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement x="420" y="30" width="124" height="30" uuid="93080619-dea6-4466-a29b-12ac5ddec27d"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{RES_DIRECCION}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="420" y="60" width="100" height="30" uuid="8143e816-7ba3-402d-a329-ed15d88c1a61"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement x="420" y="60" width="124" height="30" uuid="8143e816-7ba3-402d-a329-ed15d88c1a61"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{RES_CORREO}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -175,13 +175,13 @@ WHERE
 				<text><![CDATA[Correo del restaurante]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="90" y="50" width="100" height="30" uuid="3d0acff1-f705-42f7-ba64-1d10c8c8e630"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement x="90" y="50" width="170" height="30" uuid="3d0acff1-f705-42f7-ba64-1d10c8c8e630"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{CORREO}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="90" y="20" width="100" height="30" uuid="076a32da-ea10-476a-9741-2cc3b180b123"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement x="90" y="20" width="170" height="30" uuid="076a32da-ea10-476a-9741-2cc3b180b123"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{NOMBRE}]]></textFieldExpression>
 			</textField>
 			<staticText>
