@@ -10,14 +10,13 @@ join RestUna.Tbl_Detallexorden d on o.ord_id=d.ord_id*/
 
 
 
-
-Select p.* from Tbl_Factura f 
+/*Select p.* from Tbl_Factura f 
 join RestUna.Tbl_Orden o on f.ord_id =o.ord_id 
 join RestUna.Tbl_Detallexorden d on o.ord_id=d.ord_id
 join  RestUna.Tbl_Producto p on d.pro_id=p.pro_id
 where f.fac_id=2 
 
-Select f.* from Tbl_Factura f where f.fac_id=2
+Select f.* from Tbl_Factura f where f.fac_id=2*/
 
 /*query para el primero*/
 
@@ -37,5 +36,12 @@ FROM "TBL_FACTURA"
     "TBL_ORDEN"."ORD_ID"= "TBL_DETALLEXORDEN"."ORD_ID"
     LEFT JOIN "TBL_PRODUCTO" ON 
      "TBL_DETALLEXORDEN"."PRO_ID" = "TBL_PRODUCTO"."PRO_ID" 
-WHERE 
-     "TBL_ORDEN"."ORD_FECHA" BETWEEN $P{Inicio} AND $P{Final}
+     
+WHERE "TBL_ORDEN"."EMP_ID" = 1 AND "TBL_ORDEN"."ORD_FECHA" BETWEEN '1/11/2021' AND '30/11/2021';
+    
+/*SELECT "TBL_DETALLEXORDEN"."DXO_CANTIDAD"
+       FROM "TBL_DETALLEXORDEN" LEFT JOIN "TBL_ORDEN" 
+       ON "TBL_DETALLEXORDEN"."ORD_ID" = "TBL_ORDEN"."ORD_ID"
+       WHERE "TBL_ORDEN"."ORD_ID" = */
+       
+       

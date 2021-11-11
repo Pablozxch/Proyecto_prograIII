@@ -21,6 +21,8 @@ public class DragAndDrop {
         node.setOnMousePressed(mouseEvent -> {
             mouseAnchorX = mouseEvent.getX();
             mouseAnchorY = mouseEvent.getY();
+            System.out.println(mouseAnchorY);
+            System.out.println(mouseAnchorX);
         });
 
         node.setOnMouseDragged(mouseEvent -> {
