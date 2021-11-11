@@ -11,9 +11,11 @@ import com.jfoenix.controls.JFXTextField;
 import cr.ac.una.proyectorestaurante.models.*;
 import cr.ac.una.proyectorestaurante.services.*;
 import cr.ac.una.proyectorestaurante.utils.*;
+import java.io.*;
 import java.net.URL;
 import java.text.*;
 import java.util.*;
+import java.util.logging.*;
 import java.util.stream.*;
 import javafx.beans.property.*;
 import javafx.collections.*;
@@ -22,6 +24,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 import javafx.scene.control.*;
+import javax.mail.*;
+import javax.mail.internet.*;
 
 /**
  * FXML Controller class
@@ -58,8 +62,6 @@ public class FacturaController extends Controller implements Initializable
     @FXML
     private JFXTextField txtImpuestos;
     @FXML
-    private JFXButton btnGuardar;
-    @FXML
     private JFXButton btnPagar;
 
     /**
@@ -81,6 +83,12 @@ public class FacturaController extends Controller implements Initializable
     DecimalFormat currency = new DecimalFormat("₡ 0.00");
     @FXML
     private JFXButton btnBuscarCodDescuento;
+    @FXML
+    private JFXTextField txtMontoAPagar;
+    @FXML
+    private JFXTextField txtPagaCon;
+    @FXML
+    private JFXButton btnEnviarCorreo;
 
     @Override
 
@@ -90,8 +98,15 @@ public class FacturaController extends Controller implements Initializable
     }
 
     @FXML
-    private void click(ActionEvent event)
+    private void click(ActionEvent event) throws MessagingException
     {
+        RestauranteDto r = (RestauranteDto) AppContext.getInstance().get("Restaurante");
+        if(event.getSource() == btnEnviarCorreo)
+        {
+      
+            sendEmaill();
+            
+        }
     }
 
     void loadRes()
@@ -195,4 +210,45 @@ public class FacturaController extends Controller implements Initializable
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    void sendEmaill() throws MessagingException
+    {
+        try
+        {
+            Properties prop = new Properties();
+            prop.put("mail.smtp.auth" , true);
+            prop.put("mail.smtp.starttls.enable" , "true");
+            prop.put("mail.smtp.host" , "smtp.mailtrap.io");
+            prop.put("mail.smtp.port" , "25");
+            prop.put("mail.smtp.ssl.trust" , "smtp.mailtrap.io");
+            Session session = Session.getInstance(prop , new Authenticator()
+            {
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication()
+                {
+                    return new PasswordAuthentication("proyectorestaurante3@gmail.com" , "McDonald");
+                }
+            });
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("pigua8100@gmail.com"));
+            message.setRecipients(
+                      Message.RecipientType.TO , InternetAddress.parse("to@gmail.com"));
+            message.setSubject("Mail Subject");
+
+            String msg = "This is my first email using JavaMailer";
+
+            MimeBodyPart mimeBodyPart = new MimeBodyPart();
+            mimeBodyPart.setContent(msg , "text/html");
+
+            Multipart multipart = new MimeMultipart();
+            multipart.addBodyPart(mimeBodyPart);
+
+            message.setContent(multipart);
+
+            Transport.send(message);
+        }
+        catch(AddressException ex)
+        {
+            Logger.getLogger(FacturaController.class.getName()).log(Level.SEVERE , null , ex);
+        }
+    }
 }

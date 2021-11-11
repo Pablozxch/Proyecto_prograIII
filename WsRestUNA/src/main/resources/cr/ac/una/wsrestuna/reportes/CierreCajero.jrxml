@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CierreCajero" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c06ea8b3-7fb0-4b7d-ab2a-1daae0fa3fe0">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="OJDBC 7"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="Fecha" class="java.lang.String"/>
+	<parameter name="idEmpleado" class="java.lang.Long"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT "TBL_CIERRECAJAS"."CCAJ_MONTOEFECTIVO",
+    "TBL_CIERRECAJAS"."CCAJ_MONTOTARJETA",
+    "TBL_CIERRECAJAS"."CCJA_MONTOFINAL",
+    "TBL_CIERRECAJAS"."CCAJ_MONTOINICIAL",
+    "TBL_EMPLEADO"."EMP_NOMBRE",
+    "TBL_CIERRECAJAS"."CCAJ_ID"
+FROM "TBL_FACTURA"
+    Left JOIN "TBL_CIERRECAJAS" ON 
+     "TBL_FACTURA"."CCAJ_ID" = "TBL_CIERRECAJAS"."CCAJ_ID" 
+    Left JOIN "TBL_ORDEN" ON 
+     "TBL_FACTURA"."ORD_ID" = "TBL_ORDEN"."ORD_ID" 
+    Left JOIN "TBL_EMPLEADO" ON 
+     "TBL_CIERRECAJAS"."EMP_ID" = "TBL_EMPLEADO"."EMP_ID" 
+WHERE 
+     "TBL_ORDEN"."ORD_FECHA" =$P{Fecha} AND "TBL_CIERRECAJAS"."EMP_ID" =$P{idEmpleado}]]>
+	</queryString>
+	<field name="CCAJ_MONTOEFECTIVO" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="CCAJ_MONTOEFECTIVO"/>
+		<property name="com.jaspersoft.studio.field.label" value="CCAJ_MONTOEFECTIVO"/>
+	</field>
+	<field name="CCAJ_MONTOTARJETA" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="CCAJ_MONTOTARJETA"/>
+		<property name="com.jaspersoft.studio.field.label" value="CCAJ_MONTOTARJETA"/>
+	</field>
+	<field name="CCJA_MONTOFINAL" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="CCJA_MONTOFINAL"/>
+		<property name="com.jaspersoft.studio.field.label" value="CCJA_MONTOFINAL"/>
+	</field>
+	<field name="CCAJ_MONTOINICIAL" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="CCAJ_MONTOINICIAL"/>
+		<property name="com.jaspersoft.studio.field.label" value="CCAJ_MONTOINICIAL"/>
+	</field>
+	<field name="EMP_NOMBRE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="EMP_NOMBRE"/>
+		<property name="com.jaspersoft.studio.field.label" value="EMP_NOMBRE"/>
+	</field>
+	<field name="CCAJ_ID" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="CCAJ_ID"/>
+		<property name="com.jaspersoft.studio.field.label" value="CCAJ_ID"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="50">
+			<rectangle>
+				<reportElement x="0" y="0" width="550" height="50" backcolor="#8A4948" uuid="8f2de0c4-658a-42a2-b07d-ffc31ee6733f"/>
+				<graphicElement>
+					<pen lineColor="#8A4948"/>
+				</graphicElement>
+			</rectangle>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="33" splitType="Stretch">
+			<staticText>
+				<reportElement x="80" y="3" width="100" height="30" uuid="56bbcebc-d9d5-44be-818a-8c02e430e318">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a8fbe29b-f740-465c-9930-66eeb4a21489"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Black"/>
+				</textElement>
+				<text><![CDATA[Monto recibido en efectivo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="3" width="100" height="30" uuid="1c4699c0-f830-4e28-a693-4c99b51e47f4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="68a352f9-d29c-4565-89f4-77f7d1e6f810"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Black"/>
+				</textElement>
+				<text><![CDATA[Monto recibido de tarjetas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="3" width="100" height="30" uuid="b04c341b-102d-4065-a6b9-be9d3399c342">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b063ee73-7cdf-49c7-bc6f-6e5612003c18"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Black"/>
+				</textElement>
+				<text><![CDATA[Monto final entregado por el cajero]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="3" width="90" height="30" uuid="5d9702ef-62a6-453d-8560-986fe1f9da97">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6584f535-2267-4b3d-9a16-288b780d6612"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Black"/>
+				</textElement>
+				<text><![CDATA[Monto inicial del cajero]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="371" y="3" width="79" height="30" uuid="2402bc37-a82b-4e2d-b631-7b9f2005d491">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b5a9b20f-688a-48c9-b957-b6340d83533e"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Black"/>
+				</textElement>
+				<text><![CDATA[Monto final del cajero]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="3" width="80" height="30" uuid="277c92af-183f-4373-a16b-7724c55233cb">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="50093b25-bab1-4974-94e9-ca220b0eace5"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Black"/>
+				</textElement>
+				<text><![CDATA[Nombre del empleado]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="80" y="0" width="100" height="30" uuid="e6ac2d18-48fd-4210-b01e-e295ec84515d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a8fbe29b-f740-465c-9930-66eeb4a21489"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CCAJ_MONTOEFECTIVO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="0" width="100" height="30" uuid="8a8b516d-1aac-448d-83d7-52cd378c57d1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="68a352f9-d29c-4565-89f4-77f7d1e6f810"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CCAJ_MONTOTARJETA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="0" width="100" height="30" uuid="b0115447-d949-4408-8016-403e4530d701">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b063ee73-7cdf-49c7-bc6f-6e5612003c18"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CCJA_MONTOFINAL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="0" width="90" height="30" uuid="77b17c2b-047a-47b3-aa15-9129116cc76b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6584f535-2267-4b3d-9a16-288b780d6612"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CCAJ_MONTOINICIAL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="0" width="80" height="30" uuid="908d1067-b9b4-420b-8565-c6f687c5a290">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b5a9b20f-688a-48c9-b957-b6340d83533e"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CCAJ_MONTOINICIAL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="80" height="30" uuid="e8b6dbc6-66c8-486b-9915-baac4d30f9c8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="50093b25-bab1-4974-94e9-ca220b0eace5"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+					<leftPen lineWidth="2.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{EMP_NOMBRE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

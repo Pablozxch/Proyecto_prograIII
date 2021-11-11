@@ -11,6 +11,8 @@ import cr.ac.una.wsrestuna.utils.*;
 import java.util.*;
 import java.util.logging.*;
 import javax.ejb.*;
+import javax.mail.*;
+import javax.mail.internet.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 
@@ -33,6 +35,8 @@ public class EmpleadoController
                   .ok("ping Producto")
                   .build();
     }
+
+    
 
     @GET
     @Path("/empleado/{usuario}/{clave}")

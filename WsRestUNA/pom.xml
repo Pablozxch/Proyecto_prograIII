@@ -41,7 +41,18 @@
             <version>0.10.7</version>
         </dependency>
         <!--DEPENDECIAS IO-->
-        
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>6.17.0</version>
+            <type>jar</type>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.inject</groupId>
+                    <artifactId>javax.inject</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
     </dependencies>
     
     <build>
