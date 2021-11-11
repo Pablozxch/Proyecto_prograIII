@@ -11,6 +11,7 @@ import cr.ac.una.proyectorestaurante.services.*;
 import cr.ac.una.proyectorestaurante.utils.*;
 import java.net.URL;
 import java.util.*;
+import java.util.stream.*;
 import javafx.collections.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -85,6 +86,7 @@ public class OrdenesGeneralController extends Controller implements Initializabl
         if(res.getEstado())
         {
             ordenes = (List<OrdenDto>) res.getResultado("Ordenes");
+            ordenes = ordenes.stream().filter(t -> t.getEstado() == "P").collect(Collectors.toList());
         }
         ObservableList<OrdenDto> ords = FXCollections.observableList(ordenes);
         tblpedidos.setItems(ords);
@@ -105,7 +107,7 @@ public class OrdenesGeneralController extends Controller implements Initializabl
         }
         if(event.getSource() == btnFacturar)
         {
-  
+
             if("Cajeros".equals(rolDto.getNombre()) || "Administrativos".equals(rolDto.getNombre()))
             {
                 if(tblpedidos.getSelectionModel().getSelectedItem() != null)
@@ -124,13 +126,13 @@ public class OrdenesGeneralController extends Controller implements Initializabl
 
         /*
             Ver como setearle una orden a una mesa  
-        */
+         */
     }
 
     @Override
     public void initialize()
     {
-        rolDto=(RolDto)AppContext.getInstance().get("RolActual");
+        rolDto = (RolDto) AppContext.getInstance().get("RolActual");
         ObtencionDatos();
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

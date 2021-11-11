@@ -11,7 +11,6 @@ import cr.ac.una.proyectorestaurante.utils.Request;
 import jakarta.ws.rs.core.*;
 import java.util.*;
 import java.util.logging.*;
-import java.util.stream.*;
 
 /**
  *
@@ -19,6 +18,31 @@ import java.util.stream.*;
  */
 public class FacturaService
 {
+
+    public Respuesta sendByEmail(Long idRes , String nombrePersona , String correoPersona , Long idFac)
+    {
+        try
+        {
+            Map<String , Object> parametros = new HashMap<>();
+            parametros.put("idRes" , idRes);
+            parametros.put("nombrePersona" , nombrePersona);
+            parametros.put("correoPersona" , correoPersona);
+            parametros.put("idFac" , idFac);
+            Request request = new Request("FacturaController/factura" , "/{idRes}/{nombrePersona}/{correoPersona}/{idFac}" , parametros);
+            request.delete();
+            if(request.isError())
+            {
+                return new Respuesta(false , request.getError() , "");
+            }
+
+            return new Respuesta(true , "" , "");
+        }
+        catch(Exception ex)
+        {
+            Logger.getLogger(FacturaService.class.getName()).log(Level.SEVERE , "Error eliminando el factura." , ex);
+            return new Respuesta(false , "Error eliminando el factura." , "eliminarFactura " + ex.getMessage());
+        }
+    }
 
     public Respuesta getFacturas()
     {

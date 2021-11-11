@@ -89,7 +89,7 @@ public class FacturaController
         }
         catch(AddressException ex)
         {
-            Logger.getLogger(EmpleadoController.class.getName()).log(Level.SEVERE , null , ex);
+            Logger.getLogger(FacturaController.class.getName()).log(Level.SEVERE , null , ex);
         }
     }
 
@@ -116,10 +116,98 @@ public class FacturaController
 
         return Response.ok().build();
     }
+
+    /*
+    IMPLEMENTAR LOS SERVICES TANTO DEL SERVICES COMO EL CLIENTE Y DARLE LA FUNCION AL ENVIAR CORREO DEL CLIENTE
     
-    
-    
-    
-    
-    
+     */
+    @GET
+    @Path("/factura/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getFactura(@PathParam("id") Long id)
+    {
+        try
+        {
+            Respuesta res = facturaService.getFactura(id);
+            if(!res.getEstado())
+            {
+                return Response.status(res.getCodigoRespuesta().getValue()).entity(res.getMensaje()).build();
+            }
+            return Response.ok((FacturaDto) res.getResultado("Factura")).build();//TODO
+        }
+        catch(Exception ex)
+        {
+            Logger.getLogger(FacturaController.class.getName()).log(Level.SEVERE , null , ex);
+            return Response.status(CodigoRespuesta.ERROR_INTERNO.getValue()).entity("Error al obtener la factura ").build();//TODO
+        }
+    }
+
+    @GET
+    @Path("/factura")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getFacturas()
+    {
+        try
+        {
+            Respuesta res = facturaService.getFacturas();
+            if(!res.getEstado())
+            {
+                return Response.status(res.getCodigoRespuesta().getValue()).entity(res.getMensaje()).build();//TODO
+            }
+
+            return Response.ok(new GenericEntity<List<FacturaDto>>((List<FacturaDto>) res.getResultado("Facturas"))
+            {
+            }).build();
+        }
+        catch(Exception ex)
+        {
+            Logger.getLogger(FacturaController.class.getName()).log(Level.SEVERE , null , ex);
+            return Response.status(CodigoRespuesta.ERROR_INTERNO.getValue()).entity("Error al obtener el factura ").build();//TODO
+        }
+    }
+
+    @POST
+    @Path("/factura")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response guardarFactura(FacturaDto factura)
+    {
+        try
+        {
+            Respuesta res = facturaService.guardarFactura(factura);
+            if(!res.getEstado())
+            {
+                return Response.status(res.getCodigoRespuesta().getValue()).entity(res.getMensaje()).build();
+            }
+            return Response.ok((FacturaDto) res.getResultado("Factura")).build();//TODO
+        }
+        catch(Exception ex)
+        {
+            Logger.getLogger(FacturaController.class.getName()).log(Level.SEVERE , null , ex);
+            return Response.status(CodigoRespuesta.ERROR_INTERNO.getValue()).entity("Error al obtener el factura ").build();//TODO
+        }
+    }
+
+    @DELETE
+    @Path("/factura/{id}")
+    public Response eliminarFactura(@PathParam(("id")) Long id)
+    {
+        try
+        {
+            Respuesta res = facturaService.eliminarFactura(id);
+            if(!res.getEstado())
+            {
+                return Response.status(res.getCodigoRespuesta().getValue()).entity(res.getMensaje()).build();
+            }
+            return Response.ok().build();//TODO
+        }
+        catch(Exception ex)
+        {
+            Logger.getLogger(FacturaController.class.getName()).log(Level.SEVERE , null , ex);
+            return Response.status(CodigoRespuesta.ERROR_INTERNO.getValue()).entity("Error al obtener el factura ").build();//TODO
+        }
+    }
+
 }
