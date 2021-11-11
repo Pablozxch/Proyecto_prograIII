@@ -29,10 +29,12 @@ import javafx.fxml.*;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.*;
+import javafx.scene.effect.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
+import javafx.scene.shape.*;
 import javafx.stage.Stage;
 
 /**
@@ -51,7 +53,6 @@ public class EditarSalonesController extends Controller implements Initializable
     private JFXButton btnEditar;
     @FXML
     private Pane pane;
-    @FXML
     private GridPane gripMesa;
 
     MesaService mesaService = new MesaService();
@@ -73,46 +74,29 @@ public class EditarSalonesController extends Controller implements Initializable
     public Thread taskThread;
     double posMouseX;
     double posMouseY;
-    @FXML
-    private AnchorPane rt;
 
     /**
      * Initializes the controller class.
      */
+    Circle circle_Red, circle_Green, circle_Blue;
+    double orgSceneX, orgSceneY;
+    double orgTranslateX, orgTranslateY;
+
     @Override
     public void initialize(URL url , ResourceBundle rb)
     {
         // TODO
-
+        System.out.println("X MAX" + pane.getBoundsInLocal().getMaxX());
+        System.out.println("Y MAX" + pane.getBoundsInLocal().getMaxY());
+        System.out.println("X MIN " + pane.getBoundsInLocal().getMinX());
+        System.out.println("Y MIN" + pane.getBoundsInLocal().getMinY());
     }
 
     @Override
     public void initialize()
     {
-        gripMesa.addEventHandler(MouseEvent.ANY , h ->
-        {
-            updatePosMouse(h);
-
-        });
         load();
-        loadgrid();
         rolDto = (RolDto) AppContext.getInstance().get("RolActual");
-        loadEvent();
-    }
-
-    void loadgrid()//falta ver como se verifica la parte de las mesas//verificar si esto anda bien tomorrow
-    {
-        gripMesa.getChildren().clear();
-        iMloads.forEach(t
-                  ->
-        {
-            gripMesa.getChildren().add(t.getIm());
-            GridPane.setConstraints(t.getIm() , (int) t.getPosx() , (int) t.getPosy());
-            GridPane.setHalignment(t.getIm() , HPos.CENTER);
-            GridPane.setValignment(t.getIm() , VPos.BOTTOM);
-
-        });
-
     }
 
     void load()//con este metodo se carga la lista de iamgeviews para poder empezar a colocarlas en el grid
@@ -133,106 +117,66 @@ public class EditarSalonesController extends Controller implements Initializable
             im.setFitWidth(50);
             iMloads.add(new IMload(im , t.getPosX() , t.getPosY()));
         });
+        loadcircle();
     }
 
-    void loadEvent()
+    void loadcircle()
     {
+        circle_Red = new Circle(50);
+        circle_Red.setFill(javafx.scene.paint.Color.RED);
+        circle_Red.setCursor(javafx.scene.Cursor.OPEN_HAND);
+        circle_Red.setCenterX(250);
+        circle_Red.setCenterY(150);
+        circle_Red.setOnMousePressed(circleOnMousePressedEventHandler);
+        circle_Red.setOnMouseDragged(circleOnMouseDraggedEventHandler);
 
-        iMloads.forEach(t ->
-        {
-            t.getIm().addEventHandler(MouseEvent.DRAG_DETECTED , new EventHandler<MouseEvent>()
-            {
-                @Override
-                public void handle(MouseEvent event)
-                {
+        circle_Green = new Circle(50);
+        circle_Green.setFill(javafx.scene.paint.Color.BLUEVIOLET);
+        circle_Green.setCursor(javafx.scene.Cursor.OPEN_HAND);
+        circle_Green.setCenterX(150);
+        circle_Green.setCenterY(150);
+        circle_Green.setOnMousePressed(circleOnMousePressedEventHandler);
+        circle_Green.setOnMouseDragged(circleOnMouseDraggedEventHandler);
 
-                    Dragboard db = t.getIm().startDragAndDrop(TransferMode.COPY_OR_MOVE);
-                    ClipboardContent content = new ClipboardContent();
-                    Image checker = t.getIm().getImage();
-                    content.putImage(checker);
-                    content.putString(String.valueOf(t.getPosx()) + "H" + String.valueOf(t.getPosy()));
-                    db.setContent(content);
-                    n = t.getIm();
-                    posx = t.getPosx();
-                    posy = t.getPosy();
-                    System.out.println("Drag detectado");
-
-                    event.consume();
-
-                }
-            });
-
-            t.getIm().addEventHandler(DragEvent.DRAG_OVER , new EventHandler<DragEvent>()
-            {
-                @Override
-                public void handle(DragEvent event)
-                {
-                    if(event.getDragboard().hasImage())
-                    {
-                        event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-                        System.out.println("Drag over detectado");
-                    }
-
-                    event.consume();
-                }
-            });
-            t.getIm().setOnDragDone(new EventHandler<DragEvent>()
-            {
-                public void handle(DragEvent event)
-                {
-                    event.acceptTransferModes(TransferMode.ANY);
-                    for(int i = 0; i < 10; i++)
-                    {
-                        for(int j = 0; j < 10; j++)
-                        {
-                            if(gripMesa.getCellBounds(i , j).contains(posMouseX , posMouseY))//buscar el click dentro del anchor pane de dentro dD))
-                            {
-                                GridPane.setConstraints(n , i , j);
-                            }
-                        }
-                    }
-                    System.out.println("Drop detected");
-                    event.consume();
-                }
-            });
-
-        });
+        pane.getChildren().add(circle_Red);
+        pane.getChildren().add(circle_Green);
 
     }
-
-    void updatePosMouse(MouseEvent event)
+    EventHandler<MouseEvent> circleOnMousePressedEventHandler = new EventHandler<MouseEvent>()
     {
-        taskThread = new Thread(new Runnable()
+        @Override
+        public void handle(MouseEvent t)
         {
-            @Override
-            public void run()
-            {
+            orgSceneX = t.getSceneX();
+            orgSceneY = t.getSceneY();
+            orgTranslateX = ((Circle) (t.getSource())).getTranslateX();
+            orgTranslateY = ((Circle) (t.getSource())).getTranslateY();
+            System.out.println("X: " + t.getSceneX());
+            System.out.println("Y: " + t.getSceneY());
+        }
+    };
 
-                try
-                {
-                    Thread.sleep(1000);
-                }
-                catch(InterruptedException e)
-                {
-                    e.printStackTrace();
-                }
-                Platform.runLater(new Runnable()
-                {
-                    @Override
+    EventHandler<MouseEvent> circleOnMouseDraggedEventHandler = new EventHandler<MouseEvent>()
+    {
+        @Override
+        public void handle(MouseEvent t)
+        {
+            System.out.println("X dragged: " + t.getSceneX());
+            System.out.println("Y dragged" + t.getSceneY());
+            double offsetX = t.getSceneX() - orgSceneX;
+            double offsetY = t.getSceneY() - orgSceneY;
+            double newTranslateX = orgTranslateX + offsetX;
+            double newTranslateY = orgTranslateY + offsetY;
 
-                    public void run()
-                    {
-                        posMouseX = event.getSceneX();
-                        posMouseY = event.getScreenY();
-                    }
+//            x min >-85 <776.0  
+//y min <408 y >-90
+            ((Circle) (t.getSource())).setTranslateX(newTranslateX);
+            ((Circle) (t.getSource())).setTranslateY(newTranslateY);
+//            System.out.println("Nueva x" + newTranslateX);
+//            System.out.println("Nueva y " + newTranslateY);
 
-                });
-
-            }
-        });
-
-        taskThread.start();
-    }
+        }
+    };
 
     @FXML
     private void click(ActionEvent event

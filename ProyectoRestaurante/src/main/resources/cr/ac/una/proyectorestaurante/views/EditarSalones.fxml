@@ -4,13 +4,9 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
 
 <AnchorPane id="AnchorPane" prefHeight="810.0" prefWidth="1111.0" styleClass="fondo" stylesheets="@../styles/StylesCss.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.proyectorestaurante.controllers.EditarSalonesController">
    <children>
@@ -25,63 +21,13 @@
             </HBox>
             <VBox alignment="CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                <children>
-                  <Pane fx:id="pane" prefHeight="664.0" prefWidth="1068.0">
+                  <Pane fx:id="pane" prefHeight="618.0" prefWidth="988.0">
                      <children>
-                        <ImageView fitHeight="619.0" fitWidth="962.0" layoutX="57.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="609.0" fitWidth="969.0" layoutX="10.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../resources/fondo%20mesas.jpeg" />
                            </image>
                         </ImageView>
-                        <GridPane fx:id="gripMesa" gridLinesVisible="true" layoutX="60.0" layoutY="14.0" prefHeight="601.0" prefWidth="958.0">
-                           <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                           </rowConstraints>
-                        </GridPane>
-                        <Line endX="61.5" endY="21.5" layoutX="-3.0" layoutY="-7.0" startX="61.0" startY="622.0" strokeWidth="2.0" />
-                        <Line endX="154.0" endY="14.5" layoutX="1.0" startX="154.0" startY="615.25" strokeWidth="2.0" />
-                        <Line endX="250.0" endY="13.5" startX="250.0" startY="617.0" strokeWidth="2.0" />
-                        <Line endX="347.0" endY="14.5" layoutX="-1.0" startX="347.0" startY="617.0" strokeWidth="2.0" />
-                        <Line endX="442.0" endY="13.5" startX="442.0" startY="617.0" strokeWidth="2.0" />
-                        <Line endX="539.0" endY="14.0" layoutX="-1.0" startX="540.0429077148438" startY="617.0" strokeWidth="2.0" />
-                        <Line endX="631.0" endY="13.5" layoutX="3.0" startX="631.0" startY="617.0" strokeWidth="2.0" />
-                        <Line endX="731.5" endY="617.0" layoutX="-2.0" startX="731.5" startY="14.5" strokeWidth="2.0" />
-                        <Line endX="827.5" endY="13.5" layoutX="-1.0" startX="827.5" startY="617.0" strokeWidth="2.0" />
-                        <Line endX="923.5" endY="13.5" layoutX="-1.0" startX="923.5" startY="617.0" strokeWidth="2.0" />
-                        <Line endX="1018.5" endY="14.0" startX="1018.0858154296875" startY="617.0" strokeWidth="2.0" />
-                        <Line endX="1016.0858154296875" endY="648.0" layoutX="1.0" layoutY="-32.0" startX="60.0" startY="648.0" strokeWidth="2.0" />
-                        <Line endX="1016.0858154296875" endY="586.0" layoutY="-25.0" startX="59.5" startY="586.0" strokeWidth="2.0" />
-                        <Line endX="1019.4141845703125" endY="536.0" layoutY="-29.0" startX="59.29289245605469" startY="536.0" strokeWidth="2.0" />
-                        <Line endX="1017.5" endY="475.0" layoutY="-22.0" startX="60.29289245605469" startY="475.0" strokeWidth="2.0" />
-                        <Line endX="1019.4141845703125" endY="416.0" layoutY="-17.0" startX="59.5" startY="416.0" strokeWidth="2.0" />
-                        <Line endX="1004.0" endY="303.0" layoutX="14.0" layoutY="41.0" startX="45.29289245605469" startY="303.0" strokeWidth="2.0" />
-                        <Line endX="1004.0" endY="251.0" layoutX="14.0" layoutY="38.0" startX="47.0" startY="251.0" strokeWidth="2.0" />
-                        <Line endX="1018.0" endY="177.0" layoutY="57.0" startX="61.0" startY="177.0" strokeWidth="2.0" />
-                        <Line endX="979.0" endY="125.0" layoutX="39.0" layoutY="54.0" startX="20.292892456054688" startY="125.0" strokeWidth="2.0" />
-                        <Line endX="967.5" layoutX="53.0" layoutY="124.0" startX="6.914215087890625" strokeWidth="2.0" />
-                        <Line endX="965.0" layoutX="53.0" layoutY="69.0" startX="7.0" strokeWidth="2.0" />
-                        <Line endX="981.0" layoutX="37.0" layoutY="14.0" startX="24.0" strokeWidth="2.0" />
                      </children>
                   </Pane>
                </children>
