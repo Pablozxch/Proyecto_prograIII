@@ -134,7 +134,7 @@ WHERE
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="100" splitType="Stretch">
+		<band height="104" splitType="Stretch">
 			<rectangle>
 				<reportElement x="0" y="0" width="550" height="100" backcolor="#E3E07F" uuid="be00e623-c5c1-4b7e-af7d-ffd2627e6801"/>
 			</rectangle>
@@ -175,25 +175,25 @@ WHERE
 				<text><![CDATA[Correo del restaurante]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="90" y="50" width="170" height="30" uuid="3d0acff1-f705-42f7-ba64-1d10c8c8e630"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<reportElement x="120" y="50" width="170" height="30" uuid="3d0acff1-f705-42f7-ba64-1d10c8c8e630"/>
+				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{CORREO}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="90" y="20" width="170" height="30" uuid="076a32da-ea10-476a-9741-2cc3b180b123"/>
+				<reportElement x="120" y="20" width="170" height="30" uuid="076a32da-ea10-476a-9741-2cc3b180b123"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{NOMBRE}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="10" y="20" width="80" height="30" uuid="08341b29-2c6f-43b9-bbf6-1af8d2781ccf"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="0" y="20" width="110" height="30" uuid="08341b29-2c6f-43b9-bbf6-1af8d2781ccf"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Arial Black"/>
 				</textElement>
 				<text><![CDATA[Nombre del cliente]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="10" y="50" width="80" height="30" uuid="909cf5b6-84f7-47b6-af04-0222c8184239"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="0" y="50" width="110" height="30" uuid="909cf5b6-84f7-47b6-af04-0222c8184239"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Arial Black"/>
 				</textElement>
 				<text><![CDATA[Correo del cliente]]></text>
@@ -250,7 +250,7 @@ WHERE
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="30" splitType="Stretch">
+		<band height="34" splitType="Stretch">
 			<textField>
 				<reportElement x="140" y="0" width="90" height="30" uuid="126921e8-7595-487c-b198-9c6944f8c624">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="176a671d-cdbb-414c-b5e2-9657f3532880"/>
@@ -396,14 +396,14 @@ WHERE
 				<text><![CDATA[Total]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="30" width="100" height="30" uuid="3a96adb2-6f1c-457e-94e1-9e39e38a724b"/>
+				<reportElement x="0" y="30" width="130" height="30" uuid="3a96adb2-6f1c-457e-94e1-9e39e38a724b"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial Black"/>
 				</textElement>
-				<text><![CDATA[Nombre del empleado]]></text>
+				<text><![CDATA[Nombre del empleado:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="100" y="30" width="100" height="30" uuid="5c0a9a99-6f88-48e0-9fd6-60b33a5c4d6e"/>
+				<reportElement x="130" y="30" width="120" height="30" uuid="5c0a9a99-6f88-48e0-9fd6-60b33a5c4d6e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{EMP_NOMBRE}]]></textFieldExpression>
 			</textField>
