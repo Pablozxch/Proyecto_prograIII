@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -21,13 +20,9 @@
             </HBox>
             <VBox alignment="CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                <children>
-                  <Pane fx:id="pane" prefHeight="618.0" prefWidth="988.0">
+                  <Pane fx:id="pane" prefHeight="618.0" prefWidth="988.0" style="-fx-background-color: red;">
                      <children>
-                        <ImageView fitHeight="609.0" fitWidth="969.0" layoutX="10.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../resources/fondo%20mesas.jpeg" />
-                           </image>
-                        </ImageView>
+                        <ImageView fitHeight="609.0" fitWidth="969.0" layoutX="10.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
                </children>
