@@ -42,6 +42,8 @@ public class PrincipalController extends Controller implements Initializable
     private Label lblTitulo;
     @FXML
     private JFXButton btnCategorias;
+    @FXML
+    private JFXButton btnReportes;
 
     /**
      * Initializes the controller class.
@@ -150,6 +152,10 @@ public class PrincipalController extends Controller implements Initializable
                 }
             }
 
+        }
+        if(event.getSource() == btnReportes)
+        {
+            FlowController.getInstance().goView("ReportesGeneral");
         }
         if(event.getSource() == btnSalir)
         {

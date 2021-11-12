@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -23,11 +23,6 @@
                            <children>
                               <Label text="Nombre cliente:" />
                               <JFXTextField fx:id="txtNombre" prefHeight="31.0" prefWidth="206.0" />
-                              <JFXCheckBox fx:id="chkEfectivo" checkedColor="#f9d5a7" text="Efectivo">
-                                 <HBox.margin>
-                                    <Insets left="15.0" />
-                                 </HBox.margin>
-                              </JFXCheckBox>
                            </children>
                            <padding>
                               <Insets left="10.0" />
@@ -37,10 +32,12 @@
                            <children>
                               <Label text="Correo cliente:  " />
                               <JFXTextField fx:id="txtCorreo" prefHeight="31.0" prefWidth="207.0" />
-                              <JFXCheckBox fx:id="chkTarjeta" checkedColor="#f9d5a7" text="Tarjeta">
-                                 <HBox.margin>
-                                    <Insets left="15.0" />
-                                 </HBox.margin></JFXCheckBox>
+                              <Label text="Efectivo" />
+                              <JFXToggleButton fx:id="chkTarjetaEfectivo" prefHeight="62.0" prefWidth="152.0" styleClass="jfx-ToggleButton" text="Tarjeta" toggleColor="#ffb085" toggleLineColor="#f9d5a7">
+                                 <padding>
+                                    <Insets left="-70.0" />
+                                 </padding>
+                              </JFXToggleButton>
                            </children>
                            <padding>
                               <Insets left="10.0" />
@@ -57,7 +54,7 @@
                         <HBox alignment="CENTER_LEFT" prefHeight="53.0" prefWidth="200.0" spacing="15.0">
                            <children>
                               <Label text="Nombre restaurante:" />
-                              <JFXTextField fx:id="txtNombreRest" editable="false" prefHeight="31.0" prefWidth="246.0" />
+                              <JFXTextField fx:id="txtNombreRest" editable="false" prefHeight="31.0" prefWidth="268.0" />
                            </children>
                            <VBox.margin>
                               <Insets left="10.0" />
@@ -66,7 +63,7 @@
                         <HBox alignment="CENTER_LEFT" prefHeight="53.0" prefWidth="200.0" spacing="15.0">
                            <children>
                               <Label text="Correo restaurante:  " />
-                              <JFXTextField fx:id="txtCorreoRest" editable="false" prefHeight="31.0" prefWidth="248.0" />
+                              <JFXTextField fx:id="txtCorreoRest" editable="false" prefHeight="31.0" prefWidth="271.0" />
                            </children>
                            <VBox.margin>
                               <Insets left="10.0" />
@@ -75,7 +72,7 @@
                         <HBox alignment="CENTER_LEFT" prefHeight="53.0" prefWidth="200.0" spacing="15.0">
                            <children>
                               <Label text="Dirección:" />
-                              <JFXTextField fx:id="txtDireccionRest" editable="false" prefHeight="31.0" prefWidth="342.0" />
+                              <JFXTextField fx:id="txtDireccionRest" editable="false" prefHeight="31.0" prefWidth="348.0" />
                            </children>
                            <VBox.margin>
                               <Insets left="10.0" />
