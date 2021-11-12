@@ -28,11 +28,11 @@
             </HBox>
             <VBox alignment="CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                <children>
-                  <Pane fx:id="pane" prefHeight="664.0" prefWidth="1068.0">
+                  <Pane fx:id="pane" prefHeight="611.0" prefWidth="965.0" style="-fx-background-color: lightblue;">
                      <children>
-                        <ImageView fitHeight="619.0" fitWidth="962.0" layoutX="57.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imgB" fitHeight="619.0" fitWidth="962.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../resources/fondo%20mesas.jpeg" />
+                              <Image url="@../resources/fondomesas.jpeg" />
                            </image>
                         </ImageView>
                      </children>

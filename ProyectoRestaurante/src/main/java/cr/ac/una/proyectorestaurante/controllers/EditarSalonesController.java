@@ -151,8 +151,11 @@ public class EditarSalonesController extends Controller implements Initializable
             orgSceneY = t.getSceneY();
             orgTranslateX = ((Circle) (t.getSource())).getTranslateX();
             orgTranslateY = ((Circle) (t.getSource())).getTranslateY();
-            System.out.println("X: " + t.getSceneX());
-            System.out.println("Y: " + t.getSceneY());
+            /*
+            tratar de centrar al click
+            
+            
+             */
         }
     };
 
@@ -168,20 +171,19 @@ public class EditarSalonesController extends Controller implements Initializable
             double newTranslateX = orgTranslateX + offsetX;
             double newTranslateY = orgTranslateY + offsetY;
 
-//            x min >-85 <776.0  
-//y min <408 y >-90
-            ((Circle) (t.getSource())).setTranslateX(newTranslateX);
-            ((Circle) (t.getSource())).setTranslateY(newTranslateY);
-//            System.out.println("Nueva x" + newTranslateX);
-//            System.out.println("Nueva y " + newTranslateY);
+            if(t.getSceneX() > 138 && t.getSceneX() < 1000 && t.getSceneY() > 213 && t.getSceneY() < 705)
+            {
+                ((Circle) (t.getSource())).setTranslateX(newTranslateX);
+                ((Circle) (t.getSource())).setTranslateY(newTranslateY);
+            }
 
         }
     };
 
     @FXML
-    private void click(ActionEvent event
-    )
+    private void click(ActionEvent event)
     {
+       // if(event.getSource())
     }
 
     class IMload
