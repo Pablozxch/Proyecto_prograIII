@@ -34,6 +34,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
+import javafx.scene.paint.*;
 import javafx.scene.shape.*;
 import javafx.stage.Stage;
 
@@ -103,43 +104,32 @@ public class EditarSalonesController extends Controller implements Initializable
     {
         SalonDto salon = (SalonDto) AppContext.getInstance().get("Salon");//colocar 
         mesaDtos.clear();
+        iMloads.clear();
         Respuesta res = mesaService.getMesas();
         if(res.getEstado())
         {
             mesaDtos = (List<MesaDto>) res.getResultado("Mesas");
         }
-        mesaDtos.forEach(t
-                  ->
+        mesaDtos.forEach(t ->
         {
-            Image img2 = new Image(new ByteArrayInputStream(salon.getFoto()));//crea un objeto imagen, transforma el byte[] a un buffered imagen
-            ImageView im = new ImageView(img2);
-            im.setFitHeight(50);
-            im.setFitWidth(50);
-            iMloads.add(new IMload(im , t.getPosX() , t.getPosY()));
+            Image img2 = new Image(new ByteArrayInputStream(salon.getFoto()));//crea un objeto imagen, transforma el byte[] a un buffered image
+            Circle c = new Circle(30);
+            c.setCenterX(t.getPosX());
+            c.setCenterY(t.getPosY());
+            c.setStrokeWidth(3);
+            c.setStrokeMiterLimit(10);
+            c.setStrokeType(StrokeType.CENTERED);
+            c.setStroke(javafx.scene.paint.Color.BLACK);
+            c.setFill(new ImagePattern(img2));
+            c.setEffect(new DropShadow(0 , 0 , 0 , javafx.scene.paint.Color.BLACK));
+            iMloads.add(new cr.ac.una.proyectorestaurante.controllers.IMload(c , t.getPosX() , t.getPosY() , t.getNombre() , t));
         });
-        loadcircle();
-    }
-
-    void loadcircle()
-    {
-        circle_Red = new Circle(50);
-        circle_Red.setFill(javafx.scene.paint.Color.RED);
-        circle_Red.setCursor(javafx.scene.Cursor.OPEN_HAND);
-        circle_Red.setCenterX(250);
-        circle_Red.setCenterY(150);
-        circle_Red.setOnMousePressed(circleOnMousePressedEventHandler);
-        circle_Red.setOnMouseDragged(circleOnMouseDraggedEventHandler);
-
-        circle_Green = new Circle(50);
-        circle_Green.setFill(javafx.scene.paint.Color.BLUEVIOLET);
-        circle_Green.setCursor(javafx.scene.Cursor.OPEN_HAND);
-        circle_Green.setCenterX(150);
-        circle_Green.setCenterY(150);
-        circle_Green.setOnMousePressed(circleOnMousePressedEventHandler);
-        circle_Green.setOnMouseDragged(circleOnMouseDraggedEventHandler);
-
-        pane.getChildren().add(circle_Red);
-        pane.getChildren().add(circle_Green);
+        iMloads.forEach(j ->
+        {
+            pane.getChildren().add(j.getCircle());
+            j.getCircle().setOnMousePressed(circleOnMousePressedEventHandler);
+            j.getCircle().setOnMouseDragged(circleOnMouseDraggedEventHandler);
+        });
 
     }
     EventHandler<MouseEvent> circleOnMousePressedEventHandler = new EventHandler<MouseEvent>()
@@ -156,6 +146,8 @@ public class EditarSalonesController extends Controller implements Initializable
             
             
              */
+            System.out.println("X: " + t.getSceneX());
+            System.out.println("Y: " + t.getSceneY());
         }
     };
 
@@ -170,11 +162,26 @@ public class EditarSalonesController extends Controller implements Initializable
             double offsetY = t.getSceneY() - orgSceneY;
             double newTranslateX = orgTranslateX + offsetX;
             double newTranslateY = orgTranslateY + offsetY;
-
-            if(t.getSceneX() > 138 && t.getSceneX() < 1000 && t.getSceneY() > 213 && t.getSceneY() < 705)
+            if(t.getSceneX() > 345 && t.getSceneX() < 1245 && t.getSceneY() > 245 && t.getSceneY() < 774)
             {
                 ((Circle) (t.getSource())).setTranslateX(newTranslateX);
                 ((Circle) (t.getSource())).setTranslateY(newTranslateY);
+                iMloads.forEach(i ->
+                {
+
+                    if(i.getPosx() == ((Circle) (t.getSource())).getCenterX() && i.getPosy() == ((Circle) (t.getSource())).getCenterY())
+                    {
+                        System.out.println("Old x " + i.getMesaDto().getPosX());
+                        System.out.println("Old Y " + i.getMesaDto().getPosY());
+//                        i.setPosx((long) newTranslateX);
+//                        i.setPosy((long) newTranslateY);
+                        i.getMesaDto().setPosX((long) newTranslateX);
+                        i.getMesaDto().setPosY((long) newTranslateY);
+                        System.out.println("New x " + newTranslateX);
+                        System.out.println("New Y " + newTranslateY);
+                    }
+                });
+
             }
 
         }
@@ -183,51 +190,22 @@ public class EditarSalonesController extends Controller implements Initializable
     @FXML
     private void click(ActionEvent event)
     {
-       // if(event.getSource())
-    }
-
-    class IMload
-    {
-
-        private ImageView im;
-        private long posx;
-        private long posy;
-
-        public IMload(ImageView im , long posx , long posy)
+        if(event.getSource() == btnEliminar)
         {
-            this.im = im;
-            this.posx = posx;
-            this.posy = posy;
-        }
-
-        public long getPosy()
-        {
-            return posy;
-        }
-
-        public void setPosy(long posy)
-        {
-            this.posy = posy;
-        }
-
-        public ImageView getIm()
-        {
-            return im;
-        }
-
-        public void setIm(ImageView im)
-        {
-            this.im = im;
-        }
-
-        public long getPosx()
-        {
-            return posx;
-        }
-
-        public void setPosx(long posx)
-        {
-            this.posx = posx;
+            iMloads.forEach(t ->
+            {
+                MesaDto mesa = t.getMesaDto();
+                System.out.println("MesaDto " + mesa.toString());
+                Respuesta res = mesaService.guardarMesa(mesa);
+                if(res.getEstado())
+                {
+                    System.out.println("done");
+                }
+                else
+                {
+                    System.out.println("f");
+                }
+            });
         }
     }
 }

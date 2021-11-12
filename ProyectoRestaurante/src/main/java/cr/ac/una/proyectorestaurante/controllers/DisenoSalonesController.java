@@ -110,65 +110,9 @@ public class DisenoSalonesController extends Controller implements Initializable
         iMloads.forEach(j ->
         {
             pane.getChildren().add(j.getCircle());
-            j.getCircle().setOnMousePressed(circleOnMousePressedEventHandler);
-            j.getCircle().setOnMouseDragged(circleOnMouseDraggedEventHandler);
         });
 
     }
-    EventHandler<MouseEvent> circleOnMousePressedEventHandler = new EventHandler<MouseEvent>()
-    {
-        @Override
-        public void handle(MouseEvent t)
-        {
-            orgSceneX = t.getSceneX();
-            orgSceneY = t.getSceneY();
-            orgTranslateX = ((Circle) (t.getSource())).getTranslateX();
-            orgTranslateY = ((Circle) (t.getSource())).getTranslateY();
-            /*
-            tratar de centrar al click
-            
-            
-             */
-            System.out.println("X: " + t.getSceneX());
-            System.out.println("Y: " + t.getSceneY());
-        }
-    };
-
-    EventHandler<MouseEvent> circleOnMouseDraggedEventHandler = new EventHandler<MouseEvent>()
-    {
-        @Override
-        public void handle(MouseEvent t)
-        {
-            System.out.println("X dragged: " + t.getSceneX());
-            System.out.println("Y dragged" + t.getSceneY());
-            double offsetX = t.getSceneX() - orgSceneX;
-            double offsetY = t.getSceneY() - orgSceneY;
-            double newTranslateX = orgTranslateX + offsetX;
-            double newTranslateY = orgTranslateY + offsetY;
-            if(t.getSceneX() > 345 && t.getSceneX() < 1245 && t.getSceneY() > 245 && t.getSceneY() < 774)
-            {
-                ((Circle) (t.getSource())).setTranslateX(newTranslateX);
-                ((Circle) (t.getSource())).setTranslateY(newTranslateY);
-                iMloads.forEach(i ->
-                {
-
-                    if(i.getPosx() == ((Circle) (t.getSource())).getCenterX() && i.getPosy() == ((Circle) (t.getSource())).getCenterY())
-                    {
-                        System.out.println("Old x " + i.getMesaDto().getPosX());
-                        System.out.println("Old Y " + i.getMesaDto().getPosY());
-//                        i.setPosx((long) newTranslateX);
-//                        i.setPosy((long) newTranslateY);
-                        i.mesaDto.setPosX((long) newTranslateX);
-                        i.mesaDto.setPosY((long) newTranslateY);
-                        System.out.println("New x " + newTranslateX);
-                        System.out.println("New Y " + newTranslateY);
-                    }
-                });
-
-            }
-
-        }
-    };
 
     void loadEvents()
     {
@@ -191,99 +135,15 @@ public class DisenoSalonesController extends Controller implements Initializable
     {
         if(event.getSource() == btnEditar)
         {
-            iMloads.forEach(t ->
-            {
-                MesaDto mesa = t.getMesaDto();
-                System.out.println("MesaDto " + mesa.toString());
-                Respuesta res = mesaService.guardarMesa(mesa);
-                if(res.getEstado())
-                {
-                    System.out.println("done");
-                }
-                else
-                {
-                    System.out.println("f");
-                }
-            });
-
-        }
-//if("Administrativos".equals(rolDto.getNombre()))
+            FlowController.getInstance().goViewInWindowModal("EditarSalones" , (Stage) btnEditar.getScene().getWindow() , Boolean.FALSE);
+//            if("Administrativos".equals(rolDto.getNombre()))
 //            {
-//                FlowController.getInstance().goViewInWindowModal("EditarSalones" , (Stage) btnEditar.getScene().getWindow() , Boolean.FALSE);
+//                
 //            }
 //            else
 //            {
 //                new Mensaje().show(Alert.AlertType.ERROR , "Permisos" , "Permisos innecesarios para acceder a este apartado");
 //            }
-    }
-
-    class IMload
-    {
-
-        private Circle circle;
-        private long posx;
-        private long posy;
-        private String nombre;
-        private MesaDto mesaDto;
-
-        public IMload(Circle circle , long posx , long posy , String nombre , MesaDto mesaDto)
-        {
-            this.circle = circle;
-            this.posx = posx;
-            this.posy = posy;
-            this.nombre = nombre;
-            this.mesaDto = mesaDto;
         }
-
-        public String getNombre()
-        {
-            return nombre;
-        }
-
-        public void setNombre(String nombre)
-        {
-            this.nombre = nombre;
-        }
-
-        public Circle getCircle()
-        {
-            return circle;
-        }
-
-        public void setCircle(Circle circle)
-        {
-            this.circle = circle;
-        }
-
-        public long getPosx()
-        {
-            return posx;
-        }
-
-        public void setPosx(long posx)
-        {
-            this.posx = posx;
-        }
-
-        public long getPosy()
-        {
-            return posy;
-        }
-
-        public void setPosy(long posy)
-        {
-            this.posy = posy;
-        }
-
-        public MesaDto getMesaDto()
-        {
-            return mesaDto;
-        }
-
-        public void setMesaDto(MesaDto mesaDto)
-        {
-            this.mesaDto = mesaDto;
-        }
-
     }
 }
