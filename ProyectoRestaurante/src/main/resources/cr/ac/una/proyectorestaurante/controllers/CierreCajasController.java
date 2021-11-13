@@ -6,45 +6,34 @@
 package cr.ac.una.proyectorestaurante.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
  *
  * @author Christopher
  */
-public class PrincipalController extends Controller implements Initializable {
+public class CierreCajasController extends Controller implements Initializable {
 
     @FXML
-    private JFXButton btnSalones;
+    private JFXTextField txtMontoInicial;
     @FXML
-    private JFXButton btnProductos;
+    private JFXTextField txtMontoTarjeta;
     @FXML
-    private JFXButton btnOrdenes;
+    private JFXTextField txtMontoEfectivo;
     @FXML
-    private JFXButton btnFacturar;
+    private JFXTextField txtMontoFinal;
     @FXML
-    private JFXButton btnEmpleados;
+    private JFXButton btnCierreCaja;
     @FXML
-    private JFXButton btnCerrarSesion;
-    @FXML
-    private JFXButton btnSalir;
-    @FXML
-    private Label lblTitulo;
-    @FXML
-    private JFXButton btnCategorias;
-    @FXML
-    private Button btnRestaurante;
-    @FXML
-    private JFXButton btnReportes;
-    @FXML
-    private JFXButton btnCierreCajas;
+    private Button btnReporte;
 
     /**
      * Initializes the controller class.
@@ -52,15 +41,15 @@ public class PrincipalController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+    }    
+
+    @FXML
+    private void click(ActionEvent event) {
     }
 
     @Override
     public void initialize() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    @FXML
-    private void click(ActionEvent event) {
-    }
-
+    
 }

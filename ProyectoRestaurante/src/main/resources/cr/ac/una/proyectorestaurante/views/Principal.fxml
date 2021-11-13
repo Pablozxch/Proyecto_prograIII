@@ -21,8 +21,9 @@
                   <JFXButton fx:id="btnOrdenes" onAction="#click" prefHeight="48.0" prefWidth="155.0" text="Órdenes" />
                   <JFXButton fx:id="btnFacturar" onAction="#click" prefHeight="48.0" prefWidth="155.0" text="Facturar" />
                   <JFXButton fx:id="btnEmpleados" onAction="#click" prefHeight="48.0" prefWidth="155.0" text="Empleados" />
-                  <Button fx:id="btnRestaurante" mnemonicParsing="false" onAction="#click" text="Restaurante" />
-                  <JFXButton fx:id="btnReportes" onAction="#click" prefWidth="155.0" text="Reportes" />
+                  <Button fx:id="btnRestaurante" mnemonicParsing="false" onAction="#click" prefHeight="48.0" prefWidth="155.0" text="Restaurante" />
+                  <JFXButton fx:id="btnReportes" onAction="#click" prefHeight="48.0" prefWidth="155.0" text="Reportes" />
+                  <JFXButton fx:id="btnCierreCajas" onAction="#click" prefHeight="48.0" prefWidth="155.0" text="Cierre Cajas" />
                </children>
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="138.0" prefWidth="240.0" spacing="20.0" VBox.vgrow="ALWAYS">

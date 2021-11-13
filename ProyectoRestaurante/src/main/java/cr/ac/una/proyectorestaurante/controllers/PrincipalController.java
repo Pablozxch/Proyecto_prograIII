@@ -43,6 +43,8 @@ public class PrincipalController extends Controller implements Initializable {
     private JFXButton btnCategorias;
     @FXML
     private JFXButton btnReportes;
+    @FXML
+    private JFXButton btnCierreCajas;
 
     /**
      * Initializes the controller class.
@@ -122,6 +124,9 @@ public class PrincipalController extends Controller implements Initializable {
         }
         if (event.getSource() == btnReportes) {
             FlowController.getInstance().goView("ReportesGeneral");
+        }
+        if (event.getSource() == btnCierreCajas) {
+            FlowController.getInstance().goView("CierreCajas");
         }
         if (event.getSource() == btnSalir) {
             if (new Mensaje().showConfirmation("Saliendo del Sistema", getStage(), "¿Esta seguro que desea salir del sistema?")) {
