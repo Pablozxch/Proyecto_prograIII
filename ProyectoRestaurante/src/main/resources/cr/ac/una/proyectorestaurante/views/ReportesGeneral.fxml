@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="525.0" prefWidth="746.0" styleClass="fondo" stylesheets="@../styles/StylesCss.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/15.0.1" fx:controller="cr.ac.una.proyectorestaurante.controllers.ReportesGeneralController">
+<AnchorPane id="AnchorPane" prefHeight="525.0" prefWidth="746.0" styleClass="fondo" stylesheets="@../styles/StylesCss.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.proyectorestaurante.controllers.ReportesGeneralController">
    <children>
       <HBox layoutX="78.0" layoutY="169.0" prefHeight="525.0" prefWidth="746.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -27,7 +26,7 @@
                   <HBox alignment="CENTER" prefHeight="43.0" prefWidth="674.0">
                      <children>
                         <Label text="Productos más vendidos" />
-                        <JFXToggleButton fx:id="tgllstadoyProductos" alignment="TOP_RIGHT" prefHeight="58.0" prefWidth="210.0" styleClass="jfx-ToggleButton" text="Listado de facturas" toggleColor="#ffb085" toggleLineColor="#f9d5a7">
+                        <JFXToggleButton fx:id="tgllstadoyProductos" alignment="TOP_RIGHT" prefHeight="58.0" prefWidth="210.0" styleClass="jfx-ToggleButton" text="Listado de facturas" toggleColor="#ffb085" toggleLineColor="#f9d5a7" unToggleColor="#ffb085" unToggleLineColor="#f9d5a7">
                            <HBox.margin>
                               <Insets left="-8.0" />
                            </HBox.margin>
