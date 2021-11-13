@@ -21,34 +21,11 @@ import cr.ac.una.proyectorestaurante.utils.*;
 public class RestauranteService
 {
 
-    public Respuesta getResid(Long id)
-    {
-        try
-        {
-            Map<String , Object> parametros = new HashMap<>();
-            parametros.put("id" , id);
-            Request request = new Request("RestauranteController/restaurante" , "/{id}" , parametros);
-            request.get();
-            if(request.isError())
-            {
-                return new Respuesta(false , request.getError() , "");
-
-            }
-            RestauranteDto restauranteDto = (RestauranteDto) request.readEntity(RestauranteDto.class);
-            return new Respuesta(true , "" , "" , "Restaurante" , restauranteDto);
-        }
-        catch(Exception ex)
-        {
-            Logger.getLogger(SalonService.class.getName()).log(Level.SEVERE , "Error obteniendo el restaurante [" + id + "]" , ex);
-            return new Respuesta(false , "Error obteniendo el restaurante." , "getUsuario " + ex.getMessage());
-        }
-    }
-
     public Respuesta getRestaurantes()
     {
         try
         {
-            Request request = new Request("restauranteController/restaurante");
+            Request request = new Request("RestauranteController/restaurante");
             request.get();
             if(request.isError())
             {
