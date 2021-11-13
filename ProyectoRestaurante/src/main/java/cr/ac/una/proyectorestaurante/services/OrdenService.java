@@ -101,14 +101,17 @@ public class OrdenService
                 return new Respuesta(false , request.getError() , "");
 
             }
-            CierrecajasDto cierrecajasDto = (CierrecajasDto) request.readEntity(CierrecajasDto.class);
+            OrdenDto orden = (OrdenDto) request.readEntity(OrdenDto.class);
 
-            return new Respuesta(true , "" , "" , "CierreCaja" , cierrecajasDto);
+            return new Respuesta(true , "" , "" , "Orden" , orden);
         }
         catch(Exception ex)
         {
-            Logger.getLogger(FacturaService.class.getName()).log(Level.SEVERE , "Error obteniendo facturas." , ex);
+            Logger.getLogger(OrdenService.class.getName()).log(Level.SEVERE , "Error obteniendo facturas." , ex);
             return new Respuesta(false , "Error obteniendo facturas." , "getFacturas " + ex.getMessage());
         }
     }
+    
+    
+   
 }

@@ -87,7 +87,10 @@ public class DisenoSalonesController extends Controller implements Initializable
     {
         SalonDto salon = (SalonDto) AppContext.getInstance().get("Salon");//colocar 
         mesaDtos.clear();
+        ordenes.clear();
         iMloads.clear();
+        Respuesta resorden = orden.getOrdenes();
+        ordenes = (List<OrdenDto>) resorden.getResultado("Ordenes");
         Respuesta res = mesaService.getMesas();
         if(res.getEstado())
         {
@@ -112,39 +115,38 @@ public class DisenoSalonesController extends Controller implements Initializable
             pane.getChildren().add(j.getCircle());
             j.getCircle().addEventHandler(MouseEvent.MOUSE_CLICKED , c ->
             {
-                if(c.isPrimaryButtonDown())
+                if(c.getButton() == MouseButton.PRIMARY)
                 {
                     mesaclick = j.getMesaDto();
                     if("O".equals(mesaclick.getEstado()))
                     {
                         System.out.println("La mesa tiene orden existente activa");
-//                        list = (List<OrdenDto>) ordenes.stream().filter(o -> Objects.equals(o.getMesaDto().getId() , mesaclick.getId()) && o.getEstado() == "O").collect(Collectors.toList());
-//                        ordenes.clear();
-//                        System.out.println("xD " + list.get(0).toString());
-//                        AppContext.getInstance().set("Orden" , list.get(0));
-//                        FlowController.getInstance().goViewInWindowModal("CrearPedido" , getStage() , Boolean.FALSE);
-//                        list.clear();
-//                        mesaclick = null;
+                        list = (List<OrdenDto>) ordenes.stream().filter(o -> Objects.equals(o.getMesaDto().getId() , mesaclick.getId()) && "P".equals(o.getEstado())).collect(Collectors.toList());
+                        AppContext.getInstance().set("Orden" , list.get(0));
+                        FlowController.getInstance().goViewInWindowModal("CrearPedido" , getStage() , Boolean.FALSE);
+                        mesaclick = null;
                     }
                     else
                     {
                         System.out.println("La mesa no tiene orden");
-//                        EmpleadoDto emp = (EmpleadoDto) AppContext.getInstance().get("EmpleadoActual");
-//                        OrdenDto odd = new OrdenDto();
-//                        odd.setEmpleadoDto(emp);
-//                        odd.setFecha(new Date());
-//                        odd.setMesaDto(mesaclick);
-//                        odd.setEstado("P");
-//                        orden.guardarOrden(odd);
-//                        /*
-//                            obtener la orden para poder jugar sin error...!!!
-//                        */
-//                        mesaclick.setEstado("O");
-//                        AppContext.getInstance().set("Orden" , odd);
-//                        FlowController.getInstance().goViewInWindowModal("CrearPedido" , getStage() , Boolean.FALSE);
-//                        list.clear();
+                        EmpleadoDto emp = (EmpleadoDto) AppContext.getInstance().get("EmpleadoActual");
+                        OrdenDto odd = new OrdenDto();
+                        odd.setEmpleadoDto(emp);
+                        odd.setFecha(new Date());
+                        odd.setMesaDto(mesaclick);
+                        odd.setEstado("P");
+                        orden.guardarOrden(odd);
+                        Respuesta res2 = orden.lasto();
+                        if(res2.getEstado())
+                        {
+                            odd = (OrdenDto) res2.getResultado("Orden");
+                        }
+                        mesaclick.setEstado("O");
+                        AppContext.getInstance().set("Orden" , odd);
+                        FlowController.getInstance().goViewInWindowModal("CrearPedido" , getStage() , Boolean.FALSE);
                     }
                     mesaService.guardarMesa(mesaclick);
+                    load();
                 }
             });
 

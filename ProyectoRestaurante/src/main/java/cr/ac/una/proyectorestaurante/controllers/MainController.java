@@ -174,6 +174,8 @@ public class MainController extends Controller implements Initializable
         }
         if(event.getSource() == btnContinuar)
         {
+            RestauranteDto resta = (RestauranteDto) AppContext.getInstance().get("Restaurante");
+            System.out.println(resta.toString());
             FlowController.getInstance().goViewInStage("Principal" , (Stage) btnContinuar.getScene().getWindow());
         }
         if(event.getSource() == btnEditar)

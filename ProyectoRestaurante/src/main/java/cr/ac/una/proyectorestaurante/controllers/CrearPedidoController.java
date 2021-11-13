@@ -309,6 +309,7 @@ public class CrearPedidoController extends Controller implements Initializable
         imgProducto.setImage(img2);
         lblPrecio.setText("Precio: ₡" + pro.getCosto());
         cantidadtodal = pro.getCantidad().intValue();
+        System.out.println(pro.toString());
 
     }
 
@@ -342,6 +343,7 @@ public class CrearPedidoController extends Controller implements Initializable
         rolDto = (RolDto) AppContext.getInstance().get("RolActual");
         load();
         loadItems();
+        clear();
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
