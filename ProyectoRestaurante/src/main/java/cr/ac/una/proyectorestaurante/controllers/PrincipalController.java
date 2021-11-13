@@ -137,12 +137,29 @@ public class PrincipalController extends Controller implements Initializable
         }
         if(event.getSource() == btnRestaurante)
         {
-            CrearRestauranteController registroRestauranteController = (CrearRestauranteController) FlowController.getInstance().getController("CrearRestaurante");
-            registroRestauranteController.load();
-            FlowController.getInstance().goView("CrearRestaurante");
-            RestauranteDto rDto = registroRestauranteController.retornarRest();
-            AppContext.getInstance().delete("Restaurante");
-            AppContext.getInstance().set("Restaurante" , rDto);
+            if(((EmpleadoDto) AppContext.getInstance().get("EmpleadoActual")) == null)
+            {
+                FlowController.getInstance().goViewInWindowModal("LogIn" , (Stage) btnCerrarSesion.getScene().getWindow() , Boolean.FALSE);//ver que se hace con esto
+            }
+            else
+            {
+                rolDto = (RolDto) AppContext.getInstance().get("RolActual");
+                if("Administrativos".equals(rolDto.getNombre()))
+                {
+                    CrearRestauranteController registroRestauranteController = (CrearRestauranteController) FlowController.getInstance().getController("CrearRestaurante");
+                    registroRestauranteController.load();
+                    FlowController.getInstance().goView("CrearRestaurante");
+                    RestauranteDto rDto = registroRestauranteController.retornarRest();
+                    AppContext.getInstance().delete("Restaurante");
+                    AppContext.getInstance().set("Restaurante" , rDto);
+                }
+                else
+                {
+                    new Mensaje().show(Alert.AlertType.ERROR , "Permisos" , "Permisos innecesarios para acceder a este apartado");
+                }
+
+            }
+
         }
         if(event.getSource() == btnEmpleados)
         {

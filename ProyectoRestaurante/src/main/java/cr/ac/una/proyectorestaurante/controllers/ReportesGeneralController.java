@@ -20,7 +20,8 @@ import javafx.fxml.Initializable;
  *
  * @author Christopher
  */
-public class ReportesGeneralController extends Controller implements Initializable {
+public class ReportesGeneralController extends Controller implements Initializable
+{
 
     @FXML
     private JFXDatePicker dtpFechaInicial;
@@ -41,17 +42,20 @@ public class ReportesGeneralController extends Controller implements Initializab
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url , ResourceBundle rb)
+    {
         // TODO
-    }    
+    }
 
     @Override
-    public void initialize() {
+    public void initialize()
+    {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @FXML
-    private void click(ActionEvent event) {
+    private void click(ActionEvent event)
+    {
     }
-    
+
 }
