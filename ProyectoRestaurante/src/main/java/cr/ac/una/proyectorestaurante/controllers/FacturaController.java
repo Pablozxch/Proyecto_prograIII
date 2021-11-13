@@ -32,8 +32,7 @@ import javax.mail.internet.*;
  *
  * @author Christopher
  */
-public class FacturaController extends Controller implements Initializable
-{
+public class FacturaController extends Controller implements Initializable {
 
     @FXML
     private JFXTextField txtNombre;
@@ -70,7 +69,10 @@ public class FacturaController extends Controller implements Initializable
     OrdenService ordenService = new OrdenService();
     RestauranteDto restauranteDto = new RestauranteDto();
     SalonDto salonDto = new SalonDto();
-    List<OrdenDto> ordenes = new ArrayList<OrdenDto>();
+    EmpleadoDto emp = new EmpleadoDto();
+    CierrecajasDto cierre = new CierrecajasDto();
+    RolDto rol = new RolDto();
+    CierreCajaService cajaService = new CierreCajaService();
 
     OrdenDto ordenDto = new OrdenDto();
 
@@ -95,40 +97,54 @@ public class FacturaController extends Controller implements Initializable
 
     @Override
 
-    public void initialize(URL url , ResourceBundle rb)
-    {
+    public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
 
     @FXML
-    private void click(ActionEvent event) throws MessagingException
-    {
-        if(event.getSource() == btnEnviarCorreo)
-        {
+    private void click(ActionEvent event) throws MessagingException {
+        if (event.getSource() == btnEnviarCorreo) {
             RestauranteDto r = (RestauranteDto) AppContext.getInstance().get("Restaurante");
             Respuesta res2 = facturaService.lasto();
             FacturaDto ff = (FacturaDto) res2.getResultado("Factura");
-            if(res2.getEstado())
-            {
+            if (res2.getEstado()) {
                 String nombre = txtNombre.getText();
                 String correo = txtCorreo.getText();
-                Respuesta email = facturaService.sendByEmail(r.getId() , nombre , correo , ff.getId());
-                if(email.getEstado())
-                {
-                    new Mensaje().show(Alert.AlertType.INFORMATION , "Envio de Correo" , "Enviado con Exito");
-                }
-                else
-                {
+                Respuesta email = facturaService.sendByEmail(r.getId(), nombre, correo, ff.getId());
+                if (email.getEstado()) {
+                    new Mensaje().show(Alert.AlertType.INFORMATION, "Envio de Correo", "Enviado con Exito");
+                } else {
                     System.out.println("Problemas");
                 }
             }
             btnEnviarCorreo.setDisable(true);
         }
-        if(event.getSource() == btnPagar)
-        {
-            MesaService mesaService=new MesaService();
+
+        CierrecajasDto cierreCajas = (CierrecajasDto) AppContext.getInstance().get("CierreCajasActual");
+        if (event.getSource() == btnPagar) {
+
+            if (!"Salonero".equals(emp.getRolDto().getNombre()) && cierreCajas == null) {
+                cierre.setEmpleadoDto(emp);
+                cierre.setMontoInicial(0L);
+                cierre.setMontoEfectivo(0L);
+                cierre.setMontoFinal(0L);
+                cierre.setMontoTarjeta(0L);
+                cierre.setEstado("C");
+
+                Respuesta res2 = cajaService.guardarCierrecajas(cierre);
+                if (res2.getEstado()) {
+                    Respuesta res3 = cajaService.lasto();
+                    cierre = (CierrecajasDto) res3.getResultado("CierreCaja");
+                    System.out.println("El cierre es " + cierre);
+                    AppContext.getInstance().set("CierreCajasActual", cierre);
+                } else {
+                    new Mensaje().show(Alert.AlertType.ERROR, "Datos", "No guarda");
+                }
+            }
+
+            MesaService mesaService = new MesaService();
             CierrecajasDto cierre = (CierrecajasDto) AppContext.getInstance().get("CierreCajasActual");
-            MesaDto mesaDto=ordenDto.getMesaDto();
+            MesaDto mesaDto = ordenDto.getMesaDto();
             mesaDto.setEstado("D");
             mesaService.guardarMesa(mesaDto);//se actualiza el estado de la mesa para no tomar ordenes ya canceladas
             FacturaDto fac = new FacturaDto();
@@ -150,8 +166,7 @@ public class FacturaController extends Controller implements Initializable
         }
     }
 
-    void loadRes()
-    {
+    void loadRes() {
         restauranteDto = (RestauranteDto) AppContext.getInstance().get("Restaurante");
         ordenDto = (OrdenDto) AppContext.getInstance().get("Orden");
         salonDto = ordenDto.getMesaDto().getSalonDto();
@@ -163,33 +178,32 @@ public class FacturaController extends Controller implements Initializable
         txtDireccionRest.setText(restauranteDto.getDireccion());
     }
 
-    void load()
-    {
+    void load() {
         tblOrdenes.getColumns().clear();
-        TableColumn<DetallexordenDto , String> nombreCorto = new TableColumn<>("Nombre Corto");
+        TableColumn<DetallexordenDto, String> nombreCorto = new TableColumn<>("Nombre Corto");
         nombreCorto.setPrefWidth(tblOrdenes.getPrefWidth() / 4);
         nombreCorto.setCellValueFactory(cd -> cd.getValue().getProductoDto().nombrecorto);
         nombreCorto.setResizable(false);
 
 //
-        TableColumn<DetallexordenDto , String> cantidad = new TableColumn<>("Cantidad");
+        TableColumn<DetallexordenDto, String> cantidad = new TableColumn<>("Cantidad");
         cantidad.setPrefWidth(tblOrdenes.getPrefWidth() / 4);
         cantidad.setCellValueFactory(cd -> cd.getValue().cantidad);
         cantidad.setResizable(false);
 //
-        TableColumn<DetallexordenDto , String> precioUnidad = new TableColumn<>("Precio Unidad");
+        TableColumn<DetallexordenDto, String> precioUnidad = new TableColumn<>("Precio Unidad");
         precioUnidad.setPrefWidth(tblOrdenes.getPrefWidth() / 4);
-        precioUnidad.setCellValueFactory(cd ->
-        {
+        precioUnidad.setCellValueFactory(cd
+                -> {
             String formattedCost = currency.format(cd.getValue().getProductoDto().getCosto());
             return new SimpleStringProperty(formattedCost);
         });
         precioUnidad.setResizable(false);
 
-        TableColumn<DetallexordenDto , String> total = new TableColumn<>("Total");
+        TableColumn<DetallexordenDto, String> total = new TableColumn<>("Total");
         total.setPrefWidth(tblOrdenes.getPrefWidth() / 4);
-        total.setCellValueFactory(cellData ->
-        {
+        total.setCellValueFactory(cellData
+                -> {
             double totalF = (double) (cellData.getValue().getPrecio() * impA) + cellData.getValue().getPrecio();
             String formattedCost = currency.format(totalF);
             return new SimpleStringProperty(formattedCost);
@@ -204,21 +218,17 @@ public class FacturaController extends Controller implements Initializable
         tblOrdenes.refresh();
     }
 
-    void loadItems()
-    {
+    void loadItems() {
         Respuesta res = detallexordenService.getDetalles();
 
         List<DetallexordenDto> dett = (List<DetallexordenDto>) res.getResultado("Detalles");
         List<DetallexordenDto> detf = dett.stream().filter(t -> t.getOrdenId().getId() == ordenDto.getId()).collect(Collectors.toList());
-        if(detf == null)
-        {
+        if (detf == null) {
             List<DetallexordenDto> deta = new ArrayList<>();
             productos = (List<DetallexordenDto>) deta;
             ObservableList<DetallexordenDto> ords = FXCollections.observableList(productos);
             tblOrdenes.setItems(ords);
-        }
-        else
-        {
+        } else {
             productos = (List<DetallexordenDto>) detf;
             ObservableList<DetallexordenDto> ords = FXCollections.observableList(productos);
             tblOrdenes.setItems(ords);
@@ -226,15 +236,14 @@ public class FacturaController extends Controller implements Initializable
         loadtotales();
     }
 
-    void loadtotales()
-    {
+    void loadtotales() {
         Respuesta res = detallexordenService.getDetalles();
 
         List<DetallexordenDto> dett = (List<DetallexordenDto>) res.getResultado("Detalles");
         List<DetallexordenDto> detf = dett.stream().filter(t -> t.getOrdenId().getId() == ordenDto.getId()).collect(Collectors.toList());
 
-        detf.forEach(t ->
-        {
+        detf.forEach(t
+                -> {
             subtotal += t.getPrecio();
         });
         System.out.println("subtotal " + subtotal);
@@ -246,8 +255,7 @@ public class FacturaController extends Controller implements Initializable
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         btnEnviarCorreo.setDisable(false);
         btnPagar.setDisable(false);
         loadRes();
