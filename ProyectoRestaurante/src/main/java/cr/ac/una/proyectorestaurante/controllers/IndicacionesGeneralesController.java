@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
@@ -41,6 +42,10 @@ public class IndicacionesGeneralesController extends Controller implements Initi
     @Override
     public void initialize() {
         
+    }
+
+    @FXML
+    private void click(ActionEvent event) {
     }
     
 }

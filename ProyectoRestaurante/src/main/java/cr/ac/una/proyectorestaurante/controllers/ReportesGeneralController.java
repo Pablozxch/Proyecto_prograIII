@@ -5,11 +5,13 @@
  */
 package cr.ac.una.proyectorestaurante.controllers;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
@@ -27,11 +29,13 @@ public class ReportesGeneralController extends Controller implements Initializab
     @FXML
     private JFXTextField txtIdEmpleado;
     @FXML
-    private JFXToggleButton tglListadoFacturas;
-    @FXML
     private JFXToggleButton tglCierrreCajas;
     @FXML
-    private JFXToggleButton tglProductosVendidos;
+    private JFXToggleButton tgllstadoyProductos;
+    @FXML
+    private JFXDatePicker dtpFechaCierreCaja;
+    @FXML
+    private JFXButton btnAceptar;
 
     /**
      * Initializes the controller class.
@@ -44,6 +48,10 @@ public class ReportesGeneralController extends Controller implements Initializab
     @Override
     public void initialize() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @FXML
+    private void click(ActionEvent event) {
     }
     
 }

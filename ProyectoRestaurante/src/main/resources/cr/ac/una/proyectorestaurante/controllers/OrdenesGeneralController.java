@@ -22,13 +22,11 @@ import javafx.scene.layout.AnchorPane;
 public class OrdenesGeneralController extends Controller implements Initializable {
 
     @FXML
-    private TableView<?> tblpedidos;
+    private TableView tblpedidos;
     @FXML
     private JFXButton btnFacturar;
     @FXML
     private JFXButton btnEditar;
-    @FXML
-    private JFXButton btnVolver;
     @FXML
     private AnchorPane rt;
     @FXML

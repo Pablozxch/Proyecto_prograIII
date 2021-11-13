@@ -34,8 +34,6 @@ public class OrdenesGeneralController extends Controller implements Initializabl
     @FXML
     private JFXButton btnEditar;
     @FXML
-    private JFXButton btnVolver;
-    @FXML
     private JFXButton btnAnadir;
 
     /**
@@ -128,6 +126,9 @@ public class OrdenesGeneralController extends Controller implements Initializabl
             
         }
 
+        if(event.getSource() == btnAnadir){
+            
+        }
         /*
             Ver como setearle una orden a una mesa  
          */

@@ -23,7 +23,6 @@
                   <JFXButton fx:id="btnAnadir" onAction="#click" text="Añadir" />
                   <JFXButton fx:id="btnEditar" onAction="#click" text="Editar" />
                   <JFXButton fx:id="btnFacturar" onAction="#click" text="Facturar" />
-                  <JFXButton fx:id="btnVolver" onAction="#click" text="Volver" />
                </children>
             </VBox>
          </children>
