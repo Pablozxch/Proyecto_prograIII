@@ -88,6 +88,17 @@ public class CrearRestauranteController extends Controller implements Initializa
         AppContext.getInstance().delete("Restaurante");
     }
 
+    public RestauranteDto retornarRest()
+    {
+        Respuesta res = restauranteService.getResid(restauranteDto.getId());
+        RestauranteDto rr = new RestauranteDto();
+        if(res.getEstado())
+        {
+            rr = (RestauranteDto) res.getResultado("Restaurante");
+        }
+        return rr;
+    }
+
     public void bindRestaurante()
     {
         txtNombre.setText(restauranteDto.getNombre());
