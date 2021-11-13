@@ -111,6 +111,17 @@ public class CrearRestauranteController extends Controller implements Initializa
         cmbImpVenta.valueProperty().set(null);
     }
 
+    public RestauranteDto retornarRest()
+    {
+        Respuesta res = restauranteService.getResid(restauranteDto.getId());
+        RestauranteDto rr = new RestauranteDto();
+        if(res.getEstado())
+        {
+            rr = (RestauranteDto) res.getResultado("Restaurante");
+        }
+        return rr;
+    }
+
     @FXML
     private void click(ActionEvent event)
     {
