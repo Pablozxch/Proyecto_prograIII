@@ -110,8 +110,50 @@ public class DisenoSalonesController extends Controller implements Initializable
         iMloads.forEach(j ->
         {
             pane.getChildren().add(j.getCircle());
+            j.getCircle().addEventHandler(MouseEvent.MOUSE_CLICKED , c ->
+            {
+                if(c.isPrimaryButtonDown())
+                {
+                    mesaclick = j.getMesaDto();
+                    if("O".equals(mesaclick.getEstado()))
+                    {
+                        System.out.println("La mesa tiene orden existente activa");
+//                        list = (List<OrdenDto>) ordenes.stream().filter(o -> Objects.equals(o.getMesaDto().getId() , mesaclick.getId()) && o.getEstado() == "O").collect(Collectors.toList());
+//                        ordenes.clear();
+//                        System.out.println("xD " + list.get(0).toString());
+//                        AppContext.getInstance().set("Orden" , list.get(0));
+//                        FlowController.getInstance().goViewInWindowModal("CrearPedido" , getStage() , Boolean.FALSE);
+//                        list.clear();
+//                        mesaclick = null;
+                    }
+                    else
+                    {
+                        System.out.println("La mesa no tiene orden");
+//                        EmpleadoDto emp = (EmpleadoDto) AppContext.getInstance().get("EmpleadoActual");
+//                        OrdenDto odd = new OrdenDto();
+//                        odd.setEmpleadoDto(emp);
+//                        odd.setFecha(new Date());
+//                        odd.setMesaDto(mesaclick);
+//                        odd.setEstado("P");
+//                        orden.guardarOrden(odd);
+//                        /*
+//                            obtener la orden para poder jugar sin error...!!!
+//                        */
+//                        mesaclick.setEstado("O");
+//                        AppContext.getInstance().set("Orden" , odd);
+//                        FlowController.getInstance().goViewInWindowModal("CrearPedido" , getStage() , Boolean.FALSE);
+//                        list.clear();
+                    }
+                    mesaService.guardarMesa(mesaclick);
+                }
+            });
+
         });
 
+        /*
+            crear la orden si la mesa está en blanco, guardarla de una y devolverla 
+            implementar el drop en en la imagen, pero que detecte el drop como tal
+         */
     }
 
     void loadEvents()

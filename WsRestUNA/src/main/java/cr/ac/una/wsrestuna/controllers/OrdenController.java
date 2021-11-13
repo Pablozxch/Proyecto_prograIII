@@ -60,7 +60,7 @@ public class OrdenController
     }
 
     @POST
-    @Path("/ordenn")
+    @Path("/orden")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response guardarOrden(OrdenDto ordenDto)
@@ -78,6 +78,30 @@ public class OrdenController
         {
             Logger.getLogger(OrdenController.class.getName()).log(Level.SEVERE , null , ex);
             return Response.status(CodigoRespuesta.ERROR_INTERNO.getValue()).entity("Error al obtener la categoria ").build();//TODO
+        }
+    }
+
+    @GET
+    @Path("/ordenlasto")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response lasto()
+    {
+        long id = ordenService.last();;
+        try
+        {
+            Respuesta res = ordenService.geOrdenbyId(id);
+            if(!res.getEstado())
+            {
+                return Response.status(res.getCodigoRespuesta().getValue()).entity(res.getMensaje()).build();
+            }
+            return Response.ok((OrdenDto) res.getResultado("Orden")).build();//TODO
+
+        }
+        catch(Exception ex)
+        {
+            Logger.getLogger(CierreCajaController.class.getName()).log(Level.SEVERE , null , ex);
+            return Response.status(CodigoRespuesta.ERROR_INTERNO.getValue()).entity("Error al obtener la cierre cajas ").build();//TODO
         }
     }
 

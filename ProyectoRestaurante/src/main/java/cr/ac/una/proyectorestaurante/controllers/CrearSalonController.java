@@ -130,7 +130,7 @@ public class CrearSalonController extends Controller implements Initializable
                     }
                     else
                     {
-                        barra = "S";
+                        barra = "M";
                     }
                     try
                     {
@@ -149,7 +149,8 @@ public class CrearSalonController extends Controller implements Initializable
                         {
                             salonDto.setFoto(salonDto.getFoto());
                         }
-                        salonDto.setRestauranteDto((RestauranteDto) AppContext.getInstance().get("Restaurante"));
+                        RestauranteDto resta=(RestauranteDto) AppContext.getInstance().get("Restaurante");
+                        salonDto.setRestauranteDto(resta);
                         Respuesta res = salonService.guardarSalon(salonDto);
                         if(res.getEstado())
                         {

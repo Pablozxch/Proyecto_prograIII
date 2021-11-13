@@ -86,17 +86,13 @@ public class EditarSalonesController extends Controller implements Initializable
     @Override
     public void initialize(URL url , ResourceBundle rb)
     {
-        // TODO
-        System.out.println("X MAX" + pane.getBoundsInLocal().getMaxX());
-        System.out.println("Y MAX" + pane.getBoundsInLocal().getMaxY());
-        System.out.println("X MIN " + pane.getBoundsInLocal().getMinX());
-        System.out.println("Y MIN" + pane.getBoundsInLocal().getMinY());
     }
 
     @Override
     public void initialize()
     {
         load();
+        pane.getChildren().clear();
         rolDto = (RolDto) AppContext.getInstance().get("RolActual");
     }
 

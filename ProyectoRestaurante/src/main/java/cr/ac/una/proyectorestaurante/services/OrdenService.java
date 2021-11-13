@@ -73,7 +73,7 @@ public class OrdenService
     {
         try
         {
-            Request request = new Request("OrdenController/ordenn");
+            Request request = new Request("OrdenController/orden");
             request.post(pd);
             if(request.isError())
             {
@@ -87,6 +87,28 @@ public class OrdenService
         {
             Logger.getLogger(OrdenService.class.getName()).log(Level.SEVERE , "Error guardando el Orden." , ex);
             return new Respuesta(false , "Error guardando el Orden." , "guardarOrdenOrden " + ex.getMessage());
+        }
+    }
+
+    public Respuesta lasto()
+    {
+        try
+        {
+            Request request = new Request("OrdenController/ordenlasto");
+            request.get();
+            if(request.isError())
+            {
+                return new Respuesta(false , request.getError() , "");
+
+            }
+            CierrecajasDto cierrecajasDto = (CierrecajasDto) request.readEntity(CierrecajasDto.class);
+
+            return new Respuesta(true , "" , "" , "CierreCaja" , cierrecajasDto);
+        }
+        catch(Exception ex)
+        {
+            Logger.getLogger(FacturaService.class.getName()).log(Level.SEVERE , "Error obteniendo facturas." , ex);
+            return new Respuesta(false , "Error obteniendo facturas." , "getFacturas " + ex.getMessage());
         }
     }
 }

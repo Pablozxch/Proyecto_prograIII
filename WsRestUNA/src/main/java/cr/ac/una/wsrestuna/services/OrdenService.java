@@ -116,4 +116,38 @@ public class OrdenService
             return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al eliminar el orden." , "eliminarOrden " + ex.getMessage());
         }
     }
+
+    public Long last()
+    {
+
+        Query qryOrden = em.createNamedQuery("Orden.findlast" , Orden.class);
+        long idLast = (long) qryOrden.getSingleResult();
+        return idLast;
+    }
+
+    public Respuesta geOrdenbyId(Long ordId)// Un unico producto por id
+    {
+        try
+        {
+            Query qryCierrecajas = em.createNamedQuery("Orden.findByOrdId" , Orden.class);
+            qryCierrecajas.setParameter("ordId" , ordId);
+
+            return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "" , "Orden" , new OrdenDto((Orden) qryCierrecajas.getSingleResult()));
+
+        }
+        catch(NoResultException ex)
+        {
+            return new Respuesta(false , CodigoRespuesta.ERROR_NOENCONTRADO , "No existe un orden con el código ingresado." , "getCierrecajas NoResultException");
+        }
+        catch(NonUniqueResultException ex)
+        {
+            LOG.log(Level.SEVERE , "Ocurrio un error al consultar el orden." , ex);
+            return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al consultar el orden." , "getCierrecajas NonUniqueResultException");
+        }
+        catch(Exception ex)
+        {
+            LOG.log(Level.SEVERE , "Ocurrio un error al consultar el orden." , ex);
+            return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al consultar el orden." , "getCierrecajas " + ex.getMessage());
+        }
+    }
 }

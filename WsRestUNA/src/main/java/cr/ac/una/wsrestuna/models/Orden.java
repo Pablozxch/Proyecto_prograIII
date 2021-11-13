@@ -23,7 +23,8 @@ import javax.validation.constraints.*;
               @NamedQuery(name = "Orden.findByOrdId" , query = "SELECT o FROM Orden o WHERE o.ordId = :ordId") ,
               @NamedQuery(name = "Orden.findByOrdFecha" , query = "SELECT o FROM Orden o WHERE o.ordFecha = :ordFecha") ,
               @NamedQuery(name = "Orden.findByOrdEstado" , query = "SELECT o FROM Orden o WHERE o.ordEstado = :ordEstado") ,
-              @NamedQuery(name = "Orden.findByOrdVersion" , query = "SELECT o FROM Orden o WHERE o.ordVersion = :ordVersion")
+              @NamedQuery(name = "Orden.findByOrdVersion" , query = "SELECT o FROM Orden o WHERE o.ordVersion = :ordVersion") ,
+              @NamedQuery(name = "Orden.findlast" , query = "SELECT max(c.ordId) FROM Orden c ")
           })
 public class Orden implements Serializable
 {
