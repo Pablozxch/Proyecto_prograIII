@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="528.0" prefWidth="736.0" styleClass="fondo" stylesheets="@../styles/StylesCss.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/15.0.1" fx:controller="cr.ac.una.proyectorestaurante.controllers.CierreCajasController">
+<AnchorPane id="AnchorPane" prefHeight="528.0" prefWidth="736.0" styleClass="fondo" stylesheets="@../styles/StylesCss.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.proyectorestaurante.controllers.CierreCajasController">
    <children>
       <HBox layoutX="56.0" layoutY="152.0" prefHeight="528.0" prefWidth="736.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -23,7 +22,7 @@
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="35.0" HBox.hgrow="ALWAYS">
                <children>
                   <JFXButton fx:id="btnCierreCaja" onAction="#click" prefHeight="48.0" prefWidth="260.0" text="Generar cierre de caja" />
-                  <Button fx:id="btnReporte" mnemonicParsing="false" onAction="#click" prefWidth="260.0" text="Generar reporte" />
+                  <Button fx:id="btnReporte" mnemonicParsing="false" onAction="#click" prefHeight="48.0" prefWidth="260.0" text="Generar reporte" />
                </children>
             </VBox>
          </children>

@@ -27,7 +27,7 @@
                         <HBox alignment="CENTER">
                            <children>
                               <ImageView fx:id="imvEmpleado" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                              <JFXButton fx:id="btnCargarImagen" onAction="#click" text="Cargar Imagen" />
+                              <JFXButton fx:id="btnCargarImagen" onAction="#click" prefHeight="48.0" prefWidth="196.0" text="Cargar Imagen" />
                            </children>
                         </HBox>
                         <JFXTextField fx:id="txtUsuario" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefHeight="25.0" prefWidth="220.0" promptText="Usuario">
@@ -41,8 +41,8 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="0.0" prefWidth="600.0" spacing="85.0" VBox.vgrow="ALWAYS">
                <children>
-                  <JFXButton fx:id="btnRegresar" onAction="#click" text="Regresar" />
-                  <JFXButton fx:id="btnContinuar" onAction="#click" text="Continuar" />
+                  <JFXButton fx:id="btnRegresar" onAction="#click" prefHeight="48.0" prefWidth="150.0" text="Regresar" />
+                  <JFXButton fx:id="btnContinuar" onAction="#click" prefHeight="48.0" prefWidth="150.0" text="Continuar" />
                </children>
                <VBox.margin>
                   <Insets />

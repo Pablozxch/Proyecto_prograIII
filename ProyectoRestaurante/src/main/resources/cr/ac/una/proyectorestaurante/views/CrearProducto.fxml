@@ -27,15 +27,15 @@
                   <HBox alignment="CENTER" prefHeight="213.0" prefWidth="565.0" spacing="35.0">
                      <children>
                         <ImageView fx:id="imvImagen" fitHeight="189.0" fitWidth="214.0" pickOnBounds="true" preserveRatio="true" />
-                        <Button fx:id="btnCargarImagen" mnemonicParsing="false" onAction="#click" text="Cargar Imagen" />
+                        <Button fx:id="btnCargarImagen" mnemonicParsing="false" onAction="#click" prefHeight="48.0" prefWidth="196.0" text="Cargar Imagen" />
                      </children>
                   </HBox>
                   <JFXTextField fx:id="txtCosto" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefWidth="205.0" promptText="Costo en colones" />
                   <JFXTextField fx:id="txtCantidad" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefWidth="205.0" promptText="Cantidad" />
                   <HBox alignment="CENTER" prefHeight="168.0" prefWidth="532.0" spacing="100.0">
                      <children>
-                        <JFXButton fx:id="btnVolver" onAction="#click" text="Volver" />
-                        <JFXButton fx:id="btnContinuar" onAction="#click" text="Continuar" />
+                        <JFXButton fx:id="btnVolver" onAction="#click" prefHeight="48.0" prefWidth="150.0" text="Volver" />
+                        <JFXButton fx:id="btnContinuar" onAction="#click" prefHeight="48.0" prefWidth="150.0" text="Continuar" />
                      </children>
                   </HBox>
                </children>

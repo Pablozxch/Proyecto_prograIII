@@ -10,20 +10,20 @@
 
 <AnchorPane id="AnchorPane" prefHeight="674.0" prefWidth="615.0" styleClass="fondo" stylesheets="@../styles/StylesCss.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.proyectorestaurante.controllers.CategoriasGeneralController">
    <children>
-      <HBox layoutX="50.0" layoutY="174.0" prefHeight="531.0" prefWidth="624.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-14.0" AnchorPane.topAnchor="0.0">
+      <HBox layoutX="50.0" layoutY="174.0" prefHeight="674.0" prefWidth="615.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <VBox alignment="CENTER" fillWidth="false" prefHeight="610.0" prefWidth="728.0" spacing="20.0" HBox.hgrow="ALWAYS">
                <children>
                   <HBox alignment="CENTER" prefHeight="87.0" prefWidth="803.0" spacing="120.0">
                      <children>
-                        <JFXButton fx:id="btnCrearCategoria" onAction="#click" text="Crear" />
-                        <JFXButton fx:id="btnEliminar" onAction="#click" text="Eliminar" />
+                        <JFXButton fx:id="btnCrearCategoria" onAction="#click" prefWidth="150.0" text="Crear" />
+                        <JFXButton fx:id="btnEliminar" onAction="#click" prefWidth="150.0" text="Eliminar" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="50.0" prefWidth="516.0" spacing="35.0">
                      <children>
                         <JFXComboBox fx:id="cmbCategorias" focusColor="WHITE" labelFloat="true" prefHeight="25.0" prefWidth="235.0" promptText="Categoría" />
-                        <JFXButton fx:id="btnBuscar" onAction="#click" text="Buscar" />
+                        <JFXButton fx:id="btnBuscar" onAction="#click" prefWidth="150.0" text="Buscar" />
                      </children>
                      <VBox.margin>
                         <Insets top="10.0" />
@@ -34,7 +34,7 @@
                         <Insets />
                      </VBox.margin>
                   </JFXListView>
-                  <JFXButton fx:id="btnGuardar" onAction="#click" text="Guardar">
+                  <JFXButton fx:id="btnGuardar" onAction="#click" prefHeight="48.0" prefWidth="150.0" text="Guardar">
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>

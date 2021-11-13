@@ -20,9 +20,9 @@
                </children></VBox>
             <VBox alignment="CENTER" prefHeight="815.0" prefWidth="0.0" spacing="25.0" HBox.hgrow="ALWAYS">
                <children>
-                  <JFXButton fx:id="btnAnadir" onAction="#click" text="Añadir" />
-                  <JFXButton fx:id="btnEditar" onAction="#click" text="Editar" />
-                  <JFXButton fx:id="btnFacturar" onAction="#click" text="Facturar" />
+                  <JFXButton fx:id="btnAnadir" onAction="#click" prefHeight="48.0" text="Añadir" />
+                  <JFXButton fx:id="btnEditar" onAction="#click" prefHeight="48.0" text="Editar" />
+                  <JFXButton fx:id="btnFacturar" onAction="#click" prefHeight="48.0" text="Facturar" />
                </children>
             </VBox>
          </children>
