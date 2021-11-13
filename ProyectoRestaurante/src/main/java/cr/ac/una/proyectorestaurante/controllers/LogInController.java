@@ -64,7 +64,6 @@ public class LogInController extends Controller implements Initializable
             if(res.getEstado())
             {
                 emp = (EmpleadoDto) res.getResultado("Empleado");
-                System.out.println("El empleado es" + emp.toString());
                 if(!"Salonero".equals(emp.getRolDto().getNombre()))
                 {
                     cierre.setEmpleadoDto(emp);
@@ -79,7 +78,6 @@ public class LogInController extends Controller implements Initializable
                     {
                         Respuesta res3=cajaService.lasto();
                         cierre = (CierrecajasDto) res3.getResultado("CierreCaja");
-                        System.out.println("El cierre es " + cierre);
                         AppContext.getInstance().set("CierreCajasActual" , cierre);
                     }
                     else
