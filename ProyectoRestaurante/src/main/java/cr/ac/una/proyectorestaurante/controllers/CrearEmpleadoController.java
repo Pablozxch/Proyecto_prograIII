@@ -154,6 +154,8 @@ public class CrearEmpleadoController extends Controller implements Initializable
                                         {
                                             empleadoDto.setFoto(empleadoDto.getFoto());
                                         }
+                                        RestauranteDto resta=(RestauranteDto)AppContext.getInstance().get("Restaurante");
+                                        empleadoDto.setRestauranteDto(resta);
                                         System.out.println("El valor a guardar es " + empleadoDto.toString());
                                         Respuesta res = empleadoService.guardarEmpleado(empleadoDto);
                                         if(res.getEstado())
