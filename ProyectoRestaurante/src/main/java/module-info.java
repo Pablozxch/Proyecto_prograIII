@@ -21,6 +21,7 @@ module cr.ac.una.proyectorestaurante
     requires jakarta.ws.rs;
     requires jakarta.xml.bind;
     requires mail;
+    requires jakarta.json;
 
     opens cr.ac.una.proyectorestaurante to javafx.fxml , javafx.graphics;
     opens cr.ac.una.proyectorestaurante.controllers to javafx.fxml , javafx.graphics;
