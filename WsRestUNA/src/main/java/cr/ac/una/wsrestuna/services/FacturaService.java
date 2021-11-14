@@ -199,7 +199,7 @@ public class FacturaService
             map.put("Final" , ff);
             JasperPrint print = JasperFillManager.fillReport(jasper , map , connection);
             String a = JasperExportManager.exportReportToXml(print);
-            System.out.println(JasperExportManager.exportReportToHtmlFile(a));
+            //System.out.println(JasperExportManager.exportReportToHtmlFile(a));
             byte[] s = JasperExportManager.exportReportToPdf(print);
             return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "" , "Factura" , s);
 

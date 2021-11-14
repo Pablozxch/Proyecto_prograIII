@@ -238,7 +238,7 @@ public class FacturaController
     }
 
     @GET
-    @Path("/factura/{idres}/{fechai}/{fechaf}")
+    @Path("/factura/{fechai}/{fechaf}/{idres}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response listadoFacturas(@PathParam("fechai") String fechaI , @PathParam("fechaf") String fechaF , @PathParam("idres") Long idRes)
@@ -251,7 +251,10 @@ public class FacturaController
             {
                 return Response.status(res.getCodigoRespuesta().getValue()).entity(res.getMensaje()).build();
             }
-            return Response.ok((byte[]) res.getResultado("Factura")).build();//TODO
+            byte[] bytes = (byte[]) res.getResultado("Factura");
+            System.out.println("Bytes " + bytes);
+            System.out.println("Los byte son"+bytes);
+            return Response.ok(bytes).build();//TODO
         }
         catch(Exception ex)
         {

@@ -121,7 +121,7 @@ public class FacturaService
             parametros.put("fechai" , fechaI);
             parametros.put("fechaf" , fechaF);
             parametros.put("idres" , idRes);
-            Request request = new Request("FacturaController/factura" , "/{idres}/{fechai}/{fechaf}" , parametros);
+            Request request = new Request("FacturaController/factura" , "/{fechai}/{fechaf}/{idres}" , parametros);
             request.get();
             if(request.isError())
             {
@@ -129,6 +129,7 @@ public class FacturaService
 
             }
             byte[] bytes = (byte[]) request.readEntity(byte[].class);
+            System.out.println("bytes"+bytes);
             return new Respuesta(true , "" , "" , "Factura" , bytes);
         }
         catch(Exception ex)
