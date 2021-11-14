@@ -5,16 +5,20 @@
  */
 package cr.ac.una.proyectorestaurante.controllers;
 
-import com.jfoenix.controls.*;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXToggleButton;
 import cr.ac.una.proyectorestaurante.models.*;
 import cr.ac.una.proyectorestaurante.services.*;
 import cr.ac.una.proyectorestaurante.utils.*;
 import java.io.*;
 import java.net.URL;
 import java.time.format.*;
-import java.util.*;
-import javafx.event.*;
-import javafx.fxml.*;
+import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.*;
 
@@ -97,7 +101,7 @@ public class ReportesGeneralController extends Controller implements Initializab
                 {
                     System.out.println("PRODUCTOS MAS VENDIDOS");
                     RestauranteDto resta = (RestauranteDto) AppContext.getInstance().get("Restaurante");
-                    Respuesta res = productoService.productosMVendidos(fechaI , fechaF , resta.getId());
+                    Respuesta res = productoService.productosMVendidos(fechaC , fechaC , Long.MIN_VALUE);
                     if(res.getEstado())
                     {
                         System.out.println("gg");

@@ -40,7 +40,6 @@ public class ProductoController
     @Produces(MediaType.APPLICATION_JSON)
     public Response productosVendidos(@PathParam("inicio") String inicio , @PathParam("finall") String finall , @PathParam("idRes") Long idRes)
     {
-        System.out.println("LLEGUÉ");
         try
         {
             Respuesta res = productoService.reporteProductosVendidos(idRes , inicio , finall);
