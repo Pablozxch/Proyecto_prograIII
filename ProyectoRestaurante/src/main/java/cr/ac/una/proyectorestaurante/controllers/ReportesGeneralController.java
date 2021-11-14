@@ -27,7 +27,8 @@ import javafx.stage.*;
  *
  * @author Christopher
  */
-public class ReportesGeneralController extends Controller implements Initializable {
+public class ReportesGeneralController extends Controller implements Initializable
+{
 
     @FXML
     private JFXDatePicker dtpFechaInicial;
@@ -45,7 +46,7 @@ public class ReportesGeneralController extends Controller implements Initializab
     private JFXButton btnGenerar;
 
     DateTimeFormatter DATE_FORMATTER = DateTimeFormatter
-            .ofPattern("dd/MM/yyyy");
+              .ofPattern("dd/MM/yyyy");
 
     CierreCajaService cierreCajaService = new CierreCajaService();
     FacturaService facturaService = new FacturaService();
@@ -55,20 +56,25 @@ public class ReportesGeneralController extends Controller implements Initializab
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url , ResourceBundle rb)
+    {
 
     }
 
     @Override
-    public void initialize() {
+    public void initialize()
+    {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @FXML
-    private void click(ActionEvent event) {
-        if (event.getSource() == btnAceptar) {
+    private void click(ActionEvent event)
+    {
+        if(event.getSource() == btnAceptar)
+        {
 
-            if (tgllstadoyProductos.isSelected()) {
+            if(tgllstadoyProductos.isSelected())
+            {
 
                 String fechaI = DATE_FORMATTER.format(dtpFechaInicial.getValue());
                 String fechaF = DATE_FORMATTER.format(dtpFechaFinal.getValue());
@@ -77,37 +83,40 @@ public class ReportesGeneralController extends Controller implements Initializab
                 System.out.println("Fehca F" + fechaF);
                 System.out.println("listado de facturas");
                 RestauranteDto resta = (RestauranteDto) AppContext.getInstance().get("Restaurante");
-                Respuesta res = facturaService.reportelistadofacturas(fechaI, fechaF, resta.getId());
-                if (res.getEstado()) {
+                Respuesta res = facturaService.reportelistadofacturas(fechaI , fechaF , resta.getId());
+                if(res.getEstado())
+                {
                     System.out.println("gg");
                     byte[] decoder = (byte[]) res.getResultado("Factura");
                     cargarArchivo(decoder);
-                } else {
+                }
+                else
+                {
                     System.out.println("ni picha");
                 }
 
             }
-//                else if(!tgllstadoyProductos.isSelected())
-//                {
-//                    String fechaI = DATE_FORMATTER.format(dtpFechaInicial.getValue());
-//                    String fechaF = DATE_FORMATTER.format(dtpFechaFinal.getValue());
-//                    System.out.println("PRODUCTOS MAS VENDIDOS");
-//                    RestauranteDto resta = (RestauranteDto) AppContext.getInstance().get("Restaurante");
-////                    Respuesta res = productoService.productosMVendidos("5/5/2021" , "5/12/2021" , resta.getId());
-//                    System.out.println("Fehca i" + fechaI);
-//                    System.out.println("Fehca F" + fechaF);
-//                    Respuesta res = productoService.productosMVendidos(fechaI , fechaF , resta.getId());
-//                    if(res.getEstado())
-//                    {
-//                        System.out.println("gg");
-//                        byte[] decoder = (byte[]) res.getResultado("Productos");
-//                        cargarArchivo(decoder);
-//                    }
-//                    else
-//                    {
-//                        System.out.println("ni picha al cuadrado");
-//                    }
-//                }
+            else if(!tgllstadoyProductos.isSelected())
+            {
+                String fechaI = DATE_FORMATTER.format(dtpFechaInicial.getValue());
+                String fechaF = DATE_FORMATTER.format(dtpFechaFinal.getValue());
+                System.out.println("PRODUCTOS MAS VENDIDOS");
+                RestauranteDto resta = (RestauranteDto) AppContext.getInstance().get("Restaurante");
+//                    Respuesta res = productoService.productosMVendidos("5/5/2021" , "5/12/2021" , resta.getId());
+                System.out.println("Fehca i" + fechaI);
+                System.out.println("Fehca F" + fechaF);
+                Respuesta res = productoService.productosMVendidos(fechaI , fechaF , resta.getId());
+                if(res.getEstado())
+                {
+                    System.out.println("gg");
+                    byte[] decoder = (byte[]) res.getResultado("Productos");
+                    cargarArchivo(decoder);
+                }
+                else
+                {
+                    System.out.println("ni picha al cuadrado");
+                }
+            }
 
             /**
              *
@@ -115,35 +124,45 @@ public class ReportesGeneralController extends Controller implements Initializab
              *
              */
         }
-        if (event.getSource() == btnGenerar) {
+        if(event.getSource() == btnGenerar)
+        {
             System.out.println("cierre cajas");
             RestauranteDto resta = (RestauranteDto) AppContext.getInstance().get("Restaurante");
             CierrecajasDto ciere = (CierrecajasDto) AppContext.getInstance().get("CierreCajasActual");
-            //String fechaC = DATE_FORMATTER.format(dtpFechaCierreCaja.getValue());
-            Respuesta res = cierreCajaService.reporteCierreCompleto("7/11/2021", 2L, 2L);
-            if (res.getEstado()) {
+            String fechaC = DATE_FORMATTER.format(dtpFechaCierreCaja.getValue());
+            Long idemp = Long.valueOf(txtIdEmpleado.getText());
+            Respuesta res = cierreCajaService.reporteCierreEspecifico(fechaC , idemp , resta.getId());
+            if(res.getEstado())
+            {
                 System.out.println("gg");
                 byte[] decoder = (byte[]) res.getResultado("CierreCaja");
                 cargarArchivo(decoder);
-            } else {
+            }
+            else
+            {
                 System.out.println("ni picha al cuadrado");
             }
         }
     }
 
-    void cargarArchivo(byte[] decoder) {
+    void cargarArchivo(byte[] decoder)
+    {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save");
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF" , "*.pdf"));
         fileChooser.setInitialFileName("*.pdf");
         File selectedFile = fileChooser.showSaveDialog(new Stage());
 
-        if (selectedFile != null) {
+        if(selectedFile != null)
+        {
             File file2 = new File(selectedFile.toPath().toString());
-            try ( FileOutputStream fos = new FileOutputStream(file2);) {
+            try(FileOutputStream fos = new FileOutputStream(file2);)
+            {
                 fos.write(decoder);
-                new Mensaje().show(Alert.AlertType.CONFIRMATION, "Guardado", "Con exito");
-            } catch (Exception e) {
+                new Mensaje().show(Alert.AlertType.CONFIRMATION , "Guardado" , "Con exito");
+            }
+            catch(Exception e)
+            {
             }
         }
     }

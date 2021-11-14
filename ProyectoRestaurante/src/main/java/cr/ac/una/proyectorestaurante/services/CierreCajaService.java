@@ -59,7 +59,7 @@ public class CierreCajaService
             return new Respuesta(false , "Error obteniendo facturas." , "getFacturas " + ex.getMessage());
         }
     }
-    public Respuesta reporteCierreCompleto(String Inicio , Long idCierre , Long idRes)
+    public Respuesta reporteCierreCajero(String Inicio , Long idCierre , Long idRes)//el que se genera al terminar el cierre caja
     {
         try
         {
@@ -69,6 +69,31 @@ public class CierreCajaService
             parametros.put("idcierre" , idCierre);
             parametros.put("idres" , idRes);
             Request request = new Request("CierreCajaController/cierrecaja" , "/{inicio}/{idcierre}/{idres}" , parametros);
+            request.get();
+            if(request.isError())
+            {
+                return new Respuesta(false , request.getError() , "");
+            }
+            byte[] bytes = (byte[]) request.readEntity(byte[].class);
+            return new Respuesta(true , "" , "" , "CierreCaja" , bytes);
+        }
+        catch(Exception ex)
+        {
+            System.out.println("picha");
+            return new Respuesta(false , "Error obteniendo el usuario." , "getUsuario " + ex.getMessage());
+        }
+    }
+
+    public Respuesta reporteCierreEspecifico(String fecha , Long idEmp , Long idres)//fecha especifica
+    {
+        try
+        {
+            System.out.println("wenas");
+            Map<String , Object> parametros = new HashMap<>();
+            parametros.put("fecha" , fecha);
+            parametros.put("idEmp" , idEmp);
+            parametros.put("idres" , idres);
+            Request request = new Request("CierreCajaController/cierrecaja" , "/{fecha}/{idEmp}/{idres}" , parametros);
             request.get();
             if(request.isError())
             {
