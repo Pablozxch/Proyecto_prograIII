@@ -212,7 +212,19 @@ public class SalonesGeneralController extends Controller implements Initializabl
         }
         if(event.getSource() == btnContinuar)
         {
-            FlowController.getInstance().goView("disenoSalones");//verificar si el salon que estoy accediendo es una barra o una mesa para mostrar cosas diferentes 
+            SalonDto sbm = (SalonDto) AppContext.getInstance().get("Salon");
+            if(sbm.getBarraMesa() == "M")
+            {
+                FlowController.getInstance().goView("disenoSalones");//verificar si el salon que estoy accediendo es una barra o una mesa para mostrar cosas diferentes 
+            }
+            else
+            {
+                /*
+                
+                    HACER QUE CARGUE LAS ORDENES COMO EL ORDENES GENERAL
+                
+                 */
+            }
 
         }
         if(event.getSource() == btnEliminar)
