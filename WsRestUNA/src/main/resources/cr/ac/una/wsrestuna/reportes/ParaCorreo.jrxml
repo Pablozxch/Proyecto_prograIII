@@ -19,7 +19,7 @@ NC05ZTU1LTU5NGFhYTVjZmQ3ZDs=]]>
 	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
-	<parameter name="ID_FACTURA" class="java.lang.String"/>
+	<parameter name="ID_FACTURA" class="java.lang.Long"/>
 	<parameter name="CORREO" class="java.lang.String"/>
 	<parameter name="NOMBRE" class="java.lang.String"/>
 	<queryString language="SQL">
