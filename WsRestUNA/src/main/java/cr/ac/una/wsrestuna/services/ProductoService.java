@@ -7,11 +7,15 @@ package cr.ac.una.wsrestuna.services;
 
 import cr.ac.una.wsrestuna.models.*;
 import cr.ac.una.wsrestuna.utils.*;
+import java.io.*;
 import java.sql.*;
 import java.util.*;
 import java.util.logging.*;
 import javax.persistence.*;
 import javax.ejb.*;
+import javax.naming.*;
+import javax.sql.*;
+import net.sf.jasperreports.engine.*;
 
 /**
  *
@@ -99,7 +103,7 @@ public class ProductoService
                 empleado = new Producto(empleadoDto);
                 System.out.println("El valor antes de colocar el restaurante es " + empleado.toString());
                 empleado.setResId(new Restaurante(empleadoDto.getRestauranteDto()));
-                   System.out.println("El valor despues de colocar el restaurante es " + empleado.toString());
+                System.out.println("El valor despues de colocar el restaurante es " + empleado.toString());
                 em.persist(empleado);
             }
             em.flush();
@@ -141,6 +145,33 @@ public class ProductoService
             }
             LOG.log(Level.SEVERE , "Ocurrio un error al guardar el empleado." , ex);
             return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al eliminar el empleado." , "eliminarProducto " + ex.getMessage());
+        }
+    }
+
+    public Respuesta reporteProductosVendidos(Long IDrestaurante , String Inicial , String Final)
+    {
+
+        try
+        {
+            InputStream x = FacturaService.class.getClassLoader().getResourceAsStream("/cr/ac/una/wsrestuna/reportes/ProductosVendidos.jrxml");
+            JasperReport jasper = JasperCompileManager.compileReport(x);
+            InitialContext initialContext = new InitialContext();
+            DataSource dataSource = (DataSource) initialContext.lookup("jdbc/RestUNA");
+            Connection connection = dataSource.getConnection();
+
+            HashMap<String , Object> map = new HashMap<>();
+            map.put("IDrestaurante" , IDrestaurante);
+            map.put("Inicial" , Inicial);
+            map.put("Final" , Final);
+            JasperPrint print = JasperFillManager.fillReport(jasper , map , connection);
+            byte[] s = JasperExportManager.exportReportToPdf(print);
+            return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "" , "Producto" , s);
+
+        }
+        catch(Exception ex)
+        {
+            LOG.log(Level.SEVERE , "Ocurrio un error al guardar el registro." , ex);
+            return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "No se puede generar correctamente el reporte." , "eliminarFactura " + ex.getMessage());
         }
     }
 }

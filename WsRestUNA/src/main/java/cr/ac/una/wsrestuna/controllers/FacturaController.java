@@ -103,14 +103,12 @@ public class FacturaController
 
         Respuesta res = restauranteService.getRestaurante(idRes);
         RestauranteDto resta = (RestauranteDto) res.getResultado("Restaurante");
-        Respuesta res2 = facturaService.reporteFactura(idFac , correoPersona , nombrePersona);
+        Respuesta res2 = facturaService.reporteFacturaCorreo(idFac , correoPersona , nombrePersona);
         File file = new File("Factura.pdf");
         byte[] decoder = (byte[]) res2.getResultado("Factura");
         try(FileOutputStream fos = new FileOutputStream(file);)
         {
             fos.write(decoder);
-
-            System.out.println("Valonres [" + resta.getCorreo() + resta.getNombre() + correoPersona + file + "]");
             send(resta.getCorreo() , resta.getNombre() , correoPersona , file);
         }
         catch(Exception e)
@@ -236,6 +234,28 @@ public class FacturaController
         {
             Logger.getLogger(CierreCajaController.class.getName()).log(Level.SEVERE , null , ex);
             return Response.status(CodigoRespuesta.ERROR_INTERNO.getValue()).entity("Error al obtener la cierre cajas ").build();//TODO
+        }
+    }
+
+    @GET
+    @Path("/factura/{Inicio}/{Final}/{idRes}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response listadoFacturas(@PathParam("Inicio") String Inicio , @PathParam("Final") String Final , @PathParam("idRes") Long idRes)
+    {
+        try
+        {
+            Respuesta res = facturaService.reporteListadoFacturas(idRes , Inicio , Final);
+            if(!res.getEstado())
+            {
+                return Response.status(res.getCodigoRespuesta().getValue()).entity(res.getMensaje()).build();
+            }
+            return Response.ok((byte[]) res.getResultado("Producto")).build();//TODO
+        }
+        catch(Exception ex)
+        {
+            Logger.getLogger(FacturaController.class.getName()).log(Level.SEVERE , null , ex);
+            return Response.status(CodigoRespuesta.ERROR_INTERNO.getValue()).entity("Error al obtener el factura ").build();//TODO
         }
     }
 

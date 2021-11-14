@@ -19,8 +19,8 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="54.0" prefWidth="674.0" spacing="25.0">
                      <children>
-                        <JFXDatePicker fx:id="dtpFechaInicial" defaultColor="#f9d5a7" promptText="Fecha Inicial" />
-                        <JFXDatePicker fx:id="dtpFechaFinal" defaultColor="#f9d5a7" overLay="true" promptText="Fecha Final" />
+                        <JFXDatePicker fx:id="dtpFechaInicial" promptText="Fecha Inicial" />
+                        <JFXDatePicker fx:id="dtpFechaFinal" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="43.0" prefWidth="674.0">

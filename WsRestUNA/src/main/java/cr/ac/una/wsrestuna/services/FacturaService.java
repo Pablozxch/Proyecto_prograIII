@@ -153,7 +153,7 @@ public class FacturaService
         }
     }
 
-    public Respuesta reporteFactura(Long idFac , String correo , String nombre)
+    public Respuesta reporteFacturaCorreo(Long idFac , String correo , String nombre)
     {
 
         try
@@ -180,6 +180,35 @@ public class FacturaService
             LOG.log(Level.SEVERE , "Ocurrio un error al guardar el registro." , ex);
             return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al eliminar el factura." , "eliminarFactura " + ex.getMessage());
         }
-
     }
+
+    public Respuesta reporteListadoFacturas(Long IDrestaurante , String Inicio , String Final)
+    {
+
+        try
+        {
+            InputStream x = FacturaService.class.getClassLoader().getResourceAsStream("/cr/ac/una/wsrestuna/reportes/ListadoFactura.jrxml");
+            JasperReport jasper = JasperCompileManager.compileReport(x);
+            InitialContext initialContext = new InitialContext();
+            DataSource dataSource = (DataSource) initialContext.lookup("jdbc/RestUNA");
+            Connection connection = dataSource.getConnection();
+
+            HashMap<String , Object> map = new HashMap<>();
+            map.put("IDrestaurante" , IDrestaurante);
+            map.put("Inicio" , Inicio);
+            map.put("Final" , Final);
+            JasperPrint print = JasperFillManager.fillReport(jasper , map , connection);
+            String a = JasperExportManager.exportReportToXml(print);
+            System.out.println(a);
+            byte[] s = JasperExportManager.exportReportToPdf(print);
+            return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "" , "Factura" , s);
+
+        }
+        catch(Exception ex)
+        {
+            LOG.log(Level.SEVERE , "Ocurrio un error al guardar el registro." , ex);
+            return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al eliminar el factura." , "eliminarFactura " + ex.getMessage());
+        }
+    }
+
 }

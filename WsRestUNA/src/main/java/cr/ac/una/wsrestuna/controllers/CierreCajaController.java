@@ -54,7 +54,7 @@ public class CierreCajaController
     @Produces(MediaType.APPLICATION_JSON)
     public Response lasto()
     {
-        long id=cierreCajaService.last();;
+        long id = cierreCajaService.last();;
         try
         {
             Respuesta res = cierreCajaService.getCierrecajas(id);
@@ -63,7 +63,7 @@ public class CierreCajaController
                 return Response.status(res.getCodigoRespuesta().getValue()).entity(res.getMensaje()).build();
             }
             return Response.ok((CierrecajasDto) res.getResultado("Cierrecajas")).build();//TODO
-            
+
         }
         catch(Exception ex)
         {
@@ -90,6 +90,50 @@ public class CierreCajaController
         {
             Logger.getLogger(CierreCajaController.class.getName()).log(Level.SEVERE , null , ex);
             return Response.status(CodigoRespuesta.ERROR_INTERNO.getValue()).entity("Error al obtener la cierre cajas ").build();//TODO
+        }
+    }
+
+    @GET
+    @Path("/cierrecaja/{Inicio}/{idCierre}/{idRes}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response reporteCompletoCajas(@PathParam("Inicio") String Inicio , @PathParam("idCierre") Long idCierre , @PathParam("idRes") Long idRes)
+    {
+        try
+        {
+            Respuesta res = cierreCajaService.reporteCompletoCajas(idRes , idCierre , Inicio);
+            if(!res.getEstado())
+            {
+                return Response.status(res.getCodigoRespuesta().getValue()).entity(res.getMensaje()).build();
+            }
+            return Response.ok((byte[]) res.getResultado("CierreCaja")).build();//TODO
+        }
+        catch(Exception ex)
+        {
+            Logger.getLogger(FacturaController.class.getName()).log(Level.SEVERE , null , ex);
+            return Response.status(CodigoRespuesta.ERROR_INTERNO.getValue()).entity("Error al obtener el factura ").build();//TODO
+        }
+    }
+
+    @GET
+    @Path("/cierrecaja/{fecha}/{idEmp}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response reporteCierreCajero(@PathParam("fecha") String fecha , @PathParam("idEmp") Long idEmp)
+    {
+        try
+        {
+            Respuesta res = cierreCajaService.reporteCierreCajero(idEmp , fecha);
+            if(!res.getEstado())
+            {
+                return Response.status(res.getCodigoRespuesta().getValue()).entity(res.getMensaje()).build();
+            }
+            return Response.ok((byte[]) res.getResultado("CierreCaja")).build();//TODO
+        }
+        catch(Exception ex)
+        {
+            Logger.getLogger(FacturaController.class.getName()).log(Level.SEVERE , null , ex);
+            return Response.status(CodigoRespuesta.ERROR_INTERNO.getValue()).entity("Error al obtener el factura ").build();//TODO
         }
     }
 }

@@ -7,11 +7,15 @@ package cr.ac.una.wsrestuna.services;
 
 import cr.ac.una.wsrestuna.models.*;
 import cr.ac.una.wsrestuna.utils.*;
+import java.io.*;
 import java.sql.*;
 import java.util.*;
 import java.util.logging.*;
 import javax.ejb.*;
+import javax.naming.*;
 import javax.persistence.*;
+import javax.sql.*;
+import net.sf.jasperreports.engine.*;
 
 /**
  *
@@ -172,6 +176,59 @@ public class CierreCajaService
             }
             LOG.log(Level.SEVERE , "Ocurrio un error al guardar el cierreCaja." , ex);
             return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al eliminar el cierreCaja." , "eliminarCierrecajas " + ex.getMessage());
+        }
+    }
+
+    public Respuesta reporteCompletoCajas(Long IDrestaurante , Long idCIerreCajas , String FECHA)
+    {
+
+        try
+        {
+            InputStream x = FacturaService.class.getClassLoader().getResourceAsStream("/cr/ac/una/wsrestuna/reportes/reporteCompletoCajas.jrxml");
+            JasperReport jasper = JasperCompileManager.compileReport(x);
+            InitialContext initialContext = new InitialContext();
+            DataSource dataSource = (DataSource) initialContext.lookup("jdbc/RestUNA");
+            Connection connection = dataSource.getConnection();
+
+            HashMap<String , Object> map = new HashMap<>();
+            map.put("ID" , idCIerreCajas);//id de cierre de cajas
+            map.put("IDrestaurante" , IDrestaurante);
+            map.put("FECHA" , FECHA);
+            JasperPrint print = JasperFillManager.fillReport(jasper , map , connection);
+            byte[] s = JasperExportManager.exportReportToPdf(print);
+            return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "" , "CierreCaja" , s);
+
+        }
+        catch(Exception ex)
+        {
+            LOG.log(Level.SEVERE , "Ocurrio un error al guardar el registro." , ex);
+            return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al eliminar el factura." , "eliminarFactura " + ex.getMessage());
+        }
+    }
+
+    public Respuesta reporteCierreCajero(Long idEmpleado, String Fecha)
+    {
+
+        try
+        {
+            InputStream x = FacturaService.class.getClassLoader().getResourceAsStream("/cr/ac/una/wsrestuna/reportes/CierreCajero.jrxml");
+            JasperReport jasper = JasperCompileManager.compileReport(x);
+            InitialContext initialContext = new InitialContext();
+            DataSource dataSource = (DataSource) initialContext.lookup("jdbc/RestUNA");
+            Connection connection = dataSource.getConnection();
+
+            HashMap<String , Object> map = new HashMap<>();
+            map.put("idEmpleado" , idEmpleado);
+            map.put("Fecha" , Fecha);
+            JasperPrint print = JasperFillManager.fillReport(jasper , map , connection);
+            byte[] s = JasperExportManager.exportReportToPdf(print);
+            return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "" , "CierreCaja" , s);
+
+        }
+        catch(Exception ex)
+        {
+            LOG.log(Level.SEVERE , "Ocurrio un error al guardar el registro." , ex);
+            return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al eliminar el factura." , "eliminarFactura " + ex.getMessage());
         }
     }
 

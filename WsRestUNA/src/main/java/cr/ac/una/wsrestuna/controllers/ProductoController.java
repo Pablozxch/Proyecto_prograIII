@@ -35,6 +35,28 @@ public class ProductoController
     }
 
     @GET
+    @Path("/producto/{inicio}/{finall}/{idRes}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response productosVendidos(@PathParam("inicio") String inicio , @PathParam("finall") String finall , @PathParam("idRes") Long idRes)
+    {
+        try
+        {
+            Respuesta res = productoService.reporteProductosVendidos(idRes , inicio , finall);
+            if(!res.getEstado())
+            {
+                return Response.status(res.getCodigoRespuesta().getValue()).entity(res.getMensaje()).build();
+            }
+            return Response.ok((byte[]) res.getResultado("Producto")).build();//TODO
+        }
+        catch(Exception ex)
+        {
+            Logger.getLogger(ProductoController.class.getName()).log(Level.SEVERE , null , ex);
+            return Response.status(CodigoRespuesta.ERROR_INTERNO.getValue()).entity("Error al obtener el factura ").build();//TODO
+        }
+    }
+
+    @GET
     @Path("/producto/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -122,4 +144,5 @@ public class ProductoController
             return Response.status(CodigoRespuesta.ERROR_INTERNO.getValue()).entity("Error al obtener el producto ").build();//TODO
         }
     }
+
 }
