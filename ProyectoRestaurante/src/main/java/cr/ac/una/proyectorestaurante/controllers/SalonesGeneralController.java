@@ -213,12 +213,13 @@ public class SalonesGeneralController extends Controller implements Initializabl
         if(event.getSource() == btnContinuar)
         {
             SalonDto sbm = (SalonDto) AppContext.getInstance().get("Salon");
-            if(sbm.getBarraMesa() == "M")
+            if("M".equals(sbm.getBarraMesa()))
             {
                 FlowController.getInstance().goView("disenoSalones");//verificar si el salon que estoy accediendo es una barra o una mesa para mostrar cosas diferentes 
             }
             else
             {
+                
                 /*
                 
                     HACER QUE CARGUE LAS ORDENES COMO EL ORDENES GENERAL
