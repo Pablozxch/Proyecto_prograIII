@@ -89,16 +89,16 @@ public class ProductoService
         }
     }
 
-    public Respuesta productosMVendidos(String Inicio , String Final , Long idRes)
+    public Respuesta productosMVendidos(String Inicio , String ff , Long idRes)
     {
         try
         {
-            System.out.println("wenas");
             Map<String , Object> parametros = new HashMap<>();
             parametros.put("inicio" , Inicio);
-            parametros.put("finall" , Final);
+            parametros.put("finall" , ff);
             parametros.put("idRes" , idRes);
-            Request request = new Request("ProductoController/producto" , "/{inicio}/{finall}/{idRes}" , parametros);
+            Request request = new Request("ProductoController/ping");
+          //Request request = new Request("ProductoController/producto" , "/{inicio}/{finall}/{idRes}" , parametros);
             request.get();
             if(request.isError())
             {
@@ -110,30 +110,29 @@ public class ProductoService
         }
         catch(Exception ex)
         {
-            System.out.println("picha");
-            return new Respuesta(false , "Error obteniendo el usuario." , "getUsuario " + ex.getMessage());
+            return new Respuesta(false , "Error obteniendo el listado de productos." , "getUsuario " + ex.getMessage());
         }
     }
-
-    public Respuesta ping()
-    {
-        try
-        {
-            Request request = new Request("ProductoController/ping");
-            request.get();
-            if(request.isError())
-            {
-                return new Respuesta(false , request.getError() , "");
-
-            }
-            RestauranteDto restauranteDto = (RestauranteDto) request.readEntity(RestauranteDto.class);
-            return new Respuesta(true , "" , "" , "Producto" , restauranteDto);
-        }
-        catch(Exception ex)
-        {
-            //Logger.getLogger(SalonService.class.getName()).log(Level.SEVERE , "Error obteniendo el restaurante [" + id + "]" , ex);
-            return new Respuesta(false , "Error obteniendo el restaurante." , "getUsuario " + ex.getMessage());
-        }
-    }
+//
+//    public Respuesta ping()
+//    {
+//        try
+//        {
+//            Request request = new Request("ProductoController/ping");
+//            request.get();
+//            if(request.isError())
+//            {
+//                return new Respuesta(false , request.getError() , "");
+//
+//            }
+//            RestauranteDto restauranteDto = (RestauranteDto) request.readEntity(RestauranteDto.class);
+//            return new Respuesta(true , "" , "" , "Producto" , restauranteDto);
+//        }
+//        catch(Exception ex)
+//        {
+//            //Logger.getLogger(SalonService.class.getName()).log(Level.SEVERE , "Error obteniendo el restaurante [" + id + "]" , ex);
+//            return new Respuesta(false , "Error obteniendo el restaurante." , "getUsuario " + ex.getMessage());
+//        }
+//    }
 
 }
