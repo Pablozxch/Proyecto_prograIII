@@ -183,40 +183,66 @@ public class PrincipalController extends Controller implements Initializable
         }
         if(event.getSource() == btnReportes)
         {
-            FlowController.getInstance().goView("ReportesGeneral");
-        }
-        if(event.getSource() == btnCierreCajas)
-        {
-            CierreCajasController cr = (CierreCajasController) FlowController.getInstance().getController("CierreCajas");
-            if(((CierrecajasDto) AppContext.getInstance().get("CierreCajasActual")) == null)
+            if(((EmpleadoDto) AppContext.getInstance().get("EmpleadoActual")) == null)
             {
-                System.out.println("No se cuaenta con cierre de cajas");
-                FlowController.getInstance().goView("CierreCajas");
-                cr.createCierre();
+                FlowController.getInstance().goViewInWindowModal("LogIn" , (Stage) btnCerrarSesion.getScene().getWindow() , Boolean.FALSE);//ver que se hace con esto
             }
             else
             {
-                System.out.println("Se cuenta con cierre de cajas");
-                FlowController.getInstance().goView("CierreCajas");
-                cr.closeCierreCajas();
+                rolDto = (RolDto) AppContext.getInstance().get("RolActual");
+                if("Administrativos".equals(rolDto.getNombre()))
+                {
+                    FlowController.getInstance().goView("ReportesGeneral");
+                }
+                else
+                {
+                    new Mensaje().show(Alert.AlertType.ERROR , "Permisos" , "Permisos innecesarios para acceder a este apartado");
+                }
             }
-
         }
-        if(event.getSource() == btnSalir)
+        if(event.getSource() == btnCierreCajas)
         {
-            if(new Mensaje().showConfirmation("Saliendo del Sistema" , getStage() , "¿Esta seguro que desea salir del sistema?"))
+            if(((EmpleadoDto) AppContext.getInstance().get("EmpleadoActual")) == null)
             {
-                getStage().close();
+                FlowController.getInstance().goViewInWindowModal("LogIn" , (Stage) btnCerrarSesion.getScene().getWindow() , Boolean.FALSE);//ver que se hace con esto
             }
-        }
-        if(event.getSource() == btnCerrarSesion)
-        {
-            AppContext.getInstance().delete("EmpleadoActual");//este usuario es el encargado de ingresar a todo lo que el pueda
-            FlowController.getInstance().goViewInWindowModal("LogIn" , (Stage) btnCerrarSesion.getScene().getWindow() , Boolean.FALSE);//ver que se hace con esto
-            //preguntar que si lo de crear empleados en esta vista
+            else
+            {
+                rolDto = (RolDto) AppContext.getInstance().get("RolActual");
+                if(!"Saloneros".equals(rolDto.getNombre()))
+                {
+                    CierreCajasController cr = (CierreCajasController) FlowController.getInstance().getController("CierreCajas");
+                    if(((CierrecajasDto) AppContext.getInstance().get("CierreCajasActual")) == null)
+                    {
+                        System.out.println("No se cuaenta con cierre de cajas");
+                        FlowController.getInstance().goView("CierreCajas");
+                        cr.createCierre();
+                    }
+                    else
+                    {
+                        System.out.println("Se cuenta con cierre de cajas");
+                        FlowController.getInstance().goView("CierreCajas");
+                        cr.closeCierreCajas();
+                    }
+                }
+
+            }
+            if(event.getSource() == btnSalir)
+            {
+                if(new Mensaje().showConfirmation("Saliendo del Sistema" , getStage() , "¿Esta seguro que desea salir del sistema?"))
+                {
+                    getStage().close();
+                }
+            }
+            if(event.getSource() == btnCerrarSesion)
+            {
+                AppContext.getInstance().delete("EmpleadoActual");//este usuario es el encargado de ingresar a todo lo que el pueda
+                FlowController.getInstance().goViewInWindowModal("LogIn" , (Stage) btnCerrarSesion.getScene().getWindow() , Boolean.FALSE);//ver que se hace con esto
+                //preguntar que si lo de crear empleados en esta vista
+
+            }
 
         }
 
     }
-
 }
