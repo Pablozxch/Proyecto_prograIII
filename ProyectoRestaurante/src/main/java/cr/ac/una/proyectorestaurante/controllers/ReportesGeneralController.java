@@ -101,31 +101,44 @@ public class ReportesGeneralController extends Controller implements Initializab
                     }
 
                 }
-                else if(!tgllstadoyProductos.isSelected())
+//                else if(!tgllstadoyProductos.isSelected())
+//                {
+//                    String fechaI = DATE_FORMATTER.format(dtpFechaInicial.getValue());
+//                    String fechaF = DATE_FORMATTER.format(dtpFechaFinal.getValue());
+//                    System.out.println("PRODUCTOS MAS VENDIDOS");
+//                    RestauranteDto resta = (RestauranteDto) AppContext.getInstance().get("Restaurante");
+////                    Respuesta res = productoService.productosMVendidos("5/5/2021" , "5/12/2021" , resta.getId());
+//                    System.out.println("Fehca i" + fechaI);
+//                    System.out.println("Fehca F" + fechaF);
+//                    Respuesta res = productoService.productosMVendidos(fechaI , fechaF , resta.getId());
+//                    if(res.getEstado())
+//                    {
+//                        System.out.println("gg");
+//                        byte[] decoder = (byte[]) res.getResultado("Productos");
+//                        cargarArchivo(decoder);
+//                    }
+//                    else
+//                    {
+//                        System.out.println("ni picha al cuadrado");
+//                    }
+//                }
+                if(tglCierrreCajas.isSelected())
                 {
-                    String fechaI = DATE_FORMATTER.format(dtpFechaInicial.getValue());
-                    String fechaF = DATE_FORMATTER.format(dtpFechaFinal.getValue());
-                    System.out.println("PRODUCTOS MAS VENDIDOS");
+                    System.out.println("cierre cajas");
                     RestauranteDto resta = (RestauranteDto) AppContext.getInstance().get("Restaurante");
-//                    Respuesta res = productoService.productosMVendidos("5/5/2021" , "5/12/2021" , resta.getId());
-                    System.out.println("Fehca i" + fechaI);
-                    System.out.println("Fehca F" + fechaF);
-                    Respuesta res = productoService.productosMVendidos(fechaI , fechaF , resta.getId());
+                    CierrecajasDto ciere = (CierrecajasDto) AppContext.getInstance().get("CierreCajasActual");
+                    //String fechaC = DATE_FORMATTER.format(dtpFechaCierreCaja.getValue());
+                    Respuesta res = cierreCajaService.reporteCierreCompleto("7/11/2021" , 2L , 2L);
                     if(res.getEstado())
                     {
                         System.out.println("gg");
-                        byte[] decoder = (byte[]) res.getResultado("Productos");
+                        byte[] decoder = (byte[]) res.getResultado("CierreCaja");
                         cargarArchivo(decoder);
                     }
                     else
                     {
                         System.out.println("ni picha al cuadrado");
                     }
-                }
-                if(tglCierrreCajas.isSelected())
-                {
-                    System.out.println("cierre cajas");
-
                 }
             }
             /**

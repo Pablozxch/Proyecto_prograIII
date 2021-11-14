@@ -8,6 +8,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.text.*;
+import java.time.*;
+import java.time.format.*;
+import java.util.*;
 import javafx.scene.image.*;
 
 /**
@@ -16,14 +20,17 @@ import javafx.scene.image.*;
 public class App extends Application
 {
 
+    DateTimeFormatter DATE_FORMATTER = DateTimeFormatter
+              .ofPattern("dd/MM/yyyy");
     private static Scene scene;
 
     @Override
-    public void start(Stage stage) throws IOException
+    public void start(Stage stage) throws IOException , ParseException
     {
         FlowController.getInstance().InitializeFlow(stage , null);
         stage.getIcons().add(new Image(App.class.getResourceAsStream("/cr/ac/una/proyectorestaurante/resources/icon.png")));
         stage.setTitle("Restaurante");
+
         FlowController.getInstance().goMain();
     }
 

@@ -7,6 +7,7 @@ package cr.ac.una.proyectorestaurante.services;
 
 import cr.ac.una.proyectorestaurante.models.*;
 import cr.ac.una.proyectorestaurante.utils.*;
+import java.util.*;
 import java.util.logging.*;
 
 /**
@@ -58,4 +59,30 @@ public class CierreCajaService
             return new Respuesta(false , "Error obteniendo facturas." , "getFacturas " + ex.getMessage());
         }
     }
+    public Respuesta reporteCierreCompleto(String Inicio , Long idCierre , Long idRes)
+    {
+        try
+        {
+            System.out.println("wenas");
+            Map<String , Object> parametros = new HashMap<>();
+            parametros.put("inicio" , Inicio);
+            parametros.put("idcierre" , idCierre);
+            parametros.put("idres" , idRes);
+            Request request = new Request("CierreCajaController/cierrecaja" , "/{inicio}/{idcierre}/{idres}" , parametros);
+            request.get();
+            if(request.isError())
+            {
+                return new Respuesta(false , request.getError() , "");
+
+            }
+            byte[] bytes = (byte[]) request.readEntity(byte[].class);
+            return new Respuesta(true , "" , "" , "CierreCaja" , bytes);
+        }
+        catch(Exception ex)
+        {
+            System.out.println("picha");
+            return new Respuesta(false , "Error obteniendo el usuario." , "getUsuario " + ex.getMessage());
+        }
+    }
+
 }

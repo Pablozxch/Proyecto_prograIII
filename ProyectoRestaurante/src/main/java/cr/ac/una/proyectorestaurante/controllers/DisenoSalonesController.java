@@ -14,8 +14,12 @@ import cr.ac.una.proyectorestaurante.utils.*;
 import java.awt.*;
 import java.io.*;
 import java.net.URL;
+import java.text.*;
+import java.time.*;
+import java.time.format.*;
 import java.util.*;
 import java.util.List;
+import java.util.logging.*;
 import java.util.stream.*;
 import javafx.application.*;
 import javafx.event.*;
@@ -31,6 +35,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.shape.*;
 import javafx.stage.*;
+import javax.xml.datatype.*;
 
 /**
  * FXML Controller class
@@ -61,7 +66,8 @@ public class DisenoSalonesController extends Controller implements Initializable
      * Initializes the controller class.
      */
     MesaService mesaService = new MesaService();
-
+    DateTimeFormatter DATE_FORMATTER = DateTimeFormatter
+              .ofPattern("dd/MM/yyyy");
     List<IMload> iMloads = new ArrayList<>();
     OrdenService orden = new OrdenService();
     List<OrdenDto> ordenes = new ArrayList<>();
@@ -128,22 +134,32 @@ public class DisenoSalonesController extends Controller implements Initializable
                     }
                     else
                     {
-                        System.out.println("La mesa no tiene orden");
-                        EmpleadoDto emp = (EmpleadoDto) AppContext.getInstance().get("EmpleadoActual");
-                        OrdenDto odd = new OrdenDto();
-                        odd.setEmpleadoDto(emp);
-                        odd.setFecha(new Date());
-                        odd.setMesaDto(mesaclick);
-                        odd.setEstado("P");
-                        orden.guardarOrden(odd);
-                        Respuesta res2 = orden.lasto();
-                        if(res2.getEstado())
+                        try
                         {
-                            odd = (OrdenDto) res2.getResultado("Orden");
+                            System.out.println("La mesa no tiene orden");
+                            EmpleadoDto emp = (EmpleadoDto) AppContext.getInstance().get("EmpleadoActual");
+                            OrdenDto odd = new OrdenDto();
+                            odd.setEmpleadoDto(emp);
+                            Date date = new Date();
+                            SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");                        
+                            Date date2 = formatter1.parse(formatter1.format(date));
+                            odd.setFecha(date2);
+                            odd.setMesaDto(mesaclick);
+                            odd.setEstado("P");
+                            orden.guardarOrden(odd);
+                            Respuesta res2 = orden.lasto();
+                            if(res2.getEstado())
+                            {
+                                odd = (OrdenDto) res2.getResultado("Orden");
+                            }
+                            mesaclick.setEstado("O");
+                            AppContext.getInstance().set("Orden" , odd);
+                            FlowController.getInstance().goViewInWindowModal("CrearPedido" , getStage() , Boolean.FALSE);
                         }
-                        mesaclick.setEstado("O");
-                        AppContext.getInstance().set("Orden" , odd);
-                        FlowController.getInstance().goViewInWindowModal("CrearPedido" , getStage() , Boolean.FALSE);
+                        catch(ParseException ex)
+                        {
+                            Logger.getLogger(DisenoSalonesController.class.getName()).log(Level.SEVERE , null , ex);
+                        }
                     }
                     mesaService.guardarMesa(mesaclick);
                     load();

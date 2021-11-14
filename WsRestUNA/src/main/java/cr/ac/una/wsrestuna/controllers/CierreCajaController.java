@@ -94,10 +94,10 @@ public class CierreCajaController
     }
 
     @GET
-    @Path("/cierrecaja/{Inicio}/{idCierre}/{idRes}")
+    @Path("/cierrecaja/{inicio}/{idcierre}/{idres}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response reporteCompletoCajas(@PathParam("Inicio") String Inicio , @PathParam("idCierre") Long idCierre , @PathParam("idRes") Long idRes)
+    public Response reporteCompletoCajas(@PathParam("inicio") String Inicio , @PathParam("idcierre") Long idCierre , @PathParam("idres") Long idRes)
     {
         try
         {
