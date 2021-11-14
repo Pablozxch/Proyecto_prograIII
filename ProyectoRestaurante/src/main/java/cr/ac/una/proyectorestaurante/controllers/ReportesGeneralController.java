@@ -81,9 +81,14 @@ public class ReportesGeneralController extends Controller implements Initializab
                 if(tgllstadoyProductos.isSelected())
                 {
 
+                    String fechaI = DATE_FORMATTER.format(dtpFechaInicial.getValue());
+                    String fechaF = DATE_FORMATTER.format(dtpFechaFinal.getValue());
+//                    Respuesta res = productoService.productosMVendidos("5/5/2021" , "5/12/2021" , resta.getId());
+                    System.out.println("Fehca i" + fechaI);
+                    System.out.println("Fehca F" + fechaF);
                     System.out.println("listado de facturas");
                     RestauranteDto resta = (RestauranteDto) AppContext.getInstance().get("Restaurante");
-                    Respuesta res = facturaService.reportelistadofacturas("5/5/2021" , "5/12/2021" , resta.getId());
+                    Respuesta res = facturaService.reportelistadofacturas(fechaI , fechaF , resta.getId());
                     if(res.getEstado())
                     {
                         System.out.println("gg");
