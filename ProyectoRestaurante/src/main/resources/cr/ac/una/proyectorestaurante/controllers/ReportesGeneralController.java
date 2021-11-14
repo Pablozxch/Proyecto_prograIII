@@ -29,13 +29,13 @@ public class ReportesGeneralController extends Controller implements Initializab
     @FXML
     private JFXTextField txtIdEmpleado;
     @FXML
-    private JFXToggleButton tglCierrreCajas;
-    @FXML
     private JFXToggleButton tgllstadoyProductos;
     @FXML
     private JFXDatePicker dtpFechaCierreCaja;
     @FXML
     private JFXButton btnAceptar;
+    @FXML
+    private JFXButton btnGenerar;
 
     /**
      * Initializes the controller class.

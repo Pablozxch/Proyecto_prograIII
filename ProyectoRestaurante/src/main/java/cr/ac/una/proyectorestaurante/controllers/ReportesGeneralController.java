@@ -27,8 +27,7 @@ import javafx.stage.*;
  *
  * @author Christopher
  */
-public class ReportesGeneralController extends Controller implements Initializable
-{
+public class ReportesGeneralController extends Controller implements Initializable {
 
     @FXML
     private JFXDatePicker dtpFechaInicial;
@@ -37,16 +36,16 @@ public class ReportesGeneralController extends Controller implements Initializab
     @FXML
     private JFXTextField txtIdEmpleado;
     @FXML
-    private JFXToggleButton tglCierrreCajas;
-    @FXML
     private JFXToggleButton tgllstadoyProductos;
     @FXML
     private JFXDatePicker dtpFechaCierreCaja;
     @FXML
     private JFXButton btnAceptar;
+    @FXML
+    private JFXButton btnGenerar;
 
     DateTimeFormatter DATE_FORMATTER = DateTimeFormatter
-              .ofPattern("dd/MM/yyyy");
+            .ofPattern("dd/MM/yyyy");
 
     CierreCajaService cierreCajaService = new CierreCajaService();
     FacturaService facturaService = new FacturaService();
@@ -56,51 +55,38 @@ public class ReportesGeneralController extends Controller implements Initializab
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url , ResourceBundle rb)
-    {
+    public void initialize(URL url, ResourceBundle rb) {
 
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @FXML
-    private void click(ActionEvent event)
-    {
-        if(event.getSource() == btnAceptar)
-        {
-            if(tgllstadoyProductos.isSelected() && tglCierrreCajas.isSelected())
-            {
-                new Mensaje().show(Alert.AlertType.ERROR , "Error" , "Favor solo tener una seleccion posible");
-            }
-            else
-            {
-                if(tgllstadoyProductos.isSelected())
-                {
+    private void click(ActionEvent event) {
+        if (event.getSource() == btnAceptar) {
 
-                    String fechaI = DATE_FORMATTER.format(dtpFechaInicial.getValue());
-                    String fechaF = DATE_FORMATTER.format(dtpFechaFinal.getValue());
+            if (tgllstadoyProductos.isSelected()) {
+
+                String fechaI = DATE_FORMATTER.format(dtpFechaInicial.getValue());
+                String fechaF = DATE_FORMATTER.format(dtpFechaFinal.getValue());
 //                    Respuesta res = productoService.productosMVendidos("5/5/2021" , "5/12/2021" , resta.getId());
-                    System.out.println("Fehca i" + fechaI);
-                    System.out.println("Fehca F" + fechaF);
-                    System.out.println("listado de facturas");
-                    RestauranteDto resta = (RestauranteDto) AppContext.getInstance().get("Restaurante");
-                    Respuesta res = facturaService.reportelistadofacturas(fechaI , fechaF , resta.getId());
-                    if(res.getEstado())
-                    {
-                        System.out.println("gg");
-                        byte[] decoder = (byte[]) res.getResultado("Factura");
-                        cargarArchivo(decoder);
-                    }
-                    else
-                    {
-                        System.out.println("ni picha");
-                    }
-
+                System.out.println("Fehca i" + fechaI);
+                System.out.println("Fehca F" + fechaF);
+                System.out.println("listado de facturas");
+                RestauranteDto resta = (RestauranteDto) AppContext.getInstance().get("Restaurante");
+                Respuesta res = facturaService.reportelistadofacturas(fechaI, fechaF, resta.getId());
+                if (res.getEstado()) {
+                    System.out.println("gg");
+                    byte[] decoder = (byte[]) res.getResultado("Factura");
+                    cargarArchivo(decoder);
+                } else {
+                    System.out.println("ni picha");
                 }
+
+            }
 //                else if(!tgllstadoyProductos.isSelected())
 //                {
 //                    String fechaI = DATE_FORMATTER.format(dtpFechaInicial.getValue());
@@ -122,51 +108,42 @@ public class ReportesGeneralController extends Controller implements Initializab
 //                        System.out.println("ni picha al cuadrado");
 //                    }
 //                }
-                if(tglCierrreCajas.isSelected())
-                {
-                    System.out.println("cierre cajas");
-                    RestauranteDto resta = (RestauranteDto) AppContext.getInstance().get("Restaurante");
-                    CierrecajasDto ciere = (CierrecajasDto) AppContext.getInstance().get("CierreCajasActual");
-                    //String fechaC = DATE_FORMATTER.format(dtpFechaCierreCaja.getValue());
-                    Respuesta res = cierreCajaService.reporteCierreCompleto("7/11/2021" , 2L , 2L);
-                    if(res.getEstado())
-                    {
-                        System.out.println("gg");
-                        byte[] decoder = (byte[]) res.getResultado("CierreCaja");
-                        cargarArchivo(decoder);
-                    }
-                    else
-                    {
-                        System.out.println("ni picha al cuadrado");
-                    }
-                }
-            }
+
             /**
              *
              * SE PROCEDE A OBTENER EL CHUNCHE Y GUARDAR LA VARA
              *
              */
         }
+        if (event.getSource() == btnGenerar) {
+            System.out.println("cierre cajas");
+            RestauranteDto resta = (RestauranteDto) AppContext.getInstance().get("Restaurante");
+            CierrecajasDto ciere = (CierrecajasDto) AppContext.getInstance().get("CierreCajasActual");
+            //String fechaC = DATE_FORMATTER.format(dtpFechaCierreCaja.getValue());
+            Respuesta res = cierreCajaService.reporteCierreCompleto("7/11/2021", 2L, 2L);
+            if (res.getEstado()) {
+                System.out.println("gg");
+                byte[] decoder = (byte[]) res.getResultado("CierreCaja");
+                cargarArchivo(decoder);
+            } else {
+                System.out.println("ni picha al cuadrado");
+            }
+        }
     }
 
-    void cargarArchivo(byte[] decoder)
-    {
+    void cargarArchivo(byte[] decoder) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save");
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF" , "*.pdf"));
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
         fileChooser.setInitialFileName("*.pdf");
         File selectedFile = fileChooser.showSaveDialog(new Stage());
 
-        if(selectedFile != null)
-        {
+        if (selectedFile != null) {
             File file2 = new File(selectedFile.toPath().toString());
-            try(FileOutputStream fos = new FileOutputStream(file2);)
-            {
+            try ( FileOutputStream fos = new FileOutputStream(file2);) {
                 fos.write(decoder);
-                new Mensaje().show(Alert.AlertType.CONFIRMATION , "Guardado" , "Con exito");
-            }
-            catch(Exception e)
-            {
+                new Mensaje().show(Alert.AlertType.CONFIRMATION, "Guardado", "Con exito");
+            } catch (Exception e) {
             }
         }
     }

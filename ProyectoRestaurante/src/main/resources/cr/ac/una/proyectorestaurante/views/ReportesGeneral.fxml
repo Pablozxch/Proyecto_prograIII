@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="525.0" prefWidth="746.0" styleClass="fondo" stylesheets="@../styles/StylesCss.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.proyectorestaurante.controllers.ReportesGeneralController">
+<AnchorPane id="AnchorPane" prefHeight="693.0" prefWidth="746.0" styleClass="fondo" stylesheets="@../styles/StylesCss.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.proyectorestaurante.controllers.ReportesGeneralController">
    <children>
       <HBox layoutX="78.0" layoutY="169.0" prefHeight="525.0" prefWidth="746.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -19,8 +19,8 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="54.0" prefWidth="674.0" spacing="25.0">
                      <children>
-                        <JFXDatePicker fx:id="dtpFechaInicial" promptText="Fecha Inicial" />
-                        <JFXDatePicker fx:id="dtpFechaFinal" />
+                        <JFXDatePicker fx:id="dtpFechaInicial" defaultColor="#f9d5a7" promptText="Fecha Inicial" />
+                        <JFXDatePicker fx:id="dtpFechaFinal" defaultColor="#f9d5a7" overLay="true" promptText="Fecha Final" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="43.0" prefWidth="674.0">
@@ -31,6 +31,10 @@
                               <Insets left="-8.0" />
                            </HBox.margin>
                         </JFXToggleButton>
+                        <JFXButton fx:id="btnAceptar" onAction="#click" text="Generar">
+                           <HBox.margin>
+                              <Insets left="35.0" />
+                           </HBox.margin></JFXButton>
                      </children>
                   </HBox>
                   <Separator prefHeight="1.0" prefWidth="566.0" />
@@ -38,12 +42,7 @@
                      <children>
                         <JFXDatePicker fx:id="dtpFechaCierreCaja" defaultColor="#f9d5a7" promptText="Fecha cierre caja" />
                         <JFXTextField fx:id="txtIdEmpleado" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefWidth="210.0" promptText="ID del cajero" />
-                        <JFXToggleButton fx:id="tglCierrreCajas" alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="210.0" styleClass="jfx-ToggleButton" text="Cierres de caja" toggleColor="#ffb085" toggleLineColor="#f9d5a7" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="133.0" prefWidth="217.0">
-                     <children>
-                        <JFXButton fx:id="btnAceptar" onAction="#click" text="Aceptar" />
+                        <JFXButton fx:id="btnGenerar" onAction="#click" text="Generar" />
                      </children>
                   </HBox>
                </children>
