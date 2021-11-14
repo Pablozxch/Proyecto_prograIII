@@ -1,20 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ProductosVendidos" pageWidth="300" pageHeight="250" columnWidth="260" leftMargin="20" rightMargin="20" topMargin="5" bottomMargin="5" uuid="fc4314c2-a6db-411c-af4c-b6971452c540">
-	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[IlRCTF9ERVRBTExFWE9SREVOIiAsMTUsMTU4LDI0ZmRjY2NkLTlmZmEtNGMyMy04MDE0LThkNTg1
+NmVmM2VkOTsiVEJMX09SREVOIiAsMTY4LDE1LGE5Mzk0NmIwLTdlZjgtNDQ3Yi1hNzg4LTVlZGJk
+YzVhYTdkYjsiVEJMX1BST0RVQ1RPIiAsMTY4LDIzNyw0NWY3M2Y2YS1lYjE3LTQzNjctYTUyNy0w
+ZjdkOTQ2NDk2MTY7IlRCTF9SRVNUQVVSQU5URSIgQVMgLDQyNiwyNzMsNDk1MDk3ZTEtZjVmZC00
+Yzg3LWI4OTEtN2EwZDk3MWUyYjlhOw==]]>
+	</property>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="OJDBC 7"/>
 	<parameter name="Inicial" class="java.lang.String"/>
 	<parameter name="Final" class="java.lang.String"/>
+	<parameter name="IDrestaurante" class="java.lang.Long"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT "TBL_PRODUCTO"."PRO_NOMBRE",
-    sum( "TBL_DETALLEXORDEN"."DXO_CANTIDAD") AS total
+	sum( "TBL_DETALLEXORDEN"."DXO_CANTIDAD") AS total
 FROM "TBL_DETALLEXORDEN"
-    join "TBL_ORDEN" ON 
-     "TBL_DETALLEXORDEN"."ORD_ID" = "TBL_ORDEN"."ORD_ID" 
-    join "TBL_PRODUCTO" ON 
-     "TBL_DETALLEXORDEN"."PRO_ID" = "TBL_PRODUCTO"."PRO_ID" 
+	join "TBL_ORDEN" ON 
+	 "TBL_DETALLEXORDEN"."ORD_ID" = "TBL_ORDEN"."ORD_ID" 
+	join "TBL_PRODUCTO" ON 
+	 "TBL_DETALLEXORDEN"."PRO_ID" = "TBL_PRODUCTO"."PRO_ID" 
+	INNER JOIN "TBL_RESTAURANTE" ON 
+	 "TBL_PRODUCTO"."RES_ID" = "TBL_RESTAURANTE"."RES_ID" 
 WHERE 
-     "TBL_ORDEN"."ORD_FECHA" BETWEEN $P{Inicial} AND $P{Final}
+	 "TBL_ORDEN"."ORD_FECHA" BETWEEN $P{Inicial} AND $P{Final} 
+	 AND "TBL_RESTAURANTE"."RES_ID" = $P{IDrestaurante} 
 GROUP BY "TBL_PRODUCTO"."PRO_NOMBRE"
 ORDER BY total DESC]]>
 	</queryString>
