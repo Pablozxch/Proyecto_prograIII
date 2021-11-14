@@ -19,8 +19,8 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="54.0" prefWidth="674.0" spacing="25.0">
                      <children>
-                        <JFXDatePicker fx:id="dtpFechaInicial" defaultColor="#f9d5a7" promptText="Fecha Inicial" />
-                        <JFXDatePicker fx:id="dtpFechaFinal" defaultColor="#f9d5a7" overLay="true" promptText="Fecha Final" />
+                        <JFXDatePicker fx:id="dtpFechaInicial" promptText="Fecha Inicial" />
+                        <JFXDatePicker fx:id="dtpFechaFinal" promptText="Fecha Final" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="43.0" prefWidth="674.0">
@@ -31,7 +31,7 @@
                               <Insets left="-8.0" />
                            </HBox.margin>
                         </JFXToggleButton>
-                        <JFXButton fx:id="btnAceptar" onAction="#click" text="Generar">
+                        <JFXButton fx:id="btnAceptar" onAction="#click" prefHeight="48.0" prefWidth="150.0" text="Generar">
                            <HBox.margin>
                               <Insets left="35.0" />
                            </HBox.margin></JFXButton>
@@ -42,7 +42,7 @@
                      <children>
                         <JFXDatePicker fx:id="dtpFechaCierreCaja" defaultColor="#f9d5a7" promptText="Fecha cierre caja" />
                         <JFXTextField fx:id="txtIdEmpleado" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefWidth="210.0" promptText="ID del cajero" />
-                        <JFXButton fx:id="btnGenerar" onAction="#click" text="Generar" />
+                        <JFXButton fx:id="btnGenerar" onAction="#click" prefHeight="48.0" prefWidth="150.0" text="Generar" />
                      </children>
                   </HBox>
                </children>
