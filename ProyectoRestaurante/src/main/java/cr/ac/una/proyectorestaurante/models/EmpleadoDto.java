@@ -23,6 +23,8 @@ public class EmpleadoDto
     private RolDto rolDto;
     private RestauranteDto restauranteDto;
     private Boolean modificado;
+    
+    private String token;
 
     public EmpleadoDto()
     {
@@ -130,6 +132,14 @@ public class EmpleadoDto
     public void setModificado(Boolean modificado)
     {
         this.modificado = modificado;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     @Override

@@ -22,42 +22,61 @@ import java.util.concurrent.TimeUnit;
 public class JwTokenHelper {
 
     private static JwTokenHelper jwTokenHelper = null;
-    private static final long EXPIRATION_LIMIT = 100;
-    private static final long EXPIRATION_RENEWAL_LIMIT = 2;
+    private static final long EXPIRATION_LIMIT = 1;
+    private static final long EXPIRATION_RENEW_LIMIT = 5;
     private static final String AUTHENTICATION_SCHEME = "Bearer ";
-    private final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);    //genera una llave (string con datos) 
+    private final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
-    private JwTokenHelper() {
+    private JwTokenHelper()
+    {
     }
 
-    public static JwTokenHelper getInstance() {
-        if (jwTokenHelper == null) {
+    public static JwTokenHelper getInstance()
+    {
+        if(jwTokenHelper == null)
+        {
             jwTokenHelper = new JwTokenHelper();
         }
         return jwTokenHelper;
     }
 
-    public String generatePrivateKey(String username) {
+    public String generatePrivateKey(String username)
+    {
         return AUTHENTICATION_SCHEME + Jwts
-                .builder()
-                .setSubject(username)
-                .setIssuedAt(new Date())
-                .setExpiration(getExpirationDate())
-                .signWith(key)
-                .compact();
+                  .builder()
+                  .setSubject(username)
+                  .setIssuedAt(new Date())
+                  .setExpiration(getExpirationDate(false))
+                  .claim("rnw" ,
+                            (AUTHENTICATION_SCHEME + Jwts
+                                      .builder()
+                                      .setSubject(username)
+                                      .setIssuedAt(new Date())
+                                      .setExpiration(getExpirationDate(true))
+                                      .signWith(key)
+                                      .compact()))
+                  .
+                  signWith(key)
+                  .compact();
     }
 
-    public Claims claimKey(String privateKey) throws ExpiredJwtException, MalformedJwtException {       //permite obtener el setsubject, setIssuedAt, setExpiration, etc
+    public Claims claimKey(String privateKey) throws ExpiredJwtException , MalformedJwtException        //permite obtener el setsubject, setIssuedAt, setExpiration, etc
+    {
         return Jwts
-                .parser() //descifra el token para descifrar si todavia está vigente y más cosas, si hay lago malo entonces este metodo devuelve si está expirado o erroneo
-                .setSigningKey(key)
-                .parseClaimsJws(privateKey) //mediante la privateKey, si esta es correcta, entonces se obtendrá todo el body
-                .getBody();
+                  .parser() //descifra el token para descifrar si todavia está vigente y más cosas, si hay lago malo entonces este metodo devuelve si está expirado o erroneo
+                  .setSigningKey(key)
+                  .parseClaimsJws(privateKey)       //mediante la privateKey, si esta es correcta, entonces se obtendrá todo el body
+                  .getBody();
     }
 
-    private Date getExpirationDate() {
+    private Date getExpirationDate(boolean renewal)
+    {
         long currentTimeInMillis = System.currentTimeMillis();
         long expMilliSeconds = TimeUnit.MINUTES.toMillis(EXPIRATION_LIMIT);
+        if(renewal)
+        {
+            expMilliSeconds = TimeUnit.MINUTES.toMillis(EXPIRATION_RENEW_LIMIT);
+        }
         return new Date(currentTimeInMillis + expMilliSeconds);
     }
 }

@@ -68,7 +68,7 @@ public class CierreCajaService
             parametros.put("inicio" , Inicio);
             parametros.put("idcierre" , idCierre);
             parametros.put("idres" , idRes);
-            Request request = new Request("CierreCajaController/cierrecaja" , "/{inicio}/{idcierre}/{idres}" , parametros);
+            Request request = new Request("CierreCajaController/cierrecajero" , "/{inicio}/{idcierre}/{idres}" , parametros);
             request.get();
             if(request.isError())
             {

@@ -25,8 +25,7 @@ import javafx.stage.Stage;
  *
  * @author Christopher
  */
-public class LogInController extends Controller implements Initializable
-{
+public class LogInController extends Controller implements Initializable {
 
     @FXML
     private JFXTextField txtUsuario;
@@ -47,44 +46,42 @@ public class LogInController extends Controller implements Initializable
     CierreCajaService cajaService = new CierreCajaService();
 
     @Override
-    public void initialize(URL url , ResourceBundle rb)
-    {
+    public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
 
     @FXML
-    private void click(ActionEvent event)
-    {
+    private void click(ActionEvent event) {
 
-        if(event.getSource() == btnContinuar)
-        {
-            String user = txtUsuario.getText();
-            String contra = txtContrasena.getText();
-            Respuesta res = empleadoService.validarEmpleado(user , contra);
-            if(res.getEstado())
-            {
-                emp = (EmpleadoDto) res.getResultado("Empleado");
-                rol = emp.getRolDto();
-                AppContext.getInstance().set("RolActual" , rol);
-                AppContext.getInstance().set("EmpleadoActual" , emp);
-                new Mensaje().show(Alert.AlertType.INFORMATION , "Datos" , "Empleado " + emp.getNombre() + " Encontrado ");
-                getStage().close();
+        if (event.getSource() == btnContinuar) {
+            if (txtUsuario.getText() == null || txtUsuario.getText().isEmpty()) {
+                new Mensaje().showModal(Alert.AlertType.ERROR, "Validación de usuario", (Stage) btnContinuar.getScene().getWindow(), "Es necesario digitar un usuario para ingresar al sistema.");
+            } else if (txtContrasena.getText() == null || txtContrasena.getText().isEmpty()) {
+                new Mensaje().showModal(Alert.AlertType.ERROR, "Validación de usuario", (Stage) btnContinuar.getScene().getWindow(), "Es necesario digitar la clave para ingresar al sistema.");
+            } else {
+                String user = txtUsuario.getText();
+                String contra = txtContrasena.getText();
+                Respuesta res = empleadoService.validarEmpleado(user, contra);
+                if (res.getEstado()) {
+                    emp = (EmpleadoDto) res.getResultado("Empleado");
+                    rol = emp.getRolDto();
+                    AppContext.getInstance().set("RolActual", rol);
+                    AppContext.getInstance().set("EmpleadoActual", emp);
+                    AppContext.getInstance().set("Token", emp.getToken());
+                    new Mensaje().show(Alert.AlertType.INFORMATION, "Datos Correctos.", "Empleado " + emp.getNombre() + " encontrado ");
+                    getStage().close();
+                } else {
+                    new Mensaje().show(Alert.AlertType.ERROR, "Datos", "Los datos no existen o están mal digitados");
+                }
             }
-            else
-            {
-                new Mensaje().show(Alert.AlertType.ERROR , "Datos" , "Los datos no existen o están mal digitados");
-            }
-
         }
-        if(event.getSource() == btnCancelar)
-        {
-
+        if (event.getSource() == btnCancelar) {
+            ((Stage) btnCancelar.getScene().getWindow()).close();
         }
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

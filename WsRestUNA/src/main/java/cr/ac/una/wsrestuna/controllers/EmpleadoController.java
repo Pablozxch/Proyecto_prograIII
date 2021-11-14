@@ -20,12 +20,16 @@ import javax.ws.rs.core.*;
  *
  * @author jp015
  */
+@Secure
 @Path("/EmpleadoController")
 public class EmpleadoController
 {
 
     @EJB
     EmpleadoService empleadoServices;
+    
+    @Context
+    SecurityContext securityContext;
 
     @GET
     @Path("/ping")
@@ -146,6 +150,29 @@ public class EmpleadoController
         {
             Logger.getLogger(EmpleadoController.class.getName()).log(Level.SEVERE , null , ex);
             return Response.status(CodigoRespuesta.ERROR_INTERNO.getValue()).entity("Error al obtener el empleado ").build();//TODO
+        }
+    }
+    @GET
+    @Path("/renovar")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response renovarToken()
+    {
+        try
+        {
+            String usuarioRequest = securityContext.getUserPrincipal().getName();
+            if(usuarioRequest != null && !usuarioRequest.isBlank())
+            {
+                return Response.ok(JwTokenHelper.getInstance().generatePrivateKey(usuarioRequest)).build();
+            }
+            else
+            {
+                return Response.status(CodigoRespuesta.ERROR_PERMISOS.getValue()).entity("Error renovando el token").build();
+            }
+        }
+        catch(Exception e)
+        {
+            Logger.getLogger(EmpleadoController.class.getName()).log(Level.SEVERE , null , e);
+            return Response.status(CodigoRespuesta.ERROR_INTERNO.getValue()).entity("Error renovando el token").build();//TODO
         }
     }
 }

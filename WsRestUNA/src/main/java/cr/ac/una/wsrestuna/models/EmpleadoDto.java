@@ -9,8 +9,7 @@ package cr.ac.una.wsrestuna.models;
  *
  * @author jp015
  */
-public class EmpleadoDto
-{
+public class EmpleadoDto {
 
     private Long id;
     private String nombre;
@@ -21,14 +20,13 @@ public class EmpleadoDto
     private RolDto rolDto;
     private RestauranteDto restauranteDto;
     private Boolean modificado;
+    private String token;
 
-    public EmpleadoDto()
-    {
+    public EmpleadoDto() {
         this.modificado = false;
     }
 
-    public EmpleadoDto(Empleado empleado)
-    {
+    public EmpleadoDto(Empleado empleado) {
         this();
         this.id = empleado.getEmpId();
         this.nombre = empleado.getEmpNombre();
@@ -40,99 +38,88 @@ public class EmpleadoDto
         this.restauranteDto = new RestauranteDto(empleado.getResId());
     }
 
-    public Long getId()
-    {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Long id)
-    {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getNombre()
-    {
+    public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nombre)
-    {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public String getApellido()
-    {
+    public String getApellido() {
         return apellido;
     }
 
-    public void setApellido(String apellido)
-    {
+    public void setApellido(String apellido) {
         this.apellido = apellido;
     }
 
-    public String getUsuario()
-    {
+    public String getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(String usuario)
-    {
+    public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
 
-    public String getContra()
-    {
+    public String getContra() {
         return contra;
     }
 
-    public void setContra(String contra)
-    {
+    public void setContra(String contra) {
         this.contra = contra;
     }
 
-    public byte[] getFoto()
-    {
+    public byte[] getFoto() {
         return foto;
     }
 
-    public void setFoto(byte[] foto)
-    {
+    public void setFoto(byte[] foto) {
         this.foto = foto;
     }
 
-    public RolDto getRolDto()
-    {
+    public RolDto getRolDto() {
         return rolDto;
     }
 
-    public void setRolDto(RolDto rolDto)
-    {
+    public void setRolDto(RolDto rolDto) {
         this.rolDto = rolDto;
     }
 
-    public RestauranteDto getRestauranteDto()
-    {
+    public RestauranteDto getRestauranteDto() {
         return restauranteDto;
     }
 
-    public void setRestauranteDto(RestauranteDto restauranteDto)
-    {
+    public void setRestauranteDto(RestauranteDto restauranteDto) {
         this.restauranteDto = restauranteDto;
     }
 
-    public Boolean getModificado()
-    {
+    public Boolean getModificado() {
         return modificado;
     }
 
-    public void setModificado(Boolean modificado)
-    {
+    public void setModificado(Boolean modificado) {
         this.modificado = modificado;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("EmpleadoDto{id=").append(id);
         sb.append(", nombre=").append(nombre);

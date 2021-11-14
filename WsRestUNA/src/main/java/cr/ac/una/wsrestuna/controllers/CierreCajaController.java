@@ -116,7 +116,7 @@ public class CierreCajaController
     }
 
     @GET
-    @Path("/cierrecaja/{fecha}/{idEmp}/{idres}")
+    @Path("/cierrecajero/{fecha}/{idEmp}/{idres}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response reporteCierreCajero(@PathParam("fecha") String fecha , @PathParam("idEmp") Long idEmp , @PathParam("idres") Long idRes)
