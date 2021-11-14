@@ -187,7 +187,20 @@ public class PrincipalController extends Controller implements Initializable
         }
         if(event.getSource() == btnCierreCajas)
         {
-            FlowController.getInstance().goView("CierreCajas");
+            CierreCajasController cr = (CierreCajasController) FlowController.getInstance().getController("CierreCajas");
+            if(((CierrecajasDto) AppContext.getInstance().get("CierreCajasActual")) == null)
+            {
+                System.out.println("No se cuaenta con cierre de cajas");
+                FlowController.getInstance().goView("CierreCajas");
+                cr.createCierre();
+            }
+            else
+            {
+                System.out.println("Se cuenta con cierre de cajas");
+                FlowController.getInstance().goView("CierreCajas");
+                cr.closeCierreCajas();
+            }
+
         }
         if(event.getSource() == btnSalir)
         {

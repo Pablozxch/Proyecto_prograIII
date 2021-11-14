@@ -64,28 +64,6 @@ public class LogInController extends Controller implements Initializable
             if(res.getEstado())
             {
                 emp = (EmpleadoDto) res.getResultado("Empleado");
-                if(!"Salonero".equals(emp.getRolDto().getNombre()))
-                {
-                    cierre.setEmpleadoDto(emp);
-                    cierre.setMontoInicial(0L);
-                    cierre.setMontoEfectivo(0L);
-                    cierre.setMontoFinal(0L);
-                    cierre.setMontoTarjeta(0L);
-                    cierre.setEstado("C");
-
-                    Respuesta res2 = cajaService.guardarCierrecajas(cierre);
-                    if(res2.getEstado())
-                    {
-                        Respuesta res3=cajaService.lasto();
-                        cierre = (CierrecajasDto) res3.getResultado("CierreCaja");
-                        AppContext.getInstance().set("CierreCajasActual" , cierre);
-                    }
-                    else
-                    {
-                        new Mensaje().show(Alert.AlertType.ERROR , "Datos" , "No guarda");
-                    }
-
-                }
                 rol = emp.getRolDto();
                 AppContext.getInstance().set("RolActual" , rol);
                 AppContext.getInstance().set("EmpleadoActual" , emp);

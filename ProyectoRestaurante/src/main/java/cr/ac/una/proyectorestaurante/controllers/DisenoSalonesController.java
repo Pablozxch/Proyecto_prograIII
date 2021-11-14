@@ -141,7 +141,7 @@ public class DisenoSalonesController extends Controller implements Initializable
                             OrdenDto odd = new OrdenDto();
                             odd.setEmpleadoDto(emp);
                             Date date = new Date();
-                            SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");                        
+                            SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
                             Date date2 = formatter1.parse(formatter1.format(date));
                             odd.setFecha(date2);
                             odd.setMesaDto(mesaclick);

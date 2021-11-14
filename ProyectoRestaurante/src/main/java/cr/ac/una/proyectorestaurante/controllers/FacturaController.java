@@ -140,33 +140,18 @@ public class FacturaController extends Controller implements Initializable
         if(event.getSource() == btnPagar)
         {
             cancelado = true;
-            emp = (EmpleadoDto) AppContext.getInstance().get("EmpleadoActual");
             RolDto rol = (RolDto) AppContext.getInstance().get("RolActual");
             if(!"Salonero".equals(rol.getNombre()) && cierreCajas == null)
             {
-                cierre.setEmpleadoDto(emp);
-                cierre.setMontoInicial(0L);
-                cierre.setMontoEfectivo(0L);
-                cierre.setMontoFinal(0L);
-                cierre.setMontoTarjeta(0L);
-                cierre.setEstado("C");
-
-                Respuesta res2 = cajaService.guardarCierrecajas(cierre);
-                if(res2.getEstado())
-                {
-                    Respuesta res3 = cajaService.lasto();
-                    cierre = (CierrecajasDto) res3.getResultado("CierreCaja");
-                    System.out.println("El cierre es " + cierre);
-                    AppContext.getInstance().set("CierreCajasActual" , cierre);
-                }
-                else
-                {
-                    new Mensaje().show(Alert.AlertType.ERROR , "Datos" , "No guarda");
-                }
+                CierreCajasController cr=(CierreCajasController) FlowController.getInstance().getController("CierreCajas");
+                cr.createCierre();
+                FlowController.getInstance().goViewInWindowModal("CierreCajas" , getStage() , Boolean.FALSE); 
+                
             }
 
             MesaService mesaService = new MesaService();
             CierrecajasDto cierre = (CierrecajasDto) AppContext.getInstance().get("CierreCajasActual");
+
             MesaDto mesaDto = ordenDto.getMesaDto();
             mesaDto.setEstado("D");
             mesaService.guardarMesa(mesaDto);//se actualiza el estado de la mesa para no tomar ordenes ya canceladas
