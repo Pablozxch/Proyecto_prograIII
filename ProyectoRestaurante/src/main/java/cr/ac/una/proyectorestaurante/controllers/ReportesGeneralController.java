@@ -10,18 +10,19 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
 import java.net.URL;
+import java.time.format.FormatStyle;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.util.converter.LocalDateStringConverter;
 
 /**
  * FXML Controller class
  *
  * @author Christopher
  */
-public class ReportesGeneralController extends Controller implements Initializable
-{
+public class ReportesGeneralController extends Controller implements Initializable {
 
     @FXML
     private JFXDatePicker dtpFechaInicial;
@@ -42,20 +43,23 @@ public class ReportesGeneralController extends Controller implements Initializab
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url , ResourceBundle rb)
-    {
+    public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        dtpFechaInicial.setConverter(new LocalDateStringConverter(FormatStyle.MEDIUM));
+
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @FXML
-    private void click(ActionEvent event)
-    {
+    private void click(ActionEvent event) {
+
+        if (event.getSource() == btnAceptar) {
+            System.out.println(dtpFechaInicial.getValue());
+        }
     }
 
 }

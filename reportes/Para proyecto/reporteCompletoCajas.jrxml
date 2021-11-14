@@ -1,17 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteCompletoCajas" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2e67d741-c552-4d69-8f78-98439a6f3adb">
-	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[IlRCTF9SRVNUQVVSQU5URSIgQVMgLDU2MywxMjIsOGY4MTU4OTktNjM4ZC00ZWFiLTliYzAtNzZj
+N2FlN2UxMTZiOyJUQkxfQ0lFUlJFQ0FKQVMiICwyMDAsMTUsMDM4MjZkMTAtOTBlOS00N2EwLWJh
+YWItNzc1MWJmMjBjNjVhOyJUQkxfT1JERU4iICwyMDAsMjg4LGQzMDc2NzU1LWQ3YzEtNDM1Mi04
+NzNiLTE2YTgwMjk3MmQ1YTsiVEJMX0VNUExFQURPIiAsMzk0LDEyNSw2MTMyOTI0Yi1iMjdhLTQy
+ODQtODY2Yy04NzNmYzRiMWE2Mzg7IlRCTF9GQUNUVVJBIiAsMTUsMTEyLGQ4MDMxZWY3LTgzZGIt
+NDhiNy05NzlhLWY3ZjlmYTBhNjYxMTs=]]>
+	</property>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="OJDBC 7"/>
 	<parameter name="ID" class="java.lang.String"/>
+	<parameter name="FECHA" class="java.lang.String"/>
 	<queryString language="SQL">
-		<![CDATA[SELECT "EMP_ID",
-	"CCAJ_MONTOEFECTIVO",
-	"CCAJ_MONTOTARJETA",
-	"CCJA_MONTOFINAL",
-	"CCAJ_MONTOINICIAL"
-FROM "TBL_CIERRECAJAS"
-WHERE "TBL_CIERRECAJAS"."EMP_ID" = $P{ID}]]>
+		<![CDATA[SELECT "TBL_CIERRECAJAS"."EMP_ID",
+	"TBL_CIERRECAJAS"."CCAJ_MONTOEFECTIVO",
+	"TBL_CIERRECAJAS"."CCAJ_MONTOTARJETA",
+	"TBL_CIERRECAJAS"."CCJA_MONTOFINAL",
+	"TBL_CIERRECAJAS"."CCAJ_MONTOINICIAL",
+	"TBL_CIERRECAJAS"."CCAJ_MONTOTARJETA",
+	"TBL_CIERRECAJAS"."CCAJ_MONTOEFECTIVO",
+	"TBL_CIERRECAJAS"."CCJA_MONTOFINAL",
+	"TBL_CIERRECAJAS"."CCAJ_MONTOINICIAL",
+	"TBL_CIERRECAJAS"."EMP_ID",
+	"TBL_EMPLEADO"."EMP_NOMBRE",
+	"TBL_RESTAURANTE"."RES_NOMBRE",
+	"TBL_RESTAURANTE"."RES_CORREO"
+FROM "TBL_FACTURA"
+	INNER JOIN "TBL_CIERRECAJAS" ON 
+	 "TBL_FACTURA"."CCAJ_ID" = "TBL_CIERRECAJAS"."CCAJ_ID" 
+	INNER JOIN "TBL_EMPLEADO" ON 
+	 "TBL_CIERRECAJAS"."EMP_ID" = "TBL_EMPLEADO"."EMP_ID" 
+	INNER JOIN "TBL_ORDEN" ON 
+	 "TBL_FACTURA"."ORD_ID" = "TBL_ORDEN"."ORD_ID" 
+	INNER JOIN "TBL_RESTAURANTE" ON 
+	 "TBL_EMPLEADO"."RES_ID" = "TBL_RESTAURANTE"."RES_ID" 
+WHERE 
+	 "TBL_CIERRECAJAS"."EMP_ID" = $P{ID} 
+	 AND "TBL_ORDEN"."ORD_FECHA" = $P{FECHA}]]>
 	</queryString>
 	<field name="EMP_ID" class="java.math.BigDecimal">
 		<property name="com.jaspersoft.studio.field.name" value="EMP_ID"/>
@@ -33,6 +59,38 @@ WHERE "TBL_CIERRECAJAS"."EMP_ID" = $P{ID}]]>
 		<property name="com.jaspersoft.studio.field.name" value="CCAJ_MONTOINICIAL"/>
 		<property name="com.jaspersoft.studio.field.label" value="CCAJ_MONTOINICIAL"/>
 	</field>
+	<field name="COLUMN_6" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="CCAJ_MONTOTARJETA"/>
+		<property name="com.jaspersoft.studio.field.label" value="CCAJ_MONTOTARJETA"/>
+	</field>
+	<field name="COLUMN_7" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="CCAJ_MONTOEFECTIVO"/>
+		<property name="com.jaspersoft.studio.field.label" value="CCAJ_MONTOEFECTIVO"/>
+	</field>
+	<field name="COLUMN_8" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="CCJA_MONTOFINAL"/>
+		<property name="com.jaspersoft.studio.field.label" value="CCJA_MONTOFINAL"/>
+	</field>
+	<field name="COLUMN_9" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="CCAJ_MONTOINICIAL"/>
+		<property name="com.jaspersoft.studio.field.label" value="CCAJ_MONTOINICIAL"/>
+	</field>
+	<field name="COLUMN_10" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="EMP_ID"/>
+		<property name="com.jaspersoft.studio.field.label" value="EMP_ID"/>
+	</field>
+	<field name="EMP_NOMBRE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="EMP_NOMBRE"/>
+		<property name="com.jaspersoft.studio.field.label" value="EMP_NOMBRE"/>
+	</field>
+	<field name="RES_NOMBRE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="RES_NOMBRE"/>
+		<property name="com.jaspersoft.studio.field.label" value="RES_NOMBRE"/>
+	</field>
+	<field name="RES_CORREO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="RES_CORREO"/>
+		<property name="com.jaspersoft.studio.field.label" value="RES_CORREO"/>
+	</field>
 	<group name="EMP_ID">
 		<groupExpression><![CDATA[$F{EMP_ID}]]></groupExpression>
 	</group>
@@ -51,25 +109,48 @@ WHERE "TBL_CIERRECAJAS"."EMP_ID" = $P{ID}]]>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
-	<columnHeader>
-		<band height="60" splitType="Stretch">
+	<title>
+		<band height="56">
 			<staticText>
-				<reportElement x="0" y="30" width="110" height="30" uuid="50a681e9-9aef-41df-9319-8457a7465f8d">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4c29e9cd-6404-46b7-9c2a-19f5c4ff14d9"/>
-				</reportElement>
-				<box>
-					<topPen lineWidth="1.0" lineStyle="Solid"/>
-					<leftPen lineWidth="1.0" lineStyle="Solid"/>
-					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
-					<rightPen lineWidth="1.0" lineStyle="Solid"/>
-				</box>
+				<reportElement x="170" y="32" width="230" height="24" uuid="6a2c777e-072c-4158-b703-fbdbe5caa924"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial Black" isBold="true"/>
+					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[ID del empleado]]></text>
+				<text><![CDATA[Reporte completo del cierre de caja]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="140" y="0" width="130" height="30" uuid="5796f7a8-439a-4de0-86d0-79bcb6c9edf6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{RES_NOMBRE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="0" width="170" height="30" uuid="8451a981-dc96-44d4-96c9-df7e66a69f81"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{RES_CORREO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="270" y="0" width="110" height="30" uuid="fda8fc40-e903-4377-9a46-a57f4fb82d1c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Black"/>
+				</textElement>
+				<text><![CDATA[Correo del restaurante]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="110" y="30" width="100" height="30" uuid="d3bce097-00ad-40bd-91e5-59a29519219c">
+				<reportElement x="0" y="0" width="140" height="30" uuid="4a9f9683-3ed9-4c5b-acef-3b57a3f63f2e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Black"/>
+				</textElement>
+				<text><![CDATA[Nombre del restaurante]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="550" height="30" backcolor="#DB7876" uuid="5bae3a68-6c08-43a8-81fb-a31931cf2bbb"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="110" y="0" width="100" height="30" uuid="d3bce097-00ad-40bd-91e5-59a29519219c">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bf22593d-3191-4926-92aa-17a5ad7c8346"/>
 				</reportElement>
 				<box>
@@ -79,12 +160,12 @@ WHERE "TBL_CIERRECAJAS"."EMP_ID" = $P{ID}]]>
 					<rightPen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial Black" isBold="true"/>
+					<font fontName="Arial Black" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Monto Inicial]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="210" y="30" width="120" height="30" uuid="6f2f9d53-fec6-4b10-8742-9fbcf64dbe63">
+				<reportElement x="210" y="0" width="120" height="30" uuid="6f2f9d53-fec6-4b10-8742-9fbcf64dbe63">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cf7ba482-5130-4ba0-8340-14842c47aae0"/>
 				</reportElement>
 				<box>
@@ -94,12 +175,12 @@ WHERE "TBL_CIERRECAJAS"."EMP_ID" = $P{ID}]]>
 					<rightPen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial Black" isBold="true"/>
+					<font fontName="Arial Black" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Monto recibido en efectivo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="330" y="30" width="110" height="30" uuid="55a719d5-5526-4960-aa6f-ed670f3ac23b">
+				<reportElement x="330" y="0" width="110" height="30" uuid="55a719d5-5526-4960-aa6f-ed670f3ac23b">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6584e106-b0c2-4a68-8783-40d8083c31db"/>
 				</reportElement>
 				<box>
@@ -109,12 +190,12 @@ WHERE "TBL_CIERRECAJAS"."EMP_ID" = $P{ID}]]>
 					<rightPen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial Black" isBold="true"/>
+					<font fontName="Arial Black" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Monto recibido de tarjetas]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="440" y="30" width="110" height="30" uuid="42a91544-0c7d-4944-ac43-dbf7a93a5150">
+				<reportElement x="440" y="0" width="110" height="30" uuid="42a91544-0c7d-4944-ac43-dbf7a93a5150">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d0d35d14-4437-4c36-b1c0-d0392b199358"/>
 				</reportElement>
 				<box>
@@ -124,27 +205,13 @@ WHERE "TBL_CIERRECAJAS"."EMP_ID" = $P{ID}]]>
 					<rightPen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial Black" isBold="true"/>
+					<font fontName="Arial Black" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Monto final]]></text>
 			</staticText>
-			<rectangle>
-				<reportElement x="0" y="0" width="550" height="24" backcolor="#DB7876" uuid="5bae3a68-6c08-43a8-81fb-a31931cf2bbb"/>
-			</rectangle>
 			<staticText>
-				<reportElement x="150" y="0" width="230" height="24" uuid="6a2c777e-072c-4158-b703-fbdbe5caa924"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Reporte completo del cierre de caja]]></text>
-			</staticText>
-		</band>
-	</columnHeader>
-	<detail>
-		<band height="30" splitType="Stretch">
-			<textField>
-				<reportElement x="0" y="0" width="110" height="30" uuid="7743bf02-dcf6-4d9c-9576-4f7a619ea4b6">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4c29e9cd-6404-46b7-9c2a-19f5c4ff14d9"/>
+				<reportElement x="0" y="0" width="110" height="30" uuid="a75a2abd-1927-4f1c-8c1f-e669d0fd4c71">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="24b19581-97d0-4513-95ed-73851fd23da7"/>
 				</reportElement>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid"/>
@@ -153,10 +220,14 @@ WHERE "TBL_CIERRECAJAS"."EMP_ID" = $P{ID}]]>
 					<rightPen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" isBold="true"/>
+					<font fontName="Arial Black" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{EMP_ID}]]></textFieldExpression>
-			</textField>
+				<text><![CDATA[Nombre del Empleado]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="56" splitType="Stretch">
 			<textField>
 				<reportElement x="110" y="0" width="100" height="30" uuid="e3e9e508-c925-46cd-8b2d-bda1016603e8">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bf22593d-3191-4926-92aa-17a5ad7c8346"/>
@@ -217,6 +288,22 @@ WHERE "TBL_CIERRECAJAS"."EMP_ID" = $P{ID}]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{CCJA_MONTOFINAL}]]></textFieldExpression>
 			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="0" y="0" width="110" height="30" uuid="ca3d546e-4151-4bec-a962-29e1b5059e3a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="24b19581-97d0-4513-95ed-73851fd23da7"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{EMP_NOMBRE}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
+	<columnFooter>
+		<band height="50"/>
+	</columnFooter>
 </jasperReport>
