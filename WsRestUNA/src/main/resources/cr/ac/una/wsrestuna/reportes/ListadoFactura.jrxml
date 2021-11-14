@@ -104,7 +104,7 @@ WHERE
 						<bottomPen lineWidth="1.0" lineStyle="Solid"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="Arial Black"/>
+						<font fontName="Arial" size="12"/>
 					</textElement>
 					<text><![CDATA[ID de la factura]]></text>
 				</staticText>
@@ -132,7 +132,7 @@ WHERE
 						<rightPen lineWidth="1.0" lineStyle="Solid"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="Arial Black"/>
+						<font fontName="Arial" size="12"/>
 					</textElement>
 					<text><![CDATA[Nombre corto del producto]]></text>
 				</staticText>
@@ -147,7 +147,7 @@ WHERE
 						<rightPen lineWidth="1.0" lineStyle="Solid"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="Arial Black"/>
+						<font fontName="Arial" size="12"/>
 					</textElement>
 					<text><![CDATA[Subtotal]]></text>
 				</staticText>
@@ -162,7 +162,7 @@ WHERE
 						<rightPen lineWidth="1.0" lineStyle="Solid"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="Arial Black"/>
+						<font fontName="Arial" size="12"/>
 					</textElement>
 					<text><![CDATA[Cantidad pedidos]]></text>
 				</staticText>
@@ -177,7 +177,7 @@ WHERE
 						<rightPen lineWidth="1.0" lineStyle="Solid"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="Arial Black"/>
+						<font fontName="Arial" size="12"/>
 					</textElement>
 					<text><![CDATA[Precio unidad]]></text>
 				</staticText>
@@ -192,7 +192,7 @@ WHERE
 						<rightPen lineWidth="1.0" lineStyle="Solid"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="arial black"/>
+						<font fontName="Arial" size="12"/>
 					</textElement>
 					<text><![CDATA[Precio cantidad]]></text>
 				</staticText>
@@ -221,7 +221,7 @@ WHERE
 						<rightPen lineWidth="1.0" lineStyle="Solid"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="Arial Black"/>
+						<font fontName="Arial" size="12"/>
 					</textElement>
 					<text><![CDATA[Total con impuestos]]></text>
 				</staticText>
@@ -251,7 +251,7 @@ WHERE
 			<staticText>
 				<reportElement x="390" y="0" width="110" height="30" uuid="bef0cb10-fd1f-459f-aaea-8e6657df365f"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial Black"/>
+					<font fontName="Arial" size="12"/>
 				</textElement>
 				<text><![CDATA[Correo del restaurante:]]></text>
 			</staticText>
@@ -263,7 +263,7 @@ WHERE
 			<staticText>
 				<reportElement x="10" y="0" width="180" height="30" uuid="03a1754a-99a4-4b39-96ed-03aeca80556b"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial Black"/>
+					<font fontName="Arial" size="12"/>
 				</textElement>
 				<text><![CDATA[Listado de facturas del restaurante]]></text>
 			</staticText>
