@@ -182,7 +182,7 @@ public class FacturaService
         }
     }
 
-    public Respuesta reporteListadoFacturas(Long IDrestaurante , String Inicio , String Final)
+    public Respuesta reporteListadoFacturas(Long IDrestaurante , String ii , String ff)
     {
 
         try
@@ -195,11 +195,11 @@ public class FacturaService
 
             HashMap<String , Object> map = new HashMap<>();
             map.put("IDrestaurante" , IDrestaurante);
-            map.put("Inicio" , Inicio);
-            map.put("Final" , Final);
+            map.put("Inicio" , ii);
+            map.put("Final" , ff);
             JasperPrint print = JasperFillManager.fillReport(jasper , map , connection);
             String a = JasperExportManager.exportReportToXml(print);
-            System.out.println(a);
+            System.out.println(JasperExportManager.exportReportToHtmlFile(a));
             byte[] s = JasperExportManager.exportReportToPdf(print);
             return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "" , "Factura" , s);
 

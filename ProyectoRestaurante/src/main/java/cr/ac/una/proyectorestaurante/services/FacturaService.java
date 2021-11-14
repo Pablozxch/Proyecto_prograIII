@@ -111,4 +111,31 @@ public class FacturaService
             return new Respuesta(false , "Error guardando el factura." , "guardarFactura " + ex.getMessage());
         }
     }
+
+    public Respuesta reportelistadofacturas(String fechaI , String fechaF , Long idRes)
+    {
+        try
+        {
+            System.out.println("wenas");
+            Map<String , Object> parametros = new HashMap<>();
+            parametros.put("fechai" , fechaI);
+            parametros.put("fechaf" , fechaF);
+            parametros.put("idres" , idRes);
+            Request request = new Request("FacturaController/factura" , "/{idres}/{fechai}/{fechaf}" , parametros);
+            request.get();
+            if(request.isError())
+            {
+                return new Respuesta(false , request.getError() , "");
+
+            }
+            byte[] bytes = (byte[]) request.readEntity(byte[].class);
+            return new Respuesta(true , "" , "" , "Factura" , bytes);
+        }
+        catch(Exception ex)
+        {
+            System.out.println("picha");
+            return new Respuesta(false , "Error obteniendo el usuario." , "getUsuario " + ex.getMessage());
+        }
+    }
+
 }

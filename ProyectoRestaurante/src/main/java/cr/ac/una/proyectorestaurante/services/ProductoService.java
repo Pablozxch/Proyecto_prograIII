@@ -89,23 +89,23 @@ public class ProductoService
         }
     }
 
-    public Respuesta productosMVendidos(String Inicio , String Final , Long idRes)
+    public Respuesta productosMVendidos(String fechaI , String fechaF , Long idRes)
     {
         try
         {
             System.out.println("wenas");
             Map<String , Object> parametros = new HashMap<>();
-            parametros.put("inicio" , Inicio);
-            parametros.put("finall" , Final);
-            parametros.put("idRes" , idRes);
-            Request request = new Request("ProductoController/producto" , "/{inicio}/{finall}/{idRes}" , parametros);
+            parametros.put("fechai" , fechaI);
+            parametros.put("fechaf" , fechaF);
+            parametros.put("idres" , idRes);
+            Request request = new Request("ProductoController/producto" , "/{fechai}/{fechaf}/{idres}" , parametros);
             request.get();
             if(request.isError())
             {
                 return new Respuesta(false , request.getError() , "");
 
             }
-            Byte[] bytes = (Byte[]) request.readEntity(Byte.class);
+            byte[] bytes = (byte[]) request.readEntity(byte[].class);
             return new Respuesta(true , "" , "" , "Productos" , bytes);
         }
         catch(Exception ex)

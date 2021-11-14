@@ -78,44 +78,49 @@ public class ReportesGeneralController extends Controller implements Initializab
             }
             else
             {
-                String fechaI = null, fechaF = null, fechaC = null;
-                if(dtpFechaInicial.getValue() != null)
-                {
-                    fechaI = DATE_FORMATTER.format(dtpFechaInicial.getValue());
-                }
-                else if(dtpFechaFinal.getValue() != null)
-                {
-                    fechaF = DATE_FORMATTER.format(dtpFechaFinal.getValue());
-                }
-                else if(dtpFechaCierreCaja.getValue() != null)
-                {
-                    fechaC = DATE_FORMATTER.format(dtpFechaCierreCaja.getValue());
-                }
-
                 if(tgllstadoyProductos.isSelected())
                 {
 
                     System.out.println("listado de facturas");
-                }
-                else if(!tgllstadoyProductos.isSelected())
-                {
-                    System.out.println("PRODUCTOS MAS VENDIDOS");
                     RestauranteDto resta = (RestauranteDto) AppContext.getInstance().get("Restaurante");
-                    Respuesta res = productoService.productosMVendidos(fechaC , fechaC , Long.MIN_VALUE);
+                    Respuesta res = facturaService.reportelistadofacturas("5/5/2021" , "5/12/2021" , resta.getId());
                     if(res.getEstado())
                     {
                         System.out.println("gg");
-//                        byte[] decoder = (byte[]) res.getResultado("Productos");
-//                        cargarArchivo(decoder);
+                        byte[] decoder = (byte[]) res.getResultado("Factura");
+                        cargarArchivo(decoder);
                     }
                     else
                     {
                         System.out.println("ni picha");
                     }
+
+                }
+                else if(!tgllstadoyProductos.isSelected())
+                {
+                    String fechaI = DATE_FORMATTER.format(dtpFechaInicial.getValue());
+                    String fechaF = DATE_FORMATTER.format(dtpFechaFinal.getValue());
+                    System.out.println("PRODUCTOS MAS VENDIDOS");
+                    RestauranteDto resta = (RestauranteDto) AppContext.getInstance().get("Restaurante");
+//                    Respuesta res = productoService.productosMVendidos("5/5/2021" , "5/12/2021" , resta.getId());
+                    System.out.println("Fehca i" + fechaI);
+                    System.out.println("Fehca F" + fechaF);
+                    Respuesta res = productoService.productosMVendidos(fechaI , fechaF , resta.getId());
+                    if(res.getEstado())
+                    {
+                        System.out.println("gg");
+                        byte[] decoder = (byte[]) res.getResultado("Productos");
+                        cargarArchivo(decoder);
+                    }
+                    else
+                    {
+                        System.out.println("ni picha al cuadrado");
+                    }
                 }
                 if(tglCierrreCajas.isSelected())
                 {
                     System.out.println("cierre cajas");
+
                 }
             }
             /**

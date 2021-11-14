@@ -153,7 +153,7 @@ public class ProductoService
 
         try
         {
-            InputStream x = FacturaService.class.getClassLoader().getResourceAsStream("/cr/ac/una/wsrestuna/reportes/ProductosVendidos.jrxml");
+            InputStream x = FacturaService.class.getClassLoader().getResourceAsStream("/cr/ac/una/wsrestuna/reportes/productoMasVendidos.jrxml");
             JasperReport jasper = JasperCompileManager.compileReport(x);
             InitialContext initialContext = new InitialContext();
             DataSource dataSource = (DataSource) initialContext.lookup("jdbc/RestUNA");
@@ -161,8 +161,8 @@ public class ProductoService
 
             HashMap<String , Object> map = new HashMap<>();
             map.put("IDrestaurante" , IDrestaurante);
-            map.put("Inicial" , Inicial);
-            map.put("Final" , Final);
+            map.put("inicio" , Inicial);
+            map.put("finalo" , Final);
             JasperPrint print = JasperFillManager.fillReport(jasper , map , connection);
             byte[] s = JasperExportManager.exportReportToPdf(print);
             return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "" , "Producto" , s);

@@ -35,19 +35,22 @@ public class ProductoController
     }
 
     @GET
-    @Path("/producto/{inicio}/{finall}/{idRes}")
+    @Path("/producto/{fechai}/{fechaf}/{idres}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response productosVendidos(@PathParam("inicio") String inicio , @PathParam("finall") String finall , @PathParam("idRes") Long idRes)
+    public Response productosVendidos(@PathParam("fechai") String fechaI , @PathParam("fechaf") String fechaF , @PathParam("idres") Long idRes)
     {
         try
         {
-            Respuesta res = productoService.reporteProductosVendidos(idRes , inicio , finall);
+            System.out.println("xD");
+            Respuesta res = productoService.reporteProductosVendidos(idRes , fechaI , fechaF);
             if(!res.getEstado())
             {
                 return Response.status(res.getCodigoRespuesta().getValue()).entity(res.getMensaje()).build();
             }
-            return Response.ok((byte[]) res.getResultado("Producto")).build();//TODO
+            byte[] bytes = (byte[]) res.getResultado("Producto");
+            System.out.println("Bytes "+bytes);
+            return Response.ok(bytes).build();//TODO
         }
         catch(Exception ex)
         {

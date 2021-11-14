@@ -238,19 +238,20 @@ public class FacturaController
     }
 
     @GET
-    @Path("/factura/{Inicio}/{Final}/{idRes}")
+    @Path("/factura/{idres}/{fechai}/{fechaf}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response listadoFacturas(@PathParam("Inicio") String Inicio , @PathParam("Final") String Final , @PathParam("idRes") Long idRes)
+    public Response listadoFacturas(@PathParam("fechai") String fechaI , @PathParam("fechaf") String fechaF , @PathParam("idres") Long idRes)
     {
         try
         {
-            Respuesta res = facturaService.reporteListadoFacturas(idRes , Inicio , Final);
+            System.out.println("Bienvenidos");
+            Respuesta res = facturaService.reporteListadoFacturas(idRes , fechaI , fechaF);
             if(!res.getEstado())
             {
                 return Response.status(res.getCodigoRespuesta().getValue()).entity(res.getMensaje()).build();
             }
-            return Response.ok((byte[]) res.getResultado("Producto")).build();//TODO
+            return Response.ok((byte[]) res.getResultado("Factura")).build();//TODO
         }
         catch(Exception ex)
         {
