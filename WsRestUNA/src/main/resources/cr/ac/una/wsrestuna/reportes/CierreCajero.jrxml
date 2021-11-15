@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CierreCajero" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c06ea8b3-7fb0-4b7d-ab2a-1daae0fa3fe0">
-	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CierreCajero" pageWidth="842" pageHeight="1191" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c06ea8b3-7fb0-4b7d-ab2a-1daae0fa3fe0">
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[IlRCTF9SRVNUQVVSQU5URSIgLDU0OCwxMjYsZDRhNThlNjUtMzA2OC00MDg5LWIxOWQtMzgyNGZl
+MTAzMTAwOyJUQkxfRkFDVFVSQSIgLDE1LDExMiw0YzhkM2IwMS00MzgwLTQ0ZTQtYjQ1Zi00ZTVi
+NWNkZDA5MTQ7IlRCTF9DSUVSUkVDQUpBUyIgLDIwMCwxNSxmMTUyZTU4Ny02ZGI4LTQyNjEtOWEx
+My03NWVkZGVlZTZjZWY7IlRCTF9PUkRFTiIgLDIwMCwyODgsY2VhYjJkMjQtODI5Mi00MWRmLThj
+MTctNzk1NzZlMmZjNzkwOyJUQkxfRU1QTEVBRE8iICwzOTQsMTI1LGQ2M2Y3NGI1LTkyNTQtNGZk
+MC05YTI4LTA3YTVkNjhiOTdiZTs=]]>
+	</property>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="OJDBC 7"/>
-	<property name="com.jaspersoft.studio.unit." value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
 	<parameter name="Fecha" class="java.lang.String"/>
 	<parameter name="idCierreCaja" class="java.lang.Long"/>
 	<parameter name="IDrestaurante" class="java.lang.Long"/>
@@ -23,7 +21,8 @@
 	"TBL_EMPLEADO"."EMP_NOMBRE",
 	"TBL_CIERRECAJAS"."CCAJ_ID",
 	"TBL_RESTAURANTE"."RES_NOMBRE",
-	"TBL_RESTAURANTE"."RES_CORREO"
+	"TBL_RESTAURANTE"."RES_CORREO",
+	"TBL_CIERRECAJAS"."CCJA_ESTADO"
 FROM "TBL_FACTURA"
 	Left JOIN "TBL_CIERRECAJAS" ON 
 	 "TBL_FACTURA"."CCAJ_ID" = "TBL_CIERRECAJAS"."CCAJ_ID" 
@@ -35,7 +34,7 @@ FROM "TBL_FACTURA"
 	 "TBL_EMPLEADO"."RES_ID" = "TBL_RESTAURANTE"."RES_ID" 
 WHERE 
 	 "TBL_ORDEN"."ORD_FECHA" = $P{Fecha} 
-	 AND "TBL_CIERRECAJAS"."CCAJ_ID" = $P{idCierreCaja}
+	 AND "TBL_CIERRECAJAS"."CCAJ_ID" = $P{idCierreCaja} 
 	 AND "TBL_RESTAURANTE"."RES_ID" = $P{IDrestaurante}]]>
 	</queryString>
 	<field name="CCAJ_MONTOEFECTIVO" class="java.math.BigDecimal">
@@ -70,6 +69,10 @@ WHERE
 		<property name="com.jaspersoft.studio.field.name" value="RES_CORREO"/>
 		<property name="com.jaspersoft.studio.field.label" value="RES_CORREO"/>
 	</field>
+	<field name="CCJA_ESTADO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CCJA_ESTADO"/>
+		<property name="com.jaspersoft.studio.field.label" value="CCJA_ESTADO"/>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -78,25 +81,29 @@ WHERE
 			<staticText>
 				<reportElement x="-10" y="1" width="140" height="30" uuid="a3c38e22-90fa-4d60-9277-c2dd82d1c0d0"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial Black"/>
+					<font fontName="Arial Black" size="10"/>
 				</textElement>
 				<text><![CDATA[Nombre del restaurante]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="130" y="0" width="140" height="30" uuid="5e0aeb11-23b1-45d8-81f6-61d4254443f2"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement x="130" y="0" width="220" height="30" uuid="5e0aeb11-23b1-45d8-81f6-61d4254443f2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{RES_NOMBRE}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="270" y="0" width="110" height="30" uuid="74e49daa-315b-4b96-a5b9-76b158fd30bb"/>
+				<reportElement x="350" y="0" width="110" height="30" uuid="74e49daa-315b-4b96-a5b9-76b158fd30bb"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial Black"/>
+					<font fontName="Arial Black" size="10"/>
 				</textElement>
 				<text><![CDATA[Correo del restaurante]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="380" y="1" width="170" height="30" uuid="0192ce4a-bd7b-476e-81f6-de769ad5af62"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement x="460" y="1" width="200" height="30" uuid="0192ce4a-bd7b-476e-81f6-de769ad5af62"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{RES_CORREO}]]></textFieldExpression>
 			</textField>
 		</band>
@@ -104,10 +111,10 @@ WHERE
 	<columnHeader>
 		<band height="33" splitType="Stretch">
 			<rectangle>
-				<reportElement x="-10" y="3" width="570" height="30" backcolor="#DB7876" uuid="e05019ad-128f-4fd7-96f1-14e1d58f6f5e"/>
+				<reportElement x="-10" y="3" width="800" height="30" backcolor="#DB7876" uuid="e05019ad-128f-4fd7-96f1-14e1d58f6f5e"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="70" y="3" width="110" height="30" uuid="56bbcebc-d9d5-44be-818a-8c02e430e318">
+				<reportElement x="70" y="3" width="130" height="30" uuid="56bbcebc-d9d5-44be-818a-8c02e430e318">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a8fbe29b-f740-465c-9930-66eeb4a21489"/>
 				</reportElement>
 				<box>
@@ -116,12 +123,12 @@ WHERE
 					<rightPen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial Black"/>
+					<font fontName="Arial Black" size="10"/>
 				</textElement>
 				<text><![CDATA[Monto recibido en efectivo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="180" y="3" width="110" height="30" uuid="1c4699c0-f830-4e28-a693-4c99b51e47f4">
+				<reportElement x="200" y="3" width="119" height="30" uuid="1c4699c0-f830-4e28-a693-4c99b51e47f4">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="68a352f9-d29c-4565-89f4-77f7d1e6f810"/>
 				</reportElement>
 				<box>
@@ -130,12 +137,12 @@ WHERE
 					<rightPen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial Black"/>
+					<font fontName="Arial Black" size="10"/>
 				</textElement>
 				<text><![CDATA[Monto recibido de tarjetas]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="460" y="3" width="100" height="30" uuid="b04c341b-102d-4065-a6b9-be9d3399c342">
+				<reportElement x="570" y="3" width="111" height="30" uuid="b04c341b-102d-4065-a6b9-be9d3399c342">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b063ee73-7cdf-49c7-bc6f-6e5612003c18"/>
 				</reportElement>
 				<box>
@@ -146,10 +153,10 @@ WHERE
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial Black"/>
 				</textElement>
-				<text><![CDATA[Monto final entregado por el cajero]]></text>
+				<text><![CDATA[Monto entregado por cajero]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="290" y="3" width="90" height="30" uuid="5d9702ef-62a6-453d-8560-986fe1f9da97">
+				<reportElement x="320" y="3" width="119" height="30" uuid="5d9702ef-62a6-453d-8560-986fe1f9da97">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6584f535-2267-4b3d-9a16-288b780d6612"/>
 				</reportElement>
 				<box>
@@ -158,12 +165,12 @@ WHERE
 					<rightPen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial Black"/>
+					<font fontName="Arial Black" size="10"/>
 				</textElement>
 				<text><![CDATA[Monto inicial del cajero]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="380" y="3" width="79" height="30" uuid="2402bc37-a82b-4e2d-b631-7b9f2005d491">
+				<reportElement x="440" y="3" width="130" height="30" uuid="2402bc37-a82b-4e2d-b631-7b9f2005d491">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b5a9b20f-688a-48c9-b957-b6340d83533e"/>
 				</reportElement>
 				<box>
@@ -187,16 +194,30 @@ WHERE
 					<rightPen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial Black"/>
+					<font fontName="Arial Black" size="10"/>
 				</textElement>
 				<text><![CDATA[Nombre del empleado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="681" y="3" width="109" height="30" uuid="b8edefe1-871a-46ee-af55-a16980e66704">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2028a4ba-bd7a-4794-8805-eba763f96968"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Black"/>
+				</textElement>
+				<text><![CDATA[Estado del cierre de caja]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="30" splitType="Stretch">
+		<band height="35" splitType="Stretch">
 			<textField>
-				<reportElement x="70" y="0" width="110" height="30" uuid="e6ac2d18-48fd-4210-b01e-e295ec84515d">
+				<reportElement x="70" y="0" width="130" height="30" uuid="e6ac2d18-48fd-4210-b01e-e295ec84515d">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a8fbe29b-f740-465c-9930-66eeb4a21489"/>
 				</reportElement>
 				<box>
@@ -209,7 +230,7 @@ WHERE
 				<textFieldExpression><![CDATA[$F{CCAJ_MONTOEFECTIVO}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="180" y="0" width="110" height="30" uuid="8a8b516d-1aac-448d-83d7-52cd378c57d1">
+				<reportElement x="200" y="0" width="119" height="30" uuid="8a8b516d-1aac-448d-83d7-52cd378c57d1">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="68a352f9-d29c-4565-89f4-77f7d1e6f810"/>
 				</reportElement>
 				<box>
@@ -222,7 +243,7 @@ WHERE
 				<textFieldExpression><![CDATA[$F{CCAJ_MONTOTARJETA}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="460" y="0" width="100" height="30" uuid="b0115447-d949-4408-8016-403e4530d701">
+				<reportElement x="570" y="0" width="111" height="30" uuid="b0115447-d949-4408-8016-403e4530d701">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b063ee73-7cdf-49c7-bc6f-6e5612003c18"/>
 				</reportElement>
 				<box>
@@ -235,7 +256,7 @@ WHERE
 				<textFieldExpression><![CDATA[$F{CCJA_MONTOFINAL}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="290" y="0" width="90" height="30" uuid="77b17c2b-047a-47b3-aa15-9129116cc76b">
+				<reportElement x="320" y="0" width="118" height="30" uuid="77b17c2b-047a-47b3-aa15-9129116cc76b">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6584f535-2267-4b3d-9a16-288b780d6612"/>
 				</reportElement>
 				<box>
@@ -248,7 +269,7 @@ WHERE
 				<textFieldExpression><![CDATA[$F{CCAJ_MONTOINICIAL}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="380" y="0" width="80" height="30" uuid="908d1067-b9b4-420b-8565-c6f687c5a290">
+				<reportElement x="440" y="0" width="130" height="30" uuid="908d1067-b9b4-420b-8565-c6f687c5a290">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b5a9b20f-688a-48c9-b957-b6340d83533e"/>
 				</reportElement>
 				<box>
@@ -272,6 +293,18 @@ WHERE
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{EMP_NOMBRE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="681" y="0" width="109" height="30" uuid="b1b20dc6-f4b9-4ded-9f88-df48b01b0781">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2028a4ba-bd7a-4794-8805-eba763f96968"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{CCJA_ESTADO}.equals("C")? "Completado":"Incompleto"]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

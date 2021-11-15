@@ -78,6 +78,7 @@ public class CierreCajasController extends Controller implements Initializable
                 cierre = (CierrecajasDto) res3.getResultado("CierreCaja");
                 System.out.println("El cierre es " + cierre);
                 AppContext.getInstance().set("CierreCajasActual" , cierre);
+                new Mensaje().show(Alert.AlertType.ERROR , "Datos guardados." , "El cierre de caja se ha guardado exitosamente.");
             }
             else
             {
