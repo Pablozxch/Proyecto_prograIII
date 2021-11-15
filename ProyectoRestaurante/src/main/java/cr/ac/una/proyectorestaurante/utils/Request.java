@@ -146,6 +146,7 @@ public class Request
                             public void run()
                             {
                                 FlowController.getInstance().goLogInWindowModal(true);
+//                               FlowController.getInstance().goViewInWindowModal("LogIn" , getS, Boolean.FALSE);//ver que se hace con esto
                             }
                         });
                     }

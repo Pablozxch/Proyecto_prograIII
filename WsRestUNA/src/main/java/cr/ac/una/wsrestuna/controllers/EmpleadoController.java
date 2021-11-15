@@ -54,7 +54,9 @@ public class EmpleadoController
             {
                 return Response.status(res.getCodigoRespuesta().getValue()).entity(res.getMensaje()).build();//TODO
             }
+            
             EmpleadoDto empleadoDto = (EmpleadoDto) res.getResultado("Empleado");//TODO
+            empleadoDto.setToken(JwTokenHelper.getInstance().generatePrivateKey(usuario));
             return Response.ok(empleadoDto).build();
         }
         catch(Exception ex)

@@ -101,7 +101,7 @@ public class EmpleadoService {
 
             }
             String token = (String) request.readEntity(String.class);
-            return new Respuesta(true, "", "", " Token", token);
+            return new Respuesta(true, "", "", "Token", token);
         } catch (Exception ex) {
             Logger.getLogger(EmpleadoService.class.getName()).log(Level.SEVERE, "Error renovando el token ", ex);
             return new Respuesta(false, "Error renovando el token.", "renovarToken " + ex.getMessage());

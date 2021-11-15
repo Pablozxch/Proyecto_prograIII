@@ -216,7 +216,7 @@ public class FlowController
 
     public void goLogInWindowModal(Boolean resizable)//Aqui se le puede mandar tambien el nombre de la vista para abrir en modal
     {
-        goViewInWindowModal("LogIng2" , this.controller.getStage() , resizable);
+        goViewInWindowModal("LogIn" , this.controller.getStage() , resizable);
     }
 
     public void goViewInWindowModal(String viewName , Stage parentStage , Boolean resizable)
