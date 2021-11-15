@@ -82,6 +82,7 @@ public class EditarSalonesController extends Controller implements Initializable
     Circle circle_Red, circle_Green, circle_Blue;
     double orgSceneX, orgSceneY;
     double orgTranslateX, orgTranslateY;
+    MesaDto mesaDelete = new MesaDto();
 
     @Override
     public void initialize(URL url , ResourceBundle rb)
@@ -91,8 +92,8 @@ public class EditarSalonesController extends Controller implements Initializable
     @Override
     public void initialize()
     {
-        load();
         pane.getChildren().clear();
+        load();
         rolDto = (RolDto) AppContext.getInstance().get("RolActual");
     }
 
@@ -125,9 +126,14 @@ public class EditarSalonesController extends Controller implements Initializable
             pane.getChildren().add(j.getCircle());
             j.getCircle().setOnMousePressed(circleOnMousePressedEventHandler);
             j.getCircle().setOnMouseDragged(circleOnMouseDraggedEventHandler);
+            j.getCircle().setOnMouseClicked((m) ->
+            {
+                 mesaDelete = j.getMesaDto();
+            });
         });
 
     }
+
     EventHandler<MouseEvent> circleOnMousePressedEventHandler = new EventHandler<MouseEvent>()
     {
         @Override
@@ -137,11 +143,7 @@ public class EditarSalonesController extends Controller implements Initializable
             orgSceneY = t.getSceneY();
             orgTranslateX = ((Circle) (t.getSource())).getTranslateX();
             orgTranslateY = ((Circle) (t.getSource())).getTranslateY();
-            /*
-            tratar de centrar al click
             
-            
-             */
             System.out.println("X: " + t.getSceneX());
             System.out.println("Y: " + t.getSceneY());
         }
@@ -152,33 +154,24 @@ public class EditarSalonesController extends Controller implements Initializable
         @Override
         public void handle(MouseEvent t)
         {
-            System.out.println("X dragged: " + t.getSceneX());
-            System.out.println("Y dragged" + t.getSceneY());
             double offsetX = t.getSceneX() - orgSceneX;
             double offsetY = t.getSceneY() - orgSceneY;
             double newTranslateX = orgTranslateX + offsetX;
             double newTranslateY = orgTranslateY + offsetY;
-            if(t.getSceneX() > 345 && t.getSceneX() < 1245 && t.getSceneY() > 245 && t.getSceneY() < 774)
+            ((Circle) (t.getSource())).setTranslateX(newTranslateX);
+            ((Circle) (t.getSource())).setTranslateY(newTranslateY);
+            iMloads.forEach(i ->
             {
-                ((Circle) (t.getSource())).setTranslateX(newTranslateX);
-                ((Circle) (t.getSource())).setTranslateY(newTranslateY);
-                iMloads.forEach(i ->
+
+                if(i.getPosx() == ((Circle) (t.getSource())).getCenterX() && i.getPosy() == ((Circle) (t.getSource())).getCenterY())
                 {
+                    System.out.println("Old x " + i.getMesaDto().getPosX());
+                    System.out.println("Old Y " + i.getMesaDto().getPosY());
+                    i.getMesaDto().setPosX((long) newTranslateX);
+                    i.getMesaDto().setPosY((long) newTranslateY);
 
-                    if(i.getPosx() == ((Circle) (t.getSource())).getCenterX() && i.getPosy() == ((Circle) (t.getSource())).getCenterY())
-                    {
-                        System.out.println("Old x " + i.getMesaDto().getPosX());
-                        System.out.println("Old Y " + i.getMesaDto().getPosY());
-//                        i.setPosx((long) newTranslateX);
-//                        i.setPosy((long) newTranslateY);
-                        i.getMesaDto().setPosX((long) newTranslateX);
-                        i.getMesaDto().setPosY((long) newTranslateY);
-                        System.out.println("New x " + newTranslateX);
-                        System.out.println("New Y " + newTranslateY);
-                    }
-                });
-
-            }
+                }
+            });
 
         }
     };
@@ -188,6 +181,7 @@ public class EditarSalonesController extends Controller implements Initializable
     {
         if(event.getSource() == btnEliminar)
         {
+            System.out.println("La mesa a eliminar es " + mesaDelete);
             iMloads.forEach(t ->
             {
                 MesaDto mesa = t.getMesaDto();
@@ -201,6 +195,7 @@ public class EditarSalonesController extends Controller implements Initializable
                 {
                     System.out.println("f");
                 }
+                mesa = null;
             });
         }
     }
