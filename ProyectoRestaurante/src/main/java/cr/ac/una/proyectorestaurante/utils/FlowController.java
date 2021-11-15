@@ -7,7 +7,7 @@ package cr.ac.una.proyectorestaurante.utils;
 
 import animatefx.animation.*;
 import cr.ac.una.proyectorestaurante.App;
-import cr.ac.una.proyectorestaurante.controllers.Controller;
+import cr.ac.una.proyectorestaurante.controllers.*;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.ResourceBundle;
@@ -216,7 +216,8 @@ public class FlowController
 
     public void goLogInWindowModal(Boolean resizable)//Aqui se le puede mandar tambien el nombre de la vista para abrir en modal
     {
-        goViewInWindowModal("LogIn" , this.controller.getStage() , resizable);
+        LogInController log = (LogInController) FlowController.getInstance().getController("LogIn");
+        goViewInWindowModal("LogIn" , log.getStage() , false);
     }
 
     public void goViewInWindowModal(String viewName , Stage parentStage , Boolean resizable)
