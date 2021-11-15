@@ -3,8 +3,6 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -20,9 +18,9 @@
                   <JFXButton fx:id="btnProductos" onAction="#click" prefHeight="48.0" prefWidth="155.0" text="%Productos" />
                   <JFXButton fx:id="btnCategorias" onAction="#click" prefHeight="48.0" prefWidth="155.0" text="%Categorias" />
                   <JFXButton fx:id="btnOrdenes" onAction="#click" prefHeight="48.0" prefWidth="155.0" text="%Ordenes" />
-                  <JFXButton fx:id="btnFacturar" onAction="#click" prefHeight="48.0" prefWidth="155.0" text="%Facturar" />
+                  <JFXButton fx:id="btnDescuento" onAction="#click" prefHeight="48.0" prefWidth="190.0" text="%CodigoDesc" />
                   <JFXButton fx:id="btnEmpleados" onAction="#click" prefHeight="48.0" prefWidth="155.0" text="%Empleados" />
-                  <JFXButton fx:id="btnRestaurante" onAction="#click" prefHeight="48.0" prefWidth="150.0" text="%Restaurante" />
+                  <JFXButton fx:id="btnRestaurante" onAction="#click" prefHeight="48.0" prefWidth="155.0" text="%Restaurante" />
                   <JFXButton fx:id="btnReportes" onAction="#click" prefHeight="48.0" prefWidth="155.0" text="%Reportes" />
                   <JFXButton fx:id="btnCierreCajas" onAction="#click" prefHeight="48.0" prefWidth="180.0" text="%CierreCajas" />
                </children>
@@ -56,28 +54,6 @@
             <HBox alignment="CENTER" layoutX="500.0" layoutY="-20.0" prefHeight="80.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Label fx:id="lblTitulo" styleClass="titulo" text="%SistemadeRestaurantes" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="58.0" prefWidth="213.0">
-               <children>
-                  <JFXButton fx:id="btnEspanol" contentDisplay="GRAPHIC_ONLY" onAction="#idiomaClick">
-                     <graphic>
-                        <ImageView fitHeight="40.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../resources/espanol.gif" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton fx:id="btnEnglish" contentDisplay="GRAPHIC_ONLY" onAction="#idiomaClick">
-                     <graphic>
-                        <ImageView fitHeight="40.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../resources/usa.gif" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
                </children>
             </HBox>
          </children>

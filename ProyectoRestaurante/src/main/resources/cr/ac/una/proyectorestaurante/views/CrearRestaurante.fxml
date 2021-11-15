@@ -34,7 +34,7 @@
                   <JFXTextField fx:id="txtCorreo" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefWidth="210.0" promptText="%Correo" />
                   <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
                      <children>
-                        <Label text="%ImpuestoVenta">
+                        <Label fx:id="lblImpVenta" text="%ImpuestoVenta">
                            <HBox.margin>
                               <Insets right="10.0" />
                            </HBox.margin>
@@ -51,7 +51,7 @@
                   </HBox>
                   <HBox alignment="CENTER">
                      <children>
-                        <Label text="%ImpuestoServicio">
+                        <Label fx:id="lblImpServicio" text="%ImpuestoServicio">
                            <HBox.margin>
                               <Insets right="10.0" />
                            </HBox.margin>

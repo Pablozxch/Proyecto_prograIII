@@ -36,6 +36,7 @@ public class App extends Application
         Locale locale = new Locale("es_MX");
         ResourceBundle bundle = ResourceBundle.getBundle("/cr/ac/una/proyectorestaurante/resources/Espanol", locale);
         FlowController.setIdioma(bundle);
+        AppContext.getInstance().set("idioma", bundle);
         FlowController.getInstance().goMain();
         FlowController.getInstance().goMain();
     }

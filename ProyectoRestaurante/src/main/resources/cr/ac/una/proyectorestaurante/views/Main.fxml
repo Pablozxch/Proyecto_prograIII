@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -12,7 +13,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" fx:id="root" minHeight="810.0" minWidth="1345.0" prefHeight="810.0" prefWidth="1345.0" styleClass="fondo" stylesheets="@../styles/StylesCss.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.proyectorestaurante.controllers.MainController">
@@ -108,13 +108,33 @@
                               <Insets bottom="10.0" />
                            </VBox.margin>
                         </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="335.0" VBox.vgrow="ALWAYS">
-                           <children>
-                              <Line endX="312.29290771484375" endY="0.2928932309150696" opacity="0.0" startX="-100.0" />
-                           </children>
-                        </HBox>
                      </children>
                   </VBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0">
+                     <children>
+                        <JFXButton fx:id="btnSpanish" contentDisplay="GRAPHIC_ONLY" onAction="#click">
+                           <graphic>
+                              <ImageView fitHeight="49.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/espanol.gif" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="btnEnglish" contentDisplay="GRAPHIC_ONLY" onAction="#click">
+                           <graphic>
+                              <ImageView fitHeight="49.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/usa.gif" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                     <padding>
+                        <Insets bottom="20.0" />
+                     </padding>
+                  </HBox>
                </children>
             </VBox>
          </left>

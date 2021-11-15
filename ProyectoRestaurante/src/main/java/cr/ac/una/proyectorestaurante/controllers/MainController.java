@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXButton;
 import cr.ac.una.proyectorestaurante.models.*;
 import cr.ac.una.proyectorestaurante.services.*;
 import cr.ac.una.proyectorestaurante.utils.*;
+import java.applet.AppletContext;
 import java.io.*;
 import java.net.URL;
 import java.util.*;
@@ -53,6 +54,10 @@ public class MainController extends Controller implements Initializable
     private ImageView imgRes;
     @FXML
     private TextField txtBuscar;
+    @FXML
+    private JFXButton btnSpanish;
+    @FXML
+    private JFXButton btnEnglish;
     /**
      * Initializes the controller class.
      */
@@ -63,11 +68,14 @@ public class MainController extends Controller implements Initializable
     private List<RestauranteDto> restaurantes = new ArrayList<>();
     @FXML
     private BorderPane root2;
+    
+    ResourceBundle bundleG;
 
     @Override
     public void initialize(URL url , ResourceBundle rb)
     {
         loadItems("aux");
+        bundleG = (ResourceBundle) AppContext.getInstance().get("idioma");
     }
 
     public void loadItems(String name)
@@ -164,6 +172,7 @@ public class MainController extends Controller implements Initializable
         if(event.getSource() == btnAgregarRestaurante)
         {
             CrearRestauranteController registroRestauranteController = (CrearRestauranteController) FlowController.getInstance().getController("CrearRestaurante");
+            registroRestauranteController.loadIdioma(bundleG);
             FlowController.getInstance().goViewInWindowModal("CrearRestaurante" , (Stage) btnAgregarRestaurante.getScene().getWindow() , false);
             registroRestauranteController.unbinRestaurante();
             update();
@@ -200,6 +209,34 @@ public class MainController extends Controller implements Initializable
                 }
             }
 
+        }
+        if (event.getSource() == btnSpanish) {
+
+            Locale locale = new Locale("es_MX");
+            ResourceBundle bundle = ResourceBundle.getBundle("/cr/ac/una/proyectorestaurante/resources/Espanol", locale);
+            FlowController.setIdioma(bundle);
+            
+            bundleG = bundle;
+            
+            btnAgregarRestaurante.setText(bundle.getString("AgregarRestaurante"));
+            btnBuscar.setText(bundle.getString("buscar"));
+            btnContinuar.setText(bundle.getString("Continuar"));
+            btnEditar.setText(bundle.getString("Editar"));
+            btnEliminar.setText(bundle.getString("Eliminar"));
+        }
+        if (event.getSource() == btnEnglish) {
+            
+            Locale locale = new Locale("en_UK");
+            ResourceBundle bundle = ResourceBundle.getBundle("/cr/ac/una/proyectorestaurante/resources/Ingles", locale);
+            FlowController.setIdioma(bundle);
+
+            bundleG = bundle;
+            
+            btnAgregarRestaurante.setText(bundle.getString("AgregarRestaurante"));
+            btnBuscar.setText(bundle.getString("buscar"));
+            btnContinuar.setText(bundle.getString("Continuar"));
+            btnEditar.setText(bundle.getString("Editar"));
+            btnEliminar.setText(bundle.getString("Eliminar"));
         }
     }
 

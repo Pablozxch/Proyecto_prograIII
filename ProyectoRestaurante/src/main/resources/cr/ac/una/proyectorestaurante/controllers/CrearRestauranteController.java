@@ -6,6 +6,7 @@
 package cr.ac.una.proyectorestaurante.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
@@ -13,6 +14,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
@@ -41,9 +43,13 @@ public class CrearRestauranteController extends Controller implements Initializa
     @FXML
     private JFXTextArea txtDreccion;
     @FXML
-    private JFXTextField txtImpVenta;
+    private Label lblImpVenta;
     @FXML
-    private JFXTextField txtImpServicio;
+    private JFXComboBox<?> cmbImpVenta;
+    @FXML
+    private Label lblImpServicio;
+    @FXML
+    private JFXComboBox<?> cmbImpServicio;
     /**
      * Initializes the controller class.
      */

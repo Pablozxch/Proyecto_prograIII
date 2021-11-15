@@ -62,6 +62,10 @@ public class CrearRestauranteController extends Controller implements Initializa
     private JFXComboBox<String> cmbImpVenta;
     @FXML
     private JFXComboBox<String> cmbImpServicio;
+    @FXML
+    private Label lblImpVenta;
+    @FXML
+    private Label lblImpServicio;
     /**
      * Initializes the controller class.
      */
@@ -98,6 +102,7 @@ public class CrearRestauranteController extends Controller implements Initializa
         txtDreccion.setText(restauranteDto.getDireccion());
         cmbImpServicio.valueProperty().set(restauranteDto.getImpServ().toString());
         cmbImpVenta.valueProperty().set(restauranteDto.getImpVen().toString());
+        
     }
 
     public void unbinRestaurante()
@@ -122,6 +127,18 @@ public class CrearRestauranteController extends Controller implements Initializa
         return rr;
     }
 
+    void loadIdioma(ResourceBundle bundle){
+        btnCargarImagen.setText(bundle.getString("CargarImagen"));
+        btnCerrar.setText(bundle.getString("Cancelar"));
+        btnContinuar.setText(bundle.getString("Continuar"));
+        txtNombre.setPromptText(bundle.getString("Nombre"));
+        txtDreccion.setPromptText(bundle.getString("Direccion"));
+        txtDetalle.setPromptText(bundle.getString("Detalle"));
+        txtCorreo.setPromptText(bundle.getString("Correo"));
+        lblImpServicio.setText(bundle.getString("ImpuestoVenta"));
+        lblImpVenta.setText(bundle.getString("ImpuestoServicio"));
+        
+    }
     @FXML
     private void click(ActionEvent event)
     {
