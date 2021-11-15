@@ -28,8 +28,6 @@ public class PrincipalController extends Controller implements Initializable {
     @FXML
     private JFXButton btnOrdenes;
     @FXML
-    private JFXButton btnFacturar;
-    @FXML
     private JFXButton btnEmpleados;
     @FXML
     private JFXButton btnCerrarSesion;
@@ -45,6 +43,8 @@ public class PrincipalController extends Controller implements Initializable {
     private JFXButton btnReportes;
     @FXML
     private JFXButton btnCierreCajas;
+    @FXML
+    private JFXButton btnDescuento;
 
     /**
      * Initializes the controller class.
