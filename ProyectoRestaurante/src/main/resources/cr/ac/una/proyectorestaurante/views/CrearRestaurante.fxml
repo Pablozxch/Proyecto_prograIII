@@ -17,10 +17,10 @@
          <children>
             <VBox alignment="CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0" spacing="40.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Label text="Registrar un restaurante." />
-                  <JFXTextField fx:id="txtNombre" alignment="CENTER" focusColor="WHITE" labelFloat="true" onAction="#click" prefWidth="210.0" promptText="Nombre" />
-                  <JFXTextArea fx:id="txtDetalle" focusColor="WHITE" labelFloat="true" prefHeight="136.0" prefWidth="210.0" promptText="Detalle" />
-                  <JFXTextArea fx:id="txtDreccion" focusColor="WHITE" labelFloat="true" prefHeight="136.0" prefWidth="210.0" promptText="Dirección" />
+                  <Label text="%RegistrarRestaurante" />
+                  <JFXTextField fx:id="txtNombre" alignment="CENTER" focusColor="WHITE" labelFloat="true" onAction="#click" prefWidth="210.0" promptText="%Nombre" />
+                  <JFXTextArea fx:id="txtDetalle" focusColor="WHITE" labelFloat="true" prefHeight="136.0" prefWidth="210.0" promptText="%Detalle" />
+                  <JFXTextArea fx:id="txtDreccion" focusColor="WHITE" labelFloat="true" prefHeight="136.0" prefWidth="210.0" promptText="%Direccion" />
                </children>
             </VBox>
             <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0" spacing="35.0" HBox.hgrow="ALWAYS">
@@ -28,18 +28,18 @@
                   <HBox alignment="CENTER" prefHeight="243.0" prefWidth="566.0" spacing="30.0">
                      <children>
                         <ImageView fx:id="imvImagen" fitHeight="193.0" fitWidth="256.0" pickOnBounds="true" preserveRatio="true" />
-                        <JFXButton fx:id="btnCargarImagen" onAction="#click" prefHeight="48.0" prefWidth="190.0" text="Cargar  Imagen" />
+                        <JFXButton fx:id="btnCargarImagen" onAction="#click" prefHeight="48.0" prefWidth="190.0" text="%CargarImagen" />
                      </children>
                   </HBox>
-                  <JFXTextField fx:id="txtCorreo" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefWidth="210.0" promptText="Correo Electrónico" />
+                  <JFXTextField fx:id="txtCorreo" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefWidth="210.0" promptText="%Correo" />
                   <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
                      <children>
-                        <Label text="Impuesto Venta">
+                        <Label text="%ImpuestoVenta">
                            <HBox.margin>
                               <Insets right="10.0" />
                            </HBox.margin>
                         </Label>
-                        <JFXComboBox fx:id="cmbImpVenta" prefHeight="25.0" prefWidth="299.0" promptText="Máximo Impuesto Venta" HBox.hgrow="ALWAYS">
+                        <JFXComboBox fx:id="cmbImpVenta" focusColor="WHITE" prefHeight="25.0" prefWidth="299.0" HBox.hgrow="ALWAYS">
                            <HBox.margin>
                               <Insets left="3.0" />
                            </HBox.margin>
@@ -51,18 +51,18 @@
                   </HBox>
                   <HBox alignment="CENTER">
                      <children>
-                        <Label text="Impuesto Servicio">
+                        <Label text="%ImpuestoServicio">
                            <HBox.margin>
                               <Insets right="10.0" />
                            </HBox.margin>
                         </Label>
-                        <JFXComboBox fx:id="cmbImpServicio" prefHeight="25.0" prefWidth="289.0" promptText="Máximo impuesto Servicio" HBox.hgrow="ALWAYS" />
+                        <JFXComboBox fx:id="cmbImpServicio" focusColor="WHITE" prefHeight="25.0" prefWidth="289.0" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="168.0" prefWidth="514.0" spacing="100.0">
                      <children>
-                        <JFXButton fx:id="btnContinuar" onAction="#click" prefHeight="48.0" prefWidth="150.0" text="Continuar" />
-                        <JFXButton fx:id="btnCerrar" onAction="#click" prefHeight="48.0" prefWidth="150.0" text="Cerrar" />
+                        <JFXButton fx:id="btnContinuar" onAction="#click" prefHeight="48.0" prefWidth="150.0" text="%Continuar" />
+                        <JFXButton fx:id="btnCerrar" onAction="#click" prefHeight="48.0" prefWidth="150.0" text="%Cancelar" />
                      </children>
                   </HBox>
                </children>

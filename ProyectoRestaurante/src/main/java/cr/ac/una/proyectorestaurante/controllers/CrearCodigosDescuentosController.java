@@ -12,6 +12,8 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import cr.ac.una.proyectorestaurante.utils.*;
 
 /**
  * FXML Controller class
@@ -41,6 +43,18 @@ public class CrearCodigosDescuentosController extends Controller implements Init
 
     @FXML
     private void click(ActionEvent event) {
+        if (event.getSource() == btnAceptar) {
+            if (txtNombre.getText().isEmpty() || txtNombre.getText().isBlank()) {
+                new Mensaje().show(Alert.AlertType.ERROR, "Incompleto", "Se debe ingresar un nombre para el codigo de descuento.");
+            } else if (txtCantidad.getText().isEmpty() || txtCantidad.getText().isBlank()) {
+                new Mensaje().show(Alert.AlertType.ERROR, "Incompleto", "Se debe ingresar una cantidad de veces a usar del codigo de descuento.");
+            } else if (txtPorcentaje.getText().isEmpty() || txtPorcentaje.getText().isBlank()) {
+                new Mensaje().show(Alert.AlertType.ERROR, "Incompleto", "Se debe ingresar el porcentaje del codigo de descuento.");
+            }
+        } else if(event.getSource() == btnVolver){
+            
+        }
+
     }
 
     @Override

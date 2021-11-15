@@ -60,6 +60,8 @@ public class MainController extends Controller implements Initializable
     RestauranteService restauranteService = new RestauranteService();
     RestauranteDto restauranteDto = new RestauranteDto();
     private static List<RestauranteDto> restaurantes = new ArrayList<>();
+    @FXML
+    private BorderPane root2;
 
     @Override
     public void initialize(URL url , ResourceBundle rb)

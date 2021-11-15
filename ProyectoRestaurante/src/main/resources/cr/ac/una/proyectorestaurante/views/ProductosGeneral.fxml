@@ -23,7 +23,7 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="110.0" prefWidth="200.0">
                      <children>
-                        <Label text="Productos">
+                        <Label text="%Productos">
                            <font>
                               <Font name="Cambria Bold" size="40.0" />
                            </font>
@@ -38,12 +38,12 @@
                         <Insets />
                      </VBox.margin>
                      <children>
-                        <TextField fx:id="txtBuscar" prefHeight="40.0" prefWidth="245.0" promptText="Escriba aqui para buscar">
+                        <TextField fx:id="txtBuscar" prefHeight="40.0" prefWidth="245.0" promptText="%EscribaBuscar">
                            <font>
                               <Font name="Cambria" size="18.0" />
                            </font>
                         </TextField>
-                        <JFXButton fx:id="btnBuscar" onAction="#click" prefHeight="48.0" prefWidth="135.0" text="Buscar" textFill="WHITE">
+                        <JFXButton fx:id="btnBuscar" onAction="#click" prefHeight="48.0" prefWidth="135.0" text="%buscar" textFill="WHITE">
                            <font>
                               <Font name="Brush Script MT Italic" size="18.0" />
                            </font>
@@ -68,7 +68,7 @@
                            </VBox.margin>
                         </HBox>
                         <ImageView fx:id="imgPro" fitHeight="216.0" fitWidth="292.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label fx:id="lblPrecio" text="Precio: ₡">
+                        <Label fx:id="lblPrecio" text="%Precio">
                            <VBox.margin>
                               <Insets top="25.0" />
                            </VBox.margin></Label>
@@ -82,7 +82,7 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="46.0" prefWidth="335.0" spacing="15.0">
                            <children>
-                              <JFXButton fx:id="btnEditar" onAction="#click" prefHeight="48.0" prefWidth="113.0" text="Editar" textFill="WHITE">
+                              <JFXButton fx:id="btnEditar" onAction="#click" prefHeight="48.0" prefWidth="113.0" text="%Editar" textFill="WHITE">
                                  <HBox.margin>
                                     <Insets left="10.0" right="10.0" />
                                  </HBox.margin>
@@ -90,7 +90,7 @@
                                     <Font name="Cambria Bold" size="9.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton fx:id="btnEliminar" onAction="#click" prefHeight="48.0" prefWidth="145.0" text="Eliminar" textFill="WHITE">
+                              <JFXButton fx:id="btnEliminar" onAction="#click" prefHeight="48.0" prefWidth="145.0" text="%Eliminar" textFill="WHITE">
                                  <HBox.margin>
                                     <Insets left="10.0" right="10.0" />
                                  </HBox.margin>
@@ -121,7 +121,7 @@
                         <Insets left="20.0" right="20.0" />
                      </VBox.margin>
                      <children>
-                        <JFXButton fx:id="btnAgregarProducto" onAction="#click" text="Agregar Producto" textFill="WHITE">
+                        <JFXButton fx:id="btnAgregarProducto" onAction="#click" text="%AgregarProducto" textFill="WHITE">
                            <font>
                               <Font name="Cooper Black" size="24.0" />
                            </font>

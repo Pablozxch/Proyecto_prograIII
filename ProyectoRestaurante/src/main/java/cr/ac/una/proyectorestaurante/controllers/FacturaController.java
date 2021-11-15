@@ -118,7 +118,7 @@ public class FacturaController extends Controller implements Initializable
                     Respuesta email = facturaService.sendByEmail(r.getId() , nombre , correo , ff.getId());
                     if(email.getEstado())
                     {
-                        new Mensaje().show(Alert.AlertType.INFORMATION , "Envio de Correo" , "Enviado con Exito");
+                        new Mensaje().show(Alert.AlertType.INFORMATION , "Envio de Correo." , "El correo ha sido enviado con exito");
                     }
                     else
                     {
@@ -129,7 +129,7 @@ public class FacturaController extends Controller implements Initializable
             }
             else
             {
-                new Mensaje().show(Alert.AlertType.INFORMATION , "PAGO" , "El pago no ha sido realizado");
+                new Mensaje().show(Alert.AlertType.INFORMATION , "Pago" , "El pago no ha sido realizado.");
             }
 
         }
@@ -173,6 +173,7 @@ public class FacturaController extends Controller implements Initializable
             fac.setOrdenDto(ordenDto);
             facturaService.guardarFactura(fac);
             btnPagar.setDisable(true);
+            new Mensaje().show(Alert.AlertType.ERROR , "Factura." , "Factura pagada exitosamente.");
         }
     }
 

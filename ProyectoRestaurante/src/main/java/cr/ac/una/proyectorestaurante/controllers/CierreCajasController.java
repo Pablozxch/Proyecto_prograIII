@@ -40,7 +40,7 @@ public class CierreCajasController extends Controller implements Initializable
     @FXML
     private JFXButton btnCierreCaja;
     @FXML
-    private Button btnReporte;
+    private JFXButton btnReporte;
     EmpleadoDto emp = new EmpleadoDto();
     CierrecajasDto cierreCajas = new CierrecajasDto();
     CierreCajaService cajaService = new CierreCajaService();

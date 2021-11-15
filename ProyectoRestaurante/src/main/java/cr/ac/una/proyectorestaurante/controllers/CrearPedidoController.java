@@ -14,12 +14,16 @@ import java.io.*;
 import java.net.URL;
 import java.text.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.*;
 import javafx.beans.property.*;
 import javafx.collections.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 
 import javafx.scene.control.*;
 import javafx.scene.image.*;
@@ -346,7 +350,7 @@ public class CrearPedidoController extends Controller implements Initializable
         load();
         loadItems();
         clear();
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @FXML

@@ -29,7 +29,7 @@
                            <image>
                               <Image url="@../resources/usuario.png" />
                            </image></ImageView>
-                        <JFXTextField fx:id="txtUsuario" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefWidth="210.0" promptText="Usuario" unFocusColor="WHITE" />
+                        <JFXTextField fx:id="txtUsuario" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefWidth="210.0" promptText="%Usuario" unFocusColor="WHITE" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="57.0" prefWidth="446.0" spacing="5.0">
@@ -38,13 +38,13 @@
                            <image>
                               <Image url="@../resources/candado.png" />
                            </image></ImageView>
-                        <JFXPasswordField fx:id="txtContrasena" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefWidth="210.0" promptText="Contraseña" unFocusColor="WHITE" />
+                        <JFXPasswordField fx:id="txtContrasena" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefWidth="210.0" promptText="%Contrasena" unFocusColor="WHITE" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="48.0" prefWidth="555.0" spacing="50.0">
                      <children>
-                        <JFXButton fx:id="btnCancelar" onAction="#click" prefHeight="48.0" prefWidth="147.0" text="Cancelar" />
-                        <JFXButton fx:id="btnContinuar" onAction="#click" prefHeight="48.0" prefWidth="168.0" text="Continuar" />
+                        <JFXButton fx:id="btnCancelar" onAction="#click" prefHeight="48.0" prefWidth="147.0" text="%Cancelar" />
+                        <JFXButton fx:id="btnContinuar" onAction="#click" prefHeight="48.0" prefWidth="168.0" text="%Continuar" />
                      </children>
                      <VBox.margin>
                         <Insets bottom="15.0" />

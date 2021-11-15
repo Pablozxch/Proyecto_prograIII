@@ -16,14 +16,14 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="87.0" prefWidth="803.0" spacing="120.0">
                      <children>
-                        <JFXButton fx:id="btnCrearCategoria" onAction="#click" prefWidth="150.0" text="Crear" />
-                        <JFXButton fx:id="btnEliminar" onAction="#click" prefWidth="150.0" text="Eliminar" />
+                        <JFXButton fx:id="btnCrearCategoria" onAction="#click" prefHeight="48.0" prefWidth="150.0" text="%Crear" />
+                        <JFXButton fx:id="btnEliminar" onAction="#click" prefHeight="48.0" prefWidth="150.0" text="%Eliminar" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="50.0" prefWidth="516.0" spacing="35.0">
                      <children>
-                        <JFXComboBox fx:id="cmbCategorias" focusColor="WHITE" labelFloat="true" prefHeight="25.0" prefWidth="235.0" promptText="Categoría" />
-                        <JFXButton fx:id="btnBuscar" onAction="#click" prefWidth="150.0" text="Buscar" />
+                        <JFXComboBox fx:id="cmbCategorias" focusColor="WHITE" labelFloat="true" prefHeight="25.0" prefWidth="235.0" promptText="%Categorias" />
+                        <JFXButton fx:id="btnBuscar" onAction="#click" prefHeight="48.0" prefWidth="150.0" text="%buscar" />
                      </children>
                      <VBox.margin>
                         <Insets top="10.0" />
@@ -34,7 +34,7 @@
                         <Insets />
                      </VBox.margin>
                   </JFXListView>
-                  <JFXButton fx:id="btnGuardar" onAction="#click" prefHeight="48.0" prefWidth="150.0" text="Guardar">
+                  <JFXButton fx:id="btnGuardar" onAction="#click" prefHeight="48.0" prefWidth="150.0" text="%btn.Guardar">
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>

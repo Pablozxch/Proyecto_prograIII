@@ -17,32 +17,32 @@
          <children>
             <VBox alignment="CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                <children>
-                  <HBox alignment="CENTER" prefHeight="54.0" prefWidth="674.0" spacing="25.0">
+                  <HBox alignment="CENTER" prefHeight="95.0" prefWidth="674.0" spacing="25.0">
                      <children>
-                        <JFXDatePicker fx:id="dtpFechaInicial" promptText="Fecha Inicial" />
-                        <JFXDatePicker fx:id="dtpFechaFinal" promptText="Fecha Final" />
+                        <JFXDatePicker fx:id="dtpFechaInicial" promptText="%FechaInicial" />
+                        <JFXDatePicker fx:id="dtpFechaFinal" promptText="%FechaFinal" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="43.0" prefWidth="674.0">
+                  <HBox alignment="CENTER" prefHeight="93.0" prefWidth="674.0">
                      <children>
-                        <Label text="Productos más vendidos" />
-                        <JFXToggleButton fx:id="tgllstadoyProductos" alignment="TOP_RIGHT" prefHeight="58.0" prefWidth="210.0" styleClass="jfx-ToggleButton" text="Listado de facturas" toggleColor="#ffb085" toggleLineColor="#f9d5a7" unToggleColor="#ffb085" unToggleLineColor="#f9d5a7">
+                        <Label text="%ProductosVendidos" />
+                        <JFXToggleButton fx:id="tgllstadoyProductos" alignment="TOP_RIGHT" prefHeight="58.0" prefWidth="210.0" styleClass="jfx-ToggleButton" text="%ListadoFacturas" toggleColor="#ffb085" toggleLineColor="#f9d5a7" unToggleColor="#ffb085" unToggleLineColor="#f9d5a7">
                            <HBox.margin>
                               <Insets left="-8.0" />
                            </HBox.margin>
                         </JFXToggleButton>
-                        <JFXButton fx:id="btnAceptar" onAction="#click" prefHeight="48.0" prefWidth="150.0" text="Generar">
+                        <JFXButton fx:id="btnAceptar" onAction="#click" prefHeight="48.0" prefWidth="150.0" text="%Generar">
                            <HBox.margin>
                               <Insets left="35.0" />
                            </HBox.margin></JFXButton>
                      </children>
                   </HBox>
                   <Separator prefHeight="1.0" prefWidth="566.0" />
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="674.0" spacing="25.0">
+                  <HBox alignment="CENTER" prefHeight="132.0" prefWidth="674.0" spacing="25.0">
                      <children>
-                        <JFXDatePicker fx:id="dtpFechaCierreCaja" defaultColor="#f9d5a7" promptText="Fecha cierre caja" />
-                        <JFXTextField fx:id="txtIdEmpleado" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefWidth="210.0" promptText="ID del cajero" />
-                        <JFXButton fx:id="btnGenerar" onAction="#click" prefHeight="48.0" prefWidth="150.0" text="Generar" />
+                        <JFXDatePicker fx:id="dtpFechaCierreCaja" defaultColor="#f9d5a7" promptText="%FechaCierre" />
+                        <JFXTextField fx:id="txtIdEmpleado" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefWidth="210.0" promptText="%IdCajero" />
+                        <JFXButton fx:id="btnGenerar" onAction="#click" prefHeight="48.0" prefWidth="150.0" text="%Generar" />
                      </children>
                   </HBox>
                </children>

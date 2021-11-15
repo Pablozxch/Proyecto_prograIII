@@ -33,7 +33,7 @@ public class CierreCajasController extends Controller implements Initializable {
     @FXML
     private JFXButton btnCierreCaja;
     @FXML
-    private Button btnReporte;
+    private JFXButton btnReporte;
 
     /**
      * Initializes the controller class.

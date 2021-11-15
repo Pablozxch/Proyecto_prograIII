@@ -16,24 +16,24 @@
          <children>
             <VBox alignment="CENTER" fillWidth="false" prefHeight="521.0" prefWidth="518.0" spacing="35.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Label text="Registrar un salón." />
-                  <JFXTextField fx:id="txtNombre" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefHeight="31.0" prefWidth="210.0" promptText="Nombre" />
-                  <JFXComboBox fx:id="cmbBarraoMesa" focusColor="WHITE" labelFloat="true" onAction="#click" prefWidth="210.0" promptText="Seleccione" />
-                  <HBox alignment="CENTER" prefHeight="195.0" prefWidth="425.0" spacing="10.0">
+                  <Label text="%RegistrarSalon" />
+                  <JFXTextField fx:id="txtNombre" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefHeight="31.0" prefWidth="210.0" promptText="%Nombre" />
+                  <JFXComboBox fx:id="cmbBarraoMesa" focusColor="WHITE" labelFloat="true" onAction="#click" prefWidth="210.0" promptText="%Seleccione" />
+                  <HBox alignment="CENTER" prefHeight="212.0" prefWidth="518.0" spacing="10.0">
                      <children>
                         <VBox prefHeight="195.0" prefWidth="280.0" spacing="15.0">
                            <children>
-                              <Label text="Imagen para las mesas: " />
+                              <Label text="%ImagenMesas" />
                               <ImageView fx:id="imgSalon" fitHeight="172.0" fitWidth="226.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </VBox>
-                        <JFXButton fx:id="btnCargar" onAction="#click" prefWidth="150.0" text="Cargar" />
+                        <JFXButton fx:id="btnCargar" onAction="#click" prefHeight="48.0" prefWidth="190.0" text="%CargarImagen" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="339.0" spacing="100.0">
+                  <HBox alignment="CENTER" prefHeight="48.0" prefWidth="469.0" spacing="100.0">
                      <children>
-                        <JFXButton fx:id="btnVolver" onAction="#click" prefWidth="150.0" text="Volver" />
-                        <JFXButton fx:id="btnAceptar" onAction="#click" prefWidth="150.0" text="Aceptar" />
+                        <JFXButton fx:id="btnVolver" onAction="#click" prefHeight="48.0" prefWidth="190.0" text="%Cancelar" />
+                        <JFXButton fx:id="btnAceptar" onAction="#click" prefHeight="48.0" prefWidth="190.0" text="%Continuar" />
                      </children>
                      <VBox.margin>
                         <Insets bottom="10.0" />
