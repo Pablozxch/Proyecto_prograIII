@@ -45,19 +45,17 @@ import javafx.stage.Stage;
  */
 public class EditarSalonesController extends Controller implements Initializable
 {
-
+    
     @FXML
     private JFXButton btnAnadir;
     @FXML
     private JFXButton btnEliminar;
     @FXML
-    private JFXButton btnEditar;
-    @FXML
     private Pane pane;
     private GridPane gripMesa;
-
+    
     MesaService mesaService = new MesaService();
-
+    
     List<IMload> iMloads = new ArrayList<>();
     OrdenService orden = new OrdenService();
     List<OrdenDto> ordenes = new ArrayList<>();
@@ -83,20 +81,22 @@ public class EditarSalonesController extends Controller implements Initializable
     double orgSceneX, orgSceneY;
     double orgTranslateX, orgTranslateY;
     MesaDto mesaDelete = new MesaDto();
-
+    SalonDto salon = new SalonDto();
+    
     @Override
     public void initialize(URL url , ResourceBundle rb)
     {
     }
-
+    
     @Override
     public void initialize()
     {
+        salon = (SalonDto) AppContext.getInstance().get("Salon");//colocar 
         pane.getChildren().clear();
         load();
         rolDto = (RolDto) AppContext.getInstance().get("RolActual");
     }
-
+    
     void load()//con este metodo se carga la lista de iamgeviews para poder empezar a colocarlas en el grid
     {
         SalonDto salon = (SalonDto) AppContext.getInstance().get("Salon");//colocar 
@@ -128,12 +128,12 @@ public class EditarSalonesController extends Controller implements Initializable
             j.getCircle().setOnMouseDragged(circleOnMouseDraggedEventHandler);
             j.getCircle().setOnMouseClicked((m) ->
             {
-                 mesaDelete = j.getMesaDto();
+                mesaDelete = j.getMesaDto();
             });
         });
-
+        
     }
-
+    
     EventHandler<MouseEvent> circleOnMousePressedEventHandler = new EventHandler<MouseEvent>()
     {
         @Override
@@ -145,7 +145,7 @@ public class EditarSalonesController extends Controller implements Initializable
             orgTranslateY = ((Circle) (t.getSource())).getTranslateY();
         }
     };
-
+    
     EventHandler<MouseEvent> circleOnMouseDraggedEventHandler = new EventHandler<MouseEvent>()
     {
         @Override
@@ -159,29 +159,41 @@ public class EditarSalonesController extends Controller implements Initializable
             ((Circle) (t.getSource())).setTranslateY(newTranslateY);
             iMloads.forEach(i ->
             {
-
+                
                 if(i.getPosx() == ((Circle) (t.getSource())).getCenterX() && i.getPosy() == ((Circle) (t.getSource())).getCenterY())
                 {
                     i.getMesaDto().setPosX((long) newTranslateX);
                     i.getMesaDto().setPosY((long) newTranslateY);
-
+                    
                 }
             });
-
+            
         }
     };
-
+    
     @FXML
     private void click(ActionEvent event)
     {
         if(event.getSource() == btnEliminar)
         {
-            iMloads.forEach(t ->
+            mesaService.eliminarMesa(mesaclick.getId());
+            load();
+        }
+        if(event.getSource() == btnAnadir)
+        {
+            MesaDto msa = new MesaDto();
+            msa.setSalonDto(salon);
+            msa.setPosX(200L);
+            msa.setPosY(150L);
+            msa.setNombre("Mesa");
+            msa.setEstado("D");
+            
+            mesaDtos.add(msa);
+            mesaDtos.forEach(t ->
             {
-                MesaDto mesa = t.getMesaDto();
-                mesaService.guardarMesa(mesa);
-                mesa = null;
+                mesaService.guardarMesa(t);
             });
+            load();
         }
     }
 }

@@ -15,7 +15,6 @@
                <children>
                   <JFXButton fx:id="btnAnadir" onAction="#click" prefHeight="48.0" prefWidth="150.0" text="Añadir" />
                   <JFXButton fx:id="btnEliminar" onAction="#click" prefHeight="48.0" prefWidth="150.0" text="Eliminar" />
-                  <JFXButton fx:id="btnEditar" onAction="#click" prefHeight="48.0" prefWidth="150.0" text="Editar" />
                </children>
             </HBox>
             <VBox alignment="CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
