@@ -219,7 +219,7 @@ public class SalonesGeneralController extends Controller implements Initializabl
             }
             else
             {
-                
+                FlowController.getInstance().goView("OrdenesBarras");
                 /*
                 
                     HACER QUE CARGUE LAS ORDENES COMO EL ORDENES GENERAL
