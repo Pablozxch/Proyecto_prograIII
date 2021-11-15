@@ -120,14 +120,6 @@ public class OrdenesGeneralController extends Controller implements Initializabl
             }
 
         }
-
-        if(event.getSource() == btnAnadir)
-        {
-
-        }
-        /*
-            Ver como setearle una orden a una mesa  
-         */
     }
 
     @Override

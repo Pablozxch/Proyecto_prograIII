@@ -140,11 +140,14 @@ public class PrincipalController extends Controller implements Initializable
             }
 
         }
-        if(event.getSource() == btnDescuento){
+        if(event.getSource() == btnDescuento)
+        {
             if(((EmpleadoDto) AppContext.getInstance().get("EmpleadoActual")) == null)
             {
                 FlowController.getInstance().goViewInWindowModal("LogIn" , (Stage) btnCerrarSesion.getScene().getWindow() , Boolean.FALSE);//ver que se hace con esto
-            }else{
+            }
+            else
+            {
                 FlowController.getInstance().goView("CodigoDescuentoGeneral");
             }
         }
@@ -186,6 +189,27 @@ public class PrincipalController extends Controller implements Initializable
                 if("Administrativos".equals(rolDto.getNombre()))
                 {
                     FlowController.getInstance().goView("EmpleadosGeneral");
+                }
+                else
+                {
+                    new Mensaje().show(Alert.AlertType.ERROR , "Permisos" , "Permisos innecesarios para acceder a este apartado");
+                }
+            }
+
+        }
+
+        if(event.getSource() == btnDescuento)
+        {
+            if(((EmpleadoDto) AppContext.getInstance().get("EmpleadoActual")) == null)
+            {
+                FlowController.getInstance().goViewInWindowModal("LogIn" , (Stage) btnCerrarSesion.getScene().getWindow() , Boolean.FALSE);//ver que se hace con esto
+            }
+            else
+            {
+                rolDto = (RolDto) AppContext.getInstance().get("RolActual");
+                if("Administrativos".equals(rolDto.getNombre()))
+                {
+                    FlowController.getInstance().goView("CrearCodigosDescuentoGeneral");
                 }
                 else
                 {
@@ -265,7 +289,7 @@ public class PrincipalController extends Controller implements Initializable
             Locale locale = new Locale("es_MX");
             ResourceBundle bundle = ResourceBundle.getBundle("/cr/ac/una/proyectorestaurante/resources/Espanol" , locale);
             btnCategorias.setText(bundle.getString("Categorias"));
-            
+
         }
         if(event.getSource() == btnEnglish)
         {

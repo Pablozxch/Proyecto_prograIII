@@ -7,8 +7,11 @@ package cr.ac.una.proyectorestaurante.services;
 
 import cr.ac.una.proyectorestaurante.models.*;
 import cr.ac.una.proyectorestaurante.utils.*;
+import cr.ac.una.proyectorestaurante.utils.Request;
+import jakarta.ws.rs.core.*;
 import java.util.*;
 import java.util.logging.*;
+import java.util.stream.*;
 
 /**
  *
@@ -37,6 +40,33 @@ public class CodDescService
         {
             Logger.getLogger(EmpleadoService.class.getName()).log(Level.SEVERE , "Error obteniendo el usuario [" + url + "]" , ex);
             return new Respuesta(false , "Error obteniendo el usuario." , "getUsuario " + ex.getMessage());
+        }
+    }
+
+    public Respuesta getCodigos()
+    {
+        try
+        {
+            Request request = new Request("CodigodescController/codigo");
+            request.get();
+            if(request.isError())
+            {
+                return new Respuesta(false , request.getError() , "");
+
+            }
+
+            List<CodigodescDto> Ordenes = (List<CodigodescDto>) request.readEntity(new GenericType<List<CodigodescDto>>()
+            {
+            });
+
+            RestauranteDto id = (RestauranteDto) AppContext.getInstance().get("Restaurante");
+            List<CodigodescDto> Ordenes2 = Ordenes.stream().filter(t -> Objects.equals(t.getRestaurante().getId() , id.getId())).collect(Collectors.toList());
+            return new Respuesta(true , "" , "" , "coddesc" , Ordenes2);
+        }
+        catch(Exception ex)
+        {
+            Logger.getLogger(OrdenService.class.getName()).log(Level.SEVERE , "Error obteniendo Ordenes." , ex);
+            return new Respuesta(false , "Error obteniendo Ordenes." , "getOrdens " + ex.getMessage());
         }
     }
 
@@ -73,7 +103,7 @@ public class CodDescService
                 return new Respuesta(false , request.getError() , "");
 
             }
-           CodigodescDto cod = (CodigodescDto) request.readEntity(CodigodescDto.class);
+            CodigodescDto cod = (CodigodescDto) request.readEntity(CodigodescDto.class);
             return new Respuesta(true , "" , "" , "coddesc" , cod);
         }
         catch(Exception ex)

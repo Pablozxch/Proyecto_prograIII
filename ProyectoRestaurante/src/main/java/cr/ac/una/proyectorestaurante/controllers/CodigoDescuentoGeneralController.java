@@ -17,7 +17,9 @@ import javafx.scene.control.TableView;
 import cr.ac.una.proyectorestaurante.utils.*;
 import java.util.ArrayList;
 import java.util.List;
-import javafx.scene.control.TableColumn;
+import java.util.stream.*;
+import javafx.collections.*;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 /**
@@ -25,7 +27,8 @@ import javafx.stage.Stage;
  *
  * @author Christopher
  */
-public class CodigoDescuentoGeneralController extends Controller implements Initializable {
+public class CodigoDescuentoGeneralController extends Controller implements Initializable
+{
 
     @FXML
     private TableView tblpedidos;
@@ -39,55 +42,82 @@ public class CodigoDescuentoGeneralController extends Controller implements Init
     /**
      * Initializes the controller class.
      */
-    
     CodDescService codigoService = new CodDescService();
     List<CodigodescDto> codigos = new ArrayList<CodigodescDto>();
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        llenar();
-    }    
+    List<CodigodescDto> codigodescDtos = new ArrayList<>();
 
     @Override
-    public void initialize() {
+    public void initialize(URL url , ResourceBundle rb)
+    {
+        // TODO
+        llenar();
+    }
+
+    @Override
+    public void initialize()
+    {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    void ObtencionDatos()
+    {
+        Respuesta res = codigoService.getCodigos();
+        if(res.getEstado())
+        {
+            List<CodigodescDto> codd = (List<CodigodescDto>) res.getResultado("coddesc");
+            codigodescDtos = codd;
+        }
+        ObservableList<CodigodescDto> codds = FXCollections.observableList(codigodescDtos);
+        tblpedidos.setItems(codds);
+        tblpedidos.refresh();
+
+    }
+
     @FXML
-    private void click(ActionEvent event) {
-        if(event.getSource() == btnAnadir){
-            FlowController.getInstance().goViewInWindowModal("CrearCodigosDescuentos", (Stage) btnAnadir.getScene().getWindow() , Boolean.FALSE);
+    private void click(ActionEvent event)
+    {
+        if(event.getSource() == btnEditar)
+        {
+            if(tblpedidos.getSelectionModel().getSelectedItem() != null)
+            {
+                AppContext.getInstance().set("Codigo" , (OrdenDto) tblpedidos.getSelectionModel().getSelectedItem());
+                FlowController.getInstance().goViewInWindowModal("CrearCodigosDescuentos" , (Stage) btnAnadir.getScene().getWindow() , Boolean.FALSE);
+            }
+        }
+        if(event.getSource() == btnFacturar)//cambiar por eliminar
+        {
+            if(tblpedidos.getSelectionModel().getSelectedItem() != null)
+            {
+                AppContext.getInstance().set("Codigo" , (OrdenDto) tblpedidos.getSelectionModel().getSelectedItem());
+                FlowController.getInstance().goViewInWindowModal("CrearCodigosDescuentos" , (Stage) btnAnadir.getScene().getWindow() , Boolean.FALSE);
+            }
+
         }
     }
-    
-    void llenar(){
+
+    void llenar()
+    {
         tblpedidos.getColumns().clear();
-        
-        TableColumn<CodigodescDto , String> idDesc = new TableColumn<>("Nombre Salon");
-        idDesc.setPrefWidth(tblpedidos.getPrefWidth() /4);
+
+        TableColumn<CodigodescDto , String> idDesc = new TableColumn<>("Nombre");
+        idDesc.setPrefWidth(tblpedidos.getPrefWidth() / 3);
         idDesc.setCellValueFactory(cd -> cd.getValue().nombre);
         idDesc.setResizable(false);
-        
-        TableColumn<CodigodescDto , String> nombreDesc = new TableColumn<>("Nombre Salon");
-        nombreDesc.setPrefWidth(tblpedidos.getPrefWidth() / 4);
-        nombreDesc.setCellValueFactory(cd -> cd.getValue().nombre);
+
+        TableColumn<CodigodescDto , String> nombreDesc = new TableColumn<>("URL");
+        nombreDesc.setPrefWidth(tblpedidos.getPrefWidth() / 3);
+        nombreDesc.setCellValueFactory(cd -> cd.getValue().url);
         nombreDesc.setResizable(false);
 
-        TableColumn<CodigodescDto , String> descuento = new TableColumn<>("Nombre Mesa");
-        descuento.setPrefWidth(tblpedidos.getPrefWidth() / 4);
+        TableColumn<CodigodescDto , String> descuento = new TableColumn<>("Cantidad Descuento");
+        descuento.setPrefWidth(tblpedidos.getPrefWidth() / 3);
         descuento.setCellValueFactory(cd -> cd.getValue().desc);
         descuento.setResizable(false);
-//
-        TableColumn<CodigodescDto , String> cantDesc = new TableColumn<>("Empleado");
-        cantDesc.setPrefWidth(tblpedidos.getPrefWidth() / 4);
-        cantDesc.setCellValueFactory(cd -> cd.getValue().cantidadusar);
-        cantDesc.setResizable(false);
 
         tblpedidos.getColumns().add(idDesc);
         tblpedidos.getColumns().add(nombreDesc);
         tblpedidos.getColumns().add(descuento);
-        tblpedidos.getColumns().add(cantDesc);
         tblpedidos.refresh();
     }
-    
+
 }
