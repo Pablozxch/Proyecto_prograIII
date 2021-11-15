@@ -59,16 +59,16 @@ public class CierreCajaService
             return new Respuesta(false , "Error obteniendo facturas." , "getFacturas " + ex.getMessage());
         }
     }
-    public Respuesta reporteCierreCajero(String Inicio , Long idCierre , Long idRes)//el que se genera al terminar el cierre caja
+    public Respuesta reporteCierreCajero(String fecha , Long idCierre , Long idRes)//el que se genera al terminar el cierre caja
     {
         try
         {
             System.out.println("wenas");
             Map<String , Object> parametros = new HashMap<>();
-            parametros.put("inicio" , Inicio);
+            parametros.put("fecha" , fecha);
             parametros.put("idcierre" , idCierre);
             parametros.put("idres" , idRes);
-            Request request = new Request("CierreCajaController/cierrecajero" , "/{inicio}/{idcierre}/{idres}" , parametros);
+            Request request = new Request("CierreCajaController/cierrecajero" , "/{fecha}/{idcierre}/{idres}" , parametros);
             request.get();
             if(request.isError())
             {
