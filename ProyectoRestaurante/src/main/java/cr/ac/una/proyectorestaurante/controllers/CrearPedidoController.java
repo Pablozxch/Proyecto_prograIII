@@ -257,6 +257,7 @@ public class CrearPedidoController extends Controller implements Initializable
                     det.setProductoDto(pro);
                     det.setCantidad(Long.valueOf(txtCantidad.getText()));
                     det.setPrecio(det.getCantidad() * pro.getCosto());
+                    det.setOrdenId(ordenDto);
                     productos.add(det);
                     ObservableList<DetallexordenDto> ords = FXCollections.observableList(productos);
                     detallexordenDtos = productos;
@@ -284,6 +285,7 @@ public class CrearPedidoController extends Controller implements Initializable
                 });
 
             }
+            initialize();
         }
         if(event.getSource() == btnFacturar)
         {

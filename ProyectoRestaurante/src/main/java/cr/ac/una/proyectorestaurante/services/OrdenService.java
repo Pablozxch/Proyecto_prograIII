@@ -24,7 +24,7 @@ public class OrdenService
     {
         try
         {
-
+            System.out.println("Estoy entrado");
             Request request = new Request("OrdenController/orden");
             request.get();
             if(request.isError())
@@ -36,9 +36,14 @@ public class OrdenService
             List<OrdenDto> Ordenes = (List<OrdenDto>) request.readEntity(new GenericType<List<OrdenDto>>()
             {
             });
+
             RestauranteDto id = (RestauranteDto) AppContext.getInstance().get("Restaurante");
-            List<OrdenDto> Ordenes2 = Ordenes.stream().filter(t -> t.getEmpleadoDto().getRestauranteDto().getId() == id.getId()).collect(Collectors.toList());
-            return new Respuesta(true , "" , "" , "Ordenes" , Ordenes);
+            List<OrdenDto> Ordenes2 = Ordenes.stream().filter(t -> Objects.equals(t.getEmpleadoDto().getRestauranteDto().getId() , id.getId())).collect(Collectors.toList());
+            Ordenes2.forEach(t ->
+            {
+                System.out.println("El valor es " + t.getMesaDto().toString());
+            });
+            return new Respuesta(true , "" , "" , "Ordenes" , Ordenes2);
         }
         catch(Exception ex)
         {
@@ -111,7 +116,5 @@ public class OrdenService
             return new Respuesta(false , "Error obteniendo facturas." , "getFacturas " + ex.getMessage());
         }
     }
-    
-    
-   
+
 }

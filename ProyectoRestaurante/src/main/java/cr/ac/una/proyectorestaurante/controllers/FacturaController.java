@@ -5,9 +5,7 @@
  */
 package cr.ac.una.proyectorestaurante.controllers;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXCheckBox;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import cr.ac.una.proyectorestaurante.models.*;
 import cr.ac.una.proyectorestaurante.services.*;
 import cr.ac.una.proyectorestaurante.utils.*;
@@ -56,10 +54,6 @@ public class FacturaController extends Controller implements Initializable
     @FXML
     private JFXTextField txtDireccionRest;
     @FXML
-    private JFXCheckBox chkEfectivo;
-    @FXML
-    private JFXCheckBox chkTarjeta;
-    @FXML
     private JFXTextField txtImpuestos;
     @FXML
     private JFXButton btnPagar;
@@ -96,6 +90,8 @@ public class FacturaController extends Controller implements Initializable
     FacturaService facturaService = new FacturaService();
     long descuento = 0;
     boolean cancelado = false;
+    @FXML
+    private JFXToggleButton chkTarjetaEfectivo;
 
     @Override
 
@@ -143,21 +139,28 @@ public class FacturaController extends Controller implements Initializable
             RolDto rol = (RolDto) AppContext.getInstance().get("RolActual");
             if(!"Salonero".equals(rol.getNombre()) && cierreCajas == null)
             {
-                CierreCajasController cr=(CierreCajasController) FlowController.getInstance().getController("CierreCajas");
+                CierreCajasController cr = (CierreCajasController) FlowController.getInstance().getController("CierreCajas");
                 cr.createCierre();
-                FlowController.getInstance().goViewInWindowModal("CierreCajas" , getStage() , Boolean.FALSE); 
-                
+                FlowController.getInstance().goViewInWindowModal("CierreCajas" , getStage() , Boolean.FALSE);
+
             }
 
             MesaService mesaService = new MesaService();
             CierrecajasDto cierre = (CierrecajasDto) AppContext.getInstance().get("CierreCajasActual");
-
             MesaDto mesaDto = ordenDto.getMesaDto();
             mesaDto.setEstado("D");
             mesaService.guardarMesa(mesaDto);//se actualiza el estado de la mesa para no tomar ordenes ya canceladas
             FacturaDto fac = new FacturaDto();
             fac.setCierrecajasDto(cierre);
-            fac.setEfetivoTarjeta("T");//CAMBIAR EL VALOR DEPENDIENDO DE LO OTRO
+            if(chkTarjetaEfectivo.isSelected())
+            {
+                  fac.setEfetivoTarjeta("T");//CAMBIAR EL VALOR DEPENDIENDO DE LO OTRO
+            }
+            else
+            {
+                  fac.setEfetivoTarjeta("E");//CAMBIAR EL VALOR DEPENDIENDO DE LO OTRO
+            }
+          
             double total = Double.valueOf(txtSubtotal.getText()) * (impA);
             long ttotal = Long.valueOf(String.valueOf((long) total + subtotal));
             long finalmont = Long.valueOf(String.valueOf(((long) total + subtotal) - descuento));
@@ -166,16 +169,10 @@ public class FacturaController extends Controller implements Initializable
             fac.setMontoFinal(finalmont);
             fac.setDescuento(descuento);
             ordenDto.setEstado("C");
-            fac.setOrdenDto(ordenDto);
-            System.out.println("fac " + fac.toString());
             ordenService.guardarOrden(ordenDto);
+            fac.setOrdenDto(ordenDto);
             facturaService.guardarFactura(fac);
             btnPagar.setDisable(true);
-            ordenDto.setEstado("C");
-            MesaDto mesa = ordenDto.getMesaDto();
-            mesa.setEstado("D");
-            mesaService.guardarMesa(mesa);
-            ordenService.guardarOrden(ordenDto);
         }
     }
 

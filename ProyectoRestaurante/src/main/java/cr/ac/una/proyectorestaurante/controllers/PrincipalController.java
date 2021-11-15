@@ -237,7 +237,6 @@ public class PrincipalController extends Controller implements Initializable
         }
         if(event.getSource() == btnCerrarSesion)
         {
-            System.out.println("BYE");
             AppContext.getInstance().delete("EmpleadoActual");//este usuario es el encargado de ingresar a todo lo que el pueda
             FlowController.getInstance().goViewInWindowModal("LogIn" , (Stage) btnCerrarSesion.getScene().getWindow() , Boolean.FALSE);//ver que se hace con esto
             //preguntar que si lo de crear empleados en esta vista

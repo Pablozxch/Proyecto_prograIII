@@ -207,7 +207,7 @@ public class CierreCajaService
         }
     }
 
-    public Respuesta reporteCierreCajero(Long idEmpleado , String Fecha,Long idRes)
+    public Respuesta reporteCierreCajero(String Fecha , Long idcierre , Long idRes)
     {
 
         try
@@ -219,9 +219,9 @@ public class CierreCajaService
             Connection connection = dataSource.getConnection();
 
             HashMap<String , Object> map = new HashMap<>();
-            map.put("idEmpleado" , idEmpleado);
+            map.put("idCierreCaja" , idcierre);
             map.put("Fecha" , Fecha);
-            map.put("IDrestaurante", idRes);
+            map.put("IDrestaurante" , idRes);
             JasperPrint print = JasperFillManager.fillReport(jasper , map , connection);
             byte[] s = JasperExportManager.exportReportToPdf(print);
             return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "" , "CierreCaja" , s);

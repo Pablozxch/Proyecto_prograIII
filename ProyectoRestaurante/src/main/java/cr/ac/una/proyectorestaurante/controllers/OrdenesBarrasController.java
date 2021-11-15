@@ -10,7 +10,9 @@ import cr.ac.una.proyectorestaurante.models.*;
 import cr.ac.una.proyectorestaurante.services.*;
 import cr.ac.una.proyectorestaurante.utils.*;
 import java.net.URL;
+import java.text.*;
 import java.util.*;
+import java.util.logging.*;
 import java.util.stream.*;
 import javafx.collections.*;
 import javafx.event.*;
@@ -33,10 +35,12 @@ public class OrdenesBarrasController extends Controller implements Initializable
     private JFXButton btnEditar;
     @FXML
     private JFXButton btnFacturar;
-    OrdenService ordenService = new OrdenService();
-    List<OrdenDto> ordenes = new ArrayList<OrdenDto>();
+    List<OrdenDto> ordenes = new ArrayList<>();
     RolDto rolDto = new RolDto();
     SalonDto salonDto = new SalonDto();
+    List<MesaDto> nMesaDtos = new ArrayList<>();
+    MesaService mesaService = new MesaService();
+    OrdenService ordenService = new OrdenService();
 
     /**
      * Initializes the controller class.
@@ -45,6 +49,7 @@ public class OrdenesBarrasController extends Controller implements Initializable
     public void initialize(URL url , ResourceBundle rb)
     {
         // TODO
+        llenar();
     }
 
     void llenar()
@@ -55,10 +60,6 @@ public class OrdenesBarrasController extends Controller implements Initializable
         NombreSalon.setCellValueFactory(cd -> cd.getValue().getMesaDto().getSalonDto().nombre);
         NombreSalon.setResizable(false);
 
-        TableColumn<OrdenDto , String> nombreMesa = new TableColumn<>("Nombre Mesa");
-        nombreMesa.setPrefWidth(tblpedidos.getPrefWidth() / 3);
-        nombreMesa.setCellValueFactory(cd -> cd.getValue().getMesaDto().nombre);
-        nombreMesa.setResizable(false);
 //
         TableColumn<OrdenDto , String> nombreempelado = new TableColumn<>("Empleado");
         nombreempelado.setPrefWidth(tblpedidos.getPrefWidth() / 3);
@@ -66,7 +67,6 @@ public class OrdenesBarrasController extends Controller implements Initializable
         nombreempelado.setResizable(false);
 
         tblpedidos.getColumns().add(NombreSalon);
-        tblpedidos.getColumns().add(nombreMesa);
         tblpedidos.getColumns().add(nombreempelado);
         tblpedidos.refresh();
 
@@ -74,11 +74,12 @@ public class OrdenesBarrasController extends Controller implements Initializable
 
     void ObtencionDatos()
     {
+
         Respuesta res = ordenService.getOrdenes();
         if(res.getEstado())
         {
             List<OrdenDto> ordeness = (List<OrdenDto>) res.getResultado("Ordenes");
-            ordenes = ordeness.stream().filter(t -> "P".equals(t.getEstado()) && t.getMesaDto().getId() == salonDto.getId()).collect(Collectors.toList());
+            ordenes = ordeness.stream().filter(t -> "P".equals(t.getEstado()) && Objects.equals(t.getMesaDto().getSalonDto().getId() , salonDto.getId())).collect(Collectors.toList());
             ordenes.forEach(t ->
             {
                 System.out.println(t.getEstado());
@@ -117,29 +118,81 @@ public class OrdenesBarrasController extends Controller implements Initializable
             {
                 new Mensaje().show(Alert.AlertType.ERROR , "Permisos" , "Permisos innecesarios para acceder a este apartado");
             }
-
         }
-
         if(event.getSource() == btnAnadir)
         {
+            if(nMesaDtos == null)
+            {
+                MesaDto mesaN = new MesaDto();
+                mesaN.setNombre("Bar");
+                mesaN.setPosX(Long.MIN_VALUE);
+                mesaN.setPosY(Long.MIN_VALUE);
+                mesaN.setSalonDto(salonDto);
+                Respuesta res = mesaService.guardarMesa(mesaN);
+                if(res.getEstado())
+                {
+                    obtenermesas();
+                }
+                else
+                {
+                    System.out.println("Error");
 
-            
-            /*
-            
-                @SE DEBE DE CREAR LA VARA PARA QUE CREE LAS ORDENES Y LAS ASIGNE AL SALON, YA QUE ESTA VISTA NO CONTIENE
-                @COORDENADAS   
-            
-            */
+                }
+            }
+            else
+            {
+                try
+                {
+                    EmpleadoDto empleadoDto = (EmpleadoDto) AppContext.getInstance().get("EmpleadoActual");
+                    OrdenDto orden = new OrdenDto();
+                    orden.setEmpleadoDto(empleadoDto);
+                    Date date = new Date();
+                    SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
+                    Date date2 = formatter1.parse(formatter1.format(date));
+                    orden.setEmpleadoDto(empleadoDto);
+                    orden.setFecha(date2);
+                    orden.setMesaDto(nMesaDtos.get(0));
+                    orden.setEstado("P");
+                    System.out.println("La orden a guardar es "+orden);
+                    ordenService.guardarOrden(orden);
+                    Respuesta res2 = ordenService.lasto();
+                    orden = null;
+                    if(res2.getEstado())
+                    {
+                        orden = (OrdenDto) res2.getResultado("Orden");
+                    }
+                    AppContext.getInstance().set("Orden" , orden);
+                    FlowController.getInstance().goViewInWindowModal("CrearPedido" , getStage() , Boolean.FALSE);
+                }
+                catch(ParseException ex)
+                {
+                    Logger.getLogger(OrdenesBarrasController.class.getName()).log(Level.SEVERE , null , ex);
+                }
+            }
+            initialize();
+        }
+    }
+
+    void obtenermesas()
+    {
+        nMesaDtos.clear();
+        MesaService mesa = new MesaService();
+        Respuesta res = mesa.getMesas();
+        if(res.getEstado())
+        {
+            nMesaDtos = (List<MesaDto>) res.getResultado("Mesas");
         }
     }
 
     @Override
     public void initialize()
     {
+        obtenermesas();
         rolDto = (RolDto) AppContext.getInstance().get("RolActual");
         salonDto = (SalonDto) AppContext.getInstance().get("Salon");
+        System.out.println("Slon" + salonDto.toString());
         ObtencionDatos();
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
 }

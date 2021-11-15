@@ -28,7 +28,7 @@ import javafx.stage.*;
  */
 public class CierreCajasController extends Controller implements Initializable
 {
-    
+
     @FXML
     private JFXTextField txtMontoInicial;
     @FXML
@@ -55,7 +55,7 @@ public class CierreCajasController extends Controller implements Initializable
         // TODO
 
     }
-    
+
     @FXML
     private void click(ActionEvent event)
     {
@@ -70,7 +70,7 @@ public class CierreCajasController extends Controller implements Initializable
             cierre.setMontoFinal(0L);
             cierre.setMontoTarjeta(0L);
             cierre.setEstado("C");
-            
+
             Respuesta res2 = cajaService.guardarCierrecajas(cierre);
             if(res2.getEstado())
             {
@@ -104,24 +104,26 @@ public class CierreCajasController extends Controller implements Initializable
             }
             cierre.setMontoFinal(cierre.getMontoInicial() + montoEfectivo + montoTarjeta);
             cajaService.guardarCierrecajas(cierre);
-            AppContext.getInstance().delete("CierreCajasActual");
-            AppContext.getInstance().delete("EmpleadoActual");
-            AppContext.getInstance().delete("RolActual");
+
             /*
             
                 Proceder a generar el reporte correspondiente
              */
             Date date = new Date();
             SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
+            System.out.println("Fecha "+formatter1.format(date)+"ID CIERRE "+cierre.getId()+"Rees id "+res.getId());
             Respuesta respuesta = cajaService.reporteCierreCajero(formatter1.format(date) , cierre.getId() , res.getId());
             if(respuesta.getEstado())
             {
                 byte[] decoder = (byte[]) respuesta.getResultado("CierreCaja");
                 cargarArchivo(decoder);
             }
+            AppContext.getInstance().delete("CierreCajasActual");
+            AppContext.getInstance().delete("EmpleadoActual");
+            AppContext.getInstance().delete("RolActual");
         }
     }
-    
+
     void cargarArchivo(byte[] decoder)
     {
         FileChooser fileChooser = new FileChooser();
@@ -129,7 +131,7 @@ public class CierreCajasController extends Controller implements Initializable
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF" , "*.pdf"));
         fileChooser.setInitialFileName("*.pdf");
         File selectedFile = fileChooser.showSaveDialog(new Stage());
-        
+
         if(selectedFile != null)
         {
             File file2 = new File(selectedFile.toPath().toString());
@@ -143,7 +145,7 @@ public class CierreCajasController extends Controller implements Initializable
             }
         }
     }
-    
+
     void createCierre()
     {
         txtMontoFinal.setDisable(true);
@@ -151,7 +153,7 @@ public class CierreCajasController extends Controller implements Initializable
         txtMontoTarjeta.setDisable(true);
         btnReporte.setDisable(true);
     }
-    
+
     void closeCierreCajas()
     {
         txtMontoInicial.setDisable(true);
@@ -161,11 +163,11 @@ public class CierreCajasController extends Controller implements Initializable
         btnCierreCaja.setDisable(true);
         btnReporte.setDisable(false);
     }
-    
+
     @Override
     public void initialize()
     {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

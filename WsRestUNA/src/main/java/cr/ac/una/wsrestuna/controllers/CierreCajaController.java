@@ -116,14 +116,14 @@ public class CierreCajaController
     }
 
     @GET
-    @Path("/cierrecajero/{fecha}/{idEmp}/{idres}")
+    @Path("/cierrecajero/{fecha}/{idcierre}/{idres}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response reporteCierreCajero(@PathParam("fecha") String fecha , @PathParam("idEmp") Long idEmp , @PathParam("idres") Long idRes)
+    public Response reporteCierreCajero(@PathParam("fecha") String fecha , @PathParam("idcierre") Long idcierre , @PathParam("idres") Long idRes)
     {
         try
         {
-            Respuesta res = cierreCajaService.reporteCierreCajero(idEmp , fecha , idRes);
+            Respuesta res = cierreCajaService.reporteCierreCajero(fecha , idcierre , idRes);
             if(!res.getEstado())
             {
                 return Response.status(res.getCodigoRespuesta().getValue()).entity(res.getMensaje()).build();
