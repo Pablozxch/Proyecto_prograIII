@@ -38,7 +38,7 @@ public class CodDescService
         }
         catch(Exception ex)
         {
-            Logger.getLogger(EmpleadoService.class.getName()).log(Level.SEVERE , "Error obteniendo el usuario [" + url + "]" , ex);
+            Logger.getLogger(CodDescService.class.getName()).log(Level.SEVERE , "Error obteniendo el usuario [" + url + "]" , ex);
             return new Respuesta(false , "Error obteniendo el usuario." , "getUsuario " + ex.getMessage());
         }
     }
@@ -61,16 +61,16 @@ public class CodDescService
 
             RestauranteDto id = (RestauranteDto) AppContext.getInstance().get("Restaurante");
             List<CodigodescDto> Ordenes2 = Ordenes.stream().filter(t -> Objects.equals(t.getRestaurante().getId() , id.getId())).collect(Collectors.toList());
-            return new Respuesta(true , "" , "" , "coddesc" , Ordenes2);
+            return new Respuesta(true , "" , "" , "Codigo" , Ordenes2);
         }
         catch(Exception ex)
         {
-            Logger.getLogger(OrdenService.class.getName()).log(Level.SEVERE , "Error obteniendo Ordenes." , ex);
+            Logger.getLogger(CodDescService.class.getName()).log(Level.SEVERE , "Error obteniendo Ordenes." , ex);
             return new Respuesta(false , "Error obteniendo Ordenes." , "getOrdens " + ex.getMessage());
         }
     }
 
-    public Respuesta eliminarEmpleado(Long id)
+    public Respuesta eliminarCodigo(Long id)
     {
         try
         {
@@ -87,12 +87,12 @@ public class CodDescService
         }
         catch(Exception ex)
         {
-            Logger.getLogger(EmpleadoService.class.getName()).log(Level.SEVERE , "Error eliminando el codigo desc." , ex);
-            return new Respuesta(false , "Error eliminando el empleado." , "eliminarEmpleado " + ex.getMessage());
+            Logger.getLogger(CodDescService.class.getName()).log(Level.SEVERE , "Error eliminando el codigo desc." , ex);
+            return new Respuesta(false , "Error eliminando el empleado." , "eliminarCodigo " + ex.getMessage());
         }
     }
 
-    public Respuesta guardarEmpleado(EmpleadoDto pd)
+    public Respuesta guardarCodigo(CodigodescDto pd)
     {
         try
         {
@@ -108,8 +108,8 @@ public class CodDescService
         }
         catch(Exception ex)
         {
-            Logger.getLogger(EmpleadoService.class.getName()).log(Level.SEVERE , "Error guardando el empleado." , ex);
-            return new Respuesta(false , "Error guardando el empleado." , "guardarEmpleado " + ex.getMessage());
+            Logger.getLogger(CodDescService.class.getName()).log(Level.SEVERE , "Error guardando el empleado." , ex);
+            return new Respuesta(false , "Error guardando el empleado." , "guardarCodigo " + ex.getMessage());
         }
     }
 

@@ -8,6 +8,7 @@ package cr.ac.una.wsrestuna.services;
 import cr.ac.una.wsrestuna.models.*;
 import cr.ac.una.wsrestuna.utils.*;
 import java.sql.*;
+import java.util.*;
 import java.util.logging.*;
 import javax.ejb.*;
 import javax.persistence.*;
@@ -27,6 +28,33 @@ public class CodDescService
     @PersistenceContext(unitName = "WsRestUNA")
     private EntityManager em;
 
+        public Respuesta getCodigos()
+    {
+        try
+        {
+            Query qryCod = em.createNamedQuery("Codigodesc.findAll" , Codigodesc.class);
+            List<Codigodesc> codigos = (List<Codigodesc>) qryCod.getResultList();
+            List<CodigodescDto> codigosDto = new ArrayList<>();
+            codigos.forEach(orden ->
+            {
+                codigosDto.add(new CodigodescDto(orden));
+            });
+
+            return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "" , "Codigo" , codigosDto);
+
+        }
+        catch(NoResultException ex)
+        {
+            return new Respuesta(false , CodigoRespuesta.ERROR_NOENCONTRADO , "No existen codigos con los criterios ingresados." , "getCodigodescs NoResultException");
+        }
+        catch(Exception ex)
+        {
+            LOG.log(Level.SEVERE , "Ocurrio un error al consultar el orden." , ex);
+            return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al consultar el orden." , "getCodigodescs " + ex.getMessage());
+        }
+    }
+    
+    
     public Respuesta getbyURL(String codUrl)// Un unico producto por id
     {
         try

@@ -8,6 +8,7 @@ package cr.ac.una.wsrestuna.controllers;
 import cr.ac.una.wsrestuna.models.*;
 import cr.ac.una.wsrestuna.services.*;
 import cr.ac.una.wsrestuna.utils.*;
+import java.util.*;
 import java.util.logging.*;
 import javax.ejb.*;
 import javax.ws.rs.*;
@@ -31,6 +32,31 @@ public class CodigodescController
         return Response
                   .ok("ping Producto")
                   .build();
+    }
+
+    @GET
+    @Path("/codigo")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getOrdenees()
+    {
+        try
+        {
+            Respuesta res = codigodescServices.getCodigosdesc();
+            if(!res.getEstado())
+            {
+                return Response.status(res.getCodigoRespuesta().getValue()).entity(res.getMensaje()).build();//TODO
+            }
+
+            return Response.ok(new GenericEntity<List<CodigodescDto>>((List<CodigodescDto>) res.getResultado("Codigo"))
+            {
+            }).build();
+        }
+        catch(Exception ex)
+        {
+            Logger.getLogger(CodigodescController.class.getName()).log(Level.SEVERE , null , ex);
+            return Response.status(CodigoRespuesta.ERROR_INTERNO.getValue()).entity("Error al obtener la orden ").build();//TODO
+        }
     }
 
     @POST

@@ -53,48 +53,6 @@ public class CodigoDescuentoGeneralController extends Controller implements Init
         llenar();
     }
 
-    @Override
-    public void initialize()
-    {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    void ObtencionDatos()
-    {
-        Respuesta res = codigoService.getCodigos();
-        if(res.getEstado())
-        {
-            List<CodigodescDto> codd = (List<CodigodescDto>) res.getResultado("coddesc");
-            codigodescDtos = codd;
-        }
-        ObservableList<CodigodescDto> codds = FXCollections.observableList(codigodescDtos);
-        tblpedidos.setItems(codds);
-        tblpedidos.refresh();
-
-    }
-
-    @FXML
-    private void click(ActionEvent event)
-    {
-        if(event.getSource() == btnEditar)
-        {
-            if(tblpedidos.getSelectionModel().getSelectedItem() != null)
-            {
-                AppContext.getInstance().set("Codigo" , (OrdenDto) tblpedidos.getSelectionModel().getSelectedItem());
-                FlowController.getInstance().goViewInWindowModal("CrearCodigosDescuentos" , (Stage) btnAnadir.getScene().getWindow() , Boolean.FALSE);
-            }
-        }
-        if(event.getSource() == btnEliminar)//cambiar por eliminar
-        {
-            if(tblpedidos.getSelectionModel().getSelectedItem() != null)
-            {
-                AppContext.getInstance().set("Codigo" , (OrdenDto) tblpedidos.getSelectionModel().getSelectedItem());
-                FlowController.getInstance().goViewInWindowModal("CrearCodigosDescuentos" , (Stage) btnAnadir.getScene().getWindow() , Boolean.FALSE);
-            }
-
-        }
-    }
-
     void llenar()
     {
         tblpedidos.getColumns().clear();
@@ -118,6 +76,61 @@ public class CodigoDescuentoGeneralController extends Controller implements Init
         tblpedidos.getColumns().add(nombreDesc);
         tblpedidos.getColumns().add(descuento);
         tblpedidos.refresh();
+    }
+
+    void ObtencionDatos()
+    {
+        Respuesta res = codigoService.getCodigos();
+        if(res.getEstado())
+        {
+            List<CodigodescDto> codd = (List<CodigodescDto>) res.getResultado("Codigo");
+            codigodescDtos = codd;
+        }
+        ObservableList<CodigodescDto> codds = FXCollections.observableList(codigodescDtos);
+        tblpedidos.setItems(codds);
+        tblpedidos.refresh();
+
+    }
+
+    @FXML
+    private void click(ActionEvent event)
+    {
+        if(event.getSource() == btnEditar)
+        {
+            if(tblpedidos.getSelectionModel().getSelectedItem() != null)
+            {
+                AppContext.getInstance().set("Codigo" , (CodigodescDto) tblpedidos.getSelectionModel().getSelectedItem());
+                FlowController.getInstance().goViewInWindowModal("CrearCodigosDescuentos" , (Stage) btnAnadir.getScene().getWindow() , Boolean.FALSE);
+                //metodo update
+                //metodo cargar 
+                //,etodo unbind
+            }
+        }
+        if(event.getSource() == btnEliminar)
+        {
+            if(tblpedidos.getSelectionModel().getSelectedItem() != null)
+            {
+                CodigodescDto codt = (CodigodescDto) tblpedidos.getSelectionModel().getSelectedItem();
+                Respuesta res = codigoService.eliminarCodigo(codt.getId());
+                if(res.getEstado())
+                {
+                    new Mensaje().show(Alert.AlertType.NONE , "Eliminado" , "Correctamente Elimnado");
+                }
+            }
+
+        }
+        if(event.getSource() == btnAnadir)
+        {
+            FlowController.getInstance().goViewInWindowModal("CrearCodigosDescuentos" , (Stage) btnAnadir.getScene().getWindow() , Boolean.FALSE);
+        }
+
+    }
+
+    @Override
+    public void initialize()
+    {
+        ObtencionDatos();
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

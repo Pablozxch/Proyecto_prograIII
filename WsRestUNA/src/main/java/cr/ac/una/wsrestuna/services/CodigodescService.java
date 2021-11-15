@@ -58,15 +58,17 @@ public class CodigodescService
     {
         try
         {
+            System.out.println("sdasd");
             Query qryCodigosdesc = em.createNamedQuery("Codigodesc.findAll" , Codigodesc.class);
             List<Codigodesc> codigosdec = (List<Codigodesc>) qryCodigosdesc.getResultList();
             List<CodigodescDto> codigosdecDto = new ArrayList<>();
             codigosdec.forEach(coidgodesc ->
             {
                 codigosdecDto.add(new CodigodescDto(coidgodesc));
+                System.out.println("t "+coidgodesc.toString());
             });
 
-            return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "" , "Codigosdesc" , codigosdecDto);
+            return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "" , "Codigo" , codigosdecDto);
 
         }
         catch(NoResultException ex)
