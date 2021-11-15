@@ -124,10 +124,10 @@ public class EmpleadosGeneralController extends Controller implements Initializa
 
                     ItemController itemrest = fxmlLoader.getController();
                     itemrest.setData(productos.get(i) , myListener);
-                    if(column == 6)
+                    if(column == 4)
                     {
                         column = 0;
-                        row++;
+                        row+=2;
                     }
                     grid.add(anchorPane , column++ , row); //(child,column,row)
                     //set grid width
@@ -152,8 +152,8 @@ public class EmpleadosGeneralController extends Controller implements Initializa
 
     public void setEmpSelect(EmpleadoDto empleadoDto)
     {
+        AppContext.getInstance().delete("Empleado");
         lblNombreEmpleado.setText(empleadoDto.getNombre());
-
         Image img2 = new Image(new ByteArrayInputStream(empleadoDto.getFoto()));//crea un objeto imagen, transforma el byte[] a un buffered imagen
         imgEmpleado.setImage(img2);
         AppContext.getInstance().set("Empleado" , empleadoDto);
