@@ -67,6 +67,7 @@ public class SalonesGeneralController extends Controller implements Initializabl
 
     public void setSalSelect(SalonDto sal)
     {
+        AppContext.getInstance().delete("Salon");
         lblNombreSalon.setText(sal.getNombre());
         Image img2 = new Image(new ByteArrayInputStream(sal.getFoto()));//crea un objeto imagen, transforma el byte[] a un buffered imagen
         imgSal.setImage(img2);
@@ -134,10 +135,10 @@ public class SalonesGeneralController extends Controller implements Initializabl
 
                     ItemController itemrest = fxmlLoader.getController();
                     itemrest.setData(salones.get(i) , myListener);
-                    if(column == 6)
+                    if(column == 4)
                     {
                         column = 0;
-                        row++;
+                        row+=2;
                     }
                     grid.add(anchorPane , column++ , row); //(child,column,row)
                     //set grid width

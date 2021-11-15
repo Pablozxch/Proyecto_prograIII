@@ -67,6 +67,7 @@ public class ProductosGeneralController extends Controller implements Initializa
 
     public void setProSelect(ProductoDto sal)
     {
+        AppContext.getInstance().delete("Producto");
         lblNombrePro.setText(sal.getNombre());
         Image img2 = new Image(new ByteArrayInputStream(sal.getFoto()));//crea un objeto imagen, transforma el byte[] a un buffered imagen
         imgPro.setImage(img2);
@@ -133,10 +134,10 @@ public class ProductosGeneralController extends Controller implements Initializa
 
                     ItemController itemrest = fxmlLoader.getController();
                     itemrest.setData(productos.get(i) , myListener);
-                    if(column == 6)
+                    if(column == 4)
                     {
                         column = 0;
-                        row++;
+                        row+=2;
                     }
                     grid.add(anchorPane , column++ , row); //(child,column,row)
                     //set grid width
