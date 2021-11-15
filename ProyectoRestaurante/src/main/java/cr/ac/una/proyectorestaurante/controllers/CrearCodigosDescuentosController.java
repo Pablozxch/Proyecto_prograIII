@@ -25,14 +25,13 @@ public class CrearCodigosDescuentosController extends Controller implements Init
     @FXML
     private JFXTextField txtNombre;
     @FXML
-    private JFXTextField txtPorcentaje;
-    @FXML
     private JFXTextField txtCantidad;
     @FXML
     private JFXButton btnVolver;
     @FXML
     private JFXButton btnAceptar;
-
+    @FXML
+    private JFXTextField txtUrl;
     /**
      * Initializes the controller class.
      */

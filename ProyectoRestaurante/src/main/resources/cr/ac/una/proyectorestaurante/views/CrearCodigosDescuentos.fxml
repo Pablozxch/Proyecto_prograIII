@@ -15,8 +15,8 @@
                <children>
                   <Label text="%CrearCodigosDescuento" />
                   <JFXTextField fx:id="txtNombre" alignment="CENTER" focusColor="WHITE" labelFloat="true" onAction="#click" prefHeight="31.0" prefWidth="210.0" promptText="%Nombre" />
-                  <JFXTextField fx:id="txtPorcentaje" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefHeight="31.0" prefWidth="210.0" promptText="%Porcentaje" />
-                  <JFXTextField fx:id="txtCantidad" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefHeight="31.0" prefWidth="210.0" promptText="%Cantidad" />
+                  <JFXTextField fx:id="txtCantidad" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefHeight="31.0" prefWidth="210.0" promptText="%Porcentaje" />
+                  <JFXTextField fx:id="txtUrl" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefHeight="31.0" prefWidth="210.0" promptText="%Cantidad" />
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="539.0" spacing="150.0">
                      <children>
                         <JFXButton fx:id="btnVolver" prefHeight="48.0" prefWidth="170.0" text="%Cancelar" />
