@@ -100,10 +100,10 @@ public class CodigoDescuentoGeneralController extends Controller implements Init
             if(tblpedidos.getSelectionModel().getSelectedItem() != null)
             {
                 AppContext.getInstance().set("Codigo" , (CodigodescDto) tblpedidos.getSelectionModel().getSelectedItem());
+                CrearCodigosDescuentosController ccod = (CrearCodigosDescuentosController) FlowController.getInstance().getController("CrearCodigosDescuentos");
                 FlowController.getInstance().goViewInWindowModal("CrearCodigosDescuentos" , (Stage) btnAnadir.getScene().getWindow() , Boolean.FALSE);
-                //metodo update
-                //metodo cargar 
-                //,etodo unbind
+                ccod.clear();
+                AppContext.getInstance().delete("Codigo");
             }
         }
         if(event.getSource() == btnEliminar)
@@ -111,19 +111,22 @@ public class CodigoDescuentoGeneralController extends Controller implements Init
             if(tblpedidos.getSelectionModel().getSelectedItem() != null)
             {
                 CodigodescDto codt = (CodigodescDto) tblpedidos.getSelectionModel().getSelectedItem();
+                System.out.println("codt "+codt.toString());
                 Respuesta res = codigoService.eliminarCodigo(codt.getId());
                 if(res.getEstado())
                 {
-                    new Mensaje().show(Alert.AlertType.NONE , "Eliminado" , "Correctamente Elimnado");
+                    new Mensaje().show(Alert.AlertType.INFORMATION , "Eliminado" , "Correctamente Elimnado");
                 }
             }
 
         }
         if(event.getSource() == btnAnadir)
         {
+            CrearCodigosDescuentosController ccod = (CrearCodigosDescuentosController) FlowController.getInstance().getController("CrearCodigosDescuentos");
+            ccod.clear();
             FlowController.getInstance().goViewInWindowModal("CrearCodigosDescuentos" , (Stage) btnAnadir.getScene().getWindow() , Boolean.FALSE);
         }
-
+        initialize();
     }
 
     @Override

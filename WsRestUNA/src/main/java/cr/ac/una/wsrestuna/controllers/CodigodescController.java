@@ -105,7 +105,7 @@ public class CodigodescController
     }
 
     @DELETE
-    @Path("/cierrecaja/{id}")
+    @Path("/codigo/{id}")
     public Response eliminarCierreCaja(@PathParam("id") Long id)
     {
         try

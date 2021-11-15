@@ -19,8 +19,8 @@
                   <JFXTextField fx:id="txtUrl" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefHeight="31.0" prefWidth="210.0" promptText="%Cantidad" />
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="539.0" spacing="150.0">
                      <children>
-                        <JFXButton fx:id="btnVolver" prefHeight="48.0" prefWidth="170.0" text="%Cancelar" />
-                        <JFXButton fx:id="btnAceptar" prefHeight="48.0" prefWidth="170.0" text="%Continuar" />
+                        <JFXButton fx:id="btnVolver" onAction="#click" prefHeight="48.0" prefWidth="170.0" text="%Cancelar" />
+                        <JFXButton fx:id="btnAceptar" onAction="#click" prefHeight="48.0" prefWidth="170.0" text="%Continuar" />
                      </children>
                   </HBox>
                </children>

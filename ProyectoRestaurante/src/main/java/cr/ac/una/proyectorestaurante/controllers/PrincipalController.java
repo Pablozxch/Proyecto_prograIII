@@ -209,7 +209,7 @@ public class PrincipalController extends Controller implements Initializable
                 rolDto = (RolDto) AppContext.getInstance().get("RolActual");
                 if("Administrativos".equals(rolDto.getNombre()))
                 {
-                    FlowController.getInstance().goView("CrearCodigosDescuentoGeneral");
+                    FlowController.getInstance().goView("CodigoDescuentoGeneral");
                 }
                 else
                 {
