@@ -216,8 +216,11 @@ public class FlowController
 
     public void goLogInWindowModal(Boolean resizable)//Aqui se le puede mandar tambien el nombre de la vista para abrir en modal
     {
-        LogInController log = (LogInController) FlowController.getInstance().getController("LogIn");
+        AppContext.getInstance().delete("EmpleadoActual");
+        AppContext.getInstance().delete("RolActual");
+        PrincipalController log = (PrincipalController) FlowController.getInstance().getController("Principal");
         goViewInWindowModal("LogIn" , log.getStage() , false);
+
     }
 
     public void goViewInWindowModal(String viewName , Stage parentStage , Boolean resizable)

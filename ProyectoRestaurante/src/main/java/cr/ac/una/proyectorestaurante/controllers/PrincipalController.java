@@ -227,20 +227,20 @@ public class PrincipalController extends Controller implements Initializable
                 }
 
             }
-            if(event.getSource() == btnSalir)
+        }
+        if(event.getSource() == btnSalir)
+        {
+            if(new Mensaje().showConfirmation("Saliendo del Sistema" , getStage() , "¿Esta seguro que desea salir del sistema?"))
             {
-                if(new Mensaje().showConfirmation("Saliendo del Sistema" , getStage() , "¿Esta seguro que desea salir del sistema?"))
-                {
-                    getStage().close();
-                }
+                getStage().close();
             }
-            if(event.getSource() == btnCerrarSesion)
-            {
-                AppContext.getInstance().delete("EmpleadoActual");//este usuario es el encargado de ingresar a todo lo que el pueda
-                FlowController.getInstance().goViewInWindowModal("LogIn" , (Stage) btnCerrarSesion.getScene().getWindow() , Boolean.FALSE);//ver que se hace con esto
-                //preguntar que si lo de crear empleados en esta vista
-
-            }
+        }
+        if(event.getSource() == btnCerrarSesion)
+        {
+            System.out.println("BYE");
+            AppContext.getInstance().delete("EmpleadoActual");//este usuario es el encargado de ingresar a todo lo que el pueda
+            FlowController.getInstance().goViewInWindowModal("LogIn" , (Stage) btnCerrarSesion.getScene().getWindow() , Boolean.FALSE);//ver que se hace con esto
+            //preguntar que si lo de crear empleados en esta vista
 
         }
 

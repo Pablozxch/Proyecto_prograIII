@@ -76,7 +76,7 @@ public class SecurityFilter implements ContainerRequestFilter
                 {
                     if(!(boolean) claims.getOrDefault("rnw" , false))
                     {
-                        abortWithUnauthorized(request , "Invalid authorization");;
+                        abortWithUnauthorized(request , "Invalid authorization");
                     }
                     return;
                 }

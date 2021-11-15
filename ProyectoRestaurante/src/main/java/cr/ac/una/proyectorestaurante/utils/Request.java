@@ -145,7 +145,7 @@ public class Request
                         {
                             public void run()
                             {
-                                FlowController.getInstance().goLogInWindowModal(true);
+                                FlowController.getInstance().goLogInWindowModal(Boolean.FALSE);
                             }
                         });
                     }
