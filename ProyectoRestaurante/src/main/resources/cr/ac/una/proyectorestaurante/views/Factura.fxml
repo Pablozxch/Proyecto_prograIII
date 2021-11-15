@@ -105,12 +105,6 @@
                         </HBox>
                         <VBox alignment="CENTER" prefHeight="148.0" prefWidth="389.0">
                            <children>
-                              <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="389.0" spacing="25.0">
-                                 <children>
-                                    <Label text="Monto a pagar:          " />
-                                    <JFXTextField fx:id="txtMontoAPagar" editable="false" focusColor="WHITE" />
-                                 </children>
-                              </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="387.0" spacing="15.0">
                                  <children>
                                     <Label text="Paga con:                     " />

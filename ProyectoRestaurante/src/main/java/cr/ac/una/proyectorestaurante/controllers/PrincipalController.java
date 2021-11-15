@@ -9,7 +9,7 @@ import com.jfoenix.controls.JFXButton;
 import cr.ac.una.proyectorestaurante.models.*;
 import cr.ac.una.proyectorestaurante.utils.*;
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.*;
 import javafx.event.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -53,6 +53,10 @@ public class PrincipalController extends Controller implements Initializable
     RolDto rolDto = new RolDto();
     @FXML
     private Button btnRestaurante;
+    @FXML
+    private JFXButton btnEspanol;
+    @FXML
+    private JFXButton btnEnglish;
 
     @Override
     public void initialize(URL url , ResourceBundle rb)
@@ -243,5 +247,24 @@ public class PrincipalController extends Controller implements Initializable
 
         }
 
+    }
+
+    @FXML
+    private void idiomaClick(ActionEvent event)
+    {
+        if(event.getSource() == btnEspanol)
+        {
+            System.out.println("Espa");
+            Locale locale = new Locale("es_MX");
+            ResourceBundle bundle = ResourceBundle.getBundle("/cr/ac/una/proyectorestaurante/resources/Espanol" , locale);
+            btnCategorias.setText(bundle.getString("Categorias"));
+        }
+        if(event.getSource() == btnEnglish)
+        {
+            System.out.println("English");
+            Locale locale = new Locale("en_UK");
+            ResourceBundle bundle = ResourceBundle.getBundle("/cr/ac/una/proyectorestaurante/resources/Ingles" , locale);
+            btnCategorias.setText(bundle.getString("Categorias"));
+        }
     }
 }

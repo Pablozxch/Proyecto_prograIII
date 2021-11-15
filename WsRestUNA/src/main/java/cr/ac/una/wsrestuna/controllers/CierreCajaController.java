@@ -74,8 +74,7 @@ public class CierreCajaController
 
     @DELETE
     @Path("/cierrecaja/{id}")
-    public Response eliminarCierreCaja(@PathParam("id") Long id
-    )
+    public Response eliminarCierreCaja(@PathParam("id") Long id)
     {
         try
         {

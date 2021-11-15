@@ -82,8 +82,6 @@ public class FacturaController extends Controller implements Initializable
     @FXML
     private JFXButton btnBuscarCodDescuento;
     @FXML
-    private JFXTextField txtMontoAPagar;
-    @FXML
     private JFXTextField txtPagaCon;
     @FXML
     private JFXButton btnEnviarCorreo;
@@ -154,13 +152,13 @@ public class FacturaController extends Controller implements Initializable
             fac.setCierrecajasDto(cierre);
             if(chkTarjetaEfectivo.isSelected())
             {
-                  fac.setEfetivoTarjeta("T");//CAMBIAR EL VALOR DEPENDIENDO DE LO OTRO
+                fac.setEfetivoTarjeta("T");//CAMBIAR EL VALOR DEPENDIENDO DE LO OTRO
             }
             else
             {
-                  fac.setEfetivoTarjeta("E");//CAMBIAR EL VALOR DEPENDIENDO DE LO OTRO
+                fac.setEfetivoTarjeta("E");//CAMBIAR EL VALOR DEPENDIENDO DE LO OTRO
             }
-          
+
             double total = Double.valueOf(txtSubtotal.getText()) * (impA);
             long ttotal = Long.valueOf(String.valueOf((long) total + subtotal));
             long finalmont = Long.valueOf(String.valueOf(((long) total + subtotal) - descuento));
@@ -174,6 +172,15 @@ public class FacturaController extends Controller implements Initializable
             facturaService.guardarFactura(fac);
             btnPagar.setDisable(true);
             new Mensaje().show(Alert.AlertType.ERROR , "Factura." , "Factura pagada exitosamente.");
+        }
+        if(event.getSource() == btnBuscarCodDescuento)
+        {
+            CodDescService codService = new CodDescService();
+            Respuesta res= codService.buscarUrl(txtCodigoDescuento.getText());
+            if(res.getEstado())
+            {
+                
+            }
         }
     }
 

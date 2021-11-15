@@ -33,8 +33,8 @@ public class App extends Application
         
         Locale currentLocale = Locale.getDefault();
         
-        Locale locale = new Locale("en_UK");
-        ResourceBundle bundle = ResourceBundle.getBundle("/cr/ac/una/proyectorestaurante/resources/Ingles", locale);
+        Locale locale = new Locale("es_MX");
+        ResourceBundle bundle = ResourceBundle.getBundle("/cr/ac/una/proyectorestaurante/resources/Espanol", locale);
         FlowController.setIdioma(bundle);
         FlowController.getInstance().goMain();
         FlowController.getInstance().goMain();
