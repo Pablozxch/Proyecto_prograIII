@@ -300,7 +300,10 @@ public class FacturaController extends Controller implements Initializable
     @Override
     public void initialize()
     {
-
+        txtNombre.clear();
+        txtCorreo.clear();
+        txtPagaCon.clear();
+        txtCodigoDescuento.clear();
         cierreCajas = (CierrecajasDto) AppContext.getInstance().get("CierreCajasActual");
         btnEnviarCorreo.setDisable(false);
         btnPagar.setDisable(false);
