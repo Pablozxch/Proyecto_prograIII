@@ -28,7 +28,7 @@ import javafx.stage.*;
  */
 public class ProductosGeneralController extends Controller implements Initializable
 {
-
+    
     @FXML
     private JFXButton btnAgregarProducto;
     @FXML
@@ -57,14 +57,14 @@ public class ProductosGeneralController extends Controller implements Initializa
     ProductoService productoService = new ProductoService();
     ProductoDto productoDto = new ProductoDto();
     private static List<ProductoDto> productos = new ArrayList<>();
-
+    
     @Override
     public void initialize(URL url , ResourceBundle rb)
     {
         // TODO
         loadItems("aux");
     }
-
+    
     public void setProSelect(ProductoDto sal)
     {
         AppContext.getInstance().delete("Producto");
@@ -74,7 +74,7 @@ public class ProductosGeneralController extends Controller implements Initializa
         lblPrecio.setText("Precio: ₡" + sal.getCosto().toString());
         AppContext.getInstance().set("Producto" , sal);
     }
-
+    
     public void loadItems(String name)
     {
         if(!"aux".equals(name))
@@ -131,13 +131,13 @@ public class ProductosGeneralController extends Controller implements Initializa
                             break;
                         }
                     }
-
+                    
                     ItemController itemrest = fxmlLoader.getController();
                     itemrest.setData(productos.get(i) , myListener);
                     if(column == 4)
                     {
                         column = 0;
-                        row+=2;
+                        row++;
                     }
                     grid.add(anchorPane , column++ , row); //(child,column,row)
                     //set grid width
@@ -149,7 +149,7 @@ public class ProductosGeneralController extends Controller implements Initializa
                     grid.setMinHeight(Region.USE_COMPUTED_SIZE);
                     grid.setPrefHeight(Region.USE_COMPUTED_SIZE);
                     grid.setMaxHeight(Region.USE_PREF_SIZE);
-
+                    
                     GridPane.setMargin(anchorPane , new Insets(10));
                 }
             }
@@ -159,7 +159,7 @@ public class ProductosGeneralController extends Controller implements Initializa
             }
         }
     }
-
+    
     @FXML
     private void click(ActionEvent event)
     {
@@ -169,7 +169,7 @@ public class ProductosGeneralController extends Controller implements Initializa
             FlowController.getInstance().goViewInWindowModal("CrearProducto" , (Stage) btnBuscar.getScene().getWindow() , Boolean.FALSE);
             registroProductoController.unbindProducto();
             update();
-
+            
         }
         if(event.getSource() == btnBuscar)
         {
@@ -197,7 +197,7 @@ public class ProductosGeneralController extends Controller implements Initializa
             }
         }
     }
-
+    
     public void update()
     {
         grid.getChildren().clear();
@@ -210,12 +210,12 @@ public class ProductosGeneralController extends Controller implements Initializa
             loadItems("aux");
         }
     }
-
+    
     @Override
     public void initialize()
     {
         loadItems("aux");
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
 }
