@@ -13,7 +13,7 @@
 	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
 	<parameter name="Fecha" class="java.lang.String"/>
-	<parameter name="idEmpleado" class="java.lang.Long"/>
+	<parameter name="idCierreCaja" class="java.lang.Long"/>
 	<parameter name="IDrestaurante" class="java.lang.Long"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT "TBL_CIERRECAJAS"."CCAJ_MONTOEFECTIVO",
@@ -35,7 +35,7 @@ FROM "TBL_FACTURA"
 	 "TBL_EMPLEADO"."RES_ID" = "TBL_RESTAURANTE"."RES_ID" 
 WHERE 
 	 "TBL_ORDEN"."ORD_FECHA" = $P{Fecha} 
-	 AND "TBL_CIERRECAJAS"."EMP_ID" = $P{idEmpleado}
+	 AND "TBL_CIERRECAJAS"."CCAJ_ID" = $P{idCierreCaja}
 	 AND "TBL_RESTAURANTE"."RES_ID" = $P{IDrestaurante}]]>
 	</queryString>
 	<field name="CCAJ_MONTOEFECTIVO" class="java.math.BigDecimal">
