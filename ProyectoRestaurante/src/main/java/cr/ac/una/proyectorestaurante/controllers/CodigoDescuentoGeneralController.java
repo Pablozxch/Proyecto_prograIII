@@ -37,7 +37,7 @@ public class CodigoDescuentoGeneralController extends Controller implements Init
     @FXML
     private JFXButton btnEditar;
     @FXML
-    private JFXButton btnFacturar;
+    private JFXButton btnEliminar;
 
     /**
      * Initializes the controller class.
@@ -84,7 +84,7 @@ public class CodigoDescuentoGeneralController extends Controller implements Init
                 FlowController.getInstance().goViewInWindowModal("CrearCodigosDescuentos" , (Stage) btnAnadir.getScene().getWindow() , Boolean.FALSE);
             }
         }
-        if(event.getSource() == btnFacturar)//cambiar por eliminar
+        if(event.getSource() == btnEliminar)//cambiar por eliminar
         {
             if(tblpedidos.getSelectionModel().getSelectedItem() != null)
             {

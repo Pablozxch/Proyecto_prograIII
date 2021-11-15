@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="815.0" prefWidth="984.0" styleClass="fondo" stylesheets="@../styles/StylesCss.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/15.0.1" fx:controller="cr.ac.una.proyectorestaurante.controllers.CodigoDescuentoGeneralController">
+<AnchorPane id="AnchorPane" prefHeight="815.0" prefWidth="984.0" styleClass="fondo" stylesheets="@../styles/StylesCss.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.proyectorestaurante.controllers.CodigoDescuentoGeneralController">
    <children>
       <HBox layoutX="3.0" layoutY="10.0" prefHeight="815.0" prefWidth="984.0">
          <children>
@@ -25,7 +24,7 @@
                <children>
                   <JFXButton fx:id="btnAnadir" onAction="#click" prefHeight="48.0" prefWidth="150.0" text="%Agregar" />
                   <JFXButton fx:id="btnEditar" onAction="#click" prefHeight="48.0" prefWidth="150.0" text="%Editar" />
-                  <JFXButton fx:id="btnFacturar" onAction="#click" prefHeight="48.0" prefWidth="150.0" text="%Facturar" />
+                  <JFXButton fx:id="btnEliminar" onAction="#click" prefHeight="48.0" prefWidth="150.0" text="%Eliminar" />
                </children>
             </VBox>
          </children>
