@@ -14,21 +14,21 @@
          <children>
             <VBox alignment="CENTER" prefHeight="481.0" prefWidth="240.0" spacing="20.0" VBox.vgrow="ALWAYS">
                <children>
-                  <JFXButton fx:id="btnSalones" onAction="#click" prefHeight="48.0" prefWidth="155.0" text="%Salones" />
-                  <JFXButton fx:id="btnProductos" onAction="#click" prefHeight="48.0" prefWidth="155.0" text="%Productos" />
-                  <JFXButton fx:id="btnCategorias" onAction="#click" prefHeight="48.0" prefWidth="155.0" text="%Categorias" />
-                  <JFXButton fx:id="btnOrdenes" onAction="#click" prefHeight="48.0" prefWidth="155.0" text="%Ordenes" />
-                  <JFXButton fx:id="btnDescuento" onAction="#click" prefHeight="48.0" prefWidth="190.0" text="%CodigoDesc" />
-                  <JFXButton fx:id="btnEmpleados" onAction="#click" prefHeight="48.0" prefWidth="155.0" text="%Empleados" />
-                  <JFXButton fx:id="btnRestaurante" onAction="#click" prefHeight="48.0" prefWidth="155.0" text="%Restaurante" />
-                  <JFXButton fx:id="btnReportes" onAction="#click" prefHeight="48.0" prefWidth="155.0" text="%Reportes" />
-                  <JFXButton fx:id="btnCierreCajas" onAction="#click" prefHeight="48.0" prefWidth="180.0" text="%CierreCajas" />
+                  <JFXButton fx:id="btnSalones" onAction="#click" prefHeight="48.0" prefWidth="225.0" text="%Salones" />
+                  <JFXButton fx:id="btnProductos" onAction="#click" prefHeight="48.0" prefWidth="225.0" text="%Productos" />
+                  <JFXButton fx:id="btnCategorias" onAction="#click" prefHeight="48.0" prefWidth="225.0" text="%Categorias" />
+                  <JFXButton fx:id="btnOrdenes" onAction="#click" prefHeight="48.0" prefWidth="225.0" text="%Ordenes" />
+                  <JFXButton fx:id="btnDescuento" onAction="#click" prefHeight="48.0" prefWidth="225.0" text="%CodigoDesc" />
+                  <JFXButton fx:id="btnEmpleados" onAction="#click" prefHeight="48.0" prefWidth="225.0" text="%Empleados" />
+                  <JFXButton fx:id="btnRestaurante" onAction="#click" prefHeight="48.0" prefWidth="225.0" text="%Restaurante" />
+                  <JFXButton fx:id="btnReportes" onAction="#click" prefHeight="48.0" prefWidth="225.0" text="%Reportes" />
+                  <JFXButton fx:id="btnCierreCajas" onAction="#click" prefHeight="48.0" prefWidth="225.0" text="%CierreCajas" />
                </children>
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="138.0" prefWidth="240.0" spacing="20.0" VBox.vgrow="ALWAYS">
                <children>
-                  <JFXButton fx:id="btnCerrarSesion" onAction="#click" prefHeight="48.0" prefWidth="192.0" text="%CerrarSesion" />
-                  <JFXButton fx:id="btnSalir" onAction="#click" prefHeight="48.0" prefWidth="192.0" text="%Salir" />
+                  <JFXButton fx:id="btnCerrarSesion" onAction="#click" prefHeight="48.0" prefWidth="225.0" text="%CerrarSesion" />
+                  <JFXButton fx:id="btnSalir" onAction="#click" prefHeight="48.0" prefWidth="225.0" text="%Salir" />
                </children>
                <padding>
                   <Insets bottom="15.0" />

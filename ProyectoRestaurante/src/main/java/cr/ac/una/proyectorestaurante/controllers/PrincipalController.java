@@ -46,7 +46,8 @@ public class PrincipalController extends Controller implements Initializable
     private JFXButton btnReportes;
     @FXML
     private JFXButton btnCierreCajas;
-
+    @FXML
+    private JFXButton btnDescuento;
     /**
      * Initializes the controller class.
      */
@@ -138,6 +139,14 @@ public class PrincipalController extends Controller implements Initializable
                 FlowController.getInstance().goView("OrdenesGeneral");
             }
 
+        }
+        if(event.getSource() == btnDescuento){
+            if(((EmpleadoDto) AppContext.getInstance().get("EmpleadoActual")) == null)
+            {
+                FlowController.getInstance().goViewInWindowModal("LogIn" , (Stage) btnCerrarSesion.getScene().getWindow() , Boolean.FALSE);//ver que se hace con esto
+            }else{
+                FlowController.getInstance().goView("CodigoDescuentoGeneral");
+            }
         }
         if(event.getSource() == btnRestaurante)
         {

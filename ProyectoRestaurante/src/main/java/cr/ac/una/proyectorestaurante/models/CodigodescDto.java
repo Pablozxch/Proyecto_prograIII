@@ -14,11 +14,11 @@ import javafx.beans.property.*;
 public class CodigodescDto
 {
 
-    private SimpleStringProperty id;
-    private SimpleStringProperty nombre;
-    private SimpleStringProperty desc;
-    private SimpleStringProperty url;
-    private SimpleStringProperty cantidadusar;//cantidad dispon para su suso
+    public SimpleStringProperty id;
+    public SimpleStringProperty nombre;
+    public SimpleStringProperty desc;
+    public SimpleStringProperty url;
+    public SimpleStringProperty cantidadusar;//cantidad dispon para su suso
     private RestauranteDto restaurante;
     private Boolean modificado;
 

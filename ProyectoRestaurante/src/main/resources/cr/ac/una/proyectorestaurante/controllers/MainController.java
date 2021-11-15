@@ -63,6 +63,8 @@ public class MainController extends Controller implements Initializable {
     private JFXButton btnSpanish;
     @FXML
     private JFXButton btnEnglish;
+    @FXML
+    private Label lblRestaurante;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
