@@ -201,8 +201,7 @@ public class FacturaController extends Controller implements Initializable
             fac.setDescuento(codigodescDto.getDesc());
             txtTotal.setText(String.valueOf(finalmont));
         }
-
-        //      facturaService.guardarFactura(fac);
+         facturaService.guardarFactura(fac);
     }
 
     void loadRes()

@@ -111,7 +111,10 @@ public class CierreCajasController extends Controller implements Initializable
              */
             Date date = new Date();
             SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
-            Respuesta respuesta = cajaService.reporteCierreCajero(formatter1.format(date) , cierre.getId() , res.getId());
+            String fecha = formatter1.format(date);
+            System.out.println("Fecha " + fecha + "ID CIERRE " + cierre.getId() + "Rees id " + res.getId());
+
+            Respuesta respuesta = cajaService.reporteCierreCajero(fecha , cierre.getId() , res.getId());
             if(respuesta.getEstado())
             {
                 byte[] decoder = (byte[]) respuesta.getResultado("CierreCaja");
