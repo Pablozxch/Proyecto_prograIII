@@ -24,7 +24,6 @@ public class OrdenService
     {
         try
         {
-            System.out.println("Estoy entrado");
             Request request = new Request("OrdenController/orden");
             request.get();
             if(request.isError())
@@ -39,10 +38,6 @@ public class OrdenService
 
             RestauranteDto id = (RestauranteDto) AppContext.getInstance().get("Restaurante");
             List<OrdenDto> Ordenes2 = Ordenes.stream().filter(t -> Objects.equals(t.getEmpleadoDto().getRestauranteDto().getId() , id.getId())).collect(Collectors.toList());
-            Ordenes2.forEach(t ->
-            {
-                System.out.println("El valor es " + t.getMesaDto().toString());
-            });
             return new Respuesta(true , "" , "" , "Ordenes" , Ordenes2);
         }
         catch(Exception ex)

@@ -191,7 +191,6 @@ public class CrearProductoController extends Controller implements Initializable
                                             productoDto.setFoto(productoDto.getFoto());
                                         }
                                         productoDto.setRestauranteDto((RestauranteDto) AppContext.getInstance().get("Restaurante"));
-                                        System.out.println("El valor a guardar es " + productoDto.toString());
                                         Respuesta res = productoService.guardarProducto(productoDto);
                                         if(res.getEstado())
                                         {

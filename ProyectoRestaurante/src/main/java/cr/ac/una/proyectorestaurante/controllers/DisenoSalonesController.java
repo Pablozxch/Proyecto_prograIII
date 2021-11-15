@@ -126,7 +126,6 @@ public class DisenoSalonesController extends Controller implements Initializable
                     mesaclick = j.getMesaDto();
                     if("O".equals(mesaclick.getEstado()))
                     {
-                        System.out.println("La mesa tiene orden existente activa");
                         list = (List<OrdenDto>) ordenes.stream().filter(o -> Objects.equals(o.getMesaDto().getId() , mesaclick.getId()) && "P".equals(o.getEstado())).collect(Collectors.toList());
                         AppContext.getInstance().set("Orden" , list.get(0));
                         FlowController.getInstance().goViewInWindowModal("CrearPedido" , getStage() , Boolean.FALSE);
@@ -136,7 +135,6 @@ public class DisenoSalonesController extends Controller implements Initializable
                     {
                         try
                         {
-                            System.out.println("La mesa no tiene orden");
                             EmpleadoDto emp = (EmpleadoDto) AppContext.getInstance().get("EmpleadoActual");
                             OrdenDto odd = new OrdenDto();
                             odd.setEmpleadoDto(emp);

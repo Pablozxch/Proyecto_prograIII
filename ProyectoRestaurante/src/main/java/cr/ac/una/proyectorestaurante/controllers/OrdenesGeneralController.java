@@ -84,10 +84,6 @@ public class OrdenesGeneralController extends Controller implements Initializabl
         {
             List<OrdenDto> ordeness = (List<OrdenDto>) res.getResultado("Ordenes");
             ordenes = ordeness.stream().filter(t -> "P".equals(t.getEstado())).collect(Collectors.toList());
-            ordenes.forEach(t ->
-            {
-                System.out.println(t.getEstado());
-            });
         }
         ObservableList<OrdenDto> ords = FXCollections.observableList(ordenes);
         tblpedidos.setItems(ords);

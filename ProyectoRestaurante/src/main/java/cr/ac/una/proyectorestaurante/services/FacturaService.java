@@ -116,7 +116,6 @@ public class FacturaService
     {
         try
         {
-            System.out.println("wenas");
             Map<String , Object> parametros = new HashMap<>();
             parametros.put("fechai" , fechaI);
             parametros.put("fechaf" , fechaF);
@@ -129,12 +128,10 @@ public class FacturaService
 
             }
             byte[] bytes = (byte[]) request.readEntity(byte[].class);
-            System.out.println("bytes"+bytes);
             return new Respuesta(true , "" , "" , "Factura" , bytes);
         }
         catch(Exception ex)
         {
-            System.out.println("picha");
             return new Respuesta(false , "Error obteniendo el usuario." , "getUsuario " + ex.getMessage());
         }
     }

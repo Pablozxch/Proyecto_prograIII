@@ -78,7 +78,6 @@ public class LogInController extends Controller implements Initializable
                     AppContext.getInstance().set("RolActual" , rol);
                     AppContext.getInstance().set("EmpleadoActual" , emp);
                     AppContext.getInstance().set("Token" , emp.getToken());
-                    System.out.println("EmpleadoDto" + emp.getToken());
                     new Mensaje().show(Alert.AlertType.INFORMATION , "Datos Correctos." , "Empleado " + emp.getNombre() + " encontrado ");
                     getStage().close();
                 }

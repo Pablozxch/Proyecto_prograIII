@@ -159,38 +159,13 @@ public class CrearPedidoController extends Controller implements Initializable
             finded = false;
             if(pro != null)
             {
-                productos.forEach(t ->
-                {
-                    System.out.println(t.getProductoDto().getNombre());
-                });
                 DetallexordenDto dettodelte = (DetallexordenDto) tblpedido.getSelectionModel().getSelectedItem();
                 productos.remove(dettodelte);
-                productos.forEach(t ->
-                {
-                    System.out.println(t.getProductoDto().getNombre());
-                });
                 ObservableList<DetallexordenDto> ords = FXCollections.observableList(productos);
                 detallexordenDtos = productos;
                 tblpedido.setItems(ords);
                 tblpedido.refresh();
-                /*
-                @   ACTUALIZAR LOS DATOS RESPECTIVOS DEL PRODUCTO, YA QUE LA PERSONA NO QUIERE ESTE PRODUCTO
-                @   EJEMPLOS 
-                @   LA CANTIDAD DE ESTOS EN EL SISTEMA 
-                @   LA CANTIDAD VENDIDA
-                @   GUARDAR EL PRODUCTO CON LOS DATOS CORREGIDOS
-                
-                 */
-                Respuesta res2 = detallexordenService.eliminarDetalle(dettodelte.getId());
-                if(res2.getEstado())
-                {
-                    System.out.println("done");
-                }
-                else
-                {
-                    System.out.println("rip");
-                }
-
+                detallexordenService.eliminarDetalle(dettodelte.getId());
             }
         }
         if(event.getSource() == btnMenu)

@@ -42,14 +42,12 @@ public class ProductoController
     {
         try
         {
-            System.out.println("xD");
             Respuesta res = productoService.reporteProductosVendidos(idRes , fechaI , fechaF);
             if(!res.getEstado())
             {
                 return Response.status(res.getCodigoRespuesta().getValue()).entity(res.getMensaje()).build();
             }
             byte[] bytes = (byte[]) res.getResultado("Producto");
-            System.out.println("Bytes "+bytes);
             return Response.ok(bytes).build();//TODO
         }
         catch(Exception ex)

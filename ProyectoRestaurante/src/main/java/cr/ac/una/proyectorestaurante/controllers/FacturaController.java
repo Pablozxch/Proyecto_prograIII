@@ -75,6 +75,7 @@ public class FacturaController extends Controller implements Initializable
     DetallexordenService detallexordenService = new DetallexordenService();
     List<DetallexordenDto> detallexordenDtos = new ArrayList<>();
 
+    CodigodescDto codigodescDto = new CodigodescDto();
     double impA = 0;
     long subtotal = 0;
     DecimalFormat currency = new DecimalFormat("₡");
@@ -118,10 +119,6 @@ public class FacturaController extends Controller implements Initializable
                     {
                         new Mensaje().show(Alert.AlertType.INFORMATION , "Envio de Correo." , "El correo ha sido enviado con exito");
                     }
-                    else
-                    {
-                        System.out.println("Problemas");
-                    }
                 }
                 btnEnviarCorreo.setDisable(true);
             }
@@ -134,6 +131,7 @@ public class FacturaController extends Controller implements Initializable
         if(event.getSource() == btnPagar)
         {
             cancelado = true;
+
             RolDto rol = (RolDto) AppContext.getInstance().get("RolActual");
             if(!"Salonero".equals(rol.getNombre()) && cierreCajas == null)
             {
@@ -142,46 +140,69 @@ public class FacturaController extends Controller implements Initializable
                 FlowController.getInstance().goViewInWindowModal("CierreCajas" , getStage() , Boolean.FALSE);
 
             }
-
-            MesaService mesaService = new MesaService();
-            CierrecajasDto cierre = (CierrecajasDto) AppContext.getInstance().get("CierreCajasActual");
-            MesaDto mesaDto = ordenDto.getMesaDto();
-            mesaDto.setEstado("D");
-            mesaService.guardarMesa(mesaDto);//se actualiza el estado de la mesa para no tomar ordenes ya canceladas
-            FacturaDto fac = new FacturaDto();
-            fac.setCierrecajasDto(cierre);
-            if(chkTarjetaEfectivo.isSelected())
-            {
-                fac.setEfetivoTarjeta("T");//CAMBIAR EL VALOR DEPENDIENDO DE LO OTRO
-            }
-            else
-            {
-                fac.setEfetivoTarjeta("E");//CAMBIAR EL VALOR DEPENDIENDO DE LO OTRO
-            }
-
-            double total = Double.valueOf(txtSubtotal.getText()) * (impA);
-            long ttotal = Long.valueOf(String.valueOf((long) total + subtotal));
-            long finalmont = Long.valueOf(String.valueOf(((long) total + subtotal) - descuento));
-            fac.setSubtotal(subtotal);
-            fac.setTotal(ttotal);
-            fac.setMontoFinal(finalmont);
-            fac.setDescuento(descuento);
-            ordenDto.setEstado("C");
-            ordenService.guardarOrden(ordenDto);
-            fac.setOrdenDto(ordenDto);
-            facturaService.guardarFactura(fac);
             btnPagar.setDisable(true);
+            validarResultado();
             new Mensaje().show(Alert.AlertType.ERROR , "Factura." , "Factura pagada exitosamente.");
         }
         if(event.getSource() == btnBuscarCodDescuento)
         {
             CodDescService codService = new CodDescService();
-            Respuesta res= codService.buscarUrl(txtCodigoDescuento.getText());
+            btnBuscarCodDescuento.setDisable(true);
+            Respuesta res = codService.buscarUrl(txtCodigoDescuento.getText());
             if(res.getEstado())
             {
-                
+                codigodescDto = (CodigodescDto) res.getResultado("coddesc");
+                descuento = codigodescDto.getDesc();
+                txtDescuento.setText(codigodescDto.getDesc().toString());
+                validarResultado();
+
             }
+            else
+            {
+                new Mensaje().show(Alert.AlertType.INFORMATION , "Codigo Descuento" , "El codigo de descuento no ha sido encontrado");
+            }
+
         }
+    }
+
+    void validarResultado()
+    {
+
+        MesaService mesaService = new MesaService();
+        CierrecajasDto cierre = (CierrecajasDto) AppContext.getInstance().get("CierreCajasActual");
+        MesaDto mesaDto = ordenDto.getMesaDto();
+        mesaDto.setEstado("D");
+        mesaService.guardarMesa(mesaDto);//se actualiza el estado de la mesa para no tomar ordenes ya canceladas
+        FacturaDto fac = new FacturaDto();
+        fac.setCierrecajasDto(cierre);
+        if(chkTarjetaEfectivo.isSelected())
+        {
+            fac.setEfetivoTarjeta("T");//CAMBIAR EL VALOR DEPENDIENDO DE LO OTRO
+        }
+        else
+        {
+            fac.setEfetivoTarjeta("E");//CAMBIAR EL VALOR DEPENDIENDO DE LO OTRO
+        }
+
+        double total = Double.valueOf(txtSubtotal.getText()) * (impA);
+        long ttotal = Long.valueOf(String.valueOf((long) total + subtotal));
+        long finalmont = Long.valueOf(String.valueOf(((long) total + subtotal) - codigodescDto.getDesc()));
+        txtImpuestos.setText(String.valueOf(total));
+        fac.setSubtotal(subtotal);
+        fac.setTotal(ttotal);
+        fac.setMontoFinal(finalmont);
+        fac.setDescuento(descuento);
+        ordenDto.setEstado("C");
+        ordenService.guardarOrden(ordenDto);
+        fac.setOrdenDto(ordenDto);
+        if(codigodescDto != null)
+        {
+            fac.setCodigodescDto(codigodescDto);
+            fac.setDescuento(codigodescDto.getDesc());
+            txtTotal.setText(String.valueOf(finalmont));
+        }
+
+        //      facturaService.guardarFactura(fac);
     }
 
     void loadRes()
@@ -189,9 +210,7 @@ public class FacturaController extends Controller implements Initializable
         restauranteDto = (RestauranteDto) AppContext.getInstance().get("Restaurante");
         ordenDto = (OrdenDto) AppContext.getInstance().get("Orden");
         salonDto = ordenDto.getMesaDto().getSalonDto();
-        System.out.println(restauranteDto.getImpVen());
         impA = restauranteDto.getImpVen() / 100.0;
-        System.out.println(impA);
         txtNombreRest.setText(restauranteDto.getNombre());
         txtCorreoRest.setText(restauranteDto.getCorreo());
         txtDireccionRest.setText(restauranteDto.getDireccion());
@@ -223,8 +242,7 @@ public class FacturaController extends Controller implements Initializable
 
         TableColumn<DetallexordenDto , String> total = new TableColumn<>("Total");
         total.setPrefWidth(tblOrdenes.getPrefWidth() / 4);
-        total.setCellValueFactory(cellData
-                  ->
+        total.setCellValueFactory(cellData->
         {
             double totalF = (double) (cellData.getValue().getPrecio() * impA) + cellData.getValue().getPrecio();
             String formattedCost = currency.format(totalF);
@@ -245,7 +263,7 @@ public class FacturaController extends Controller implements Initializable
         Respuesta res = detallexordenService.getDetalles();
 
         List<DetallexordenDto> dett = (List<DetallexordenDto>) res.getResultado("Detalles");
-        List<DetallexordenDto> detf = dett.stream().filter(t -> t.getOrdenId().getId() == ordenDto.getId()).collect(Collectors.toList());
+        List<DetallexordenDto> detf = dett.stream().filter(t -> Objects.equals(t.getOrdenId().getId() , ordenDto.getId())).collect(Collectors.toList());
         if(detf == null)
         {
             List<DetallexordenDto> deta = new ArrayList<>();
@@ -267,19 +285,17 @@ public class FacturaController extends Controller implements Initializable
         Respuesta res = detallexordenService.getDetalles();
 
         List<DetallexordenDto> dett = (List<DetallexordenDto>) res.getResultado("Detalles");
-        List<DetallexordenDto> detf = dett.stream().filter(t -> t.getOrdenId().getId() == ordenDto.getId()).collect(Collectors.toList());
+        List<DetallexordenDto> detf = dett.stream().filter(t -> Objects.equals(t.getOrdenId().getId() , ordenDto.getId())).collect(Collectors.toList());
 
-        detf.forEach(t
-                  ->
+        detf.forEach(t ->
         {
             subtotal += t.getPrecio();
         });
-        System.out.println("subtotal " + subtotal);
         txtDescuento.setText(String.valueOf(descuento));
         txtSubtotal.setText(String.valueOf(subtotal));
         long total = (long) ((long) Long.valueOf(txtSubtotal.getText()) * (impA));
-        System.out.println(total);
         txtTotal.setText(String.valueOf(total + subtotal));
+        txtImpuestos.setText(String.valueOf(total));
     }
 
     @Override
@@ -289,6 +305,7 @@ public class FacturaController extends Controller implements Initializable
         cierreCajas = (CierrecajasDto) AppContext.getInstance().get("CierreCajasActual");
         btnEnviarCorreo.setDisable(false);
         btnPagar.setDisable(false);
+        btnBuscarCodDescuento.setDisable(false);
         loadRes();
         load();
         loadItems();

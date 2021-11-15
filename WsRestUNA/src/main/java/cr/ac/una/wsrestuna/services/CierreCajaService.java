@@ -195,7 +195,6 @@ public class CierreCajaService
             map.put("IDrestaurante" , IDrestaurante);
             map.put("FECHA" , FECHA);
             JasperPrint print = JasperFillManager.fillReport(jasper , map , connection);
-            System.out.println(JasperExportManager.exportReportToXml(print));
             byte[] s = JasperExportManager.exportReportToPdf(print);
             return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "" , "CierreCaja" , s);
 

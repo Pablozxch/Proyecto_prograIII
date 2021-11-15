@@ -131,7 +131,6 @@ public class CrearEmpleadoController extends Controller implements Initializable
                                         empleadoDto.setNombre(nombre);
                                         empleadoDto.setApellido(apellido);
                                         empleadoDto.setUsuario(user);
-                                        System.out.println("La contra es " + password);
                                         empleadoDto.setContra(password);
                                         roles.forEach(t ->
                                         {
@@ -156,7 +155,6 @@ public class CrearEmpleadoController extends Controller implements Initializable
                                         }
                                         RestauranteDto resta=(RestauranteDto)AppContext.getInstance().get("Restaurante");
                                         empleadoDto.setRestauranteDto(resta);
-                                        System.out.println("El valor a guardar es " + empleadoDto.toString());
                                         Respuesta res = empleadoService.guardarEmpleado(empleadoDto);
                                         if(res.getEstado())
                                         {

@@ -76,7 +76,6 @@ public class CierreCajasController extends Controller implements Initializable
             {
                 Respuesta res3 = cajaService.lasto();
                 cierre = (CierrecajasDto) res3.getResultado("CierreCaja");
-                System.out.println("El cierre es " + cierre);
                 AppContext.getInstance().set("CierreCajasActual" , cierre);
                 new Mensaje().show(Alert.AlertType.ERROR , "Datos guardados." , "El cierre de caja se ha guardado exitosamente.");
             }
@@ -112,7 +111,6 @@ public class CierreCajasController extends Controller implements Initializable
              */
             Date date = new Date();
             SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
-            System.out.println("Fecha "+formatter1.format(date)+"ID CIERRE "+cierre.getId()+"Rees id "+res.getId());
             Respuesta respuesta = cajaService.reporteCierreCajero(formatter1.format(date) , cierre.getId() , res.getId());
             if(respuesta.getEstado())
             {

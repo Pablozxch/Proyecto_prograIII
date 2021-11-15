@@ -23,7 +23,7 @@ public class CodDescService
         {
             Map<String , Object> parametros = new HashMap<>();
             parametros.put("url" , url);
-            Request request = new Request("CodigodescController/cierrecaja" , "/{url}" , parametros);
+            Request request = new Request("CodigodescController/codigo" , "/{url}" , parametros);
             request.get();
             if(request.isError())
             {
@@ -46,7 +46,7 @@ public class CodDescService
         {
             Map<String , Object> parametros = new HashMap<>();
             parametros.put("id" , id);
-            Request request = new Request("CodigodescController/cierrecaja" , "/{id}" , parametros);
+            Request request = new Request("CodigodescController/codigo" , "/{id}" , parametros);
             request.delete();
             if(request.isError())
             {
@@ -66,7 +66,7 @@ public class CodDescService
     {
         try
         {
-            Request request = new Request("CodigodescController/cierrecaja");
+            Request request = new Request("CodigodescController/codigo");
             request.post(pd);
             if(request.isError())
             {

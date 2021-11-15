@@ -184,7 +184,6 @@ public class CategoriasGeneralController extends Controller implements Initializ
                 {
                     if(((CheckBox) t.getChildren().get(1)).isSelected())
                     {
-                        System.out.println("El valor seleccionado es " + ((Label) t.getChildren().get(0)).getText());
                         productos.forEach(p ->
                         {
                             if(((Label) t.getChildren().get(0)).getText().equals(p.getNombre()))
@@ -193,10 +192,6 @@ public class CategoriasGeneralController extends Controller implements Initializ
                             }
                         });
                     }
-                });
-                productosSave.forEach(t ->
-                {
-                    System.out.println("Los valores son" + t.toString());
                 });
                 categorias.forEach(t ->
                 {
@@ -207,10 +202,6 @@ public class CategoriasGeneralController extends Controller implements Initializ
                         cat = t;
                         //una lista que creo antes de inclusive buscar entre categorias
                     }
-                });
-                cat.getProductos().forEach(t ->
-                {
-                    System.out.println("El producto es " + t.getNombre());
                 });
                 Respuesta res = categoriaService.guardarCategoria(cat);
                 if(res.getEstado())

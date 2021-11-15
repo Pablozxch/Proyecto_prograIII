@@ -143,9 +143,6 @@ public class EditarSalonesController extends Controller implements Initializable
             orgSceneY = t.getSceneY();
             orgTranslateX = ((Circle) (t.getSource())).getTranslateX();
             orgTranslateY = ((Circle) (t.getSource())).getTranslateY();
-            
-            System.out.println("X: " + t.getSceneX());
-            System.out.println("Y: " + t.getSceneY());
         }
     };
 
@@ -165,8 +162,6 @@ public class EditarSalonesController extends Controller implements Initializable
 
                 if(i.getPosx() == ((Circle) (t.getSource())).getCenterX() && i.getPosy() == ((Circle) (t.getSource())).getCenterY())
                 {
-                    System.out.println("Old x " + i.getMesaDto().getPosX());
-                    System.out.println("Old Y " + i.getMesaDto().getPosY());
                     i.getMesaDto().setPosX((long) newTranslateX);
                     i.getMesaDto().setPosY((long) newTranslateY);
 
@@ -181,20 +176,10 @@ public class EditarSalonesController extends Controller implements Initializable
     {
         if(event.getSource() == btnEliminar)
         {
-            System.out.println("La mesa a eliminar es " + mesaDelete);
             iMloads.forEach(t ->
             {
                 MesaDto mesa = t.getMesaDto();
-                System.out.println("MesaDto " + mesa.toString());
-                Respuesta res = mesaService.guardarMesa(mesa);
-                if(res.getEstado())
-                {
-                    System.out.println("done");
-                }
-                else
-                {
-                    System.out.println("f");
-                }
+                mesaService.guardarMesa(mesa);
                 mesa = null;
             });
         }

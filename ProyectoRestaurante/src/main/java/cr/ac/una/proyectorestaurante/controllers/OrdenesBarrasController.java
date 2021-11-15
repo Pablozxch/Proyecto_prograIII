@@ -56,13 +56,13 @@ public class OrdenesBarrasController extends Controller implements Initializable
     {
         tblpedidos.getColumns().clear();
         TableColumn<OrdenDto , String> NombreSalon = new TableColumn<>("Nombre Salon");
-        NombreSalon.setPrefWidth(tblpedidos.getPrefWidth() / 3);
+        NombreSalon.setPrefWidth(tblpedidos.getPrefWidth() / 2);
         NombreSalon.setCellValueFactory(cd -> cd.getValue().getMesaDto().getSalonDto().nombre);
         NombreSalon.setResizable(false);
 
 //
         TableColumn<OrdenDto , String> nombreempelado = new TableColumn<>("Empleado");
-        nombreempelado.setPrefWidth(tblpedidos.getPrefWidth() / 3);
+        nombreempelado.setPrefWidth(tblpedidos.getPrefWidth() / 2);
         nombreempelado.setCellValueFactory(cd -> cd.getValue().getEmpleadoDto().nombre);
         nombreempelado.setResizable(false);
 
@@ -80,10 +80,6 @@ public class OrdenesBarrasController extends Controller implements Initializable
         {
             List<OrdenDto> ordeness = (List<OrdenDto>) res.getResultado("Ordenes");
             ordenes = ordeness.stream().filter(t -> "P".equals(t.getEstado()) && Objects.equals(t.getMesaDto().getSalonDto().getId() , salonDto.getId())).collect(Collectors.toList());
-            ordenes.forEach(t ->
-            {
-                System.out.println(t.getEstado());
-            });
         }
         ObservableList<OrdenDto> ords = FXCollections.observableList(ordenes);
         tblpedidos.setItems(ords);
@@ -133,11 +129,6 @@ public class OrdenesBarrasController extends Controller implements Initializable
                 {
                     obtenermesas();
                 }
-                else
-                {
-                    System.out.println("Error");
-
-                }
             }
             else
             {
@@ -153,7 +144,6 @@ public class OrdenesBarrasController extends Controller implements Initializable
                     orden.setFecha(date2);
                     orden.setMesaDto(nMesaDtos.get(0));
                     orden.setEstado("P");
-                    System.out.println("La orden a guardar es "+orden);
                     ordenService.guardarOrden(orden);
                     Respuesta res2 = ordenService.lasto();
                     orden = null;
@@ -190,7 +180,6 @@ public class OrdenesBarrasController extends Controller implements Initializable
         obtenermesas();
         rolDto = (RolDto) AppContext.getInstance().get("RolActual");
         salonDto = (SalonDto) AppContext.getInstance().get("Salon");
-        System.out.println("Slon" + salonDto.toString());
         ObtencionDatos();
 
     }

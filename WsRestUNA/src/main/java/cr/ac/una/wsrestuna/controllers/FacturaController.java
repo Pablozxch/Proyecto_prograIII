@@ -175,7 +175,6 @@ public class FacturaController
     @Produces(MediaType.APPLICATION_JSON)
     public Response guardarFactura(FacturaDto factura)
     {
-        System.out.println("La factura a guardar es" + factura.toString());
         try
         {
 
@@ -245,15 +244,12 @@ public class FacturaController
     {
         try
         {
-            System.out.println("Bienvenidos");
             Respuesta res = facturaService.reporteListadoFacturas(idRes , fechaI , fechaF);
             if(!res.getEstado())
             {
                 return Response.status(res.getCodigoRespuesta().getValue()).entity(res.getMensaje()).build();
             }
             byte[] bytes = (byte[]) res.getResultado("Factura");
-            System.out.println("Bytes " + bytes);
-            System.out.println("Los byte son"+bytes);
             return Response.ok(bytes).build();//TODO
         }
         catch(Exception ex)

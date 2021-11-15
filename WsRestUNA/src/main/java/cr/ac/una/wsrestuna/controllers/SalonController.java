@@ -63,7 +63,6 @@ public class SalonController
     @Produces(MediaType.APPLICATION_JSON)
     public Response getSalones()
     {
-        System.out.println("Buenos dias");
         try
         {
             Respuesta res = salonService.getSalones();
@@ -71,12 +70,6 @@ public class SalonController
             {
                 return Response.status(res.getCodigoRespuesta().getValue()).entity(res.getMensaje()).build();//TODO
             }
-
-            List<SalonDto> s = (List<SalonDto>) res.getResultado("Salones");
-            s.forEach(t ->
-            {
-                System.out.println("El valor es " + t.toString());
-            });
             return Response.ok(new GenericEntity<List<SalonDto>>((List<SalonDto>) res.getResultado("Salones"))
             {
             }).build();

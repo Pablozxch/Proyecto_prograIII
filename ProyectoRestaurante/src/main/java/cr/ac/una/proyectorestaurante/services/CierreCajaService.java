@@ -63,7 +63,6 @@ public class CierreCajaService
     {
         try
         {
-            System.out.println("wenas");
             Map<String , Object> parametros = new HashMap<>();
             parametros.put("fecha" , fecha);
             parametros.put("idcierre" , idCierre);
@@ -79,7 +78,6 @@ public class CierreCajaService
         }
         catch(Exception ex)
         {
-            System.out.println("picha");
             return new Respuesta(false , "Error obteniendo el usuario." , "getUsuario " + ex.getMessage());
         }
     }
@@ -88,7 +86,6 @@ public class CierreCajaService
     {
         try
         {
-            System.out.println("wenas");
             Map<String , Object> parametros = new HashMap<>();
             parametros.put("fecha" , fecha);
             parametros.put("idEmp" , idEmp);
@@ -105,7 +102,6 @@ public class CierreCajaService
         }
         catch(Exception ex)
         {
-            System.out.println("picha");
             return new Respuesta(false , "Error obteniendo el usuario." , "getUsuario " + ex.getMessage());
         }
     }

@@ -218,13 +218,11 @@ public class PrincipalController extends Controller implements Initializable
                     CierreCajasController cr = (CierreCajasController) FlowController.getInstance().getController("CierreCajas");
                     if(((CierrecajasDto) AppContext.getInstance().get("CierreCajasActual")) == null)
                     {
-                        System.out.println("No se cuaenta con cierre de cajas");
                         FlowController.getInstance().goView("CierreCajas");
                         cr.createCierre();
                     }
                     else
                     {
-                        System.out.println("Se cuenta con cierre de cajas");
                         FlowController.getInstance().goView("CierreCajas");
                         cr.closeCierreCajas();
                     }
@@ -254,14 +252,14 @@ public class PrincipalController extends Controller implements Initializable
     {
         if(event.getSource() == btnEspanol)
         {
-            System.out.println("Espa");
+
             Locale locale = new Locale("es_MX");
             ResourceBundle bundle = ResourceBundle.getBundle("/cr/ac/una/proyectorestaurante/resources/Espanol" , locale);
             btnCategorias.setText(bundle.getString("Categorias"));
+            
         }
         if(event.getSource() == btnEnglish)
         {
-            System.out.println("English");
             Locale locale = new Locale("en_UK");
             ResourceBundle bundle = ResourceBundle.getBundle("/cr/ac/una/proyectorestaurante/resources/Ingles" , locale);
             btnCategorias.setText(bundle.getString("Categorias"));

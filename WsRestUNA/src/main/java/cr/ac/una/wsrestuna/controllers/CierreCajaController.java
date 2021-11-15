@@ -31,7 +31,6 @@ public class CierreCajaController
     @Produces(MediaType.APPLICATION_JSON)
     public Response guardarCierreCaja(CierrecajasDto cierrecajaDto)
     {
-        System.out.println("El cierre a guardar es " + cierrecajaDto.toString());
         try
         {
             Respuesta res = cierreCajaService.guardarCierrecajas(cierrecajaDto);

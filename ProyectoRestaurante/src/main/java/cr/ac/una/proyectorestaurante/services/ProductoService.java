@@ -93,7 +93,6 @@ public class ProductoService
     {
         try
         {
-            System.out.println("wenas");
             Map<String , Object> parametros = new HashMap<>();
             parametros.put("fechai" , fechaI);
             parametros.put("fechaf" , fechaF);
@@ -110,29 +109,7 @@ public class ProductoService
         }
         catch(Exception ex)
         {
-            System.out.println("picha");
             return new Respuesta(false , "Error obteniendo el usuario." , "getUsuario " + ex.getMessage());
-        }
-    }
-
-    public Respuesta ping()
-    {
-        try
-        {
-            Request request = new Request("ProductoController/ping");
-            request.get();
-            if(request.isError())
-            {
-                return new Respuesta(false , request.getError() , "");
-
-            }
-            RestauranteDto restauranteDto = (RestauranteDto) request.readEntity(RestauranteDto.class);
-            return new Respuesta(true , "" , "" , "Producto" , restauranteDto);
-        }
-        catch(Exception ex)
-        {
-            //Logger.getLogger(SalonService.class.getName()).log(Level.SEVERE , "Error obteniendo el restaurante [" + id + "]" , ex);
-            return new Respuesta(false , "Error obteniendo el restaurante." , "getUsuario " + ex.getMessage());
         }
     }
 

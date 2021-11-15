@@ -95,7 +95,6 @@ public class MenuController extends Controller implements Initializable
     {
         if(!"aux".equals(name) && !"cat".equals(name))
         {
-            System.out.println("El nombre del producto a buscar  es " + name);
             grid.getChildren().clear();
             productosddelete=productos;
             productosddelete = productos.stream().filter(t -> t.getNombre().toUpperCase().contains(name.toUpperCase())).collect(Collectors.toList());

@@ -78,55 +78,29 @@ public class ReportesGeneralController extends Controller implements Initializab
 
                 String fechaI = DATE_FORMATTER.format(dtpFechaInicial.getValue());
                 String fechaF = DATE_FORMATTER.format(dtpFechaFinal.getValue());
-//                    Respuesta res = productoService.productosMVendidos("5/5/2021" , "5/12/2021" , resta.getId());
-                System.out.println("Fehca i" + fechaI);
-                System.out.println("Fehca F" + fechaF);
-                System.out.println("listado de facturas");
                 RestauranteDto resta = (RestauranteDto) AppContext.getInstance().get("Restaurante");
                 Respuesta res = facturaService.reportelistadofacturas(fechaI , fechaF , resta.getId());
                 if(res.getEstado())
                 {
-                    System.out.println("gg");
                     byte[] decoder = (byte[]) res.getResultado("Factura");
                     cargarArchivo(decoder);
                 }
-                else
-                {
-                    System.out.println("ni picha");
-                }
-
             }
             else if(!tgllstadoyProductos.isSelected())
             {
                 String fechaI = DATE_FORMATTER.format(dtpFechaInicial.getValue());
                 String fechaF = DATE_FORMATTER.format(dtpFechaFinal.getValue());
-                System.out.println("PRODUCTOS MAS VENDIDOS");
                 RestauranteDto resta = (RestauranteDto) AppContext.getInstance().get("Restaurante");
-//                    Respuesta res = productoService.productosMVendidos("5/5/2021" , "5/12/2021" , resta.getId());
-                System.out.println("Fehca i" + fechaI);
-                System.out.println("Fehca F" + fechaF);
                 Respuesta res = productoService.productosMVendidos(fechaI , fechaF , resta.getId());
                 if(res.getEstado())
                 {
-                    System.out.println("gg");
                     byte[] decoder = (byte[]) res.getResultado("Productos");
                     cargarArchivo(decoder);
                 }
-                else
-                {
-                    System.out.println("ni picha al cuadrado");
-                }
             }
-
-            /**
-             *
-             * SE PROCEDE A OBTENER EL CHUNCHE Y GUARDAR LA VARA
-             *
-             */
         }
         if(event.getSource() == btnGenerar)
         {
-            System.out.println("cierre cajas");
             RestauranteDto resta = (RestauranteDto) AppContext.getInstance().get("Restaurante");
             CierrecajasDto ciere = (CierrecajasDto) AppContext.getInstance().get("CierreCajasActual");
             String fechaC = DATE_FORMATTER.format(dtpFechaCierreCaja.getValue());
@@ -134,13 +108,8 @@ public class ReportesGeneralController extends Controller implements Initializab
             Respuesta res = cierreCajaService.reporteCierreEspecifico(fechaC , idemp , resta.getId());
             if(res.getEstado())
             {
-                System.out.println("gg");
                 byte[] decoder = (byte[]) res.getResultado("CierreCaja");
                 cargarArchivo(decoder);
-            }
-            else
-            {
-                System.out.println("ni picha al cuadrado");
             }
         }
     }
