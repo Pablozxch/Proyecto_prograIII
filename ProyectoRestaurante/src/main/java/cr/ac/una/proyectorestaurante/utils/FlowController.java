@@ -9,8 +9,7 @@ import animatefx.animation.*;
 import cr.ac.una.proyectorestaurante.App;
 import cr.ac.una.proyectorestaurante.controllers.*;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.logging.Level;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -103,6 +102,7 @@ public class FlowController
     {
         try
         {
+
             this.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("/cr/ac/una/proyectorestaurante/views/Main.fxml") , this.idioma)));
             mainStage.setMinHeight(1000);
             mainStage.setMinWidth(1445);

@@ -67,7 +67,6 @@ public class SalonesGeneralController extends Controller implements Initializabl
 
     public void setSalSelect(SalonDto sal)
     {
-        AppContext.getInstance().delete("Salon");
         lblNombreSalon.setText(sal.getNombre());
         Image img2 = new Image(new ByteArrayInputStream(sal.getFoto()));//crea un objeto imagen, transforma el byte[] a un buffered imagen
         imgSal.setImage(img2);
@@ -138,7 +137,7 @@ public class SalonesGeneralController extends Controller implements Initializabl
                     if(column == 4)
                     {
                         column = 0;
-                        row+=2;
+                        row += 2;
                     }
                     grid.add(anchorPane , column++ , row); //(child,column,row)
                     //set grid width
@@ -216,16 +215,13 @@ public class SalonesGeneralController extends Controller implements Initializabl
             SalonDto sbm = (SalonDto) AppContext.getInstance().get("Salon");
             if("M".equals(sbm.getBarraMesa()))
             {
+                System.out.println("ES mesa");
                 FlowController.getInstance().goView("disenoSalones");//verificar si el salon que estoy accediendo es una barra o una mesa para mostrar cosas diferentes 
             }
             else
             {
                 FlowController.getInstance().goView("OrdenesBarras");
-                /*
-                
-                    HACER QUE CARGUE LAS ORDENES COMO EL ORDENES GENERAL
-                
-                 */
+
             }
 
         }

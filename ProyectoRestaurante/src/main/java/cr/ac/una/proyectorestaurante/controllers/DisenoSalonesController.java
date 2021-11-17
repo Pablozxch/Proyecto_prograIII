@@ -194,6 +194,7 @@ public class DisenoSalonesController extends Controller implements Initializable
         if(event.getSource() == btnEditar)
         {
             FlowController.getInstance().goViewInWindowModal("EditarSalones" , (Stage) btnEditar.getScene().getWindow() , Boolean.FALSE);
+            initialize();
 //            if("Administrativos".equals(rolDto.getNombre()))
 //            {
 //                

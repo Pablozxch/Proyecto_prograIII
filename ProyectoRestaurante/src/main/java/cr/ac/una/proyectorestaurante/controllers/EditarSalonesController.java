@@ -45,7 +45,7 @@ import javafx.stage.Stage;
  */
 public class EditarSalonesController extends Controller implements Initializable
 {
-    
+
     @FXML
     private JFXButton btnAnadir;
     @FXML
@@ -53,9 +53,9 @@ public class EditarSalonesController extends Controller implements Initializable
     @FXML
     private Pane pane;
     private GridPane gripMesa;
-    
+
     MesaService mesaService = new MesaService();
-    
+
     List<IMload> iMloads = new ArrayList<>();
     OrdenService orden = new OrdenService();
     List<OrdenDto> ordenes = new ArrayList<>();
@@ -82,23 +82,23 @@ public class EditarSalonesController extends Controller implements Initializable
     double orgTranslateX, orgTranslateY;
     MesaDto mesaDelete = new MesaDto();
     SalonDto salon = new SalonDto();
-    
+
     @Override
     public void initialize(URL url , ResourceBundle rb)
     {
     }
-    
+
     @Override
     public void initialize()
     {
         salon = (SalonDto) AppContext.getInstance().get("Salon");//colocar 
-        pane.getChildren().clear();
         load();
         rolDto = (RolDto) AppContext.getInstance().get("RolActual");
     }
-    
+
     void load()//con este metodo se carga la lista de iamgeviews para poder empezar a colocarlas en el grid
     {
+        pane.getChildren().clear();
         SalonDto salon = (SalonDto) AppContext.getInstance().get("Salon");//colocar 
         mesaDtos.clear();
         iMloads.clear();
@@ -131,9 +131,9 @@ public class EditarSalonesController extends Controller implements Initializable
                 mesaDelete = j.getMesaDto();
             });
         });
-        
+
     }
-    
+
     EventHandler<MouseEvent> circleOnMousePressedEventHandler = new EventHandler<MouseEvent>()
     {
         @Override
@@ -145,7 +145,7 @@ public class EditarSalonesController extends Controller implements Initializable
             orgTranslateY = ((Circle) (t.getSource())).getTranslateY();
         }
     };
-    
+
     EventHandler<MouseEvent> circleOnMouseDraggedEventHandler = new EventHandler<MouseEvent>()
     {
         @Override
@@ -157,41 +157,46 @@ public class EditarSalonesController extends Controller implements Initializable
             double newTranslateY = orgTranslateY + offsetY;
             ((Circle) (t.getSource())).setTranslateX(newTranslateX);
             ((Circle) (t.getSource())).setTranslateY(newTranslateY);
+            long finalx=(long) (((Circle) (t.getSource())).getCenterX()+((Circle) (t.getSource())).getTranslateX());
+            long finaly=(long) (((Circle) (t.getSource())).getCenterY()+((Circle) (t.getSource())).getTranslateY());
+            System.out.println("Center X" + finalx);
+            System.out.println("Center Y" + finaly);
             iMloads.forEach(i ->
             {
-                
+
                 if(i.getPosx() == ((Circle) (t.getSource())).getCenterX() && i.getPosy() == ((Circle) (t.getSource())).getCenterY())
                 {
-                    i.getMesaDto().setPosX((long) newTranslateX);
-                    i.getMesaDto().setPosY((long) newTranslateY);
-                    
+                    i.getMesaDto().setPosX(finalx);
+                    i.getMesaDto().setPosY(finaly);
                 }
             });
-            
+
         }
     };
-    
+
     @FXML
     private void click(ActionEvent event)
     {
         if(event.getSource() == btnEliminar)
         {
-            mesaService.eliminarMesa(mesaclick.getId());
-            load();
+//            mesaService.eliminarMesa(mesaclick.getId());
+//            load();
         }
         if(event.getSource() == btnAnadir)
         {
-            MesaDto msa = new MesaDto();
-            msa.setSalonDto(salon);
-            msa.setPosX(200L);
-            msa.setPosY(150L);
-            msa.setNombre("Mesa");
-            msa.setEstado("D");
-            
-            mesaDtos.add(msa);
-            mesaDtos.forEach(t ->
+//            MesaDto msa = new MesaDto();
+//            msa.setSalonDto(salon);
+//            msa.setPosX(200L);
+//            msa.setPosY(150L);
+//            msa.setNombre("Mesa");
+//            msa.setEstado("D");
+//            
+//            mesaDtos.add(msa);
+            iMloads.forEach(t ->
             {
-                mesaService.guardarMesa(t);
+//                t.getMesaDto().setPosX((long) t.getCircle().getCenterX());
+//                t.getMesaDto().setPosY((long) t.getCircle().getCenterY());
+                mesaService.guardarMesa(t.getMesaDto());
             });
             load();
         }
