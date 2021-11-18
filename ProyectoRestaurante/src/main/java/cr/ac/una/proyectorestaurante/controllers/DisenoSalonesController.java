@@ -6,26 +6,19 @@
 package cr.ac.una.proyectorestaurante.controllers;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXCheckBox;
-import cr.ac.una.proyectorestaurante.*;
 import cr.ac.una.proyectorestaurante.models.*;
 import cr.ac.una.proyectorestaurante.services.*;
 import cr.ac.una.proyectorestaurante.utils.*;
-import java.awt.*;
 import java.io.*;
 import java.net.URL;
 import java.text.*;
-import java.time.*;
 import java.time.format.*;
 import java.util.*;
 import java.util.List;
 import java.util.logging.*;
 import java.util.stream.*;
-import javafx.application.*;
 import javafx.event.*;
 import javafx.fxml.*;
-import javafx.geometry.*;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.effect.*;
 import javafx.scene.image.Image;
@@ -35,7 +28,6 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.shape.*;
 import javafx.stage.*;
-import javax.xml.datatype.*;
 
 /**
  * FXML Controller class
@@ -117,8 +109,15 @@ public class DisenoSalonesController extends Controller implements Initializable
             iMloads.add(new IMload(c , t.getPosX() , t.getPosY() , t.getNombre() , t));
         });
         iMloads.forEach(j ->
-        {
+        { 
+            Label label= new Label();
+            label.setStyle("-fx-text-fill: Black");
+            label.setText(j.getNombre());
+            label.setLayoutX(j.getPosx()-22);
+            label.setLayoutY(j.getPosy()+30);
+            
             pane.getChildren().add(j.getCircle());
+            pane.getChildren().add(label);
             j.getCircle().addEventHandler(MouseEvent.MOUSE_CLICKED , c ->
             {
                 if(c.getButton() == MouseButton.PRIMARY)
