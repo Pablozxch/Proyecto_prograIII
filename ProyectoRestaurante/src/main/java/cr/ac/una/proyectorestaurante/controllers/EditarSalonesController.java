@@ -90,6 +90,19 @@ public class EditarSalonesController extends Controller implements Initializable
         rolDto = (RolDto) AppContext.getInstance().get("RolActual");
     }
 
+    Circle changeCOlor(String color , Circle c)
+    {
+        if("D".equals(color))
+        {
+            c.setStroke(javafx.scene.paint.Color.GREEN);
+        }
+        else
+        {
+            c.setStroke(javafx.scene.paint.Color.RED);
+        }
+        return c;
+    }
+
     void load()//con este metodo se carga la lista de iamgeviews para poder empezar a colocarlas en el grid
     {
         new Mensaje().showModal(Alert.AlertType.INFORMATION , "¡IMPORTANTE!" , getStage() , "ANTES DE MOVER LA MESA o ELIMINAR LA MESA, DARLE CLICK PARA LINKEAR EL TEXTO MANERA, SINO SE PRESENTAN PROBLEMAS");
@@ -116,14 +129,7 @@ public class EditarSalonesController extends Controller implements Initializable
             c.setStrokeMiterLimit(10);
             c.setStrokeType(StrokeType.CENTERED);
             c.setFill(new ImagePattern(img2));
-            if("D".equals(t.getEstado()))
-            {
-                c.setStroke(javafx.scene.paint.Color.GREEN);
-            }
-            else
-            {
-                c.setStroke(javafx.scene.paint.Color.RED);
-            }
+            c=changeCOlor(t.getEstado() , c);
             TextField text = new TextField();
             text.setStyle("-fx-background-color: transparent ");
             text.setText(t.getNombre());
@@ -144,6 +150,15 @@ public class EditarSalonesController extends Controller implements Initializable
             {
                 n = j.getTextField();
                 mesaDelete = j.getMesaDto();
+                if(j.getCircle().getStroke()==javafx.scene.paint.Color.YELLOW)
+                {
+                    j.setCircle(changeCOlor(j.getMesaDto().getEstado() , j.getCircle()));
+                }
+                else
+                {
+                     j.getCircle().setStroke(javafx.scene.paint.Color.YELLOW);
+                }
+               
             });
             j.getCircle().setOnMousePressed(circleOnMousePressedEventHandler);
             j.getCircle().setOnMouseDragged(circleOnMouseDraggedEventHandler);
@@ -201,15 +216,15 @@ public class EditarSalonesController extends Controller implements Initializable
         }
         if(event.getSource() == btnAnadir)
         {
-                MesaDto msa = new MesaDto();
-                msa.setSalonDto(salon);
-                msa.setPosX(200L);
-                msa.setPosY(150L);
-                msa.setNombre("Mesa");
-                msa.setEstado("D");
-                mesaDtos.add(msa);
-                mesaService.guardarMesa(msa);
-                load();
+            MesaDto msa = new MesaDto();
+            msa.setSalonDto(salon);
+            msa.setPosX(200L);
+            msa.setPosY(150L);
+            msa.setNombre("Mesa");
+            msa.setEstado("D");
+            mesaDtos.add(msa);
+            mesaService.guardarMesa(msa);
+            load();
 
         }
         if(event.getSource() == btnGuardar)
