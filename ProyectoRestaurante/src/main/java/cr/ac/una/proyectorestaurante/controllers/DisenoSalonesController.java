@@ -73,6 +73,7 @@ public class DisenoSalonesController extends Controller implements Initializable
     private JFXButton btnEditar;
     double orgSceneX, orgSceneY;
     double orgTranslateX, orgTranslateY;
+    SalonDto salon = new SalonDto();
     @FXML
     private ImageView imgB;
 
@@ -83,7 +84,7 @@ public class DisenoSalonesController extends Controller implements Initializable
 
     void load()//con este metodo se carga la lista de iamgeviews para poder empezar a colocarlas en el grid
     {
-        SalonDto salon = (SalonDto) AppContext.getInstance().get("Salon");//colocar 
+        salon = (SalonDto) AppContext.getInstance().get("Salon");//colocar 
         mesaDtos.clear();
         ordenes.clear();
         iMloads.clear();
@@ -171,13 +172,9 @@ public class DisenoSalonesController extends Controller implements Initializable
                     load();
                 }
             });
-
+      
         });
 
-        /*
-            crear la orden si la mesa está en blanco, guardarla de una y devolverla 
-            implementar el drop en en la imagen, pero que detecte el drop como tal
-         */
     }
 
     @Override
