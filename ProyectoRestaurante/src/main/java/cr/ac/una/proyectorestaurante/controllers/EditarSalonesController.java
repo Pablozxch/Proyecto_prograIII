@@ -85,6 +85,7 @@ public class EditarSalonesController extends Controller implements Initializable
     @Override
     public void initialize()
     {
+        btnEliminar.setDisable(true);
         salon = (SalonDto) AppContext.getInstance().get("Salon");//colocar 
         load();
         rolDto = (RolDto) AppContext.getInstance().get("RolActual");
@@ -211,7 +212,8 @@ public class EditarSalonesController extends Controller implements Initializable
     {
         if(event.getSource() == btnEliminar)
         {
-//            mesaService.eliminarMesa(mesaclick.getId());
+//            mesaDelete.getId();
+//            mesaService.eliminarMesa(mesaDelete.getId());
 //            load();
         }
         if(event.getSource() == btnAnadir)
