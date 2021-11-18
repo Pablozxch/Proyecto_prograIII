@@ -198,7 +198,7 @@ public class FacturaController extends Controller implements Initializable
         if(codigodescDto != null)
         {
             fac.setCodigodescDto(codigodescDto);
-            fac.setDescuento(codigodescDto.getDesc());
+            fac.setDescuento(descuento);
             txtTotal.setText(String.valueOf(finalmont));
         }
          facturaService.guardarFactura(fac);
