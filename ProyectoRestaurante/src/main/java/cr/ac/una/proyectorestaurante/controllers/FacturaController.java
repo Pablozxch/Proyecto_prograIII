@@ -117,7 +117,7 @@ public class FacturaController extends Controller implements Initializable
                     Respuesta email = facturaService.sendByEmail(r.getId() , nombre , correo , ff.getId());
                     if(email.getEstado())
                     {
-                        new Mensaje().show(Alert.AlertType.INFORMATION , "Envio de Correo." , "El correo ha sido enviado con exito");
+                        new Mensaje().show(Alert.AlertType.CONFIRMATION , "Envio de Correo." , "El correo ha sido enviado con exito");
                     }
                 }
                 btnEnviarCorreo.setDisable(true);

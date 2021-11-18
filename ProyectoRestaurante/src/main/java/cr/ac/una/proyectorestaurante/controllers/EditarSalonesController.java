@@ -53,7 +53,8 @@ public class EditarSalonesController extends Controller implements Initializable
     private JFXButton btnEliminar;
     @FXML
     private Pane pane;
-    private GridPane gripMesa;
+    @FXML
+    private JFXButton btnGuardar;
 
     MesaService mesaService = new MesaService();
 
@@ -196,6 +197,9 @@ public class EditarSalonesController extends Controller implements Initializable
                 mesaService.guardarMesa(t.getMesaDto());
             });
             load();
+        }
+        if(event.getSource() == btnGuardar){
+            
         }
     }
 }
