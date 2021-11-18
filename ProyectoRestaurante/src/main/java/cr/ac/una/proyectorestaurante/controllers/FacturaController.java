@@ -142,7 +142,7 @@ public class FacturaController extends Controller implements Initializable
             }
             btnPagar.setDisable(true);
             validarResultado();
-            new Mensaje().show(Alert.AlertType.ERROR , "Factura." , "Factura pagada exitosamente.");
+            new Mensaje().show(Alert.AlertType.ERROR , "Factura." , "Factura cancelada exitosamente.");
         }
         if(event.getSource() == btnBuscarCodDescuento)
         {

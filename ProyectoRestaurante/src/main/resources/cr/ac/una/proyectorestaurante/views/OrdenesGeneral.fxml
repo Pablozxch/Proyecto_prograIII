@@ -20,7 +20,6 @@
                </children></VBox>
             <VBox alignment="CENTER" prefHeight="815.0" prefWidth="0.0" spacing="25.0" HBox.hgrow="ALWAYS">
                <children>
-                  <JFXButton fx:id="btnAnadir" onAction="#click" prefHeight="48.0" prefWidth="150.0" text="%Agregar" />
                   <JFXButton fx:id="btnEditar" onAction="#click" prefHeight="48.0" prefWidth="150.0" text="%Editar" />
                   <JFXButton fx:id="btnFacturar" onAction="#click" prefHeight="48.0" prefWidth="150.0" text="%Facturar" />
                </children>
