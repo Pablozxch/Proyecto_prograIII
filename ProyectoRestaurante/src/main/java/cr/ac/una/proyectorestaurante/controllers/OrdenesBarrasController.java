@@ -84,29 +84,6 @@ public class OrdenesBarrasController extends Controller implements Initializable
         ObservableList<OrdenDto> ords = FXCollections.observableList(ordenes);
         tblpedidos.setItems(ords);
         tblpedidos.refresh();
-        Respuesta res2 = mesaService.getMesas();
-        if(res2.getEstado())
-        {
-            nMesaDtos=(List<MesaDto>) res2.getResultado("Mesas");
-        }
-        if(nMesaDtos == null)
-        {
-
-            System.out.println("NO HAY MESA");
-            MesaDto mesaN = new MesaDto();
-            mesaN.setNombre("Bar");
-            mesaN.setPosX(Long.MIN_VALUE);
-            mesaN.setPosY(Long.MIN_VALUE);
-            mesaN.setSalonDto(salonDto);
-            mesaN.setEstado("D");
-            Respuesta respu = mesaService.guardarMesa(mesaN);
-            if(respu.getEstado())
-            {
-                System.out.println("Se guardo");
-                obtenermesas();
-            }
-        }
-
     }
 
     @FXML
@@ -174,20 +151,40 @@ public class OrdenesBarrasController extends Controller implements Initializable
     {
         System.out.println("Obteniendo mesas");
         nMesaDtos.clear();
-        Respuesta res = mesaService.getMesas();
-        if(res.getEstado())
+        Respuesta res2 = mesaService.getMesas();
+        if(res2.getEstado())
         {
-            System.out.println("mesa encontrada");
-            nMesaDtos = (List<MesaDto>) res.getResultado("Mesas");
+            nMesaDtos = (List<MesaDto>) res2.getResultado("Mesas");
+        }
+        if(nMesaDtos.isEmpty())
+        {
+
+            System.out.println("NO HAY MESA");
+            MesaDto mesaN = new MesaDto();
+            mesaN.setNombre("Bar");
+            mesaN.setPosX(0L);
+            mesaN.setPosY(0L);
+            mesaN.setSalonDto(salonDto);
+            mesaN.setEstado("D");
+            Respuesta respu = mesaService.guardarMesa(mesaN);
+            if(respu.getEstado())
+            {
+                System.out.println("Se guardo");
+                obtenermesas();
+            }
+            else
+            {
+                System.out.println("No se guardó");
+            }
         }
     }
 
     @Override
     public void initialize()
     {
-        obtenermesas();
         rolDto = (RolDto) AppContext.getInstance().get("RolActual");
         salonDto = (SalonDto) AppContext.getInstance().get("Salon");
+        obtenermesas();
         ObtencionDatos();
 
     }
