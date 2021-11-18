@@ -159,18 +159,14 @@ public class EditarSalonesController extends Controller implements Initializable
             ((Circle) (t.getSource())).setTranslateY(newTranslateY);
             long finalx=(long) (((Circle) (t.getSource())).getCenterX()+((Circle) (t.getSource())).getTranslateX());
             long finaly=(long) (((Circle) (t.getSource())).getCenterY()+((Circle) (t.getSource())).getTranslateY());
-            System.out.println("Center X" + finalx);
-            System.out.println("Center Y" + finaly);
             iMloads.forEach(i ->
             {
-
                 if(i.getPosx() == ((Circle) (t.getSource())).getCenterX() && i.getPosy() == ((Circle) (t.getSource())).getCenterY())
                 {
                     i.getMesaDto().setPosX(finalx);
                     i.getMesaDto().setPosY(finaly);
                 }
             });
-
         }
     };
 

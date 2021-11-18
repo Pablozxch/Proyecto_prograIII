@@ -84,6 +84,23 @@ public class OrdenesBarrasController extends Controller implements Initializable
         ObservableList<OrdenDto> ords = FXCollections.observableList(ordenes);
         tblpedidos.setItems(ords);
         tblpedidos.refresh();
+        if(nMesaDtos == null)
+        {
+            
+            System.out.println("NO HAY MESA");
+            MesaDto mesaN = new MesaDto();
+            mesaN.setNombre("Bar");
+            mesaN.setPosX(Long.MIN_VALUE);
+            mesaN.setPosY(Long.MIN_VALUE);
+            mesaN.setSalonDto(salonDto);
+            mesaN.setEstado("D");
+            Respuesta respu = mesaService.guardarMesa(mesaN);
+            if(respu.getEstado())
+            {
+                System.out.println("Se guardo");
+                obtenermesas();
+            }
+        }
 
     }
 
@@ -117,59 +134,45 @@ public class OrdenesBarrasController extends Controller implements Initializable
         }
         if(event.getSource() == btnAnadir)
         {
-            if(nMesaDtos == null)
+            try
             {
-                MesaDto mesaN = new MesaDto();
-                mesaN.setNombre("Bar");
-                mesaN.setPosX(Long.MIN_VALUE);
-                mesaN.setPosY(Long.MIN_VALUE);
-                mesaN.setSalonDto(salonDto);
-                Respuesta res = mesaService.guardarMesa(mesaN);
-                if(res.getEstado())
+                EmpleadoDto empleadoDto = (EmpleadoDto) AppContext.getInstance().get("EmpleadoActual");
+                OrdenDto orden = new OrdenDto();
+                orden.setEmpleadoDto(empleadoDto);
+                Date date = new Date();
+                SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
+                Date date2 = formatter1.parse(formatter1.format(date));
+                orden.setEmpleadoDto(empleadoDto);
+                orden.setFecha(date2);
+                orden.setMesaDto(nMesaDtos.get(0));
+                orden.setEstado("P");
+                ordenService.guardarOrden(orden);
+                Respuesta res2 = ordenService.lasto();
+                orden = null;
+                if(res2.getEstado())
                 {
-                    obtenermesas();
+                    orden = (OrdenDto) res2.getResultado("Orden");
                 }
+                AppContext.getInstance().set("Orden" , orden);
+                FlowController.getInstance().goViewInWindowModal("CrearPedido" , getStage() , Boolean.FALSE);
             }
-            else
+            catch(ParseException ex)
             {
-                try
-                {
-                    EmpleadoDto empleadoDto = (EmpleadoDto) AppContext.getInstance().get("EmpleadoActual");
-                    OrdenDto orden = new OrdenDto();
-                    orden.setEmpleadoDto(empleadoDto);
-                    Date date = new Date();
-                    SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
-                    Date date2 = formatter1.parse(formatter1.format(date));
-                    orden.setEmpleadoDto(empleadoDto);
-                    orden.setFecha(date2);
-                    orden.setMesaDto(nMesaDtos.get(0));
-                    orden.setEstado("P");
-                    ordenService.guardarOrden(orden);
-                    Respuesta res2 = ordenService.lasto();
-                    orden = null;
-                    if(res2.getEstado())
-                    {
-                        orden = (OrdenDto) res2.getResultado("Orden");
-                    }
-                    AppContext.getInstance().set("Orden" , orden);
-                    FlowController.getInstance().goViewInWindowModal("CrearPedido" , getStage() , Boolean.FALSE);
-                }
-                catch(ParseException ex)
-                {
-                    Logger.getLogger(OrdenesBarrasController.class.getName()).log(Level.SEVERE , null , ex);
-                }
+                Logger.getLogger(OrdenesBarrasController.class.getName()).log(Level.SEVERE , null , ex);
             }
-            initialize();
         }
+        initialize();
+
     }
 
     void obtenermesas()
     {
+        System.out.println("Obteniendo mesas");
         nMesaDtos.clear();
-        MesaService mesa = new MesaService();
-        Respuesta res = mesa.getMesas();
+        Respuesta res = mesaService.getMesas();
         if(res.getEstado())
         {
+            System.out.println("mesa encontrada");
             nMesaDtos = (List<MesaDto>) res.getResultado("Mesas");
         }
     }

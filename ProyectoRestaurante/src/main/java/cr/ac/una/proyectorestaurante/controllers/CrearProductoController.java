@@ -24,6 +24,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.stage.*;
 import javax.imageio.*;
+import org.apache.commons.io.*;
 
 /**
  * FXML Controller class
@@ -67,8 +68,8 @@ public class CrearProductoController extends Controller implements Initializable
         cmbFavorito.getItems().addAll("SI" , "NO");
         txtCosto.setTextFormatter(Formato.getInstance().integerFormat());
         txtCantidad.setTextFormatter(Formato.getInstance().integerFormat());
-        txtNombre.setTextFormatter(Formato.getInstance().letrasFormat(50));
-        txtNombreCorto.setTextFormatter(Formato.getInstance().letrasFormat(10));
+        txtNombre.setTextFormatter(Formato.getInstance().maxLengthFormat(50));
+        txtNombreCorto.setTextFormatter(Formato.getInstance().maxLengthFormat(10));
     }
 
     public void load()
@@ -182,7 +183,8 @@ public class CrearProductoController extends Controller implements Initializable
                                             BufferedImage bufferimage;
                                             bufferimage = ImageIO.read(x);
                                             ByteArrayOutputStream output = new ByteArrayOutputStream();
-                                            ImageIO.write(bufferimage , "jpg" , output);
+                                            String fe = FilenameUtils.getExtension(x.getAbsolutePath());
+                                            ImageIO.write(bufferimage , fe , output);
                                             byte[] data = output.toByteArray();
                                             productoDto.setFoto(data);
                                         }
