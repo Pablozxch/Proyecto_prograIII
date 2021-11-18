@@ -186,7 +186,7 @@ public class FacturaController extends Controller implements Initializable
 
         double total = Double.valueOf(txtSubtotal.getText()) * (impA);
         long ttotal = Long.valueOf(String.valueOf((long) total + subtotal));
-        long finalmont = Long.valueOf(String.valueOf(((long) total + subtotal) - codigodescDto.getDesc()));
+        long finalmont = Long.valueOf(String.valueOf(((long) total + subtotal) - descuento));
         txtImpuestos.setText(String.valueOf(total));
         fac.setSubtotal(subtotal);
         fac.setTotal(ttotal);
