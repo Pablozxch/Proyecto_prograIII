@@ -103,21 +103,30 @@ public class DisenoSalonesController extends Controller implements Initializable
             c.setStrokeWidth(3);
             c.setStrokeMiterLimit(10);
             c.setStrokeType(StrokeType.CENTERED);
-            c.setStroke(javafx.scene.paint.Color.BLACK);
             c.setFill(new ImagePattern(img2));
-            c.setEffect(new DropShadow(0 , 0 , 0 , javafx.scene.paint.Color.BLACK));
-            iMloads.add(new IMload(c , t.getPosX() , t.getPosY() , t.getNombre() , t));
+            if("D".equals(t.getEstado()))
+            {
+                c.setStroke(javafx.scene.paint.Color.GREEN);
+            }
+            else
+            {
+                c.setStroke(javafx.scene.paint.Color.RED);
+            }
+
+            TextField text = new TextField();
+            text.setStyle("-fx-background-color: transparent ");
+            text.setText(t.getNombre());
+            text.setLayoutX(t.getPosX() - 32);
+            text.setLayoutY(t.getPosY() + 30);
+            text.setMaxWidth(80);
+            text.setEditable(false);
+            iMloads.add(new IMload(c , t.getPosX() , t.getPosY() , t.getNombre() , t , text));
         });
         iMloads.forEach(j ->
-        { 
-            Label label= new Label();
-            label.setStyle("-fx-text-fill: Black");
-            label.setText(j.getNombre());
-            label.setLayoutX(j.getPosx()-22);
-            label.setLayoutY(j.getPosy()+30);
-            
+        {
+
             pane.getChildren().add(j.getCircle());
-            pane.getChildren().add(label);
+            pane.getChildren().add(j.getTextField());
             j.getCircle().addEventHandler(MouseEvent.MOUSE_CLICKED , c ->
             {
                 if(c.getButton() == MouseButton.PRIMARY)
@@ -171,17 +180,13 @@ public class DisenoSalonesController extends Controller implements Initializable
          */
     }
 
-    void loadEvents()
-    {
-
-    }
-
     @Override
     public void initialize()
     {
         pane.getChildren().clear();
-//        File x=new File("/cr/ac/una/proyectorestaurante/resources/fondomesas.jpeg");
-//        imgB.setImage(new Image(x.getAbsolutePath()));
+        File x = new File("/cr/ac/una/proyectorestaurante/resources/fondomesas.jpeg");
+        imgB.setImage(new Image(x.getPath()));
+        pane.getChildren().add(imgB);
         load();
         rolDto = (RolDto) AppContext.getInstance().get("RolActual");
 

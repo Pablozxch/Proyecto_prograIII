@@ -6,6 +6,7 @@
 package cr.ac.una.proyectorestaurante.controllers;
 
 import cr.ac.una.proyectorestaurante.models.*;
+import javafx.scene.control.*;
 import javafx.scene.shape.*;
 
 /**
@@ -20,14 +21,16 @@ class IMload
     private long posy;
     private String nombre;
     private MesaDto mesaDto;
+    private TextField textField;
 
-    public IMload(Circle circle , long posx , long posy , String nombre , MesaDto mesaDto)
+    public IMload(Circle circle , long posx , long posy , String nombre , MesaDto mesaDtom, TextField textField)
     {
         this.circle = circle;
         this.posx = posx;
         this.posy = posy;
         this.nombre = nombre;
-        this.mesaDto = mesaDto;
+        this.mesaDto = mesaDtom;
+        this.textField=textField;
     }
 
     public String getNombre()
@@ -79,5 +82,17 @@ class IMload
     {
         this.mesaDto = mesaDto;
     }
+
+    public TextField getTextField()
+    {
+        return textField;
+    }
+
+    public void setTextField(TextField textField)
+    {
+        this.textField = textField;
+    }
+
+
 
 }
