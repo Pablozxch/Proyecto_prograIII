@@ -84,9 +84,14 @@ public class OrdenesBarrasController extends Controller implements Initializable
         ObservableList<OrdenDto> ords = FXCollections.observableList(ordenes);
         tblpedidos.setItems(ords);
         tblpedidos.refresh();
+        Respuesta res2 = mesaService.getMesas();
+        if(res2.getEstado())
+        {
+            nMesaDtos=(List<MesaDto>) res2.getResultado("Mesas");
+        }
         if(nMesaDtos == null)
         {
-            
+
             System.out.println("NO HAY MESA");
             MesaDto mesaN = new MesaDto();
             mesaN.setNombre("Bar");
