@@ -18,12 +18,12 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <JFXButton fx:id="btnMenu" onAction="#click" text="%Menu">
+                        <JFXButton fx:id="btnMenu" onAction="#click" prefHeight="48.0" prefWidth="200.0" text="%Menu">
                            <HBox.margin>
                               <Insets left="15.0" />
                            </HBox.margin>
                         </JFXButton>
-                        <JFXButton fx:id="btnMenuRapido" onAction="#click" text="%MenuRapido">
+                        <JFXButton fx:id="btnMenuRapido" onAction="#click" prefHeight="48.0" prefWidth="200.0" text="%MenuRapido">
                            <HBox.margin>
                               <Insets left="35.0" />
                            </HBox.margin>

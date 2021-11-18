@@ -59,4 +59,5 @@ clear al categorias
 
 cerrar las vistas cuando se hagan productos, empleados y/o cateogrias
 
-cambiar contraseña del correo
+
+EDITAR SALONES
