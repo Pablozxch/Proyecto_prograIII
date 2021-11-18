@@ -112,7 +112,7 @@ CREATE TABLE tbl_producto(
   pro_id Number NOT NULL,
   pro_nombre Varchar2(50 ) NOT NULL,
   pro_nombrecorto Varchar2(10 ) NOT NULL,
-  pro_detalle Varchar2(50 ) NOT NULL,
+  pro_detalle Varchar2(100 ) NOT NULL,
   pro_foto Blob NOT NULL,
   pro_costo Number NOT NULL,
   pro_cantidad Number NOT NULL,

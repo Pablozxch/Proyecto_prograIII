@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="productoMasVendidos" pageWidth="298" pageHeight="420" columnWidth="258" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ce918af6-57aa-4971-b614-bd888743b992">
-	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="productoMasVendidos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ce918af6-57aa-4971-b614-bd888743b992">
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[IlRCTF9PUkRFTiIgLDE2OCwxNSw5Y2NhYjI1OC1jYTQ0LTQyNmEtOWM4OC04M2VhMDU1ZTMwMjc7
+IlRCTF9QUk9EVUNUTyIgLDE2OCwyMzcsYjcwNmU4ZjEtNGYwNi00ZDM3LTg2MDktOTA2ZmJiYzA1
+ZTVjOyJUQkxfREVUQUxMRVhPUkRFTiIgLDE1LDE1OCw1MWIxNDU2OS0zY2IzLTRkMGItOWNkYS00
+Y2Q4ZDY1MDc3ODQ7IlRCTF9SRVNUQVVSQU5URSIgLDM1NCwyNjMsN2QzMTljNDUtOGI0OS00MjQ4
+LTlkNzItNGFkOWY4ZDM5YjE4Ow==]]>
+	</property>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="OJDBC 7"/>
-	<property name="com.jaspersoft.studio.unit." value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
 	<parameter name="IDrestaurante" class="java.lang.Long"/>
 	<parameter name="inicio" class="java.lang.String"/>
 	<parameter name="finalo" class="java.lang.String"/>
@@ -27,7 +24,7 @@ FROM "TBL_DETALLEXORDEN"
 	 "TBL_PRODUCTO"."RES_ID" = "TBL_RESTAURANTE"."RES_ID" 
 WHERE 
 	 "TBL_ORDEN"."ORD_FECHA" BETWEEN $P{inicio} AND $P{finalo} 
-   AND "TBL_RESTAURANTE"."RES_ID" = $P{IDrestaurante}
+	 AND "TBL_RESTAURANTE"."RES_ID" = $P{IDrestaurante} 
 GROUP BY "TBL_PRODUCTO"."PRO_NOMBRE"
 ORDER BY total DESC]]>
 	</queryString>
@@ -42,13 +39,27 @@ ORDER BY total DESC]]>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
-	<columnHeader>
-		<band height="30" splitType="Stretch">
+	<title>
+		<band height="50">
 			<rectangle>
-				<reportElement mode="Opaque" x="30" y="0" width="200" height="30" backcolor="#FCABA9" uuid="4b2121db-679a-4a0e-acf8-c8070d5ed56c"/>
+				<reportElement mode="Opaque" x="0" y="0" width="561" height="50" backcolor="#FCABA9" uuid="4b2121db-679a-4a0e-acf8-c8070d5ed56c"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="30" y="0" width="100" height="30" uuid="dbb442fd-e0b0-4442-a011-de6ba21426e4">
+				<reportElement x="0" y="10" width="561" height="31" uuid="1db1a76b-703c-40a8-8570-d2bd5bd03785"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Black" size="12"/>
+				</textElement>
+				<text><![CDATA[Reporte de los productos más vendidos del restaurante]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Opaque" x="81" y="0" width="398" height="30" backcolor="#FCABA9" uuid="0505167d-7e4f-4174-8e35-b41c889ddcf0"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="81" y="0" width="198" height="30" uuid="dbb442fd-e0b0-4442-a011-de6ba21426e4">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="447b7831-ed8e-4b82-8a77-1292a68b474f"/>
 				</reportElement>
 				<box>
@@ -63,7 +74,7 @@ ORDER BY total DESC]]>
 				<text><![CDATA[Nombre del producto]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="130" y="0" width="100" height="30" uuid="300d3764-851f-4c34-969a-e761fffbb398">
+				<reportElement x="279" y="0" width="200" height="30" uuid="300d3764-851f-4c34-969a-e761fffbb398">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d9b9ed59-3c5c-4485-8fa4-2d481d9d6875"/>
 				</reportElement>
 				<box>
@@ -75,19 +86,19 @@ ORDER BY total DESC]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<text><![CDATA[TOTAL]]></text>
+				<text><![CDATA[Total productos vendidos]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="30" splitType="Stretch">
+		<band height="50" splitType="Stretch">
 			<textField>
-				<reportElement x="30" y="0" width="100" height="30" uuid="559f332b-2f63-4dca-9fc4-28fd5c505801">
+				<reportElement x="81" y="-1" width="198" height="30" uuid="559f332b-2f63-4dca-9fc4-28fd5c505801">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="447b7831-ed8e-4b82-8a77-1292a68b474f"/>
 				</reportElement>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid"/>
-					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.1" lineStyle="Solid"/>
 					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
@@ -95,7 +106,7 @@ ORDER BY total DESC]]>
 				<textFieldExpression><![CDATA[$F{PRO_NOMBRE}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="130" y="0" width="100" height="30" uuid="1999349e-2d28-476b-b6e8-9cb7c96a00c8">
+				<reportElement x="279" y="-1" width="200" height="30" uuid="1999349e-2d28-476b-b6e8-9cb7c96a00c8">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d9b9ed59-3c5c-4485-8fa4-2d481d9d6875"/>
 				</reportElement>
 				<box>

@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ListadoFactura" printOrder="Horizontal" pageWidth="705" pageHeight="400" columnWidth="665" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fea6b2f2-20cd-4466-bdda-3c01edd9eb31">
-	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[IlRCTF9SRVNUQVVSQU5URSIgLDM5MSwzMjAsNGM3NWVhY2ItZTI3NC00NTQxLWIyNjQtY2VhMWMz
+NzFkOWM4OyJUQkxfUFJPRFVDVE8iICwyMDUsMjk0LDgyNjFkNTA0LTIwYjEtNDJhNy04MjU0LWY0
+OGUxNzE5ODAwZDsiVEJMX0RFVEFMTEVYT1JERU4iICwzOTEsNzIsNjY5NWRlMGUtMmVlZS00YTJl
+LTlhNTQtZmQ3YTA4YmUyNDBlOyJUQkxfRkFDVFVSQSIgLDIwLDIwLGNhOTdjZTk5LTg3NTgtNDhi
+NC05OGE3LWNmYjUyN2Y3NWE4OTsiVEJMX09SREVOIiAsMjA1LDcyLGM4OTQ3OGI4LTAyZmMtNDNm
+Mi1iZTRhLTk3YzA0NDVmYmU5Yzs=]]>
+	</property>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="OJDBC 7"/>
 	<subDataset name="Dataset1" uuid="3d18ff5d-503d-4c8f-a462-196ce999c44d">
 		<queryString>
@@ -29,7 +36,9 @@
 	"TBL_PRODUCTO"."PRO_NOMBRECORTO",
 	"TBL_PRODUCTO"."PRO_COSTO",
 	"TBL_RESTAURANTE"."RES_NOMBRE",
-	"TBL_RESTAURANTE"."RES_CORREO"
+	"TBL_RESTAURANTE"."RES_CORREO",
+	"TBL_RESTAURANTE"."RES_DIRECCION",
+	"TBL_RESTAURANTE"."RES_DETALLE"
 FROM "TBL_FACTURA"
 	LEFT JOIN "TBL_ORDEN" ON 
 	 "TBL_FACTURA"."ORD_ID" = "TBL_ORDEN"."ORD_ID" 
@@ -40,7 +49,8 @@ FROM "TBL_FACTURA"
 	INNER JOIN "TBL_RESTAURANTE" ON 
 	 "TBL_PRODUCTO"."RES_ID" = "TBL_RESTAURANTE"."RES_ID" 
 WHERE 
-	 "TBL_ORDEN"."ORD_FECHA" BETWEEN $P{Inicio} AND $P{Final} AND "TBL_RESTAURANTE"."RES_ID"  = $P{IDrestaurante}]]>
+	 "TBL_ORDEN"."ORD_FECHA" BETWEEN $P{Inicio} AND $P{Final} 
+	 AND "TBL_RESTAURANTE"."RES_ID" = $P{IDrestaurante}]]>
 	</queryString>
 	<field name="FAC_ID" class="java.math.BigDecimal">
 		<property name="com.jaspersoft.studio.field.name" value="FAC_ID"/>
@@ -90,12 +100,20 @@ WHERE
 		<property name="com.jaspersoft.studio.field.name" value="RES_CORREO"/>
 		<property name="com.jaspersoft.studio.field.label" value="RES_CORREO"/>
 	</field>
+	<field name="RES_DIRECCION" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="RES_DIRECCION"/>
+		<property name="com.jaspersoft.studio.field.label" value="RES_DIRECCION"/>
+	</field>
+	<field name="RES_DETALLE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="RES_DETALLE"/>
+		<property name="com.jaspersoft.studio.field.label" value="RES_DETALLE"/>
+	</field>
 	<group name="Detalles">
 		<groupExpression><![CDATA[$F{FAC_ID}]]></groupExpression>
 		<groupHeader>
-			<band height="67">
+			<band height="66">
 				<staticText>
-					<reportElement mode="Opaque" x="30" y="3" width="90" height="30" backcolor="#FA6B66" uuid="da6e3b10-1480-4d4b-90f1-f7104dade9df">
+					<reportElement mode="Opaque" x="30" y="3" width="90" height="30" backcolor="#F2CAC7" uuid="da6e3b10-1480-4d4b-90f1-f7104dade9df">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1f4bd5f4-2a55-41ee-a82a-bd4c147fd0ee"/>
 					</reportElement>
 					<box>
@@ -109,7 +127,7 @@ WHERE
 					<text><![CDATA[ID de la factura]]></text>
 				</staticText>
 				<textField>
-					<reportElement mode="Opaque" x="120" y="3" width="110" height="30" backcolor="#E5AEEB" uuid="0f9d8a16-c821-4af2-94b0-b7ba60978bf6">
+					<reportElement mode="Opaque" x="120" y="3" width="110" height="30" backcolor="#F4F5ED" uuid="0f9d8a16-c821-4af2-94b0-b7ba60978bf6">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1f4bd5f4-2a55-41ee-a82a-bd4c147fd0ee"/>
 					</reportElement>
 					<box>
@@ -122,7 +140,7 @@ WHERE
 					<textFieldExpression><![CDATA[$F{FAC_ID}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement mode="Opaque" x="121" y="36" width="109" height="30" backcolor="#FA6B66" uuid="fb24b0c1-ee2e-4f82-863e-07feb1935db2">
+					<reportElement mode="Opaque" x="121" y="36" width="109" height="30" backcolor="#F2CAC7" uuid="fb24b0c1-ee2e-4f82-863e-07feb1935db2">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0c00c3a2-f875-4ed1-b77c-f8c07de56806"/>
 					</reportElement>
 					<box>
@@ -137,7 +155,7 @@ WHERE
 					<text><![CDATA[Nombre corto del producto]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="230" y="3" width="110" height="30" backcolor="#FA6B66" uuid="0baaff44-12ac-4c9b-b3a0-4715d5e990f9">
+					<reportElement mode="Opaque" x="230" y="3" width="110" height="30" backcolor="#F2CAC7" uuid="0baaff44-12ac-4c9b-b3a0-4715d5e990f9">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="256f5f7a-6b30-42e6-803f-0ea883f7176e"/>
 					</reportElement>
 					<box>
@@ -152,7 +170,7 @@ WHERE
 					<text><![CDATA[Subtotal]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="230" y="36" width="110" height="30" backcolor="#FA6B66" uuid="b445cbfa-ca51-4d38-83a8-004d219bc5bf">
+					<reportElement mode="Opaque" x="230" y="36" width="110" height="30" backcolor="#F2CAC7" uuid="b445cbfa-ca51-4d38-83a8-004d219bc5bf">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="832c5f23-1fb8-4e86-b49b-a75b9bbe3e47"/>
 					</reportElement>
 					<box>
@@ -167,7 +185,7 @@ WHERE
 					<text><![CDATA[Cantidad pedidos]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="340" y="36" width="110" height="30" backcolor="#FA6B66" uuid="46bf887a-0cef-41ad-a568-e5b7f135d5bf">
+					<reportElement mode="Opaque" x="340" y="36" width="110" height="30" backcolor="#F2CAC7" uuid="46bf887a-0cef-41ad-a568-e5b7f135d5bf">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="555f898d-fdd9-4971-b462-4ce60ef33469"/>
 					</reportElement>
 					<box>
@@ -182,7 +200,7 @@ WHERE
 					<text><![CDATA[Precio unidad]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="450" y="36" width="110" height="30" backcolor="#FA6B66" uuid="fabd09ca-d323-4b58-a5ab-8d6bf9e5be32">
+					<reportElement mode="Opaque" x="450" y="36" width="110" height="30" backcolor="#F2CAC7" uuid="fabd09ca-d323-4b58-a5ab-8d6bf9e5be32">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d007c0ce-3e1e-47b8-914f-434b5420e54d"/>
 					</reportElement>
 					<box>
@@ -197,7 +215,7 @@ WHERE
 					<text><![CDATA[Precio cantidad]]></text>
 				</staticText>
 				<textField>
-					<reportElement mode="Opaque" x="340" y="3" width="110" height="30" backcolor="#E5AEEB" uuid="ff1ddf9d-469c-469e-adb0-b6b11ef1af29">
+					<reportElement mode="Opaque" x="340" y="3" width="110" height="30" backcolor="#F4F5ED" uuid="ff1ddf9d-469c-469e-adb0-b6b11ef1af29">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="256f5f7a-6b30-42e6-803f-0ea883f7176e"/>
 					</reportElement>
 					<box>
@@ -210,7 +228,7 @@ WHERE
 					<textFieldExpression><![CDATA[$F{FAC_SUBTOTAL}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement mode="Opaque" x="450" y="3" width="110" height="30" backcolor="#FA6B66" uuid="74911fb1-cae7-4938-839f-4623fdf3fb31">
+					<reportElement mode="Opaque" x="450" y="3" width="110" height="30" backcolor="#F2CAC7" uuid="74911fb1-cae7-4938-839f-4623fdf3fb31">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="dcd17a69-e1a9-4fea-8b63-b105b7b04278"/>
 					</reportElement>
 					<box>
@@ -226,7 +244,7 @@ WHERE
 					<text><![CDATA[Total con impuestos]]></text>
 				</staticText>
 				<textField>
-					<reportElement mode="Opaque" x="560" y="3" width="90" height="30" backcolor="#E5AEEB" uuid="469e4a99-b9d5-4e71-bebe-23e851b6f812">
+					<reportElement mode="Opaque" x="560" y="3" width="90" height="30" backcolor="#F4F5ED" uuid="469e4a99-b9d5-4e71-bebe-23e851b6f812">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="dcd17a69-e1a9-4fea-8b63-b105b7b04278"/>
 					</reportElement>
 					<box>
@@ -242,7 +260,7 @@ WHERE
 		</groupHeader>
 	</group>
 	<title>
-		<band height="33">
+		<band height="78">
 			<textField>
 				<reportElement x="500" y="0" width="160" height="30" uuid="36428b33-967f-42b4-8880-a6c80fcb716d"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
@@ -265,14 +283,38 @@ WHERE
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<text><![CDATA[Listado de facturas del restaurante]]></text>
+				<text><![CDATA[Listado de facturas del restaurante: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="190" y="30" width="190" height="40" uuid="6c315ae0-2cfb-41ed-8554-d7321b4d86b6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{RES_DIRECCION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="500" y="30" width="160" height="40" uuid="529e0513-a65b-4b6d-9a46-0386aa1c2a7e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{RES_DETALLE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="30" width="180" height="40" uuid="15010a78-16e2-4c5f-8e57-f1e8c41997b4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<text><![CDATA[Dirección del restaurante: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="390" y="30" width="110" height="40" uuid="d880becd-882e-494d-b052-04177b5c27a8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<text><![CDATA[Detalles del restaurante:]]></text>
 			</staticText>
 		</band>
 	</title>
 	<detail>
 		<band height="29">
 			<textField>
-				<reportElement mode="Opaque" x="121" y="0" width="109" height="29" backcolor="#C3F7E3" uuid="138adff5-c25b-45fa-8393-9a62b9843215">
+				<reportElement mode="Opaque" x="121" y="0" width="109" height="29" backcolor="#F4F5ED" uuid="138adff5-c25b-45fa-8393-9a62b9843215">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0c00c3a2-f875-4ed1-b77c-f8c07de56806"/>
 				</reportElement>
 				<box>
@@ -285,7 +327,7 @@ WHERE
 				<textFieldExpression><![CDATA[$F{PRO_NOMBRECORTO}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Opaque" x="230" y="0" width="110" height="29" backcolor="#C3F7E3" uuid="36f4e6d1-73d8-4c22-b71d-f4734a81a107">
+				<reportElement mode="Opaque" x="230" y="0" width="110" height="29" backcolor="#F4F5ED" uuid="36f4e6d1-73d8-4c22-b71d-f4734a81a107">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="832c5f23-1fb8-4e86-b49b-a75b9bbe3e47"/>
 				</reportElement>
 				<box>
@@ -298,7 +340,7 @@ WHERE
 				<textFieldExpression><![CDATA[$F{DXO_CANTIDAD}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Opaque" x="340" y="0" width="110" height="29" backcolor="#C3F7E3" uuid="5af01e10-33d5-45ee-9a31-8d44c789df25">
+				<reportElement mode="Opaque" x="340" y="0" width="110" height="29" backcolor="#F4F5ED" uuid="5af01e10-33d5-45ee-9a31-8d44c789df25">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="555f898d-fdd9-4971-b462-4ce60ef33469"/>
 				</reportElement>
 				<box>
@@ -313,7 +355,7 @@ WHERE
 				<textFieldExpression><![CDATA[$F{PRO_COSTO}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Opaque" x="450" y="0" width="110" height="29" backcolor="#C3F7E3" uuid="e03a11cb-b8ad-42bd-b8a8-6a207b7ee0bd">
+				<reportElement mode="Opaque" x="450" y="0" width="110" height="29" backcolor="#F4F5ED" uuid="e03a11cb-b8ad-42bd-b8a8-6a207b7ee0bd">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d007c0ce-3e1e-47b8-914f-434b5420e54d"/>
 				</reportElement>
 				<box>

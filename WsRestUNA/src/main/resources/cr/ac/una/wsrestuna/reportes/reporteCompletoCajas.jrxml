@@ -3,7 +3,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteCompletoCajas" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2e67d741-c552-4d69-8f78-98439a6f3adb">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="OJDBC 7"/>
-	<parameter name="ID" class="java.lang.String"/>
+	<parameter name="ID" class="java.lang.Long"/>
 	<parameter name="FECHA" class="java.lang.String"/>
 	<parameter name="IDrestaurante" class="java.lang.Long"/>
 	<queryString language="SQL">
@@ -32,7 +32,8 @@ FROM "TBL_FACTURA"
 	 "TBL_FACTURA"."ORD_ID" = "TBL_ORDEN"."ORD_ID" 
 WHERE 
 	 "TBL_CIERRECAJAS"."CCAJ_ID" = $P{ID} 
-	 AND "TBL_ORDEN"."ORD_FECHA" = $P{FECHA}]]>
+	 AND "TBL_ORDEN"."ORD_FECHA" = $P{FECHA}
+	 AND "TBL_RESTAURANTE"."RES_ID" = $P{IDrestaurante}]]>
 	</queryString>
 	<field name="EMP_NOMBRE" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="EMP_NOMBRE"/>
@@ -130,14 +131,14 @@ WHERE
 			<staticText>
 				<reportElement x="270" y="0" width="110" height="30" uuid="fda8fc40-e903-4377-9a46-a57f4fb82d1c"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial Black"/>
+					<font fontName="Arial" size="12"/>
 				</textElement>
 				<text><![CDATA[Correo del restaurante]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="0" width="140" height="30" uuid="4a9f9683-3ed9-4c5b-acef-3b57a3f63f2e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial Black"/>
+					<font fontName="Arial" size="12"/>
 				</textElement>
 				<text><![CDATA[Nombre del restaurante]]></text>
 			</staticText>
@@ -156,7 +157,7 @@ WHERE
 					<rightPen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial Black" isBold="false"/>
+					<font fontName="Arial" size="12" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Nombre del Empleado]]></text>
 			</staticText>
@@ -199,7 +200,7 @@ WHERE
 					<rightPen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial Black" isBold="false"/>
+					<font fontName="Arial" size="12" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Monto Inicial]]></text>
 			</staticText>
@@ -229,7 +230,7 @@ WHERE
 					<rightPen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial Black" isBold="false"/>
+					<font fontName="Arial" size="12" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Monto recibido en efectivo]]></text>
 			</staticText>
@@ -244,7 +245,7 @@ WHERE
 					<rightPen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial Black" isBold="false"/>
+					<font fontName="Arial" size="12" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Monto recibido de tarjetas]]></text>
 			</staticText>
@@ -274,7 +275,7 @@ WHERE
 					<rightPen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial Black" isBold="false"/>
+					<font fontName="Arial" size="12" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Monto final]]></text>
 			</staticText>
@@ -304,7 +305,7 @@ WHERE
 					<rightPen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial Black"/>
+					<font fontName="Arial" size="12"/>
 				</textElement>
 				<text><![CDATA[Estado ]]></text>
 			</staticText>
@@ -336,7 +337,7 @@ WHERE
 					<rightPen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial Black"/>
+					<font fontName="Arial" size="12"/>
 				</textElement>
 				<text><![CDATA[ID factura]]></text>
 			</staticText>
@@ -351,7 +352,7 @@ WHERE
 					<rightPen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial Black"/>
+					<font fontName="Arial" size="12"/>
 				</textElement>
 				<text><![CDATA[¿Efectivo o tarjeta?]]></text>
 			</staticText>
@@ -366,7 +367,7 @@ WHERE
 					<rightPen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial Black"/>
+					<font fontName="Arial" size="12"/>
 				</textElement>
 				<text><![CDATA[Descuento]]></text>
 			</staticText>
@@ -381,7 +382,7 @@ WHERE
 					<rightPen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial Black"/>
+					<font fontName="Arial" size="12"/>
 				</textElement>
 				<text><![CDATA[Subtotal]]></text>
 			</staticText>
@@ -396,7 +397,7 @@ WHERE
 					<rightPen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial Black"/>
+					<font fontName="Arial" size="12"/>
 				</textElement>
 				<text><![CDATA[Total con descuento]]></text>
 			</staticText>
@@ -411,7 +412,7 @@ WHERE
 					<rightPen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial Black"/>
+					<font fontName="Arial" size="12"/>
 				</textElement>
 				<text><![CDATA[Total]]></text>
 			</staticText>

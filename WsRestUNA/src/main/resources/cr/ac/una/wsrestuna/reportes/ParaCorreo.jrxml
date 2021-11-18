@@ -19,7 +19,7 @@ NC05ZTU1LTU5NGFhYTVjZmQ3ZDs=]]>
 	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
-	<parameter name="ID_FACTURA" class="java.lang.String"/>
+	<parameter name="ID_FACTURA" class="java.lang.Long"/>
 	<parameter name="CORREO" class="java.lang.String"/>
 	<parameter name="NOMBRE" class="java.lang.String"/>
 	<queryString language="SQL">
@@ -134,69 +134,79 @@ WHERE
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="104" splitType="Stretch">
+		<band height="160" splitType="Stretch">
 			<rectangle>
-				<reportElement x="0" y="0" width="550" height="100" backcolor="#E3E07F" uuid="be00e623-c5c1-4b7e-af7d-ffd2627e6801"/>
+				<reportElement x="0" y="0" width="550" height="160" backcolor="#E3E07F" uuid="be00e623-c5c1-4b7e-af7d-ffd2627e6801"/>
 			</rectangle>
-			<textField>
-				<reportElement x="390" y="0" width="160" height="30" uuid="52e1a7af-619f-4864-9f17-c1cacb2bcacd"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+			<textField evaluationTime="Group" evaluationGroup="DXO_CANTIDAD">
+				<reportElement x="10" y="10" width="230" height="60" uuid="52e1a7af-619f-4864-9f17-c1cacb2bcacd"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{RES_NOMBRE}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="390" y="30" width="160" height="30" uuid="93080619-dea6-4466-a29b-12ac5ddec27d"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+			<textField evaluationTime="Group" evaluationGroup="DXO_CANTIDAD">
+				<reportElement x="340" y="10" width="170" height="30" uuid="93080619-dea6-4466-a29b-12ac5ddec27d"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{RES_DIRECCION}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="390" y="60" width="160" height="30" uuid="8143e816-7ba3-402d-a329-ed15d88c1a61"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+			<textField evaluationTime="Group" evaluationGroup="DXO_CANTIDAD">
+				<reportElement x="340" y="40" width="170" height="30" uuid="8143e816-7ba3-402d-a329-ed15d88c1a61"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{RES_CORREO}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="290" y="0" width="100" height="30" uuid="abfa04c2-7b73-4ea2-9fb8-9c36dff116c2"/>
+				<reportElement x="250" y="10" width="90" height="30" uuid="e5c16e67-1e19-4c7d-9b5d-25eab845ce8f"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial Black"/>
 				</textElement>
-				<text><![CDATA[Nombre de restaurante]]></text>
+				<text><![CDATA[Dirección:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="290" y="30" width="100" height="30" uuid="e5c16e67-1e19-4c7d-9b5d-25eab845ce8f"/>
+				<reportElement x="250" y="40" width="90" height="30" uuid="a6f16eb0-afc4-4f77-a472-9e59fd59d9b8"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial Black"/>
 				</textElement>
-				<text><![CDATA[Direccion]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="290" y="60" width="100" height="30" uuid="a6f16eb0-afc4-4f77-a472-9e59fd59d9b8"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial Black"/>
-				</textElement>
-				<text><![CDATA[Correo del restaurante]]></text>
+				<text><![CDATA[Correo:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="110" y="50" width="170" height="30" uuid="3d0acff1-f705-42f7-ba64-1d10c8c8e630"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="210" y="130" width="170" height="30" uuid="3d0acff1-f705-42f7-ba64-1d10c8c8e630"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$P{CORREO}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="110" y="20" width="170" height="30" uuid="076a32da-ea10-476a-9741-2cc3b180b123"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<reportElement x="210" y="100" width="170" height="30" uuid="076a32da-ea10-476a-9741-2cc3b180b123"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$P{NOMBRE}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="20" width="110" height="30" uuid="08341b29-2c6f-43b9-bbf6-1af8d2781ccf"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
+				<reportElement x="90" y="100" width="120" height="30" uuid="08341b29-2c6f-43b9-bbf6-1af8d2781ccf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial Black"/>
 				</textElement>
-				<text><![CDATA[Nombre del cliente]]></text>
+				<text><![CDATA[Nombre:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="50" width="110" height="30" uuid="909cf5b6-84f7-47b6-af04-0222c8184239"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
+				<reportElement x="90" y="130" width="120" height="30" uuid="909cf5b6-84f7-47b6-af04-0222c8184239"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial Black"/>
 				</textElement>
 				<text><![CDATA[Correo del cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="70" width="191" height="31" uuid="6f08fdc5-ea25-468e-b39d-f6aa3997e6c4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FACTURA DIGITAL]]></text>
 			</staticText>
 		</band>
 	</title>

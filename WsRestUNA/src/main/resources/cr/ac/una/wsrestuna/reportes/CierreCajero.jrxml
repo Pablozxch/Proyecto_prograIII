@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CierreCajero" pageWidth="842" pageHeight="1191" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c06ea8b3-7fb0-4b7d-ab2a-1daae0fa3fe0">
-	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[IlRCTF9SRVNUQVVSQU5URSIgLDU0OCwxMjYsZDRhNThlNjUtMzA2OC00MDg5LWIxOWQtMzgyNGZl
+MTAzMTAwOyJUQkxfRkFDVFVSQSIgLDE1LDExMiw0YzhkM2IwMS00MzgwLTQ0ZTQtYjQ1Zi00ZTVi
+NWNkZDA5MTQ7IlRCTF9DSUVSUkVDQUpBUyIgLDIwMCwxNSxmMTUyZTU4Ny02ZGI4LTQyNjEtOWEx
+My03NWVkZGVlZTZjZWY7IlRCTF9PUkRFTiIgLDIwMCwyODgsY2VhYjJkMjQtODI5Mi00MWRmLThj
+MTctNzk1NzZlMmZjNzkwOyJUQkxfRU1QTEVBRE8iICwzOTQsMTI1LGQ2M2Y3NGI1LTkyNTQtNGZk
+MC05YTI4LTA3YTVkNjhiOTdiZTs=]]>
+	</property>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="OJDBC 7"/>
 	<parameter name="Fecha" class="java.lang.String"/>
 	<parameter name="idCierreCaja" class="java.lang.Long"/>
 	<parameter name="IDrestaurante" class="java.lang.Long"/>
@@ -16,15 +23,19 @@
 	"TBL_RESTAURANTE"."RES_NOMBRE",
 	"TBL_RESTAURANTE"."RES_CORREO",
 	"TBL_CIERRECAJAS"."CCJA_ESTADO"
-FROM "TBL_CIERRECAJAS"
+FROM "TBL_FACTURA"
+	Left JOIN "TBL_CIERRECAJAS" ON 
+	 "TBL_FACTURA"."CCAJ_ID" = "TBL_CIERRECAJAS"."CCAJ_ID" 
+	Left JOIN "TBL_ORDEN" ON 
+	 "TBL_FACTURA"."ORD_ID" = "TBL_ORDEN"."ORD_ID" 
 	Left JOIN "TBL_EMPLEADO" ON 
 	 "TBL_CIERRECAJAS"."EMP_ID" = "TBL_EMPLEADO"."EMP_ID" 
 	INNER JOIN "TBL_RESTAURANTE" ON 
 	 "TBL_EMPLEADO"."RES_ID" = "TBL_RESTAURANTE"."RES_ID" 
 WHERE 
-	 "TBL_CIERRECAJAS"."CCAJ_ID" = $P{idCierreCaja} 
-	 AND "TBL_RESTAURANTE"."RES_ID" = $P{IDrestaurante}
-	]]>
+	 "TBL_ORDEN"."ORD_FECHA" = $P{Fecha} 
+	 AND "TBL_CIERRECAJAS"."CCAJ_ID" = $P{idCierreCaja} 
+	 AND "TBL_RESTAURANTE"."RES_ID" = $P{IDrestaurante}]]>
 	</queryString>
 	<field name="CCAJ_MONTOEFECTIVO" class="java.math.BigDecimal">
 		<property name="com.jaspersoft.studio.field.name" value="CCAJ_MONTOEFECTIVO"/>

@@ -53,3 +53,10 @@ categorias con imagenes, que toque la categoria
 parte del correo, envio de gmail con correo ya existente
 
 normalmente hacerlo con un panel, 
+
+
+clear al categorias
+
+cerrar las vistas cuando se hagan productos, empleados y/o cateogrias
+
+cambiar contraseña del correo
