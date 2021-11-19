@@ -111,6 +111,7 @@ public class OrdenesGeneralController extends Controller implements Initializabl
                 {
                     AppContext.getInstance().set("Orden" , (OrdenDto) tblpedidos.getSelectionModel().getSelectedItem());
                     FlowController.getInstance().goViewInWindowModal("Factura" , getStage() , Boolean.FALSE);
+                    initialize();
 
                 }
             }
