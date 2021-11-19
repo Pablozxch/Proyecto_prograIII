@@ -77,11 +77,11 @@ public class CierreCajasController extends Controller implements Initializable
                 Respuesta res3 = cajaService.lasto();
                 cierre = (CierrecajasDto) res3.getResultado("CierreCaja");
                 AppContext.getInstance().set("CierreCajasActual" , cierre);
-                new Mensaje().show(Alert.AlertType.ERROR , "Datos guardados." , "El cierre de caja se ha guardado exitosamente.");
+                new Mensaje().show(Alert.AlertType.INFORMATION , "Datos guardados." , "El cierre de caja se ha iniciado exitosamente.");
             }
             else
             {
-                new Mensaje().show(Alert.AlertType.ERROR , "Datos" , "No guarda");
+                new Mensaje().show(Alert.AlertType.ERROR , "Datos" , "No se pudo iniciar el cierre de caja.");
             }
         }
         if(event.getSource() == btnReporte)
@@ -140,7 +140,7 @@ public class CierreCajasController extends Controller implements Initializable
             try(FileOutputStream fos = new FileOutputStream(file2);)
             {
                 fos.write(decoder);
-                new Mensaje().show(Alert.AlertType.CONFIRMATION , "Guardado" , "Con exito");
+                new Mensaje().show(Alert.AlertType.CONFIRMATION , "Guardado" , "Cierre de caja guardado con exito.");
             }
             catch(Exception e)
             {

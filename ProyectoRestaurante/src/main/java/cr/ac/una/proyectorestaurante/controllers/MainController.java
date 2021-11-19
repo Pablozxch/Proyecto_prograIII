@@ -188,7 +188,7 @@ public class MainController extends Controller implements Initializable {
         if (event.getSource() == btnSpanish) {
 
             Locale locale = new Locale("es_MX");
-            ResourceBundle bundle = ResourceBundle.getBundle("/cr/ac/una/proyectorestaurante/resources/Espanol", locale);
+            ResourceBundle bundle = ResourceBundle.getBundle("/cr/ac/una/proyectorestaurante/resources/Idioma", locale);
             FlowController.setIdioma(bundle);
 
             bundleG = bundle;
@@ -203,7 +203,7 @@ public class MainController extends Controller implements Initializable {
         if (event.getSource() == btnEnglish) {
 
             Locale locale = new Locale("en_UK");
-            ResourceBundle bundle = ResourceBundle.getBundle("/cr/ac/una/proyectorestaurante/resources/Ingles", locale);
+            ResourceBundle bundle = ResourceBundle.getBundle("/cr/ac/una/proyectorestaurante/resources/Idioma", locale);
             FlowController.setIdioma(bundle);
 
             bundleG = bundle;
