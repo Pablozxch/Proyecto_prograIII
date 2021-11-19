@@ -10,6 +10,8 @@ import cr.ac.una.proyectorestaurante.models.*;
 import cr.ac.una.proyectorestaurante.utils.*;
 import java.net.URL;
 import java.util.*;
+import java.util.stream.*;
+import javafx.application.*;
 import javafx.event.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -48,6 +50,8 @@ public class PrincipalController extends Controller implements Initializable
     private JFXButton btnCierreCajas;
     @FXML
     private JFXButton btnDescuento;
+
+    public Thread taskThread;
     /**
      * Initializes the controller class.
      */
@@ -64,7 +68,34 @@ public class PrincipalController extends Controller implements Initializable
     {
         // TODO
         lblTitulo.setText(" Sistema del Restaurante " + ((RestauranteDto) AppContext.getInstance().get("Restaurante")).getNombre() + " ");//cambiar para ver que se ve mejor xD
+        taskThread = new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                try
+                {
+                    Thread.sleep(1000);
+                }
+                catch(InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
+                Platform.runLater(new Runnable()
+                {
+                    @Override
 
+                    public void run()
+                    {
+                        FlowController.getInstance().goView("VistaGeneral");
+                    }
+
+                });
+
+            }
+        });
+
+        taskThread.start();
     }
 
     @Override
@@ -278,7 +309,7 @@ public class PrincipalController extends Controller implements Initializable
         }
         if(event.getSource() == btnCerrarSesion)
         {
-            LogInController con=(LogInController)FlowController.getInstance().getController("LoIn");
+            LogInController con = (LogInController) FlowController.getInstance().getController("LoIn");
             FlowController.getInstance().goView("VistaGeneral");
             AppContext.getInstance().delete("EmpleadoActual");//este usuario es el encargado de ingresar a todo lo que el pueda
             FlowController.getInstance().goViewInWindowModal("LogIn" , (Stage) btnCerrarSesion.getScene().getWindow() , Boolean.FALSE);//ver que se hace con esto
