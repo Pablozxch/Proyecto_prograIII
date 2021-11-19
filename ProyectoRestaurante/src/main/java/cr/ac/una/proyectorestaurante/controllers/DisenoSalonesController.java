@@ -66,6 +66,8 @@ public class DisenoSalonesController extends Controller implements Initializable
     List<MesaDto> mesaDtos = new ArrayList<>();
     List<OrdenDto> list = new ArrayList<>();
     RolDto rolDto = new RolDto();
+
+    TextField n;
     MesaDto mesaclick = new MesaDto();
     @FXML
     private AnchorPane rt;
@@ -173,11 +175,39 @@ public class DisenoSalonesController extends Controller implements Initializable
                 }
             });
 
+            j.getCircle().setOnDragDetected((MouseEvent event) ->
+            {
+                Image img2 = new Image(new ByteArrayInputStream(salon.getFoto()));//crea un objeto imagen, transforma el byte[] a un buffered image      
+                Dragboard db = j.getCircle().startDragAndDrop(TransferMode.COPY_OR_MOVE);
+                ClipboardContent content = new ClipboardContent();
+                Image checker = img2;
+                content.putImage(checker);
+                db.setContent(content);
+                
+                System.out.println("Drag detectado");
+                event.consume();
+            });
+
+            j.getCircle().setOnDragOver((DragEvent event) ->
+            {
+                event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+                event.consume();
+            });
+            j.getCircle().setOnDragDone((DragEvent t) ->
+            {
+                if(imvCajero.getBoundsInParent().intersects(((Circle) t.getTarget()).getBoundsInParent()))
+                {
+                    System.out.println("completado dentro del cajero");
+                }
+                else
+                {
+                    System.out.println("fuera");
+                }
+                
+                // throw new Un
+            });
         });
-
     }
-
-
 
     @Override
     public void initialize()
@@ -188,7 +218,6 @@ public class DisenoSalonesController extends Controller implements Initializable
         pane.getChildren().add(imgB);
         load();
         rolDto = (RolDto) AppContext.getInstance().get("RolActual");
-
     }
 
     @FXML
