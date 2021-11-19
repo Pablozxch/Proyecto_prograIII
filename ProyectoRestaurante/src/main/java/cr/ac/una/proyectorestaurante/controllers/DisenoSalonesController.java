@@ -17,6 +17,7 @@ import java.util.*;
 import java.util.List;
 import java.util.logging.*;
 import java.util.stream.*;
+import javafx.application.*;
 import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
@@ -144,47 +145,50 @@ public class DisenoSalonesController extends Controller implements Initializable
                     }
                     else
                     {
-                        try
+                        if(new Mensaje().showConfirmation("Orden" , getStage() , "Deseaa crear una orden"))
                         {
-                            EmpleadoDto emp = (EmpleadoDto) AppContext.getInstance().get("EmpleadoActual");
-                            OrdenDto odd = new OrdenDto();
-                            odd.setEmpleadoDto(emp);
-                            Date date = new Date();
-                            SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
-                            Date date2 = formatter1.parse(formatter1.format(date));
-                            odd.setFecha(date2);
-                            odd.setMesaDto(mesaclick);
-                            odd.setEstado("P");
-                            orden.guardarOrden(odd);
-                            Respuesta res2 = orden.lasto();
-                            if(res2.getEstado())
+                            try
                             {
-                                odd = (OrdenDto) res2.getResultado("Orden");
+                                EmpleadoDto emp = (EmpleadoDto) AppContext.getInstance().get("EmpleadoActual");
+                                OrdenDto odd = new OrdenDto();
+                                odd.setEmpleadoDto(emp);
+                                Date date = new Date();
+                                SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
+                                Date date2 = formatter1.parse(formatter1.format(date));
+                                odd.setFecha(date2);
+                                odd.setMesaDto(mesaclick);
+                                odd.setEstado("P");
+                                orden.guardarOrden(odd);
+                                Respuesta res2 = orden.lasto();
+                                if(res2.getEstado())
+                                {
+                                    odd = (OrdenDto) res2.getResultado("Orden");
+                                }
+                                mesaclick.setEstado("O");
+                                AppContext.getInstance().set("Orden" , odd);
+                                FlowController.getInstance().goViewInWindowModal("CrearPedido" , getStage() , Boolean.FALSE);
                             }
-                            mesaclick.setEstado("O");
-                            AppContext.getInstance().set("Orden" , odd);
-                            FlowController.getInstance().goViewInWindowModal("CrearPedido" , getStage() , Boolean.FALSE);
+                            catch(ParseException ex)
+                            {
+                                Logger.getLogger(DisenoSalonesController.class.getName()).log(Level.SEVERE , null , ex);
+                            }
+                            mesaService.guardarMesa(mesaclick);
+                            load();
                         }
-                        catch(ParseException ex)
-                        {
-                            Logger.getLogger(DisenoSalonesController.class.getName()).log(Level.SEVERE , null , ex);
-                        }
+
                     }
-                    mesaService.guardarMesa(mesaclick);
-                    load();
                 }
             });
 
             j.getCircle().setOnDragDetected((MouseEvent event) ->
             {
+                mesaclick = j.getMesaDto();
                 Image img2 = new Image(new ByteArrayInputStream(salon.getFoto()));//crea un objeto imagen, transforma el byte[] a un buffered image      
                 Dragboard db = j.getCircle().startDragAndDrop(TransferMode.COPY_OR_MOVE);
                 ClipboardContent content = new ClipboardContent();
                 Image checker = img2;
                 content.putImage(checker);
                 db.setContent(content);
-                
-                System.out.println("Drag detectado");
                 event.consume();
             });
 
@@ -193,19 +197,55 @@ public class DisenoSalonesController extends Controller implements Initializable
                 event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
                 event.consume();
             });
-            j.getCircle().setOnDragDone((DragEvent t) ->
+
+        });
+        imvCajero.setOnDragEntered((DragEvent g) ->
+        {
+            g.consume();
+            taskThread = new Thread(new Runnable()
             {
-                if(imvCajero.getBoundsInParent().intersects(((Circle) t.getTarget()).getBoundsInParent()))
+                @Override
+                public void run()
                 {
-                    System.out.println("completado dentro del cajero");
+                    try
+                    {
+                        Thread.sleep(1000);
+                    }
+                    catch(InterruptedException e)
+                    {
+                        e.printStackTrace();
+                    }
+                    Platform.runLater(new Runnable()
+                    {
+                        @Override
+
+                        public void run()
+                        {
+                            if(g.isConsumed())
+                            {
+                                if(new Mensaje().showConfirmation("Desea Cancelar la factura" , getStage() , "Se va a proceder a abrir una orden"))
+                                {
+                                    if("O".equals(mesaclick.getEstado()))
+                                    {
+                                        list = (List<OrdenDto>) ordenes.stream().filter(o -> Objects.equals(o.getMesaDto().getId() , mesaclick.getId()) && "P".equals(o.getEstado())).collect(Collectors.toList());
+                                        AppContext.getInstance().set("Orden" , list.get(0));
+                                        FlowController.getInstance().goViewInWindowModal("CrearPedido" , getStage() , Boolean.FALSE);
+                                        mesaclick = null;
+                                    }
+                                    else
+                                    {
+                                        new Mensaje().show(Alert.AlertType.ERROR , "Error" , "La mesa no tiene una orden ");
+                                    }
+                                }
+                            }
+                        }
+
+                    });
+
                 }
-                else
-                {
-                    System.out.println("fuera");
-                }
-                
-                // throw new Un
             });
+
+            taskThread.start();
         });
     }
 
