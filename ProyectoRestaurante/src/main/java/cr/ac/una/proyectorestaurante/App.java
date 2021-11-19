@@ -31,10 +31,9 @@ public class App extends Application
         stage.getIcons().add(new Image(App.class.getResourceAsStream("/cr/ac/una/proyectorestaurante/resources/icon.png")));
         stage.setTitle("Restaurante");
         Locale locale = new Locale("es_MX");
-        ResourceBundle bundle = ResourceBundle.getBundle("/cr/ac/una/proyectorestaurante/resources/Idioma" , locale);
+        ResourceBundle bundle = ResourceBundle.getBundle("/cr/ac/una/proyectorestaurante/resources/Idioma", locale);
         FlowController.setIdioma(bundle);
         AppContext.getInstance().set("idioma" , bundle);
-        FlowController.getInstance().goMain();
         FlowController.getInstance().goMain();
     }
 
