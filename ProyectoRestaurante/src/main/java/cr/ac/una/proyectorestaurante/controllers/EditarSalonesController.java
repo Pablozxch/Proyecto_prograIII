@@ -86,6 +86,7 @@ public class EditarSalonesController extends Controller implements Initializable
     public void initialize()
     {
         btnEliminar.setDisable(true);
+        btnEliminar.setVisible(false);
         salon = (SalonDto) AppContext.getInstance().get("Salon");//colocar 
         load();
         rolDto = (RolDto) AppContext.getInstance().get("RolActual");
