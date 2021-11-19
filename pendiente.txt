@@ -61,3 +61,8 @@ cerrar las vistas cuando se hagan productos, empleados y/o cateogrias
 
 
 EDITAR SALONES
+
+
+refrescar la tabla de ordenes general cuando se factura un pedido
+
+un cajero puede entrar a codigo descuento, arreglar porque no deberia

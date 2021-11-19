@@ -83,7 +83,7 @@ public class LogInController extends Controller implements Initializable
                 }
                 else
                 {
-                    new Mensaje().show(Alert.AlertType.ERROR , "Datos" , "Los datos no existen o están mal digitados");
+                    new Mensaje().show(Alert.AlertType.ERROR , "Datos" , "Los datos no existen o están mal digitados.");
                 }
             }
         }

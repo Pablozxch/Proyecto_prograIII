@@ -148,7 +148,11 @@ public class PrincipalController extends Controller implements Initializable
             }
             else
             {
-                FlowController.getInstance().goView("CodigoDescuentoGeneral");
+                rolDto = (RolDto) AppContext.getInstance().get("RolActual");
+                if("Administrativos".equals(rolDto.getNombre())){
+                    FlowController.getInstance().goView("CodigoDescuentoGeneral");
+                }
+                
             }
         }
         if(event.getSource() == btnRestaurante)
