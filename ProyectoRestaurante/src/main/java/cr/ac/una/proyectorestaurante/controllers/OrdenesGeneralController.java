@@ -49,7 +49,7 @@ public class OrdenesGeneralController extends Controller implements Initializabl
     public void initialize(URL url , ResourceBundle rb)
     {
         // TODO
-        llenar();
+     
     }
 
     void llenar()
@@ -112,7 +112,6 @@ public class OrdenesGeneralController extends Controller implements Initializabl
                     AppContext.getInstance().set("Orden" , (OrdenDto) tblpedidos.getSelectionModel().getSelectedItem());
                     FlowController.getInstance().goViewInWindowModal("Factura" , getStage() , Boolean.FALSE);
                     initialize();
-
                 }
             }
             else
@@ -126,6 +125,7 @@ public class OrdenesGeneralController extends Controller implements Initializabl
     @Override
     public void initialize()
     {
+        llenar();
         rolDto = (RolDto) AppContext.getInstance().get("RolActual");
         ObtencionDatos();
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
