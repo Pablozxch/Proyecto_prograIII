@@ -76,6 +76,7 @@ public class MainController extends Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         loadItems("aux");
         bundleG = (ResourceBundle) AppContext.getInstance().get("idioma");
+       
     }
 
     public void loadItems(String name) {
