@@ -51,6 +51,11 @@ public class LogInController extends Controller implements Initializable
         // TODO
     }
 
+    void clear()
+    {
+        txtUsuario.clear();
+        txtContrasena.clear();
+    }
     @FXML
     private void click(ActionEvent event)
     {

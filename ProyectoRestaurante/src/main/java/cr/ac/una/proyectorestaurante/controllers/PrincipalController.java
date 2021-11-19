@@ -64,7 +64,7 @@ public class PrincipalController extends Controller implements Initializable
     {
         // TODO
         lblTitulo.setText(" Sistema del Restaurante " + ((RestauranteDto) AppContext.getInstance().get("Restaurante")).getNombre() + " ");//cambiar para ver que se ve mejor xD
-        
+
     }
 
     @Override
@@ -150,10 +150,11 @@ public class PrincipalController extends Controller implements Initializable
             else
             {
                 rolDto = (RolDto) AppContext.getInstance().get("RolActual");
-                if("Administrativos".equals(rolDto.getNombre())){
+                if("Administrativos".equals(rolDto.getNombre()))
+                {
                     FlowController.getInstance().goView("CodigoDescuentoGeneral");
                 }
-                
+
             }
         }
         if(event.getSource() == btnRestaurante)
@@ -277,9 +278,11 @@ public class PrincipalController extends Controller implements Initializable
         }
         if(event.getSource() == btnCerrarSesion)
         {
+            LogInController con=(LogInController)FlowController.getInstance().getController("LoIn");
             FlowController.getInstance().goView("VistaGeneral");
             AppContext.getInstance().delete("EmpleadoActual");//este usuario es el encargado de ingresar a todo lo que el pueda
             FlowController.getInstance().goViewInWindowModal("LogIn" , (Stage) btnCerrarSesion.getScene().getWindow() , Boolean.FALSE);//ver que se hace con esto
+            con.clear();
             //preguntar que si lo de crear empleados en esta vista
 
         }
