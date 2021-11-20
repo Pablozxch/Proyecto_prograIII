@@ -276,7 +276,24 @@ public class Producto implements Serializable
     @Override
     public String toString()
     {
-        return "cr.ac.una.wsrestuna.models.Producto[ proId=" + proId + " ]";
+        StringBuilder sb = new StringBuilder();
+        sb.append("Producto{proId=").append(proId);
+        sb.append(", proNombre=").append(proNombre);
+        sb.append(", proNombrecorto=").append(proNombrecorto);
+        sb.append(", proDetalle=").append(proDetalle);
+        sb.append(", proFoto=").append(proFoto);
+        sb.append(", proCosto=").append(proCosto);
+        sb.append(", proCantidad=").append(proCantidad);
+        sb.append(", proAccesoRapido=").append(proAccesoRapido);
+        sb.append(", proCantidadv=").append(proCantidadv);
+        sb.append(", proVersion=").append(proVersion);
+        sb.append(", categoriaList=").append(categoriaList);
+        sb.append(", detallexordenList=").append(detallexordenList);
+        sb.append(", resId=").append(resId);
+        sb.append('}');
+        return sb.toString();
     }
+
+   
 
 }

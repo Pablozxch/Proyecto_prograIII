@@ -43,17 +43,17 @@ public class ProductoService
         }
         catch(NoResultException ex)
         {
-            return new Respuesta(false , CodigoRespuesta.ERROR_NOENCONTRADO , "No existe un empleado con el código ingresado." , "getProducto NoResultException");
+            return new Respuesta(false , CodigoRespuesta.ERROR_NOENCONTRADO , "No existe un productoDto con el código ingresado." , "getProducto NoResultException");
         }
         catch(NonUniqueResultException ex)
         {
-            LOG.log(Level.SEVERE , "Ocurrio un error al consultar el empleado." , ex);
-            return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al consultar el empleado." , "getProducto NonUniqueResultException");
+            LOG.log(Level.SEVERE , "Ocurrio un error al consultar el productoDto." , ex);
+            return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al consultar el productoDto." , "getProducto NonUniqueResultException");
         }
         catch(Exception ex)
         {
-            LOG.log(Level.SEVERE , "Ocurrio un error al consultar el empleado." , ex);
-            return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al consultar el empleado." , "getProducto " + ex.getMessage());
+            LOG.log(Level.SEVERE , "Ocurrio un error al consultar el productoDto." , ex);
+            return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al consultar el productoDto." , "getProducto " + ex.getMessage());
         }
     }
 
@@ -78,41 +78,39 @@ public class ProductoService
         }
         catch(Exception ex)
         {
-            LOG.log(Level.SEVERE , "Ocurrio un error al consultar el empleado." , ex);
-            return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al consultar el empleado." , "getProductos " + ex.getMessage());
+            LOG.log(Level.SEVERE , "Ocurrio un error al consultar el productoDto." , ex);
+            return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al consultar el productoDto." , "getProductos " + ex.getMessage());
         }
     }
 
-    public Respuesta guardarProducto(ProductoDto empleadoDto)
+    public Respuesta guardarProducto(ProductoDto productoDtoDto)
     {
         try
         {
-            Producto empleado;
-            if(empleadoDto.getId() != null && empleadoDto.getId() > 0)
+            Producto productoDto;
+            if(productoDtoDto.getId() != null && productoDtoDto.getId() > 0)
             {
-                empleado = em.find(Producto.class , empleadoDto.getId());
-                if(empleado == null)
+                productoDto = em.find(Producto.class , productoDtoDto.getId());
+                if(productoDto == null)
                 {
-                    return new Respuesta(false , CodigoRespuesta.ERROR_NOENCONTRADO , "No se encrontró el empleado a modificar." , "guardarProducto NoResultException");
+                    return new Respuesta(false , CodigoRespuesta.ERROR_NOENCONTRADO , "No se encrontró el productoDto a modificar." , "guardarProducto NoResultException");
                 }
-                empleado.actualizarProducto(empleadoDto);
-                empleado = em.merge(empleado);
+                productoDto.actualizarProducto(productoDtoDto);
+                productoDto = em.merge(productoDto);
             }
             else
             {
-                empleado = new Producto(empleadoDto);
-                System.out.println("El valor antes de colocar el restaurante es " + empleado.toString());
-                empleado.setResId(new Restaurante(empleadoDto.getRestauranteDto()));
-                System.out.println("El valor despues de colocar el restaurante es " + empleado.toString());
-                em.persist(empleado);
+                productoDto = new Producto(productoDtoDto);
+                System.out.println("El valor despues de colocar el restaurante es " + productoDto.toString());
+                em.persist(productoDto);
             }
             em.flush();
-            return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "" , "Producto" , new ProductoDto(empleado));
+            return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "" , "Producto" , new ProductoDto(productoDto));
         }
         catch(Exception ex)
         {
-            LOG.log(Level.SEVERE , "Ocurrio un error al guardar el empleado." , ex);
-            return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al guardar el empleado." , "guardarProducto " + ex.getMessage());
+            LOG.log(Level.SEVERE , "Ocurrio un error al guardar el productoDto." , ex);
+            return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al guardar el productoDto." , "guardarProducto " + ex.getMessage());
         }
     }
 
@@ -120,19 +118,19 @@ public class ProductoService
     {
         try
         {
-            Producto empleado;
+            Producto productoDto;
             if(id != null && id > 0)
             {
-                empleado = em.find(Producto.class , id);
-                if(empleado == null)
+                productoDto = em.find(Producto.class , id);
+                if(productoDto == null)
                 {
-                    return new Respuesta(false , CodigoRespuesta.ERROR_NOENCONTRADO , "No se encrontró el empleado a eliminar." , "eliminarProducto NoResultException");
+                    return new Respuesta(false , CodigoRespuesta.ERROR_NOENCONTRADO , "No se encrontró el productoDto a eliminar." , "eliminarProducto NoResultException");
                 }
-                em.remove(empleado);
+                em.remove(productoDto);
             }
             else
             {
-                return new Respuesta(false , CodigoRespuesta.ERROR_NOENCONTRADO , "Debe cargar el empleado a eliminar." , "eliminarProducto NoResultException");
+                return new Respuesta(false , CodigoRespuesta.ERROR_NOENCONTRADO , "Debe cargar el productoDto a eliminar." , "eliminarProducto NoResultException");
             }
             em.flush();
             return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "");
@@ -141,10 +139,10 @@ public class ProductoService
         {
             if(ex.getCause() != null && ex.getCause().getCause().getClass() == SQLIntegrityConstraintViolationException.class)
             {
-                return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "No se puede eliminar el empleado porque tiene relaciones con otros registros." , "eliminarProducto " + ex.getMessage());
+                return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "No se puede eliminar el productoDto porque tiene relaciones con otros registros." , "eliminarProducto " + ex.getMessage());
             }
-            LOG.log(Level.SEVERE , "Ocurrio un error al guardar el empleado." , ex);
-            return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al eliminar el empleado." , "eliminarProducto " + ex.getMessage());
+            LOG.log(Level.SEVERE , "Ocurrio un error al guardar el productoDto." , ex);
+            return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al eliminar el productoDto." , "eliminarProducto " + ex.getMessage());
         }
     }
 

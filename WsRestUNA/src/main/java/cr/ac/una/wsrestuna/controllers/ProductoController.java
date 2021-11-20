@@ -110,6 +110,7 @@ public class ProductoController
     @Produces(MediaType.APPLICATION_JSON)
     public Response guardarProducto(ProductoDto productoDto)
     {
+        System.out.println("El producto a guardar es "+productoDto.toString());
         try
         {
             Respuesta res = productoService.guardarProducto(productoDto);
@@ -117,6 +118,7 @@ public class ProductoController
             {
                 return Response.status(res.getCodigoRespuesta().getValue()).entity(res.getMensaje()).build();
             }
+            System.out.println("El prodcuto es"+((ProductoDto) res.getResultado("Producto")).toString());
             return Response.ok((ProductoDto) res.getResultado("Producto")).build();//TODO
         }
         catch(Exception ex)
