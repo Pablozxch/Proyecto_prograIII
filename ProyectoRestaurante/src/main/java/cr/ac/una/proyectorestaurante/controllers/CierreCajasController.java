@@ -124,6 +124,8 @@ public class CierreCajasController extends Controller implements Initializable
             AppContext.getInstance().delete("EmpleadoActual");
             AppContext.getInstance().delete("RolActual");
             FlowController.getInstance().goView("VistaGeneral");
+            clearALl();
+            FlowController.getInstance().goView("VistaGeneral");
         }
     }
 
@@ -147,6 +149,20 @@ public class CierreCajasController extends Controller implements Initializable
             {
             }
         }
+    }
+
+    void clearALl()
+    {
+        txtMontoInicial.setDisable(false);
+        txtMontoFinal.setDisable(false);
+        txtMontoEfectivo.setDisable(false);
+        txtMontoTarjeta.setDisable(false);
+        btnCierreCaja.setDisable(true);
+        btnReporte.setDisable(false);
+        txtMontoInicial.clear();
+        txtMontoFinal.clear();
+        txtMontoEfectivo.clear();
+        txtMontoTarjeta.clear();
     }
 
     void createCierre()
