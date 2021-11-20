@@ -196,11 +196,12 @@ public class CrearProductoController extends Controller implements Initializable
                                         Respuesta res = productoService.guardarProducto(productoDto);
                                         if(res.getEstado())
                                         {
-                                            new Mensaje().show(Alert.AlertType.INFORMATION , "Gurdar Restaurante" , "Guardado Correctamente");
+                                            new Mensaje().show(Alert.AlertType.INFORMATION , "Guardar Producto" , "El producto se ha guardado correctamente");
+                                            getStage().close();
                                         }
                                         else
                                         {
-                                            new Mensaje().show(Alert.AlertType.ERROR , "Gurdar Producto" , "Error al guardarProducto");
+                                            new Mensaje().show(Alert.AlertType.ERROR , "Guardar Producto" , "Ha ocurrido un error al guardar el producto.");
                                         }
 
                                     }
@@ -211,33 +212,33 @@ public class CrearProductoController extends Controller implements Initializable
                                 }
                                 else
                                 {
-                                    new Mensaje().show(Alert.AlertType.ERROR , "Faltan datos" , "Error en el combo");
+                                    new Mensaje().show(Alert.AlertType.ERROR , "Faltan datos" , "Debe seleccionar si quiere el producto en el menu favorito o no.");
                                 }
                             }
                             else
                             {
-                                new Mensaje().show(Alert.AlertType.ERROR , "Faltan datos" , "Error en cantidad");
+                                new Mensaje().show(Alert.AlertType.ERROR , "Faltan datos" , "Debe digitar la cantidad de productos con los que cuenta el restaurante.");
                             }
                         }
                         else
                         {
-                            new Mensaje().show(Alert.AlertType.ERROR , "Faltan datos" , "Error costo");
+                            new Mensaje().show(Alert.AlertType.ERROR , "Faltan datos" , "Debe digitar el precio del producto.");
                         }
                     }
                     else
                     {
-                        new Mensaje().show(Alert.AlertType.ERROR , "Faltan datos" , "Error detalle");
+                        new Mensaje().show(Alert.AlertType.ERROR , "Faltan datos" , "Debe digitar un detalle para el producto.");
                     }
 
                 }
                 else
                 {
-                    new Mensaje().show(Alert.AlertType.ERROR , "Faltan datos" , "Error nombrecorto");
+                    new Mensaje().show(Alert.AlertType.ERROR , "Faltan datos" , "Debe digitar el nombre corto para el producto.");
                 }
             }
             else
             {
-                new Mensaje().show(Alert.AlertType.ERROR , "Faltan datos" , "Error en nombre");
+                new Mensaje().show(Alert.AlertType.ERROR , "Faltan datos" , "Debe digitar un nombre para el producto.");
             }
         }
     }

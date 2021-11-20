@@ -25,6 +25,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.stage.*;
 import javax.imageio.*;
+import org.apache.commons.io.FilenameUtils;
 
 /**
  * FXML Controller class
@@ -145,7 +146,8 @@ public class CrearEmpleadoController extends Controller implements Initializable
                                             BufferedImage bufferimage;
                                             bufferimage = ImageIO.read(x);
                                             ByteArrayOutputStream output = new ByteArrayOutputStream();
-                                            ImageIO.write(bufferimage , "jpg" , output);
+                                            String fe = FilenameUtils.getExtension(x.getAbsolutePath());
+                                            ImageIO.write(bufferimage , fe , output);
                                             byte[] data = output.toByteArray();
                                             empleadoDto.setFoto(data);
                                         }
@@ -158,11 +160,12 @@ public class CrearEmpleadoController extends Controller implements Initializable
                                         Respuesta res = empleadoService.guardarEmpleado(empleadoDto);
                                         if(res.getEstado())
                                         {
-                                            new Mensaje().show(Alert.AlertType.INFORMATION , "Gurdar Empleado" , "Guardado Correctamente");
+                                            new Mensaje().show(Alert.AlertType.INFORMATION , "Guardar Empleado" , "El empleado ha sido guardado correctamente.");
+                                            getStage().close();
                                         }
                                         else
                                         {
-                                            new Mensaje().show(Alert.AlertType.ERROR , "Gurdar Empelado" , "Error al guardar");
+                                            new Mensaje().show(Alert.AlertType.ERROR , "Guardar Empleado" , "Error al guardar el empleado.");
                                         }
 
                                     }
@@ -173,28 +176,28 @@ public class CrearEmpleadoController extends Controller implements Initializable
                                 }
                                 else
                                 {
-                                    new Mensaje().show(Alert.AlertType.ERROR , "Falta de Datos" , "El campo de la contraseña está en blanco");
+                                    new Mensaje().show(Alert.AlertType.ERROR , "Error en algunos datos" , "El campo de la contraseña se encuentra vacío.");
                                 }
                             }
                         }
                         else
                         {
-                            new Mensaje().show(Alert.AlertType.ERROR , "Falta de Datos" , "La imgen está en blanco");
+                            new Mensaje().show(Alert.AlertType.ERROR , "Error en algunos datos" , "Debe ingresar una imagen para poder guardar el empleado.");
                         }
                     }
                     else
                     {
-                        new Mensaje().show(Alert.AlertType.ERROR , "Falta de Datos" , "El campo de roles está en blanco");
+                        new Mensaje().show(Alert.AlertType.ERROR , "Error en algunos datos" , "Debe seleccionar un rol para poder guardar el empleado.");
                     }
                 }
                 else
                 {
-                    new Mensaje().show(Alert.AlertType.ERROR , "Falta de Datos" , "El campo de apellido está en blanco");
+                    new Mensaje().show(Alert.AlertType.ERROR , "Error en algunos datos" , "Debe digitar un apellido para poder guardar el empleado.");
                 }
             }
             else
             {
-                new Mensaje().show(Alert.AlertType.ERROR , "Falta de Datos" , "El campo de nombre está en blanco");
+                new Mensaje().show(Alert.AlertType.ERROR , "Error en algunos datos" , "Debe digitar un nombre para poder guardar el empleado.");
             }
         }
     }

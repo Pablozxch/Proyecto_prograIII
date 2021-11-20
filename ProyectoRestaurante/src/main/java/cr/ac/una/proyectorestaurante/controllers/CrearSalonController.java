@@ -23,6 +23,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.stage.*;
 import javax.imageio.*;
+import org.apache.commons.io.FilenameUtils;
 
 /**
  * FXML Controller class
@@ -141,7 +142,8 @@ public class CrearSalonController extends Controller implements Initializable
                             BufferedImage bufferimage;
                             bufferimage = ImageIO.read(x);
                             ByteArrayOutputStream output = new ByteArrayOutputStream();
-                            ImageIO.write(bufferimage , "jpg" , output);
+                            String fe = FilenameUtils.getExtension(x.getAbsolutePath());
+                            ImageIO.write(bufferimage , fe , output);
                             byte[] data = output.toByteArray();
                             salonDto.setFoto(data);
                         }
@@ -154,11 +156,12 @@ public class CrearSalonController extends Controller implements Initializable
                         Respuesta res = salonService.guardarSalon(salonDto);
                         if(res.getEstado())
                         {
-                            new Mensaje().show(Alert.AlertType.INFORMATION , "Gurdar Salon" , "Guardado Correctamente");
+                            new Mensaje().show(Alert.AlertType.INFORMATION , "Guardar Salon" , "El salon ha sido guardado correctamente.");
+                            getStage().close();
                         }
                         else
                         {
-                            new Mensaje().show(Alert.AlertType.ERROR , "Gurdar Salon" , "Error al guardar");
+                            new Mensaje().show(Alert.AlertType.ERROR , "Guardar Salon" , "Ha ocurrido un error al guardar el salon.");
                         }
 
                     }
@@ -169,12 +172,12 @@ public class CrearSalonController extends Controller implements Initializable
                 }
                 else
                 {
-                    new Mensaje().show(Alert.AlertType.ERROR , "Error en Datos" , "El dato de Barra o Mesa está en blancoF");
+                    new Mensaje().show(Alert.AlertType.ERROR , "Error en algunos datos" , "Debe seleccionar si el salon es un espacio de barra o mesas.");
                 }
             }
             else
             {
-                new Mensaje().show(Alert.AlertType.ERROR , "Error en Datos" , "El nombre está en blanco");
+                new Mensaje().show(Alert.AlertType.ERROR , "Error en algunos datos" , "Debe digitar un nombre para poder guardar el salon.");
             }
         }
 

@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="512.0" prefWidth="855.0" styleClass="fondo" stylesheets="@../styles/StylesCss.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.proyectorestaurante.controllers.CrearRestauranteController">
+<AnchorPane id="AnchorPane" prefHeight="569.0" prefWidth="902.0" styleClass="fondo" stylesheets="@../styles/StylesCss.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.proyectorestaurante.controllers.CrearRestauranteController">
    <children>
       <HBox layoutX="234.0" layoutY="90.0" prefHeight="586.0" prefWidth="883.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -27,8 +27,11 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="243.0" prefWidth="566.0" spacing="30.0">
                      <children>
-                        <ImageView fx:id="imvImagen" fitHeight="193.0" fitWidth="256.0" pickOnBounds="true" preserveRatio="true" />
-                        <JFXButton fx:id="btnCargarImagen" onAction="#click" prefHeight="48.0" prefWidth="190.0" text="%CargarImagen" />
+                        <ImageView fx:id="imvImagen" fitHeight="193.0" fitWidth="256.0" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets top="20.0" />
+                           </HBox.margin></ImageView>
+                        <JFXButton fx:id="btnCargarImagen" onAction="#click" prefHeight="48.0" prefWidth="207.0" text="%CargarImagen" />
                      </children>
                   </HBox>
                   <JFXTextField fx:id="txtCorreo" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefWidth="210.0" promptText="%Correo" />

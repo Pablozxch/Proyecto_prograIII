@@ -309,7 +309,7 @@ public class PrincipalController extends Controller implements Initializable
         }
         if(event.getSource() == btnCerrarSesion)
         {
-            LogInController con = (LogInController) FlowController.getInstance().getController("LoIn");
+            LogInController con = (LogInController) FlowController.getInstance().getController("LogIn");
             FlowController.getInstance().goView("VistaGeneral");
             AppContext.getInstance().delete("EmpleadoActual");//este usuario es el encargado de ingresar a todo lo que el pueda
             FlowController.getInstance().goViewInWindowModal("LogIn" , (Stage) btnCerrarSesion.getScene().getWindow() , Boolean.FALSE);//ver que se hace con esto

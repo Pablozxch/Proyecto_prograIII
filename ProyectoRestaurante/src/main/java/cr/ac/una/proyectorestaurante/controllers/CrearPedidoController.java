@@ -276,7 +276,7 @@ public class CrearPedidoController extends Controller implements Initializable
             }
             else
             {
-                new Mensaje().show(Alert.AlertType.ERROR , "Permisos" , "Permisos innecesarios para acceder a este apartado");
+                new Mensaje().show(Alert.AlertType.ERROR , "Permisos" , "Usted no tiene los permisos necesarios para acceder a este apartado.");
             }
         }
 

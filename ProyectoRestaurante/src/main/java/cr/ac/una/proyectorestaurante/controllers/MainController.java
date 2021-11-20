@@ -121,7 +121,7 @@ public class MainController extends Controller implements Initializable {
 
                     ItemController itemrest = fxmlLoader.getController();
                     itemrest.setData(restaurantes.get(i), myListenerRess);
-                    if (column == 6) {
+                    if (column == 5) {
                         column = 0;
                         row++;
                     }

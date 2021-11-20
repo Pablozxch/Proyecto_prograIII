@@ -10,8 +10,6 @@ import cr.ac.una.proyectorestaurante.models.*;
 import cr.ac.una.proyectorestaurante.services.*;
 import cr.ac.una.proyectorestaurante.utils.*;
 import java.io.*;
-import java.net.URL;
-import java.util.ResourceBundle;
 import java.util.logging.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,20 +17,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.stage.*;
-import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.*;
-import javafx.fxml.*;
-import javafx.scene.control.*;
-import javafx.scene.image.*;
-import javafx.stage.*;
 import java.awt.image.*;
-import java.time.*;
-import java.util.*;
-import java.util.logging.*;
-import javafx.geometry.*;
 import javax.imageio.*;
+import org.apache.commons.io.FilenameUtils;
 
 /**
  * FXML Controller class
@@ -205,7 +194,8 @@ public class CrearRestauranteController extends Controller implements Initializa
                                                         BufferedImage bufferimage;
                                                         bufferimage = ImageIO.read(x);
                                                         ByteArrayOutputStream output = new ByteArrayOutputStream();
-                                                        ImageIO.write(bufferimage , "jpg" , output);
+                                                        String fe = FilenameUtils.getExtension(x.getAbsolutePath());
+                                                        ImageIO.write(bufferimage , fe , output);
                                                         byte[] data = output.toByteArray();
                                                         restauranteDto.setFoto(data);
                                                     }
@@ -214,13 +204,16 @@ public class CrearRestauranteController extends Controller implements Initializa
                                                         restauranteDto.setFoto(restauranteDto.getFoto());
                                                     }
                                                     Respuesta res = restauranteService.guardarRestaurante(restauranteDto);
+                                                    
+                                                    
                                                     if(res.getEstado())
                                                     {
-                                                        new Mensaje().show(Alert.AlertType.INFORMATION , "Gurdar Restaurante" , "Guardado Correctamente");
+                                                        new Mensaje().show(Alert.AlertType.INFORMATION , "Guardar Restaurante" , "El restaurante se ha guardado correctamente.");
+                                                        //getStage().close();
                                                     }
                                                     else
                                                     {
-                                                        new Mensaje().show(Alert.AlertType.ERROR , "Gurdar Restaurante" , "Error al guardar");
+                                                        new Mensaje().show(Alert.AlertType.ERROR , "Guardar Restaurante" , "Error al guardar el restaurante.");
                                                     }
 
                                                 }
@@ -231,49 +224,49 @@ public class CrearRestauranteController extends Controller implements Initializa
                                             }
                                             else
                                             {
-                                                new Mensaje().show(Alert.AlertType.WARNING , "Error en los Datos ingresador" , "Problemas con los impuestos");
+                                                new Mensaje().show(Alert.AlertType.WARNING , "Error en los datos ingresados" , "Debe seleccionar los tipos de impuestos.");
                                             }
                                         }
                                         else
                                         {
-                                            new Mensaje().show(Alert.AlertType.WARNING , "Error en los Datos ingresador" , "Problemas con la imagen");
+                                            new Mensaje().show(Alert.AlertType.WARNING , "Error en los datos ingresados" , "Debe digitar una imagen para el restaurante.");
                                         }
                                     }
                                     else
                                     {
-                                        new Mensaje().show(Alert.AlertType.WARNING , "Error en los Datos ingresador" , "Correo No Valido");
+                                        new Mensaje().show(Alert.AlertType.WARNING , "Error en los datos ingresados" , "Debe digitar un correo electronico para el restaurante.");
                                     }
 
                                 }
                                 else
                                 {
-                                    new Mensaje().show(Alert.AlertType.WARNING , "Error en los Datos ingresador" , "Correo No Digitado");
+                                    new Mensaje().show(Alert.AlertType.WARNING , "Error en los datos ingresados" ,"El formato del correo electronico es incorrecto.");
                                 }
                             }
                             else
                             {
-                                new Mensaje().show(Alert.AlertType.WARNING , "Error en los Datos ingresador" , "Direccion No Valido, excede caracteres");
+                                new Mensaje().show(Alert.AlertType.WARNING , "Error en los datos ingresados" , "La direccion del restaurante excede la cantidad maxima de caracteres.");
                             }
                         }
                         else
                         {
-                            new Mensaje().show(Alert.AlertType.WARNING , "Error en los Datos ingresador" , "Direccion No Ingresdo");
+                            new Mensaje().show(Alert.AlertType.WARNING , "Error en los datos ingresados" , "Debe digitar la direccion del restaurante.");
                         }
                     }
                     else
                     {
-                        new Mensaje().show(Alert.AlertType.WARNING , "Error en los Datos ingresador" , "Detalle No Valido, excede caracteres");
+                        new Mensaje().show(Alert.AlertType.WARNING , "Error en los datos ingresados" , "Debe digitar un detalle para el restaurante.");
                     }
                 }
                 else
                 {
-                    new Mensaje().show(Alert.AlertType.WARNING , "Error en los Datos ingresador" , "Detalle No Ingresdo");
+                    new Mensaje().show(Alert.AlertType.WARNING , "Error en los datos ingresados" , "Debe digitar un detalle para el restaurante.");
                 }
 
             }
             else
             {
-                new Mensaje().show(Alert.AlertType.WARNING , "Error en los Datos ingresador" , "Nombre No Nigitado");
+                new Mensaje().show(Alert.AlertType.WARNING , "Error en los datos ingresados" , "Debe digitar un nombre para el restaurante.");
             }
         }
     }

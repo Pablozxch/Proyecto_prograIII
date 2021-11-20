@@ -47,7 +47,7 @@ public class CrearCodigosDescuentosController extends Controller implements Init
     {
         // TODO
         txtCantidad.setTextFormatter(Formato.getInstance().integerFormat());
-        txtNombre.setTextFormatter(Formato.getInstance().letrasFormat(20));
+        txtNombre.setTextFormatter(Formato.getInstance().letrasFormat(30));
     }
 
     void clear()
@@ -69,11 +69,11 @@ public class CrearCodigosDescuentosController extends Controller implements Init
             }
             else if(txtCantidad.getText().isEmpty() || txtCantidad.getText().isBlank())
             {
-                new Mensaje().show(Alert.AlertType.ERROR , "Incompleto" , "Se debe ingresar una cantidad de veces a usar del codigo de descuento.");
+                new Mensaje().show(Alert.AlertType.ERROR , "Incompleto" , "Se debe ingresar el monto de descuento del codigo.");
             }
             else if(txtUrl.getText().isEmpty() || txtUrl.getText().isBlank())
             {
-                new Mensaje().show(Alert.AlertType.ERROR , "Incompleto" , "Se debe ingresar el porcentaje del codigo de descuento.");
+                new Mensaje().show(Alert.AlertType.ERROR , "Incompleto" , "Se debe ingresar el codigo del descuento.");
             }
             else
             {
@@ -86,7 +86,8 @@ public class CrearCodigosDescuentosController extends Controller implements Init
                 Respuesta res = service.guardarCodigo(dd);
                 if(res.getEstado())
                 {
-                    new Mensaje().show(Alert.AlertType.INFORMATION , "Guardado" , "Se guardo con exito");
+                    new Mensaje().show(Alert.AlertType.INFORMATION , "Guardado" , "Se guardo el codigo satisfactoriamente.");
+                    getStage().close();
                 }
             }
         }
