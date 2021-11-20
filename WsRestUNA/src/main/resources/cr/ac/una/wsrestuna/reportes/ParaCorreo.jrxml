@@ -136,12 +136,12 @@ WHERE
 	<title>
 		<band height="160" splitType="Stretch">
 			<rectangle>
-				<reportElement x="0" y="0" width="550" height="160" backcolor="#E3E07F" uuid="be00e623-c5c1-4b7e-af7d-ffd2627e6801"/>
+				<reportElement x="0" y="0" width="550" height="160" backcolor="#FCFCB8" uuid="be00e623-c5c1-4b7e-af7d-ffd2627e6801"/>
 			</rectangle>
 			<textField evaluationTime="Group" evaluationGroup="DXO_CANTIDAD">
 				<reportElement x="10" y="10" width="230" height="60" uuid="52e1a7af-619f-4864-9f17-c1cacb2bcacd"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font size="12"/>
+					<font size="16"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{RES_NOMBRE}]]></textFieldExpression>
 			</textField>
@@ -305,7 +305,7 @@ WHERE
 	<pageFooter>
 		<band height="120" splitType="Stretch">
 			<rectangle>
-				<reportElement x="350" y="0" width="200" height="120" backcolor="#91CF96" uuid="7b09814a-3478-41f6-81ad-060a474c7b2e"/>
+				<reportElement x="350" y="0" width="200" height="120" backcolor="#B2F7B9" uuid="7b09814a-3478-41f6-81ad-060a474c7b2e"/>
 			</rectangle>
 			<textField>
 				<reportElement x="450" y="0" width="100" height="30" uuid="d57b10c0-39cf-4f25-8a8f-d11ea4b95d92"/>

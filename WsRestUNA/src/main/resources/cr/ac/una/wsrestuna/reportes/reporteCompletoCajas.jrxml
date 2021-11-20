@@ -5,91 +5,117 @@
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="OJDBC 7"/>
 	<parameter name="ID" class="java.lang.Long"/>
 	<parameter name="FECHA" class="java.lang.String"/>
-	<parameter name="IDrestaurante" class="java.lang.Long"/>
 	<queryString language="SQL">
-		<![CDATA[SELECT "TBL_EMPLEADO"."EMP_NOMBRE",
-	"TBL_RESTAURANTE"."RES_NOMBRE",
-	"TBL_RESTAURANTE"."RES_CORREO",
-	"TBL_CIERRECAJAS"."CCAJ_MONTOINICIAL",
-	"TBL_CIERRECAJAS"."CCJA_MONTOFINAL",
-	"TBL_CIERRECAJAS"."CCAJ_MONTOTARJETA",
-	"TBL_CIERRECAJAS"."CCJA_ESTADO",
-	"TBL_CIERRECAJAS"."CCAJ_MONTOEFECTIVO",
-	"TBL_FACTURA"."FAC_DESC",
-	"TBL_FACTURA"."FAC_EFECTIVOTARJETA",
-	"TBL_FACTURA"."FAC_SUBTOTAL",
-	"TBL_FACTURA"."FAC_TOTAL",
-	"TBL_FACTURA"."FAC_MONTOCDESC",
-	"TBL_FACTURA"."FAC_ID"
-FROM "TBL_FACTURA"
-	INNER JOIN "TBL_CIERRECAJAS" ON 
-	 "TBL_FACTURA"."CCAJ_ID" = "TBL_CIERRECAJAS"."CCAJ_ID" 
-	INNER JOIN "TBL_EMPLEADO" ON 
-	 "TBL_CIERRECAJAS"."EMP_ID" = "TBL_EMPLEADO"."EMP_ID" 
-	INNER JOIN "TBL_RESTAURANTE" ON 
-	 "TBL_EMPLEADO"."RES_ID" = "TBL_RESTAURANTE"."RES_ID" 
-	INNER JOIN "TBL_ORDEN" ON 
-	 "TBL_FACTURA"."ORD_ID" = "TBL_ORDEN"."ORD_ID" 
+		<![CDATA[   SELECT "TBL_CIERRECAJAS"."CCAJ_MONTOEFECTIVO",
+  "TBL_CIERRECAJAS"."CCAJ_MONTOTARJETA",
+  "TBL_CIERRECAJAS"."CCJA_MONTOFINAL",
+  "TBL_CIERRECAJAS"."CCAJ_MONTOINICIAL",
+  "TBL_EMPLEADO"."EMP_NOMBRE",
+  "TBL_CIERRECAJAS"."CCAJ_ID",
+  "TBL_CIERRECAJAS"."CCJA_ESTADO",
+  "TBL_ORDEN"."ORD_FECHA",
+   "TBL_RESTAURANTE"."RES_ID",
+   "TBL_RESTAURANTE"."RES_NOMBRE",
+   "TBL_RESTAURANTE"."RES_DETALLE",
+   "TBL_RESTAURANTE"."RES_DIRECCION",
+   "TBL_RESTAURANTE"."RES_CORREO",
+   "TBL_FACTURA"."FAC_ID",
+   "TBL_FACTURA"."FAC_EFECTIVOTARJETA",
+   "TBL_FACTURA"."FAC_DESC",
+   "TBL_FACTURA"."FAC_SUBTOTAL",
+   "TBL_FACTURA"."FAC_MONTOCDESC",
+   "TBL_FACTURA"."FAC_TOTAL"
+FROM "TBL_CIERRECAJAS"
+  Left JOIN "TBL_FACTURA" ON 
+   "TBL_CIERRECAJAS"."CCAJ_ID"  = "TBL_FACTURA"."CCAJ_ID"
+  Left JOIN "TBL_ORDEN" ON 
+   "TBL_FACTURA"."ORD_ID" = "TBL_ORDEN"."ORD_ID" 
+  Left JOIN "TBL_EMPLEADO" ON 
+   "TBL_CIERRECAJAS"."EMP_ID" = "TBL_EMPLEADO"."EMP_ID" 
+   Left join "TBL_RESTAURANTE" ON
+   "TBL_EMPLEADO"."RES_ID" ="TBL_EMPLEADO"."RES_ID" 
 WHERE 
-	 "TBL_CIERRECAJAS"."CCAJ_ID" = $P{ID} 
-	 AND "TBL_ORDEN"."ORD_FECHA" = $P{FECHA}
-	 AND "TBL_RESTAURANTE"."RES_ID" = $P{IDrestaurante}]]>
+   "TBL_EMPLEADO"."EMP_ID" = $P{ID}
+and "TBL_ORDEN"."ORD_FECHA" =$P{FECHA}
+
+
+]]>
 	</queryString>
-	<field name="EMP_NOMBRE" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="EMP_NOMBRE"/>
-		<property name="com.jaspersoft.studio.field.label" value="EMP_NOMBRE"/>
-	</field>
-	<field name="RES_NOMBRE" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="RES_NOMBRE"/>
-		<property name="com.jaspersoft.studio.field.label" value="RES_NOMBRE"/>
-	</field>
-	<field name="RES_CORREO" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="RES_CORREO"/>
-		<property name="com.jaspersoft.studio.field.label" value="RES_CORREO"/>
-	</field>
-	<field name="CCAJ_MONTOINICIAL" class="java.math.BigDecimal">
-		<property name="com.jaspersoft.studio.field.name" value="CCAJ_MONTOINICIAL"/>
-		<property name="com.jaspersoft.studio.field.label" value="CCAJ_MONTOINICIAL"/>
-	</field>
-	<field name="CCJA_MONTOFINAL" class="java.math.BigDecimal">
-		<property name="com.jaspersoft.studio.field.name" value="CCJA_MONTOFINAL"/>
-		<property name="com.jaspersoft.studio.field.label" value="CCJA_MONTOFINAL"/>
+	<field name="CCAJ_MONTOEFECTIVO" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="CCAJ_MONTOEFECTIVO"/>
+		<property name="com.jaspersoft.studio.field.label" value="CCAJ_MONTOEFECTIVO"/>
 	</field>
 	<field name="CCAJ_MONTOTARJETA" class="java.math.BigDecimal">
 		<property name="com.jaspersoft.studio.field.name" value="CCAJ_MONTOTARJETA"/>
 		<property name="com.jaspersoft.studio.field.label" value="CCAJ_MONTOTARJETA"/>
 	</field>
+	<field name="CCJA_MONTOFINAL" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="CCJA_MONTOFINAL"/>
+		<property name="com.jaspersoft.studio.field.label" value="CCJA_MONTOFINAL"/>
+	</field>
+	<field name="CCAJ_MONTOINICIAL" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="CCAJ_MONTOINICIAL"/>
+		<property name="com.jaspersoft.studio.field.label" value="CCAJ_MONTOINICIAL"/>
+	</field>
+	<field name="EMP_NOMBRE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="EMP_NOMBRE"/>
+		<property name="com.jaspersoft.studio.field.label" value="EMP_NOMBRE"/>
+	</field>
+	<field name="CCAJ_ID" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="CCAJ_ID"/>
+		<property name="com.jaspersoft.studio.field.label" value="CCAJ_ID"/>
+	</field>
 	<field name="CCJA_ESTADO" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="CCJA_ESTADO"/>
 		<property name="com.jaspersoft.studio.field.label" value="CCJA_ESTADO"/>
 	</field>
-	<field name="CCAJ_MONTOEFECTIVO" class="java.math.BigDecimal">
-		<property name="com.jaspersoft.studio.field.name" value="CCAJ_MONTOEFECTIVO"/>
-		<property name="com.jaspersoft.studio.field.label" value="CCAJ_MONTOEFECTIVO"/>
+	<field name="ORD_FECHA" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="ORD_FECHA"/>
+		<property name="com.jaspersoft.studio.field.label" value="ORD_FECHA"/>
 	</field>
-	<field name="FAC_DESC" class="java.math.BigDecimal">
-		<property name="com.jaspersoft.studio.field.name" value="FAC_DESC"/>
-		<property name="com.jaspersoft.studio.field.label" value="FAC_DESC"/>
+	<field name="RES_ID" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="RES_ID"/>
+		<property name="com.jaspersoft.studio.field.label" value="RES_ID"/>
+	</field>
+	<field name="RES_NOMBRE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="RES_NOMBRE"/>
+		<property name="com.jaspersoft.studio.field.label" value="RES_NOMBRE"/>
+	</field>
+	<field name="RES_DETALLE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="RES_DETALLE"/>
+		<property name="com.jaspersoft.studio.field.label" value="RES_DETALLE"/>
+	</field>
+	<field name="RES_DIRECCION" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="RES_DIRECCION"/>
+		<property name="com.jaspersoft.studio.field.label" value="RES_DIRECCION"/>
+	</field>
+	<field name="RES_CORREO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="RES_CORREO"/>
+		<property name="com.jaspersoft.studio.field.label" value="RES_CORREO"/>
+	</field>
+	<field name="FAC_ID" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="FAC_ID"/>
+		<property name="com.jaspersoft.studio.field.label" value="FAC_ID"/>
 	</field>
 	<field name="FAC_EFECTIVOTARJETA" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="FAC_EFECTIVOTARJETA"/>
 		<property name="com.jaspersoft.studio.field.label" value="FAC_EFECTIVOTARJETA"/>
 	</field>
+	<field name="FAC_DESC" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="FAC_DESC"/>
+		<property name="com.jaspersoft.studio.field.label" value="FAC_DESC"/>
+	</field>
 	<field name="FAC_SUBTOTAL" class="java.math.BigDecimal">
 		<property name="com.jaspersoft.studio.field.name" value="FAC_SUBTOTAL"/>
 		<property name="com.jaspersoft.studio.field.label" value="FAC_SUBTOTAL"/>
-	</field>
-	<field name="FAC_TOTAL" class="java.math.BigDecimal">
-		<property name="com.jaspersoft.studio.field.name" value="FAC_TOTAL"/>
-		<property name="com.jaspersoft.studio.field.label" value="FAC_TOTAL"/>
 	</field>
 	<field name="FAC_MONTOCDESC" class="java.math.BigDecimal">
 		<property name="com.jaspersoft.studio.field.name" value="FAC_MONTOCDESC"/>
 		<property name="com.jaspersoft.studio.field.label" value="FAC_MONTOCDESC"/>
 	</field>
-	<field name="FAC_ID" class="java.math.BigDecimal">
-		<property name="com.jaspersoft.studio.field.name" value="FAC_ID"/>
-		<property name="com.jaspersoft.studio.field.label" value="FAC_ID"/>
+	<field name="FAC_TOTAL" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="FAC_TOTAL"/>
+		<property name="com.jaspersoft.studio.field.label" value="FAC_TOTAL"/>
 	</field>
 	<group name="CCAJ_MONTOEFECTIVO">
 		<groupExpression><![CDATA[$F{CCAJ_MONTOEFECTIVO}]]></groupExpression>
@@ -107,40 +133,51 @@ WHERE
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="56">
+		<band height="86">
 			<rectangle>
-				<reportElement mode="Opaque" x="0" y="0" width="550" height="56" backcolor="#E89492" uuid="5c649db6-1bad-4919-a8a6-84da87758092"/>
+				<reportElement mode="Opaque" x="0" y="0" width="550" height="85" backcolor="#E89492" uuid="5c649db6-1bad-4919-a8a6-84da87758092"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="170" y="32" width="230" height="24" uuid="6a2c777e-072c-4158-b703-fbdbe5caa924"/>
+				<reportElement x="160" y="60" width="230" height="24" uuid="6a2c777e-072c-4158-b703-fbdbe5caa924"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Reporte completo del cierre de caja]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="140" y="0" width="130" height="30" uuid="5796f7a8-439a-4de0-86d0-79bcb6c9edf6"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement x="120" y="30" width="150" height="30" uuid="5796f7a8-439a-4de0-86d0-79bcb6c9edf6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{RES_NOMBRE}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="380" y="0" width="170" height="30" uuid="8451a981-dc96-44d4-96c9-df7e66a69f81"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement x="380" y="30" width="170" height="30" uuid="8451a981-dc96-44d4-96c9-df7e66a69f81"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{RES_CORREO}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="270" y="0" width="110" height="30" uuid="fda8fc40-e903-4377-9a46-a57f4fb82d1c"/>
+				<reportElement x="270" y="30" width="110" height="30" uuid="fda8fc40-e903-4377-9a46-a57f4fb82d1c"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Correo del restaurante]]></text>
+				<text><![CDATA[Correo:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="0" width="140" height="30" uuid="4a9f9683-3ed9-4c5b-acef-3b57a3f63f2e"/>
+				<reportElement x="0" y="30" width="120" height="30" uuid="4a9f9683-3ed9-4c5b-acef-3b57a3f63f2e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Nombre del restaurante]]></text>
+				<text><![CDATA[Nombre:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="43" y="0" width="460" height="30" uuid="ed54e966-565c-4893-8907-9ef2108d3910"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Listado de facturas que se pagaron durante el día.]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -265,7 +302,7 @@ WHERE
 				<textFieldExpression><![CDATA[$F{CCAJ_MONTOTARJETA}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Opaque" x="380" y="10" width="100" height="30" backcolor="#CFFCF8" uuid="42a91544-0c7d-4944-ac43-dbf7a93a5150">
+				<reportElement mode="Opaque" x="380" y="10" width="110" height="30" backcolor="#CFFCF8" uuid="42a91544-0c7d-4944-ac43-dbf7a93a5150">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d0d35d14-4437-4c36-b1c0-d0392b199358"/>
 				</reportElement>
 				<box>
@@ -277,10 +314,10 @@ WHERE
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="12" isBold="false"/>
 				</textElement>
-				<text><![CDATA[Monto final]]></text>
+				<text><![CDATA[Monto recibido por el cajero]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="380" y="40" width="100" height="30" uuid="98801df5-b24b-44a6-b1cc-f7b8b98fd497">
+				<reportElement x="380" y="40" width="110" height="30" uuid="98801df5-b24b-44a6-b1cc-f7b8b98fd497">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d0d35d14-4437-4c36-b1c0-d0392b199358"/>
 				</reportElement>
 				<box>
@@ -295,7 +332,7 @@ WHERE
 				<textFieldExpression><![CDATA[$F{CCJA_MONTOFINAL}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Opaque" x="480" y="10" width="70" height="30" backcolor="#CFFCF8" uuid="2ecb5446-904c-4db0-963e-b06cffe78036">
+				<reportElement mode="Opaque" x="490" y="10" width="60" height="30" backcolor="#CFFCF8" uuid="2ecb5446-904c-4db0-963e-b06cffe78036">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="338cd3ec-6fbd-4829-bdc6-ada365f59dd7"/>
 				</reportElement>
 				<box>
@@ -310,7 +347,7 @@ WHERE
 				<text><![CDATA[Estado ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="480" y="40" width="70" height="30" uuid="e76d457d-86d4-4dbc-bfd9-6df450d54922">
+				<reportElement x="490" y="40" width="60" height="30" uuid="e76d457d-86d4-4dbc-bfd9-6df450d54922">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="338cd3ec-6fbd-4829-bdc6-ada365f59dd7"/>
 				</reportElement>
 				<box>
@@ -473,19 +510,6 @@ WHERE
 				<textFieldExpression><![CDATA[$F{FAC_SUBTOTAL}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="450" y="0" width="100" height="30" uuid="c9ac716b-264b-4afd-a177-9607de1b5a0e">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4e978ce3-7820-411d-8cce-5041c9772de9"/>
-				</reportElement>
-				<box>
-					<topPen lineWidth="1.0" lineStyle="Solid"/>
-					<leftPen lineWidth="1.0" lineStyle="Solid"/>
-					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
-					<rightPen lineWidth="1.0" lineStyle="Solid"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{FAC_MONTOCDESC}]]></textFieldExpression>
-			</textField>
-			<textField>
 				<reportElement x="357" y="0" width="93" height="30" uuid="2ab54793-2ea1-45c0-af94-d05d2e3f3932">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0fa7bb90-365d-40db-95ec-8809e7346459"/>
 				</reportElement>
@@ -497,6 +521,19 @@ WHERE
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{FAC_TOTAL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="0" width="100" height="30" uuid="c9ac716b-264b-4afd-a177-9607de1b5a0e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4e978ce3-7820-411d-8cce-5041c9772de9"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{FAC_MONTOCDESC}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
