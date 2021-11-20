@@ -103,7 +103,7 @@ WHERE
 				<textFieldExpression><![CDATA[$F{RES_CORREO}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="179" y="-1" width="440" height="29" uuid="4216292a-86c4-405d-b864-4e5621e2d3fb"/>
+				<reportElement x="179" y="0" width="440" height="29" uuid="4216292a-86c4-405d-b864-4e5621e2d3fb"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="14" isBold="true"/>
 				</textElement>
@@ -215,12 +215,6 @@ WHERE
 				</textElement>
 				<text><![CDATA[Estado del cierre de caja]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="589" y="0" width="100" height="30" uuid="4f6402bc-e752-409e-9064-aaa25b0e5aca">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="62b934f2-81cc-46dd-84d6-43a1d6eede1e"/>
-				</reportElement>
-				<text><![CDATA[CCJA_MONTOFINAL]]></text>
-			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -270,7 +264,7 @@ WHERE
 				</reportElement>
 				<box>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
-					<leftPen lineWidth="2.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
 					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
@@ -304,6 +298,10 @@ WHERE
 				<reportElement x="570" y="0" width="110" height="30" uuid="eb151967-e3d1-4fe4-80b3-1b3e87c5ccd4">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="62b934f2-81cc-46dd-84d6-43a1d6eede1e"/>
 				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial"/>
 				</textElement>

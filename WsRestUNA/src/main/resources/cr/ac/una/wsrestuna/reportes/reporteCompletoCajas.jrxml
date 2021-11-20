@@ -6,7 +6,7 @@
 	<parameter name="ID" class="java.lang.Long"/>
 	<parameter name="FECHA" class="java.lang.String"/>
 	<queryString language="SQL">
-		<![CDATA[   SELECT "TBL_CIERRECAJAS"."CCAJ_MONTOEFECTIVO",
+		<![CDATA[SELECT "TBL_CIERRECAJAS"."CCAJ_MONTOEFECTIVO",
   "TBL_CIERRECAJAS"."CCAJ_MONTOTARJETA",
   "TBL_CIERRECAJAS"."CCJA_MONTOFINAL",
   "TBL_CIERRECAJAS"."CCAJ_MONTOINICIAL",
@@ -36,10 +36,7 @@ FROM "TBL_CIERRECAJAS"
    "TBL_EMPLEADO"."RES_ID" ="TBL_EMPLEADO"."RES_ID" 
 WHERE 
    "TBL_EMPLEADO"."EMP_ID" = $P{ID}
-and "TBL_ORDEN"."ORD_FECHA" =$P{FECHA}
-
-
-]]>
+and "TBL_ORDEN"."ORD_FECHA" =$P{FECHA}]]>
 	</queryString>
 	<field name="CCAJ_MONTOEFECTIVO" class="java.math.BigDecimal">
 		<property name="com.jaspersoft.studio.field.name" value="CCAJ_MONTOEFECTIVO"/>

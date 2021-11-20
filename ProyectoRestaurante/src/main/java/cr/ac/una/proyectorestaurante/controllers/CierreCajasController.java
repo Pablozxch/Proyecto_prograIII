@@ -102,7 +102,7 @@ public class CierreCajasController extends Controller implements Initializable
             {
                 cierre.setEstado("C");
             }
-            cierre.setMontoFinal(cierre.getMontoInicial() + montoEfectivo + montoTarjeta);
+            //cierre.setMontoFinal(cierre.getMontoInicial() + montoEfectivo + montoTarjeta);
             cajaService.guardarCierrecajas(cierre);
 
             /*
@@ -123,6 +123,7 @@ public class CierreCajasController extends Controller implements Initializable
             AppContext.getInstance().delete("CierreCajasActual");
             AppContext.getInstance().delete("EmpleadoActual");
             AppContext.getInstance().delete("RolActual");
+            FlowController.getInstance().goView("VistaGeneral");
         }
     }
 
