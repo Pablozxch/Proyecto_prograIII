@@ -29,7 +29,8 @@ import javafx.stage.*;
  *
  * @author Christopher
  */
-public class MainController extends Controller implements Initializable {
+public class MainController extends Controller implements Initializable
+{
 
     @FXML
     private AnchorPane root;
@@ -73,29 +74,38 @@ public class MainController extends Controller implements Initializable {
     ResourceBundle bundleG;
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url , ResourceBundle rb)
+    {
         loadItems("aux");
         bundleG = (ResourceBundle) AppContext.getInstance().get("idioma");
-       
+
     }
 
-    public void loadItems(String name) {
-        if (!"aux".equals(name)) {
+    public void loadItems(String name)
+    {
+        if(!"aux".equals(name))
+        {
             restaurantes.clear();
             Respuesta respuesta = restauranteService.getRestaurantes();
             List<RestauranteDto> aux = (List<RestauranteDto>) respuesta.getResultado("Restaurantes");
             restaurantes = aux.stream().filter(t -> t.getNombre().toUpperCase().contains(name.toUpperCase())).collect(Collectors.toList());
-        } else {
+        }
+        else
+        {
             restaurantes.clear();
             Respuesta respuesta = restauranteService.getRestaurantes();
             restaurantes = (List<RestauranteDto>) respuesta.getResultado("Restaurantes");
         }
-        if (restaurantes != null) {
-            if (restaurantes.size() > 0) {
+        if(restaurantes != null)
+        {
+            if(restaurantes.size() > 0)
+            {
                 setResSelect(restaurantes.get(0));
-                myListenerRess = new MyListenerItem() {
+                myListenerRess = new MyListenerItem()
+                {
                     @Override
-                    public void onClickListener(Object item) {
+                    public void onClickListener(Object item)
+                    {
                         setResSelect((RestauranteDto) item);
                         // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                     }
@@ -106,26 +116,31 @@ public class MainController extends Controller implements Initializable {
             int row = 1;
             String name1;
             String name2;
-            try {
-                for (int i = 0; i < restaurantes.size(); i++) {
+            try
+            {
+                for(int i = 0; i < restaurantes.size(); i++)
+                {
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     fxmlLoader.setLocation(getClass().getResource("/cr/ac/una/proyectorestaurante/views/Item.fxml"));
                     AnchorPane anchorPane = fxmlLoader.load();
                     name1 = restaurantes.get(i).getNombre();
-                    if (i + 1 < restaurantes.size()) {
+                    if(i + 1 < restaurantes.size())
+                    {
                         name2 = restaurantes.get(i + 1).getNombre();
-                        if (name1 == null ? name2 == null : name1.equals(name2)) {
+                        if(name1 == null ? name2 == null : name1.equals(name2))
+                        {
                             break;
                         }
                     }
 
                     ItemController itemrest = fxmlLoader.getController();
-                    itemrest.setData(restaurantes.get(i), myListenerRess);
-                    if (column == 5) {
+                    itemrest.setData(restaurantes.get(i) , myListenerRess);
+                    if(column == 5)
+                    {
                         column = 0;
                         row++;
                     }
-                    grid.add(anchorPane, column++, row); //(child,column,row)
+                    grid.add(anchorPane , column++ , row); //(child,column,row)
                     //set grid width
                     grid.setMinWidth(Region.USE_COMPUTED_SIZE);
                     grid.setPrefWidth(Region.USE_COMPUTED_SIZE);
@@ -136,64 +151,70 @@ public class MainController extends Controller implements Initializable {
                     grid.setPrefHeight(Region.USE_COMPUTED_SIZE);
                     grid.setMaxHeight(Region.USE_PREF_SIZE);
 
-                    GridPane.setMargin(anchorPane, new Insets(10));
+                    GridPane.setMargin(anchorPane , new Insets(10));
                 }
-            } catch (IOException e) {
+            }
+            catch(IOException e)
+            {
                 e.printStackTrace();
             }
         }
     }
 
-    public void setResSelect(RestauranteDto res) {
+    public void setResSelect(RestauranteDto res)
+    {
         lblNombreRes.setText(res.getNombre());
         Image img2 = new Image(new ByteArrayInputStream(res.getFoto()));//crea un objeto imagen, transforma el byte[] a un buffered imagen
         imgRes.setImage(img2);
-        AppContext.getInstance().set("Restaurante", res);
+        AppContext.getInstance().set("Restaurante" , res);
     }
 
     @FXML
-    private void click(ActionEvent event) {
-        if (event.getSource() == btnAgregarRestaurante) {
+    private void click(ActionEvent event)
+    {
+        if(event.getSource() == btnAgregarRestaurante)
+        {
             CrearRestauranteController registroRestauranteController = (CrearRestauranteController) FlowController.getInstance().getController("CrearRestaurante");
             registroRestauranteController.loadIdioma(bundleG);
-            FlowController.getInstance().goViewInWindowModal("CrearRestaurante", (Stage) btnAgregarRestaurante.getScene().getWindow(), false);
+            FlowController.getInstance().goViewInWindowModal("CrearRestaurante" , (Stage) btnAgregarRestaurante.getScene().getWindow() , false);
             registroRestauranteController.unbinRestaurante();
             update();
         }
-        if (event.getSource() == btnBuscar) {
+        if(event.getSource() == btnBuscar)
+        {
             update();
         }
-        if (event.getSource() == btnContinuar) {
-            RestauranteDto resta = (RestauranteDto) AppContext.getInstance().get("Restaurante");
-            FlowController.getInstance().goViewInStage("Principal", (Stage) btnContinuar.getScene().getWindow());
+        if(event.getSource() == btnContinuar)
+        {
+            FlowController.getInstance().goViewInStage("Principal" , (Stage) btnContinuar.getScene().getWindow());
         }
-        if (event.getSource() == btnEditar) {
+        if(event.getSource() == btnEditar)
+        {
             CrearRestauranteController registroRestauranteController = (CrearRestauranteController) FlowController.getInstance().getController("CrearRestaurante");
             registroRestauranteController.load();
-            FlowController.getInstance().goViewInWindowModal("CrearRestaurante", (Stage) btnContinuar.getScene().getWindow(), false);
+            FlowController.getInstance().goViewInWindowModal("CrearRestaurante" , (Stage) btnContinuar.getScene().getWindow() , false);
             registroRestauranteController.unbinRestaurante();
             update();
-
         }
-        if (event.getSource() == btnEliminar) {
-            if (new Mensaje().showConfirmation("Eliminar el restaurante", getStage(), "¿Esta seguro que desea eliminar el restaurante?")) {
+        if(event.getSource() == btnEliminar)
+        {
+            if(new Mensaje().showConfirmation("Eliminar el restaurante" , getStage() , "¿Esta seguro que desea eliminar el restaurante?"))
+            {
                 RestauranteDto res = (RestauranteDto) AppContext.getInstance().get("Restaurante");
                 Respuesta respuesta = restauranteService.eliminarRestaurante(res.getId());
-                if (respuesta.getEstado()) {
-                    new Mensaje().show(Alert.AlertType.INFORMATION, "Eliminar el restaurante", "Eliminado Correctamente");
+                if(respuesta.getEstado())
+                {
+                    new Mensaje().show(Alert.AlertType.INFORMATION , "Eliminar el restaurante" , "Eliminado Correctamente");
                     update();
                 }
             }
-
         }
-        if (event.getSource() == btnSpanish) {
-
+        if(event.getSource() == btnSpanish)
+        {
             Locale locale = new Locale("es_MX");
-            ResourceBundle bundle = ResourceBundle.getBundle("/cr/ac/una/proyectorestaurante/resources/Idioma", locale);
+            ResourceBundle bundle = ResourceBundle.getBundle("/cr/ac/una/proyectorestaurante/resources/Idioma" , locale);
             FlowController.setIdioma(bundle);
-
             bundleG = bundle;
-
             btnAgregarRestaurante.setText(bundle.getString("AgregarRestaurante"));
             btnBuscar.setText(bundle.getString("buscar"));
             btnContinuar.setText(bundle.getString("Continuar"));
@@ -201,14 +222,12 @@ public class MainController extends Controller implements Initializable {
             btnEliminar.setText(bundle.getString("Eliminar"));
             lblRestaurante.setText(bundle.getString("Restaurante"));
         }
-        if (event.getSource() == btnEnglish) {
-
+        if(event.getSource() == btnEnglish)
+        {
             Locale locale = new Locale("en_UK");
-            ResourceBundle bundle = ResourceBundle.getBundle("/cr/ac/una/proyectorestaurante/resources/Idioma", locale);
+            ResourceBundle bundle = ResourceBundle.getBundle("/cr/ac/una/proyectorestaurante/resources/Idioma" , locale);
             FlowController.setIdioma(bundle);
-
             bundleG = bundle;
-
             btnAgregarRestaurante.setText(bundle.getString("AgregarRestaurante"));
             btnBuscar.setText(bundle.getString("buscar"));
             btnContinuar.setText(bundle.getString("Continuar"));
@@ -218,18 +237,23 @@ public class MainController extends Controller implements Initializable {
         }
     }
 
-    public void update() {
+    public void update()
+    {
         grid.getChildren().clear();
-        if (!txtBuscar.getText().isBlank() || !txtBuscar.getText().isEmpty()) {
+        if(!txtBuscar.getText().isBlank() || !txtBuscar.getText().isEmpty())
+        {
             loadItems(txtBuscar.getText());
-        } else {
+        }
+        else
+        {
             loadItems("aux");
         }
     }
 
     @Override
-    public void initialize() {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void initialize()
+    {
+        
     }
 
 }
