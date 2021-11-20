@@ -116,6 +116,7 @@ public class Producto implements Serializable
         this.proCantidad = productoDto.getCantidad();
         this.proAccesoRapido = productoDto.getAccesoRapido();
         this.proCantidadv = productoDto.getCantidadV();
+        this.resId= new Restaurante(productoDto.getRestauranteDto());
     }
 
     public Long getProId()
