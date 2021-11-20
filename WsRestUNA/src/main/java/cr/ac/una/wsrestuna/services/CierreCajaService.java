@@ -198,7 +198,7 @@ public class CierreCajaService
             return new Respuesta(true , CodigoRespuesta.CORRECTO , "" , "" , "CierreCaja" , s);
 
         }
-        catch(Exception ex)
+        catch(SQLException | NamingException | JRException ex)
         {
             LOG.log(Level.SEVERE , "Ocurrio un error al guardar el registro." , ex);
             return new Respuesta(false , CodigoRespuesta.ERROR_INTERNO , "Ocurrio un error al eliminar el factura." , "eliminarFactura " + ex.getMessage());
