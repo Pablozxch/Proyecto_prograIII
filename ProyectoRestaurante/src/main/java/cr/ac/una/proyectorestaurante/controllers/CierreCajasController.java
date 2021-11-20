@@ -78,6 +78,7 @@ public class CierreCajasController extends Controller implements Initializable
                 cierre = (CierrecajasDto) res3.getResultado("CierreCaja");
                 AppContext.getInstance().set("CierreCajasActual" , cierre);
                 new Mensaje().show(Alert.AlertType.INFORMATION , "Datos guardados." , "El cierre de caja se ha iniciado exitosamente.");
+                FlowController.getInstance().goView("VistaGeneral");
             }
             else
             {
@@ -123,7 +124,6 @@ public class CierreCajasController extends Controller implements Initializable
             AppContext.getInstance().delete("CierreCajasActual");
             AppContext.getInstance().delete("EmpleadoActual");
             AppContext.getInstance().delete("RolActual");
-            FlowController.getInstance().goView("VistaGeneral");
             clearALl();
             FlowController.getInstance().goView("VistaGeneral");
         }
