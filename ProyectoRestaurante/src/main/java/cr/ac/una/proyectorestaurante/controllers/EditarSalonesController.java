@@ -85,6 +85,7 @@ public class EditarSalonesController extends Controller implements Initializable
     @Override
     public void initialize()
     {
+        new Mensaje().showModal(Alert.AlertType.INFORMATION , "¡IMPORTANTE!" , getStage() , "ANTES DE MOVER LA MESA o ELIMINAR LA MESA, DARLE CLICK PARA LINKEAR EL TEXTO MANERA, SINO SE PRESENTAN PROBLEMAS");
         btnEliminar.setDisable(true);
         btnEliminar.setVisible(false);
         salon = (SalonDto) AppContext.getInstance().get("Salon");//colocar 
@@ -107,7 +108,6 @@ public class EditarSalonesController extends Controller implements Initializable
 
     void load()//con este metodo se carga la lista de iamgeviews para poder empezar a colocarlas en el grid
     {
-        new Mensaje().showModal(Alert.AlertType.INFORMATION , "¡IMPORTANTE!" , getStage() , "ANTES DE MOVER LA MESA o ELIMINAR LA MESA, DARLE CLICK PARA LINKEAR EL TEXTO MANERA, SINO SE PRESENTAN PROBLEMAS");
         paneEditar.getChildren().clear();
         File x = new File("/cr/ac/una/proyectorestaurante/resources/fondomesas.jpeg");
         imgBB.setImage(new Image(x.getPath()));
@@ -131,7 +131,7 @@ public class EditarSalonesController extends Controller implements Initializable
             c.setStrokeMiterLimit(10);
             c.setStrokeType(StrokeType.CENTERED);
             c.setFill(new ImagePattern(img2));
-            c=changeCOlor(t.getEstado() , c);
+            c = changeCOlor(t.getEstado() , c);
             TextField text = new TextField();
             text.setStyle("-fx-background-color: transparent ");
             text.setText(t.getNombre());
@@ -152,15 +152,15 @@ public class EditarSalonesController extends Controller implements Initializable
             {
                 n = j.getTextField();
                 mesaDelete = j.getMesaDto();
-                if(j.getCircle().getStroke()==javafx.scene.paint.Color.YELLOW)
+                if(j.getCircle().getStroke() == javafx.scene.paint.Color.YELLOW)
                 {
                     j.setCircle(changeCOlor(j.getMesaDto().getEstado() , j.getCircle()));
                 }
                 else
                 {
-                     j.getCircle().setStroke(javafx.scene.paint.Color.YELLOW);
+                    j.getCircle().setStroke(javafx.scene.paint.Color.YELLOW);
                 }
-               
+
             });
             j.getCircle().setOnMousePressed(circleOnMousePressedEventHandler);
             j.getCircle().setOnMouseDragged(circleOnMouseDraggedEventHandler);
@@ -211,6 +211,7 @@ public class EditarSalonesController extends Controller implements Initializable
     @FXML
     private void click(ActionEvent event)
     {
+
         if(event.getSource() == btnEliminar)
         {
 //            mesaDelete.getId();
