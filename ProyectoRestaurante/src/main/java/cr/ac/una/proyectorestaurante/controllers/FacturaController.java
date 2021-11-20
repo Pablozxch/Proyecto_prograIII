@@ -201,7 +201,7 @@ public class FacturaController extends Controller implements Initializable
             fac.setDescuento(descuento);
             txtTotal.setText(String.valueOf(finalmont));
         }
-         facturaService.guardarFactura(fac);
+        facturaService.guardarFactura(fac);
     }
 
     void loadRes()
@@ -209,7 +209,17 @@ public class FacturaController extends Controller implements Initializable
         restauranteDto = (RestauranteDto) AppContext.getInstance().get("Restaurante");
         ordenDto = (OrdenDto) AppContext.getInstance().get("Orden");
         salonDto = ordenDto.getMesaDto().getSalonDto();
-        impA = restauranteDto.getImpVen() / 100.0;
+
+        if("B".equals(salonDto.getBarraMesa()))
+        {
+            impA = restauranteDto.getImpVen() / 100.0;
+            impA += restauranteDto.getImpServ() / 100.0;
+        }
+        else
+        {
+            impA = restauranteDto.getImpVen() / 100.0;
+
+        }
         txtNombreRest.setText(restauranteDto.getNombre());
         txtCorreoRest.setText(restauranteDto.getCorreo());
         txtDireccionRest.setText(restauranteDto.getDireccion());
@@ -241,7 +251,7 @@ public class FacturaController extends Controller implements Initializable
 
         TableColumn<DetallexordenDto , String> total = new TableColumn<>("Total");
         total.setPrefWidth(tblOrdenes.getPrefWidth() / 4);
-        total.setCellValueFactory(cellData->
+        total.setCellValueFactory(cellData ->
         {
             double totalF = (double) (cellData.getValue().getPrecio() * impA) + cellData.getValue().getPrecio();
             String formattedCost = currency.format(totalF);

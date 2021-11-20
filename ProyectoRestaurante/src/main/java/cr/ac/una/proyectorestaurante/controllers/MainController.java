@@ -107,7 +107,6 @@ public class MainController extends Controller implements Initializable
                     public void onClickListener(Object item)
                     {
                         setResSelect((RestauranteDto) item);
-                        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                     }
 
                 };
@@ -140,7 +139,7 @@ public class MainController extends Controller implements Initializable
                         column = 0;
                         row++;
                     }
-                    grid.add(anchorPane , column++ , row); //(child,column,row)
+                    grid.add(anchorPane , column++ , row); 
                     //set grid width
                     grid.setMinWidth(Region.USE_COMPUTED_SIZE);
                     grid.setPrefWidth(Region.USE_COMPUTED_SIZE);
