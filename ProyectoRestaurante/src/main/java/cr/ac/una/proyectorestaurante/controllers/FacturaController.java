@@ -131,7 +131,7 @@ public class FacturaController extends Controller implements Initializable
         if(event.getSource() == btnPagar)
         {
             if(txtPagaCon.getText().isBlank() || txtCorreo.getText().isEmpty() || txtNombre.getText().isEmpty()){
-                 new Mensaje().show(Alert.AlertType.INFORMATION , "Factura." , "Por favor, ingrese el monto con el que paga el cliente.");
+                 new Mensaje().show(Alert.AlertType.INFORMATION , "Factura." , "Falta de ingresar algunos datos.");
             }else{
                 cancelado = true;
 
