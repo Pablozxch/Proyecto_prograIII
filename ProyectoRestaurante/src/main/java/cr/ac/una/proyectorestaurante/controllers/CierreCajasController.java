@@ -69,7 +69,7 @@ public class CierreCajasController extends Controller implements Initializable
             cierre.setMontoEfectivo(0L);
             cierre.setMontoFinal(0L);
             cierre.setMontoTarjeta(0L);
-            cierre.setEstado("C");
+            cierre.setEstado("I");
 
             Respuesta res2 = cajaService.guardarCierrecajas(cierre);
             if(res2.getEstado())

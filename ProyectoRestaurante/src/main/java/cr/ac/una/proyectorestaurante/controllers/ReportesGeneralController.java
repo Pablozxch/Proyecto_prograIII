@@ -128,7 +128,7 @@ public class ReportesGeneralController extends Controller implements Initializab
             try(FileOutputStream fos = new FileOutputStream(file2);)
             {
                 fos.write(decoder);
-                new Mensaje().show(Alert.AlertType.CONFIRMATION , "Guardado" , "Con exito");
+                new Mensaje().show(Alert.AlertType.INFORMATION , "Guardado" , "Con exito");
             }
             catch(Exception e)
             {

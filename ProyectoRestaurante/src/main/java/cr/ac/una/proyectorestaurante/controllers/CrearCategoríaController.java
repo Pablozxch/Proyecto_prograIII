@@ -45,6 +45,7 @@ public class CrearCategoríaController extends Controller implements Initializab
     public void initialize(URL url , ResourceBundle rb)
     {
         // TODO
+        txtDetalle.setTextFormatter(Formato.getInstance().maxLengthFormat(50));
     }
 
     @Override
@@ -71,7 +72,7 @@ public class CrearCategoríaController extends Controller implements Initializab
             Respuesta res=service.guardarCategoria(catDto);
             if(res.getEstado())
             {
-                new Mensaje().show(Alert.AlertType.INFORMATION , "Guardado de Categorias", "La categoria fue guardad con exito");
+                new Mensaje().show(Alert.AlertType.INFORMATION , "Guardado de Categorias", "La categoria fue guardada exitosamente.");
             }
             getStage().close();
         }

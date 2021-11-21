@@ -145,7 +145,7 @@ public class DisenoSalonesController extends Controller implements Initializable
                     }
                     else
                     {
-                        if(new Mensaje().showConfirmation("Orden" , getStage() , "Deseaa crear una orden"))
+                        if(new Mensaje().showConfirmation("Orden" , getStage() , "¿Desea crear una orden?"))
                         {
                             try
                             {
@@ -223,7 +223,7 @@ public class DisenoSalonesController extends Controller implements Initializable
                         {
                             if(g.isConsumed())
                             {
-                                if(new Mensaje().showConfirmation("Desea Cancelar la factura" , getStage() , "Se va a proceder a abrir una orden"))
+                                if(new Mensaje().showConfirmation("Cancelar el pedido" , getStage() , "Se va a proceder a abrir una orden"))
                                 {
                                     if("O".equals(mesaclick.getEstado()))
                                     {

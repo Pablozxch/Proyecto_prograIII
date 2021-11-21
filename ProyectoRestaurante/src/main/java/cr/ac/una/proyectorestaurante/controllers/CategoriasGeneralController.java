@@ -149,7 +149,7 @@ public class CategoriasGeneralController extends Controller implements Initializ
         {
             if(cmbCategorias.getValue() != null)
             {
-                if(new Mensaje().showConfirmation("Eliminacion de Categorias" , getStage() , "¿Está seguro que desea eliminar la cantegoria " + cmbCategorias.getValue() + "?"))
+                if(new Mensaje().showConfirmation("Eliminacion de Categorias" , getStage() , "¿Está seguro que desea eliminar la categoria " + cmbCategorias.getValue() + "?"))
                 {
                     categorias.forEach(t ->
                     {
@@ -162,13 +162,13 @@ public class CategoriasGeneralController extends Controller implements Initializ
                     Respuesta res = categoriaService.eliminarCategoria(catDelete.getId());
                     if(res.getEstado())
                     {
-                        new Mensaje().show(Alert.AlertType.INFORMATION , "Categoria Eliminada" , "La categoria " + catDelete.getNombre() + " ah sido eliminada correctamente");
+                        new Mensaje().show(Alert.AlertType.INFORMATION , "Categoria Eliminada" , "La categoria " + catDelete.getNombre() + " ha sido eliminada correctamente.");
                     }
                 }
             }
             else
             {
-                new Mensaje().show(Alert.AlertType.INFORMATION , "Categoria" , "No tiene ninguna categoria seleccionada");
+                new Mensaje().show(Alert.AlertType.INFORMATION , "Categoria" , "No hay ninguna categoria seleccionada");
             }
             list.clear();
             listProductos.getItems().clear();
@@ -206,13 +206,13 @@ public class CategoriasGeneralController extends Controller implements Initializ
                 Respuesta res = categoriaService.guardarCategoria(cat);
                 if(res.getEstado())
                 {
-                    new Mensaje().show(Alert.AlertType.CONFIRMATION , "Guardado Con exito" , "Se guardo con exito toda la informacion");
+                    new Mensaje().show(Alert.AlertType.INFORMATION , "Guardado Con exito" , "Se guardo con exito toda la información.");
                     load();
                 }
             }
             else
             {
-                new Mensaje().show(Alert.AlertType.INFORMATION , "Categoria" , "No tiene ninguna categoria seleccionada");
+                new Mensaje().show(Alert.AlertType.INFORMATION , "Categoria" , "No tiene ninguna categoria seleccionada.");
             }
         }
     }

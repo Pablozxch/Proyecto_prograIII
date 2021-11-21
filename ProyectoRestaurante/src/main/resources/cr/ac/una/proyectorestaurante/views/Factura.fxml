@@ -33,7 +33,7 @@
                               <Label text="Correo cliente:  " />
                               <JFXTextField fx:id="txtCorreo" prefHeight="31.0" prefWidth="207.0" />
                               <Label text="Efectivo" />
-                              <JFXToggleButton fx:id="chkTarjetaEfectivo" prefHeight="62.0" prefWidth="152.0" styleClass="jfx-ToggleButton" text="Tarjeta" toggleColor="#ffb085" toggleLineColor="#f9d5a7">
+                              <JFXToggleButton fx:id="chkTarjetaEfectivo" prefHeight="62.0" prefWidth="152.0" styleClass="jfx-ToggleButton" text="Tarjeta" toggleColor="#ffb085" toggleLineColor="#f9d5a7" unToggleColor="#ffb085" unToggleLineColor="#f9d5a7">
                                  <padding>
                                     <Insets left="-70.0" />
                                  </padding>

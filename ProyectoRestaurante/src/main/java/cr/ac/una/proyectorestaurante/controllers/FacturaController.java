@@ -130,19 +130,24 @@ public class FacturaController extends Controller implements Initializable
         }
         if(event.getSource() == btnPagar)
         {
-            cancelado = true;
+            if(txtPagaCon.getText().isBlank() || txtCorreo.getText().isEmpty() || txtNombre.getText().isEmpty()){
+                 new Mensaje().show(Alert.AlertType.INFORMATION , "Factura." , "Por favor, ingrese el monto con el que paga el cliente.");
+            }else{
+                cancelado = true;
 
-            RolDto rol = (RolDto) AppContext.getInstance().get("RolActual");
-            if(!"Salonero".equals(rol.getNombre()) && cierreCajas == null)
-            {
-                CierreCajasController cr = (CierreCajasController) FlowController.getInstance().getController("CierreCajas");
-                cr.createCierre();
-                FlowController.getInstance().goViewInWindowModal("CierreCajas" , getStage() , Boolean.FALSE);
+                RolDto rol = (RolDto) AppContext.getInstance().get("RolActual");
+                if(!"Salonero".equals(rol.getNombre()) && cierreCajas == null)
+                {
+                    CierreCajasController cr = (CierreCajasController) FlowController.getInstance().getController("CierreCajas");
+                    cr.createCierre();
+                    FlowController.getInstance().goViewInWindowModal("CierreCajas" , getStage() , Boolean.FALSE);
 
+                }
+                btnPagar.setDisable(true);
+                validarResultado();
+                new Mensaje().show(Alert.AlertType.INFORMATION , "Factura." , "Factura cancelada exitosamente.");
             }
-            btnPagar.setDisable(true);
-            validarResultado();
-            new Mensaje().show(Alert.AlertType.INFORMATION , "Factura." , "Factura cancelada exitosamente.");
+            
         }
         if(event.getSource() == btnBuscarCodDescuento)
         {

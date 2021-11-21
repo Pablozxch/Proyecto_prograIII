@@ -142,15 +142,15 @@ and "TBL_ORDEN"."ORD_FECHA" =$P{FECHA}]]>
 				<text><![CDATA[Reporte completo del cierre de caja]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="120" y="30" width="150" height="30" uuid="5796f7a8-439a-4de0-86d0-79bcb6c9edf6"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="100" y="30" width="170" height="30" uuid="5796f7a8-439a-4de0-86d0-79bcb6c9edf6"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Arial" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{RES_NOMBRE}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="380" y="30" width="170" height="30" uuid="8451a981-dc96-44d4-96c9-df7e66a69f81"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Arial" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{RES_CORREO}]]></textFieldExpression>
@@ -163,7 +163,7 @@ and "TBL_ORDEN"."ORD_FECHA" =$P{FECHA}]]>
 				<text><![CDATA[Correo:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="30" width="120" height="30" uuid="4a9f9683-3ed9-4c5b-acef-3b57a3f63f2e"/>
+				<reportElement x="0" y="30" width="100" height="30" uuid="4a9f9683-3ed9-4c5b-acef-3b57a3f63f2e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
@@ -172,7 +172,7 @@ and "TBL_ORDEN"."ORD_FECHA" =$P{FECHA}]]>
 			<staticText>
 				<reportElement x="43" y="0" width="460" height="30" uuid="ed54e966-565c-4893-8907-9ef2108d3910"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" isBold="true"/>
+					<font fontName="Arial" size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Listado de facturas que se pagaron durante el día.]]></text>
 			</staticText>
