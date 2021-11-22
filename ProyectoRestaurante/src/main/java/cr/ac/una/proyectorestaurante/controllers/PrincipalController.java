@@ -297,7 +297,10 @@ public class PrincipalController extends Controller implements Initializable
                         cr.closeCierreCajas();
                     }
                 }
-
+                else
+                {
+                    new Mensaje().show(Alert.AlertType.ERROR , "Permisos" , "Permisos innecesarios para acceder a este apartado");
+                }
             }
         }
         if(event.getSource() == btnSalir)

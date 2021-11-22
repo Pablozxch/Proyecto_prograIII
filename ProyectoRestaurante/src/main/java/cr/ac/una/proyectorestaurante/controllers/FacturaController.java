@@ -130,12 +130,19 @@ public class FacturaController extends Controller implements Initializable
         }
         if(event.getSource() == btnPagar)
         {
-            if(txtPagaCon.getText().isBlank() || txtCorreo.getText().isEmpty() || txtNombre.getText().isEmpty()){
-                 new Mensaje().show(Alert.AlertType.INFORMATION , "Factura." , "Falta de ingresar algunos datos.");
-            }else{
+            if(txtPagaCon.getText().isBlank() || txtCorreo.getText().isEmpty() || txtNombre.getText().isEmpty())
+            {
+                new Mensaje().show(Alert.AlertType.INFORMATION , "Factura." , "Falta de ingresar algunos datos.");
+            }
+            if(Long.valueOf(txtPagaCon.getText()) < Long.valueOf(txtTotal.getText()))
+            {
+                new Mensaje().show(Alert.AlertType.INFORMATION , "Factura." , "Hace falta dinero.");
+            }
+            else
+            {
                 cancelado = true;
 
-                RolDto rol = (RolDto) AppContext.getInstance().get("RolActual");
+                rol = (RolDto) AppContext.getInstance().get("RolActual");
                 if(!"Salonero".equals(rol.getNombre()) && cierreCajas == null)
                 {
                     CierreCajasController cr = (CierreCajasController) FlowController.getInstance().getController("CierreCajas");
@@ -147,12 +154,11 @@ public class FacturaController extends Controller implements Initializable
                 validarResultado();
                 new Mensaje().show(Alert.AlertType.INFORMATION , "Factura." , "Factura cancelada exitosamente.");
             }
-            
+
         }
         if(event.getSource() == btnBuscarCodDescuento)
         {
             CodDescService codService = new CodDescService();
-            btnBuscarCodDescuento.setDisable(true);
             Respuesta res = codService.buscarUrl(txtCodigoDescuento.getText());
             if(res.getEstado())
             {
@@ -160,11 +166,12 @@ public class FacturaController extends Controller implements Initializable
                 descuento = codigodescDto.getDesc();
                 txtDescuento.setText(codigodescDto.getDesc().toString());
                 validarResultado();
+                btnBuscarCodDescuento.setDisable(true);
 
             }
             else
             {
-                new Mensaje().show(Alert.AlertType.INFORMATION , "Codigo Descuento" , "El codigo de descuento no ha sido encontrado");
+                new Mensaje().show(Alert.AlertType.ERROR , "Codigo Descuento" , "El codigo de descuento no ha sido encontrado");
             }
 
         }

@@ -5,11 +5,14 @@
  */
 package cr.ac.una.wsrestuna.controllers;
 
+
 import cr.ac.una.wsrestuna.models.*;
 import cr.ac.una.wsrestuna.services.*;
 import cr.ac.una.wsrestuna.utils.*;
+import java.awt.*;
 import java.io.*;
 import java.util.*;
+import java.util.List;
 import java.util.logging.*;
 import javax.ejb.*;
 import javax.mail.*;
@@ -31,9 +34,9 @@ public class FacturaController
     @EJB
     RestauranteService restauranteService;
 
-    void send(String correo , String pass , String correotosend , File factura) throws MessagingException
+    void send(String correo , String pass , String correotosend , File factura , RestauranteDto resta) throws MessagingException , IOException , BadElementException
     {
-        try
+         try
         {
             // When creating a mail session you need to create a Properties object that contains
             // any properties that the session needs to send or receive mail.
@@ -70,7 +73,12 @@ public class FacturaController
             message.setRecipient(Message.RecipientType.TO , addressTo);
 
             MimeBodyPart messageBodyPart = new MimeBodyPart();
-            messageBodyPart.setContent("<h1>Factura digital de la empresa" + pass + "<h1>" , "text/html");
+            messageBodyPart.setContent("<h1>Factura digital de la empresa " + pass + "</h1>"
+                      + "<footer> "
+                      + "<h3> "
+                      + "Derechos reservados @" + pass
+                      + "</h3>"
+                      + " </footer>" , "text/html");
             MimeBodyPart attachment = new MimeBodyPart();
             try
             {
@@ -109,7 +117,7 @@ public class FacturaController
         try(FileOutputStream fos = new FileOutputStream(file);)
         {
             fos.write(decoder);
-            send(resta.getCorreo() , resta.getNombre() , correoPersona , file);
+            send(resta.getCorreo() , resta.getNombre() , correoPersona , file , resta);
         }
         catch(Exception e)
         {

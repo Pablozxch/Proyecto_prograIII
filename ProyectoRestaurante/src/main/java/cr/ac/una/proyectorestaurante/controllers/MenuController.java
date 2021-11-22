@@ -167,7 +167,7 @@ public class MenuController extends Controller implements Initializable
 
                     ItemController itemrest = fxmlLoader.getController();
                     itemrest.setData(productosddelete.get(i) , myListener);
-                    if(column == 6)
+                    if(column == 4)
                     {
                         column = 0;
                         row++;
