@@ -181,7 +181,7 @@ public class FacturaController extends Controller implements Initializable
     {
 
         MesaService mesaService = new MesaService();
-        CierrecajasDto cierre = (CierrecajasDto) AppContext.getInstance().get("CierreCajasActual");
+        cierre = (CierrecajasDto) AppContext.getInstance().get("CierreCajasActual");
         MesaDto mesaDto = ordenDto.getMesaDto();
         mesaDto.setEstado("D");
         mesaService.guardarMesa(mesaDto);//se actualiza el estado de la mesa para no tomar ordenes ya canceladas
