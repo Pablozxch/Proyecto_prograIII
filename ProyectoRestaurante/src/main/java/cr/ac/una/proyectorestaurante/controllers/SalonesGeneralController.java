@@ -187,7 +187,7 @@ public class SalonesGeneralController extends Controller implements Initializabl
             }
             else
             {
-                new Mensaje().show(Alert.AlertType.ERROR , "Permisos" , "Permisos innecesarios para acceder a este apartado");
+                new Mensaje().show(Alert.AlertType.ERROR , "Permisos" , "Permisos innecesarios para acceder a este apartado.");
             }
 
         }
@@ -235,14 +235,14 @@ public class SalonesGeneralController extends Controller implements Initializabl
                     Respuesta respuesta = salonService.eliminarSalon(pro.getId());
                     if(respuesta.getEstado())
                     {
-                        new Mensaje().show(Alert.AlertType.INFORMATION , "Eliminar el Salon" , "Eliminado Correctamente");
+                        new Mensaje().show(Alert.AlertType.INFORMATION , "Eliminar el Salon" , "Eliminado Correctamente.");
                         update();
                     }
                 }
             }
             else
             {
-                new Mensaje().show(Alert.AlertType.ERROR , "Permisos" , "Permisos innecesarios para acceder a este apartado");
+                new Mensaje().show(Alert.AlertType.ERROR , "Permisos" , "Permisos innecesarios para acceder a este apartado.");
             }
         }
     }

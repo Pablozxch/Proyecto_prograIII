@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -13,6 +14,7 @@
          <children>
             <VBox alignment="CENTER" prefHeight="815.0" prefWidth="469.0" HBox.hgrow="ALWAYS">
                <children>
+                  <Label text="Tabla para mostrar todos los codigos de descuentos " />
                   <TableView fx:id="tblpedidos" fixedCellSize="0.0" prefHeight="500.0" prefWidth="586.0">
                      <VBox.margin>
                         <Insets bottom="10.0" left="15.0" right="10.0" top="10.0" />

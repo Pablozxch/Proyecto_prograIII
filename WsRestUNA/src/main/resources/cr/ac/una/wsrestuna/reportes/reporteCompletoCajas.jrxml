@@ -5,6 +5,7 @@
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="OJDBC 7"/>
 	<parameter name="ID" class="java.lang.Long"/>
 	<parameter name="FECHA" class="java.lang.String"/>
+	<parameter name="IDrestaurante" class="java.lang.Long"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT "TBL_CIERRECAJAS"."CCAJ_MONTOEFECTIVO",
   "TBL_CIERRECAJAS"."CCAJ_MONTOTARJETA",
@@ -36,7 +37,8 @@ FROM "TBL_CIERRECAJAS"
    "TBL_EMPLEADO"."RES_ID" ="TBL_EMPLEADO"."RES_ID" 
 WHERE 
    "TBL_EMPLEADO"."EMP_ID" = $P{ID}
-and "TBL_ORDEN"."ORD_FECHA" =$P{FECHA}]]>
+and "TBL_ORDEN"."ORD_FECHA" =$P{FECHA}
+AND "TBL_RESTAURANTE"."RES_ID" = $P{IDrestaurante}]]>
 	</queryString>
 	<field name="CCAJ_MONTOEFECTIVO" class="java.math.BigDecimal">
 		<property name="com.jaspersoft.studio.field.name" value="CCAJ_MONTOEFECTIVO"/>
@@ -144,28 +146,28 @@ and "TBL_ORDEN"."ORD_FECHA" =$P{FECHA}]]>
 			<textField>
 				<reportElement x="100" y="30" width="170" height="30" uuid="5796f7a8-439a-4de0-86d0-79bcb6c9edf6"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Arial" size="9"/>
+					<font fontName="Arial" size="13"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{RES_NOMBRE}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="380" y="30" width="170" height="30" uuid="8451a981-dc96-44d4-96c9-df7e66a69f81"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Arial" size="9"/>
+					<font fontName="Arial" size="13"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{RES_CORREO}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="270" y="30" width="110" height="30" uuid="fda8fc40-e903-4377-9a46-a57f4fb82d1c"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="Arial" size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Correo:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="30" width="100" height="30" uuid="4a9f9683-3ed9-4c5b-acef-3b57a3f63f2e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="Arial" size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Nombre:]]></text>
 			</staticText>

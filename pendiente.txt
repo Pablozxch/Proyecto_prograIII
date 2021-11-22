@@ -26,6 +26,9 @@ verificar si es una barra o mesa, y cargar la vista de ordenes general para ver 
 
 streams y base de datos (consulta)
 
+
+cambiar en empleados general al eliminar
+
 traslacion del circulo al click cuando la arrastre
 ----------------------------------------------------------------------------------------------------
 
@@ -66,3 +69,6 @@ EDITAR SALONES
 refrescar la tabla de ordenes general cuando se factura un pedido
 
 un cajero puede entrar a codigo descuento, arreglar porque no deberia
+
+
+tener en cuenta cuando paga en tarjeta que no necesita poner el campo de "paga con"

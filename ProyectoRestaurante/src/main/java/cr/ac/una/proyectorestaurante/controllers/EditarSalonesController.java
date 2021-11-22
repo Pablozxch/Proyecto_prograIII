@@ -85,7 +85,7 @@ public class EditarSalonesController extends Controller implements Initializable
     @Override
     public void initialize()
     {
-        new Mensaje().showModal(Alert.AlertType.INFORMATION , "¡IMPORTANTE!" , getStage() , "ANTES DE MOVER LA MESA o ELIMINAR LA MESA, DARLE CLICK PARA LINKEAR EL TEXTO MANERA, SINO SE PRESENTAN PROBLEMAS");
+        new Mensaje().showModal(Alert.AlertType.INFORMATION , "¡Importante!" , getStage() , "Antes de mover la mesa, debe seleccionarla, de otra manera presentaria dificultades.");
         btnEliminar.setDisable(true);
         btnEliminar.setVisible(false);
         salon = (SalonDto) AppContext.getInstance().get("Salon");//colocar 

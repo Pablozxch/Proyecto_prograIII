@@ -193,6 +193,7 @@ public class CierreCajaService
             HashMap<String , Object> map = new HashMap<>();
             map.put("ID" , idCIerreCajas);//id de cierre de cajas
             map.put("FECHA",FECHA);
+            map.put("IDrestaurante", IDrestaurante);
             
             JasperPrint print = JasperFillManager.fillReport(jasper , map , connection);
             byte[] s = JasperExportManager.exportReportToPdf(print);

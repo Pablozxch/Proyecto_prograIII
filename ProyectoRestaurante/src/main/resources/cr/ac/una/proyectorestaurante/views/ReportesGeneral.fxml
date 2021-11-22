@@ -17,6 +17,8 @@
          <children>
             <VBox alignment="CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                <children>
+                  <Label text="Se podrán generar reportes de producto más vendidos y un" />
+                  <Label text=" listado de facturas entre un rango de fechas " />
                   <HBox alignment="CENTER" prefHeight="95.0" prefWidth="674.0" spacing="25.0">
                      <children>
                         <JFXDatePicker fx:id="dtpFechaInicial" promptText="%FechaInicial" />
@@ -38,9 +40,14 @@
                      </children>
                   </HBox>
                   <Separator prefHeight="1.0" prefWidth="566.0" />
+                  <Label text="Generar un reporte en una fecha especifica para un empleado ">
+                     <VBox.margin>
+                        <Insets bottom="-15.0" top="30.0" />
+                     </VBox.margin>
+                  </Label>
                   <HBox alignment="CENTER" prefHeight="132.0" prefWidth="674.0" spacing="25.0">
                      <children>
-                        <JFXDatePicker fx:id="dtpFechaCierreCaja" defaultColor="#f9d5a7" promptText="%FechaCierre" />
+                        <JFXDatePicker fx:id="dtpFechaCierreCaja" promptText="%FechaCierre" />
                         <JFXTextField fx:id="txtIdEmpleado" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefWidth="210.0" promptText="%IdCajero" />
                         <JFXButton fx:id="btnGenerar" onAction="#click" prefHeight="48.0" prefWidth="150.0" text="%Generar" />
                      </children>

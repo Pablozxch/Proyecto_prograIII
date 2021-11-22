@@ -197,13 +197,13 @@ public class EmpleadosGeneralController extends Controller implements Initializa
         }
         if(event.getSource() == btnEliminar)
         {
-            if(new Mensaje().showConfirmation("Eliminar el restaurante" , getStage() , "¿Esta seguro que desea eliminar el restaurante?"))
+            if(new Mensaje().showConfirmation("Eliminar el empleado" , getStage() , "¿Esta seguro que desea eliminar el empleado?"))
             {
                 EmpleadoDto empleado = (EmpleadoDto) AppContext.getInstance().get("Empleado");
                 Respuesta respuesta = empleadoService.eliminarEmpleado(empleado.getId());
                 if(respuesta.getEstado())
                 {
-                    new Mensaje().show(Alert.AlertType.INFORMATION , "Eliminar el restaurante" , "Eliminado Correctamente");
+                    new Mensaje().show(Alert.AlertType.INFORMATION , "Eliminar el empleado" , "Eliminado correctamente");
                     update();
                 }
             }
