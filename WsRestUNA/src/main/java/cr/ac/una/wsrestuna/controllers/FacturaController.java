@@ -34,7 +34,7 @@ public class FacturaController
     @EJB
     RestauranteService restauranteService;
 
-    void send(String correo , String pass , String correotosend , File factura , RestauranteDto resta) throws MessagingException , IOException , BadElementException
+    void send(String correo , String pass , String correotosend , File factura , RestauranteDto resta) throws MessagingException , IOException 
     {
          try
         {
