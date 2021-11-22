@@ -141,7 +141,7 @@ WHERE
 			<textField evaluationTime="Group" evaluationGroup="DXO_CANTIDAD">
 				<reportElement x="10" y="10" width="230" height="60" uuid="52e1a7af-619f-4864-9f17-c1cacb2bcacd"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font size="16"/>
+					<font size="19"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{RES_NOMBRE}]]></textFieldExpression>
 			</textField>
